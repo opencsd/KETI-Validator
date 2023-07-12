@@ -1,0 +1,44 @@
+{
+  "type": 1,
+  "snippet": {
+    "queryID": 10,
+    "workID": 10,
+    "tableName": [
+      "snippet10-9"
+    ],
+    "tableCol": [ ],
+    "tableFilter": [ ],
+    "tableOffset": [ ],
+    "tableOfflen": [ ],
+    "tableDatatype": [ ],
+    "tableAlias": "snippet10-10",
+    "columnAlias": [
+      "ps_partkey",
+      "value"
+    ],
+    "columnProjection": [
+      {
+        "selectType": 0,
+        "value": [
+          "ps_partkey"
+        ],
+        "valueType": [
+          10
+        ]
+      },
+      {
+        "selectType": 1,
+        "value": [
+          "value"
+        ],
+        "valueType": [
+          10
+        ]
+      }
+    ],
+    "columnFiltering": [ ],
+    "groupBy": [ 
+        "ps_partkey"
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "type" : 1,
+  "snippet":
+  {
+    "queryID":19,
+    "workID":8,
+    "tableName": ["snippet19-7"],
+    "tableCol":[],
+    "tableFilter":[],
+    "tableOffset":[],
+    "tableOfflen":[],
+    "tableDatatype":[],
+    "blockList":[],
+    "tableAlias": "snippet19-8",
+    "columnAlias": [
+        "s_name",
+        "s_address"
+    ],
+    "columnProjection": [
+      {
+        "selectType": 0,
+        "value": ["s_name"],
+        "valueType": [10]
+      },
+      {
+        "selectType": 0,
+        "value": ["s_address"],
+        "valueType": [10]
+      }
+    ],
+    "columnFiltering": [
+      ],
+    "groupBy": [],
+    "orderBy": 
+      {
+        "ascending" : [0],
+        "columnName" : ["s_name"]
+      }
+  }
+}

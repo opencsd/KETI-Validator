@@ -1,0 +1,45 @@
+{
+    "type" : 1,
+    "snippet":
+    {
+      "queryID":21,
+      "workID":6,
+      "tableName": ["custsale"],
+      "tableCol":[
+    ],
+    "tableFilter":[
+    ],
+    "tableOffset":[],
+    "tableOfflen":[],
+    "tableDatatype":[],
+      "tableAlias": "snippet21-6",
+      "columnAlias": [
+        "cntrycode", 
+        "numcust",
+        "totacctbal"
+      ],
+      "columnProjection": [
+        {
+          "selectType": 0,
+          "value": ["cntrycode"],
+          "valueType": [10]
+        },
+        {
+          "selectType": 4,
+          "value": [],
+          "valueType": []
+        },
+        {
+          "selectType": 1,
+          "value": ["c_acctbal"],
+          "valueType": [10]
+        }
+      ],
+      "columnFiltering": [],
+      "groupBy": ["cntrycode"],
+      "orderBy": {
+        "ascending" : [0],
+        "columnName" : ["cntrycode"]
+      }
+    }
+}

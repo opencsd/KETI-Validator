@@ -1,0 +1,28 @@
+{
+  "type": 1,
+  "snippet": {
+    "queryID": 16,
+    "workID": 3,
+    "tableName": [
+      "snippet16-2"
+    ],
+    "tableCol": [],
+    "tableFilter": [],
+    "tableOffset": [],
+    "tableOfflen": [],
+    "tableDatatype": [],
+    "tableAlias": "snippet16-3",
+    "columnAlias": [
+      "avg_l_quantity"
+    ],
+    "columnProjection": [
+      {
+          "selectType": 2,
+          "value": ["0.2", "l_quantity", "*"],
+          "valueType": [5, 10, 11]
+      }
+    ],
+    "columnFiltering": [],
+    "groupBy": []
+  }
+}

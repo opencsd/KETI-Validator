@@ -1,0 +1,34 @@
+{
+  "type": 1,
+  "snippet": {
+    "queryID": 17,
+    "workID": 3,
+    "tableName": [
+      "snippet17-2"
+    ],
+    "tableCol": [],
+    "tableFilter": [],
+    "tableOffset": [],
+    "tableOfflen": [],
+    "tableDatatype": [],
+    "tableAlias": "snippet17-3",
+    "columnAlias": [
+      "sum_lquantity",
+      "l_orderkey"
+    ],
+    "columnProjection": [
+      {
+          "selectType": 1,
+          "value": ["l_quantity"],
+          "valueType": [10]
+      },
+      {
+          "selectType": 0,
+          "value": ["l_orderkey"],
+          "valueType": [10]
+      }
+    ],
+    "columnFiltering": [],
+    "groupBy": ["l_orderkey"]
+  }
+}

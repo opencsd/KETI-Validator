@@ -1,0 +1,28 @@
+{
+    "type": 0,
+    "snippet": {
+      "queryID": 18,
+      "workID": 4,
+      "tableName": [
+        "snippet18-3"
+      ],
+      "tableCol": [],
+      "tableFilter": [],
+      "tableOffset": [],
+      "tableOfflen": [],
+      "tableDatatype": [],
+      "tableAlias": "snippet18-4",
+      "columnAlias": [
+        "revenue"
+      ],
+      "columnProjection": [
+        {
+            "selectType": 1,
+            "value": ["pre_revenue"],
+            "valueType": [10]
+        }
+      ],
+      "columnFiltering": [],
+      "groupBy": []
+    }
+  }

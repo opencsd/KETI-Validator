@@ -1,0 +1,58 @@
+{
+    "type" : 2,
+    "snippet":
+    {
+      "queryID":15,
+      "workID":3,
+      "tableName": ["snippet15-2", "snippet15-1"],
+      "tableCol":[],
+      "tableFilter":[
+        {
+          "LV": {
+              "type": [10],
+              "value": ["p_partkey"]
+          },
+          "Operator" : 5, 
+          "RV" : {
+              "type": [10],
+              "value": ["ps_partkey"]
+          },
+          "EXTRA": []
+        }   
+      ],
+      "tableOffset":[],
+      "tableOfflen":[],
+      "tableDatatype":[],
+      "tableAlias": "snippet15-3",
+      "columnAlias": [
+          "p_brand",
+          "p_type",
+          "p_size",
+          "ps_suppkey"
+      ],
+      "columnProjection": [
+        {
+          "selectType": 0,
+          "value": ["p_brand"],
+          "valueType": [10]
+        },
+        {
+          "selectType": 0,
+          "value": ["p_type"],
+          "valueType": [10]
+        },
+        {
+          "selectType": 0,
+          "value": ["p_size"],
+          "valueType": [10]
+        },
+        {
+          "selectType": 0,
+          "value": ["ps_suppkey"],
+          "valueType": [10]
+        }
+      ],
+      "columnFiltering": [],
+      "groupBy": []
+    }
+}

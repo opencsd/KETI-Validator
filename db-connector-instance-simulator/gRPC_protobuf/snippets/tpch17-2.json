@@ -1,0 +1,63 @@
+{
+  "type": 2,
+  "snippet": {
+    "queryID": 16,
+    "workID": 2,
+    "tableName": [
+      "snippet16-1",
+      "snippet16-0"
+    ],
+    "tableCol": [],
+    "tableFilter": [
+      {
+          "LV": {
+            "type": [
+              10
+            ],
+            "value": [
+              "p_partkey"
+            ]
+          },
+          "Operator": 5,
+          "RV": {
+            "type": [
+              10
+            ],
+            "value": [
+              "l_partkey"
+            ]
+          }
+      }
+    ],
+    "tableOffset": [],
+    "tableOfflen": [],
+    "tableDatatype": [],
+    "tableAlias": "snippet16-2",
+    "columnAlias": [
+      "l_quantity",
+      "l_extendedprice"
+    ],
+    "columnProjection": [
+      {
+        "selectType": 0,
+        "value": [
+          "l_quantity"
+        ],
+        "valueType": [
+          10
+        ]
+      },
+      {
+        "selectType": 0,
+        "value": [
+          "l_extendedprice"
+        ],
+        "valueType": [
+          10
+        ]
+      } 
+    ],
+    "columnFiltering": [],
+    "groupBy": []
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "type": 8,
+  "snippet": {
+    "queryID": 17,
+    "workID": 4,
+    "tableName": [
+      "snippet17-3"
+    ],
+    "tableCol": [],
+    "tableFilter": [
+      {
+          "LV": {
+              "type": [10],
+              "value": ["sum_lquantity"]
+          },
+          "Operator" : 3, 
+          "RV" : {
+              "type": [5],
+              "value": ["314"]
+          }
+      }
+    ],
+    "tableOffset": [],
+    "tableOfflen": [],
+    "tableDatatype": [],
+    "tableAlias": "snippet17-4",
+    "columnAlias": [
+      "in_lorderkey"
+    ],
+    "columnProjection": [
+      {
+          "selectType": 0,
+          "value": ["l_orderkey"],
+          "valueType": [10]
+      }
+    ],
+    "columnFiltering": [],
+    "groupBy": []
+  }
+}

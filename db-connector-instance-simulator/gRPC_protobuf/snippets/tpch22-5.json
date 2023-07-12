@@ -1,0 +1,45 @@
+{
+  "type" : 5,
+  "snippet":
+  {
+    "queryID":21,
+    "workID":5,
+    "tableName": ["snippet21-3","snippet21-4"],
+    "tableCol":[],
+    "tableFilter": [
+      {
+        "LV": {
+          "type": [10],
+          "value": ["c_custkey"]
+        },
+        "Operator" : 5,
+        "RV" : {
+          "type": [10],
+          "value": ["o_custkey"]
+        }
+      }
+    ],
+    "tableOffset":[],
+    "tableOfflen":[],
+    "tableDatatype":[],
+    "tableAlias": "custsale",
+    "columnAlias": [
+      "cntrycode", 
+      "c_acctbal"
+    ],
+    "columnProjection": [
+      {
+        "selectType": 0,
+        "value": ["cntrycode"],
+        "valueType": [10]
+      },
+      {
+        "selectType": 0,
+        "value": ["c_acctbal"],
+        "valueType": [10]
+      }
+    ],
+    "columnFiltering": [],
+    "groupBy": []
+  }
+}

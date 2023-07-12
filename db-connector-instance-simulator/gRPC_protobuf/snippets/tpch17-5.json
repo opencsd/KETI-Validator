@@ -1,0 +1,28 @@
+{
+    "type": 1,
+    "snippet": {
+        "queryID": 16,
+        "workID": 5,
+        "tableName": [
+        "snippet16-4"
+        ],
+        "tableCol": [],
+        "tableFilter": [],
+        "tableOffset": [],
+        "tableOfflen": [],
+        "tableDatatype": [],
+        "tableAlias": "snippet16-5",
+        "columnAlias": [
+        "avg_yearly"
+        ],
+        "columnProjection": [
+        {
+            "selectType": 1,
+            "value": ["sum_extendedprice", "7.0", "/"],
+            "valueType": [10, 5, 11]
+        }
+        ],
+        "columnFiltering": [],
+        "groupBy": []
+    }
+}

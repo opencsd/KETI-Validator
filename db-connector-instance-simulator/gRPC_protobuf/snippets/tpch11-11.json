@@ -1,0 +1,33 @@
+{
+  "type": 1,
+  "snippet": {
+    "queryID": 10,
+    "workID": 11,
+    "tableName": [
+      "snippet10-4"
+    ],
+    "tableCol": [ ],
+    "tableFilter": [
+    ],
+    "tableOffset": [ ],
+    "tableOfflen": [ ],
+    "tableDatatype": [ ],
+    "tableAlias": "snippet10-11",
+    "columnAlias": [
+      "snippet10-11.ps_supplycost"
+    ],
+    "columnProjection": [
+      {
+        "selectType": 1,
+        "value": [
+          "snippet10-4.ps_supplycost"
+        ],
+        "valueType": [
+          10
+        ]
+      }
+    ],
+    "columnFiltering": [ ],
+    "groupBy": [ ]
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "type" : 4,
+  "snippet":
+  {
+    "queryID":20,
+    "workID":9,
+    "tableName": ["snippet20-8","l2"],
+    "tableCol":[],
+    "tableFilter":[
+      {
+        "LV": {
+          "type": [10],
+          "value": ["l1.l_orderkey"]
+      },
+      "Operator" : 5, 
+      "RV" : {
+          "type": [10],
+          "value": ["l2.l_orderkey"]
+        }
+      },
+      {
+      "Operator" : 13
+      },
+      {
+        "LV": {
+          "type": [10],
+          "value": ["l1.l_suppkey"]
+      },
+      "Operator" : 6, 
+      "RV" : {
+          "type": [10],
+          "value": ["l2.l_suppkey"]
+        }
+      }
+    ],
+    "tableOffset":[],
+    "tableOfflen":[],
+    "tableDatatype":[],
+    "tableAlias": "snippet20-9",
+    "columnAlias": [
+        "s_name",
+        "l1.l_orderkey",
+        "l1.l_suppkey"
+    ],
+    "columnProjection": [
+      {
+        "selectType": 0,
+        "value": ["s_name"],
+        "valueType": [10]
+      },
+      {
+        "selectType": 0,
+        "value": ["l1.l_orderkey"],
+        "valueType": [10]
+      },
+      {
+        "selectType": 0,
+        "value": ["l1.l_suppkey"],
+        "valueType": [10]
+      }
+    ],
+    "columnFiltering": [],
+    "groupBy": []
+  }
+
+}

@@ -1,0 +1,53 @@
+{
+  "type" : 2,
+  "snippet":
+  {
+    "queryID":19,
+    "workID":4,
+    "tableName": ["snippet19-2","snippet19-3"],
+    "tableCol":[],
+    "tableFilter":[
+      {
+        "LV": {
+          "type": [10],
+          "value": ["ps_partkey"]
+      },
+      "Operator" : 5, 
+      "RV" : {
+          "type": [10],
+          "value": ["l_partkey"]
+        }
+      },
+      {
+      "Operator" : 13 
+      },
+      {
+        "LV": {
+          "type": [10],
+          "value": ["ps_suppkey"]
+      },
+      "Operator" : 5, 
+      "RV" : {
+          "type": [10],
+          "value": ["l_suppkey"]
+        }
+      }
+    ],
+    "tableOffset":[],
+    "tableOfflen":[],
+    "tableDatatype":[],
+    "tableAlias": "snippet19-4",
+    "columnAlias": [
+        "l_quantity"
+    ],
+    "columnProjection": [
+      {
+        "selectType": 1,
+        "value": ["l_quantity","0.5","*"],
+        "valueType": [10,5,11]
+      }
+    ],
+    "columnFiltering": [],
+    "groupBy": []
+  }
+}

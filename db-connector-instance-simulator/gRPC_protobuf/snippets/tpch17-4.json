@@ -1,0 +1,41 @@
+{
+  "type": 3,
+  "snippet": {
+    "queryID": 16,
+    "workID": 4,
+    "tableName": [
+      "snippet16-2",
+      "snippet16-3"
+    ],
+    "tableCol": [],
+    "tableFilter": [
+      {
+        "LV": {
+            "type": [10],
+            "value": ["l_quantity"]
+        },
+        "Operator" : 4, 
+        "RV" : {
+            "type": [10],
+            "value": ["avg_l_quantity"]
+        }
+      }
+    ],
+    "tableOffset": [],
+    "tableOfflen": [],
+    "tableDatatype": [],
+    "tableAlias": "snippet16-4",
+    "columnAlias": [
+      "sum_extendedprice"
+    ],
+    "columnProjection": [
+      {
+          "selectType": 0,
+          "value": ["l_extendedprice"],
+          "valueType": [10]
+      }
+    ],
+    "columnFiltering": [],
+    "groupBy": []
+  }
+}

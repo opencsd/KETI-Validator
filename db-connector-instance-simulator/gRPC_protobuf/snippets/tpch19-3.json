@@ -1,0 +1,320 @@
+{
+    "type": 8,
+    "snippet": {
+      "queryID": 18,
+      "workID": 3,
+      "tableName": [
+        "snippet18-2"
+      ],
+      "tableCol": [],
+      "tableFilter": [
+        {
+          "LV": {
+              "type": [10],
+              "value": ["p_brand"]
+          },
+          "Operator" : 5, 
+          "RV" : {
+              "type": [9],
+              "value": ["Brand#52"]
+          }
+        },
+        {
+          "Operator" : 13
+        },
+        {
+          "LV": {
+              "type": [10],
+              "value": ["p_container"]
+          },
+          "Operator" : 9, 
+          "RV" : {
+              "type": [9, 9, 9, 9],
+              "value": ["SM CASE" , "SM BOX", "SM PACK", "SM PKG"]
+          }
+        },
+        {
+            "Operator" : 13
+        },
+        {
+            "LV": {
+                "type": [10],
+                "value": ["l_quantity"]
+            },
+            "Operator" : 1, 
+            "RV" : {
+                "type": [2],
+                "value": ["4"]
+            }
+        },
+        {
+            "Operator" : 13
+        },
+        {
+            "LV": {
+                "type": [10],
+                "value": ["l_quantity"]
+            },
+            "Operator" : 2, 
+            "RV" : {
+                "type": [2],
+                "value": ["14"]
+            }
+        },
+        {
+          "Operator" : 13
+        },
+        {
+          "LV": {
+              "type": [10],
+              "value": ["p_size"]
+          },
+          "Operator" : 8, 
+          "RV" : {
+              "type": [2, 2],
+              "value": ["1", "5"]
+          }
+        },
+        {
+            "Operator" : 13
+        },
+        {
+            "LV": {
+                "type": [10],
+                "value": ["l_shipmode"]
+            },
+            "Operator" : 9, 
+            "RV" : {
+                "type": [9, 9],
+                "value": ["AIR", "AIR REG"]
+            }
+        },
+        {
+            "Operator" : 13
+        },
+        {
+            "LV": {
+                "type": [10],
+                "value": ["l_shipinstruct"]
+            },
+            "Operator" : 5, 
+            "RV" : {
+                "type": [9],
+                "value": ["DELIVER IN PERSON"]
+            }
+        },
+        {
+          "Operator" : 14
+        },
+        {
+          "LV": {
+              "type": [10],
+              "value": ["p_brand"]
+          },
+          "Operator" : 5, 
+          "RV" : {
+              "type": [9],
+              "value": ["Brand#11"]
+          }
+        },
+        {
+          "Operator" : 13
+        },
+        {
+          "LV": {
+              "type": [10],
+              "value": ["p_container"]
+          },
+          "Operator" : 9, 
+          "RV" : {
+              "type": [9, 9, 9, 9],
+              "value": ["MED BAG" , "MED BOX", "MED PKG", "MED PACK"]
+          }
+        },
+        {
+            "Operator" : 13
+        },
+        {
+            "LV": {
+                "type": [10],
+                "value": ["l_quantity"]
+            },
+            "Operator" : 1, 
+            "RV" : {
+                "type": [2],
+                "value": ["18"]
+            }
+        },
+        {
+            "Operator" : 13
+        },
+        {
+            "LV": {
+                "type": [10],
+                "value": ["l_quantity"]
+            },
+            "Operator" : 2, 
+            "RV" : {
+                "type": [2],
+                "value": ["28"]
+            }
+        },
+        {
+          "Operator" : 13
+        },
+        {
+          "LV": {
+              "type": [10],
+              "value": ["p_size"]
+          },
+          "Operator" : 8, 
+          "RV" : {
+              "type": [2, 2],
+              "value": ["1", "10"]
+          }
+        },
+        {
+            "Operator" : 13
+        },
+        {
+            "LV": {
+                "type": [10],
+                "value": ["l_shipmode"]
+            },
+            "Operator" : 9, 
+            "RV" : {
+                "type": [9, 9],
+                "value": ["AIR", "AIR REG"]
+            }
+        },
+        {
+            "Operator" : 13
+        },
+        {
+            "LV": {
+                "type": [10],
+                "value": ["l_shipinstruct"]
+            },
+            "Operator" : 5, 
+            "RV" : {
+                "type": [9],
+                "value": ["DELIVER IN PERSON"]
+            }
+        },
+        {
+          "Operator" : 14
+        },
+        {
+          "LV": {
+              "type": [10],
+              "value": ["p_brand"]
+          },
+          "Operator" : 5, 
+          "RV" : {
+              "type": [9],
+              "value": ["Brand#51"]
+          }
+        },
+        {
+          "Operator" : 13
+        },
+        {
+          "LV": {
+              "type": [10],
+              "value": ["p_container"]
+          },
+          "Operator" : 9, 
+          "RV" : {
+              "type": [9, 9, 9, 9],
+              "value": ["LG CASE" , "LG BOX", "LG PACK", "LG PKG"]
+          }
+        },
+        {
+          "Operator" : 13
+        },
+        {
+            "LV": {
+                "type": [10],
+                "value": ["l_quantity"]
+            },
+            "Operator" : 1, 
+            "RV" : {
+                "type": [2],
+                "value": ["29"]
+            }
+        },
+        {
+            "Operator" : 13
+        },
+        {
+            "LV": {
+                "type": [10],
+                "value": ["l_quantity"]
+            },
+            "Operator" : 2, 
+            "RV" : {
+                "type": [2],
+                "value": ["39"]
+            }
+        },
+        {
+            "Operator" : 13
+        },
+        {
+          "LV": {
+              "type": [10],
+              "value": ["p_size"]
+          },
+          "Operator" : 8, 
+          "RV" : {
+              "type": [2, 2],
+              "value": ["1", "15"]
+          }
+        },
+        {
+            "Operator" : 13
+        },
+        {
+            "LV": {
+                "type": [10],
+                "value": ["l_shipmode"]
+            },
+            "Operator" : 9, 
+            "RV" : {
+                "type": [9, 9],
+                "value": ["AIR", "AIR REG"]
+            }
+        },
+        {
+            "Operator" : 13
+        },
+        {
+            "LV": {
+                "type": [10],
+                "value": ["l_shipinstruct"]
+            },
+            "Operator" : 5, 
+            "RV" : {
+                "type": [9],
+                "value": ["DELIVER IN PERSON"]
+            }
+        }
+      ],
+      "tableOffset": [],
+      "tableOfflen": [],
+      "tableDatatype": [],
+      "tableAlias": "snippet18-3",
+      "columnAlias": [
+        "pre_revenue"
+      ],
+      "columnProjection": [
+        {
+            "selectType": 0,
+            "value": ["pre_revenue"],
+            "valueType": [10]
+        }
+      ],
+      "columnFiltering": [],
+      "groupBy": []
+    }
+  }
