@@ -1,0 +1,35 @@
+
+{
+  "queryID":4,
+  "workID":5,
+  "tableName":"region",
+  "tableCol":["r_regionkey","r_name","r_comment"],
+  "tableFilter":[{"LV":"r_name","OPERATOR":5,"RV":"+MIDDLE EAST"}],
+  "columnFiltering":["r_regionkey"],
+  "groupBy":[],
+  "Order_By":[],
+  "columnProjection":[{"selectType":0,"value":["r_regionkey"],"valueType":[10]}],
+  "tableOffset":[0,4,29],
+  "tableOfflen":[4,25,152],
+  "tableDatatype":[3,254,15],
+  "projectionDatatype":[3],
+  "blockList":[{"offset":138518528,"length":[571]}],
+  "primaryKey":0,
+  "csdName":"1",
+  "totalBlockCount":1,
+  "deleteKey": [
+    "0000013A0000000000000004",
+    "0000013A0000000000000005"
+  ],
+  "unflushedRows": {
+      "key": [
+          "0000013A0000000000000005",
+          "0000013A0000000000000006"
+      ],
+      "value": [
+          "080000004D4944444C4520454153542020202020202020202020202020176567756C617220636F757274732061626F766520746865",
+          "0A0000004D4944444C4520454153542020202020202020202020202020176567756C617220636F757274732061626F766520746865"
+         ]
+  }
+}
+
