@@ -1,0 +1,20 @@
+# started on Tue Jun 20 10:31:45 2023
+
+
+ Performance counter stats for process id '29701':
+
+            199.10 msec task-clock                #    0.040 CPUs utilized          
+                53      context-switches          #    0.266 K/sec                  
+                 0      cpu-migrations            #    0.000 K/sec                  
+                32      page-faults               #    0.161 K/sec                  
+       256,636,477      cycles                    #    1.289 GHz                    
+       515,455,721      instructions              #    2.01  insn per cycle         
+       115,971,196      branches                  #  582.471 M/sec                  
+           332,785      branch-misses             #    0.29% of all branches        
+       135,567,172      L1-dcache-loads           #  680.893 M/sec                  
+           690,667      L1-dcache-load-misses     #    0.51% of all L1-dcache hits  
+            69,712      LLC-loads                 #    0.350 M/sec                  
+            39,799      LLC-load-misses           #   57.09% of all LL-cache hits   
+
+       5.002725671 seconds time elapsed
+

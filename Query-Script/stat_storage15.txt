@@ -1,0 +1,20 @@
+# started on Thu Jun  1 10:19:39 2023
+
+
+ Performance counter stats for process id '19227':
+
+             40.79 msec task-clock                #    0.004 CPUs utilized          
+                14      context-switches          #    0.343 K/sec                  
+                 0      cpu-migrations            #    0.000 K/sec                  
+                38      page-faults               #    0.932 K/sec                  
+        47,830,379      cycles                    #    1.173 GHz                    
+        89,374,970      instructions              #    1.87  insn per cycle         
+        21,121,563      branches                  #  517.778 M/sec                  
+            63,495      branch-misses             #    0.30% of all branches        
+        25,149,374      L1-dcache-loads           #  616.517 M/sec                  
+           431,531      L1-dcache-load-misses     #    1.72% of all L1-dcache hits  
+            44,152      LLC-loads                 #    1.082 M/sec                  
+            29,049      LLC-load-misses           #   65.79% of all LL-cache hits   
+
+      10.002309267 seconds time elapsed
+
