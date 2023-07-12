@@ -1,0 +1,45 @@
+{
+  "type" : 2,
+  "snippet":
+  {
+    "queryID":1,
+    "workID":10,
+    "tableName": ["snippet1-9","snippet1-4"],
+    "tableCol":[],
+    "tableFilter":[
+      {
+        "LV": {
+          "type": [10],
+          "value": ["s_suppkey"]
+      },
+      "Operator" : 5, 
+      "RV" : {
+          "type": [10],
+          "value": ["ps_suppkey"]
+        }
+      }
+    ],
+    "tableOffset":[],
+    "tableOfflen":[],
+    "tableDatatype":[],
+    "tableAlias": "snippet1-10",
+    "columnAlias": [
+        "snippet1-10.ps_supplycost",
+        "snippet1-10.ps_partkey"
+    ],
+    "columnProjection": [
+      {
+        "selectType": 0,
+        "value": ["ps_supplycost"],
+        "valueType": [10]
+      },
+      {
+        "selectType": 0,
+        "value": ["ps_partkey"],
+        "valueType": [10]
+      }
+    ],
+    "columnFiltering": [],
+    "groupBy": []
+  }
+}

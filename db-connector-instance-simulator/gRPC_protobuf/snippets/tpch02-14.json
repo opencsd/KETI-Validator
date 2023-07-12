@@ -1,0 +1,58 @@
+{
+  "type" : 2,
+  "snippet":
+  {
+    "queryID":1,
+    "workID":14,
+    "tableName": ["snippet1-2","snippet1-11"],
+    "tableCol":[],
+    "tableFilter":[
+      {
+        "LV": {
+          "type": [10],
+          "value": ["p_partkey"]
+      },
+      "Operator" : 5, 
+      "RV" : {
+          "type": [10],
+          "value": ["ps_partkey"]
+        }
+      }
+    ],
+    "tableOffset":[],
+    "tableOfflen":[],
+    "tableDatatype":[],
+    "tableAlias": "snippet1-14",
+    "columnAlias": [
+        "ps_suppkey", 
+        "ps_supplycost",
+        "p_partkey",
+        "p_mfgr"
+    ],
+    "columnProjection": [
+        {
+          "selectType": 0,
+          "value": ["ps_suppkey"],
+          "valueType": [10]
+        },
+        {
+          "selectType": 0,
+          "value": ["ps_supplycost"],
+          "valueType": [10]
+        },
+        {
+          "selectType": 0,
+          "value": ["p_partkey"],
+          "valueType": [10]
+        },
+        {
+          "selectType": 0,
+          "value": ["p_mfgr"],
+          "valueType": [10]
+        }
+    ],
+    "columnFiltering": [],
+    "groupBy": []
+  }
+
+}

@@ -1,0 +1,40 @@
+{
+  "type" : 4,
+  "snippet":
+  {
+    "queryID":3,
+    "workID":2,
+    "tableName": ["ProcessTable-0","ProcessTable-1"],
+    "tableCol":[],
+    "tableFilter":[
+      {
+        "LV": {
+          "type": [10],
+          "value": ["o_orderkey"]
+      },
+      "Operator" : 5, 
+      "RV" : {
+          "type": [10],
+          "value": ["l_orderkey"]
+        }
+      }
+    ],
+    "tableOffset":[],
+    "tableOfflen":[],
+    "tableDatatype":[],
+    "tableAlias": "MergeTable-2",
+    "columnAlias": [
+        "o_orderpriority"
+    ],
+    "columnProjection": [
+      {
+        "selectType": 0,
+        "value": ["o_orderpriority"],
+        "valueType": [10]
+      }
+    ],
+    "columnFiltering": [],
+    "groupBy": []
+  }
+
+}

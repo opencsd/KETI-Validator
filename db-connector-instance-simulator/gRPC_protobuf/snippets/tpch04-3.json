@@ -1,0 +1,38 @@
+{
+  "type" : 1,
+  "snippet":
+  {
+    "queryID":3,
+    "workID":3,
+    "tableName": ["MergeTable-2"],
+    "tableCol":[],
+    "tableFilter":[],
+    "tableOffset":[],
+    "tableOfflen":[],
+    "tableDatatype":[],
+    "tableAlias": "ResultTable-3",
+    "columnAlias": [
+      "order_count",
+      "o_orderpriority"
+    ],
+    "columnProjection": [
+      {
+        "selectType": 4,
+        "value": [],
+        "valueType": []
+      },
+      {
+        "selectType": 0,
+        "value": ["o_orderpriority"],
+        "valueType": [10]
+      }
+
+    ],
+    "columnFiltering": [],
+    "groupBy": ["o_orderpriority"],
+    "orderBy": {
+      "ascending" : [0],
+      "columnName" : ["o_orderpriority"]
+    }
+  }
+}
