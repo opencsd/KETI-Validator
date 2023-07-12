@@ -1,0 +1,190 @@
+----
+**test.json에 totalBlockCount 꼭 추가하기 (테스트용)
+**동일 테이블은 블록수 통일해도 상관없음
+
+[lineitem]
+1. 001388.sst  totalBlockCount: 244
+2. 001404.sst  totalBlockCount: 244
+3. 001420.sst  totalBlockCount: 244
+4. 001436.sst  totalBlockCount: 244
+5. 001452.sst  totalBlockCount: 244
+6. 001468.sst  totalBlockCount: 244
+7. 001484.sst  totalBlockCount: 244
+8. 001490.sst  totalBlockCount: 244
+
+[customer]
+1. 001174.sst  totalBlockCount: 8
+2. 001190.sst  totalBlockCount: 8
+3. 001205.sst  totalBlockCount: 8
+4. 001221.sst  totalBlockCount: 8
+5. 001236.sst  totalBlockCount: 8
+6. 001252.sst  totalBlockCount: 8
+7. 001267.sst  totalBlockCount: 8
+8. 001283.sst  totalBlockCount: 8
+
+[nation]
+1. 001715.sst  totalBlockCount: 1
+
+[orders]
+1. 001533.sst  totalBlockCount: 53
+2. 001548.sst  totalBlockCount: 53
+3. 001576.sst  totalBlockCount: 53
+4. 001591.sst  totalBlockCount: 53
+5. 001607.sst  totalBlockCount: 53
+6. 001622.sst  totalBlockCount: 53
+7. 001638.sst  totalBlockCount: 53
+8. 001653.sst  totalBlockCount: 53
+
+[part]
+1. 000895.sst  totalBlockCount: 8
+2. 000911.sst  totalBlockCount: 8
+3. 000926.sst  totalBlockCount: 8
+4. 000942.sst  totalBlockCount: 8
+5. 000957.sst  totalBlockCount: 8
+6. 000973.sst  totalBlockCount: 8
+7. 000988.sst  totalBlockCount: 8
+8. 001004.sst  totalBlockCount: 8
+
+[partsupp]
+1. 001019.sst  totalBlockCount: 39
+2. 001035.sst  totalBlockCount: 40
+3. 001050.sst  totalBlockCount: 39
+4. 001066.sst  totalBlockCount: 39
+5. 001081.sst  totalBlockCount: 39
+6. 001097.sst  totalBlockCount: 39
+7. 001112.sst  totalBlockCount: 39
+8. 001128.sst  totalBlockCount: 40
+
+[region]
+1. 001699.sst  totalBlockCount: 1
+
+[supplier]
+1. 000771.sst  totalBlockCount: 1
+2. 000787.sst  totalBlockCount: 2
+3. 000802.sst  totalBlockCount: 2
+4. 000818.sst  totalBlockCount: 2
+5. 000833.sst  totalBlockCount: 2
+6. 000849.sst  totalBlockCount: 2
+7. 000864.sst  totalBlockCount: 2
+8. 000880.sst  totalBlockCount: 2
+
+----
+
+1. 002055.sst -> odbcdata.customer
+2. 002319.sst -> odbcdata.lineitem
+
+[sstfile]
+database : tpch_small
+1. 001174.sst -> customer
+2. 000538.sst -> lineitem 
+3. 001159.sst -> nation 
+4. 000647.sst -> orders 
+5. 000895.sst -> part 
+6. 001035.sst -> partsupp 
+7. 001143.sst -> region 
+8. 000771.sst -> supplier
+
+[check list]
+1. tableName = string 하나로 수정 (배열X)
+2. "blockList" : [] 추가필요
+3. "blockFilter" 확인필요
+4. "columnFiltering" 없어도 됨
+5. "groupBy" 없어도 됨
+6. "csdName" 필요
+7. "primaryKey" 필요
+8. "projectionDatatype" 필요
+
+[projectionDatatype]
+0-0. projectionDatatype:[254(MySQL_STRING), 254(MySQL_STRING), 246(MySQL_NEWDECIMAL), 246(MySQL_NEWDECIMAL), 246(MySQL_NEWDECIMAL), 246(MySQL_NEWDECIMAL), 246(MySQL_NEWDECIMAL), 246(MySQL_NEWDECIMAL), 246(MySQL_NEWDECIMAL)]
+
+1-0. projectionDatatype:[3(MySQL_INT32)]
+1-1. projectionDatatype:[3(MySQL_INT32), 3(MySQL_INT32), 254(MySQL_STRING)]
+1-2. projectionDatatype:[3(MySQL_INT32), 254(MySQL_STRING)]
+1-3. projectionDatatype:[3(MySQL_INT32), 3(MySQL_INT32), 246(MySQL_NEWDECIMAL), 254(MySQL_STRING), 15(MySQL_VARSTRING), 254(MySQL_STRING), 15(MySQL_VARSTRING)]
+1-4. projectionDatatype:[3(MySQL_INT32), 3(MySQL_INT32), 246(MySQL_NEWDECIMAL)]
+1-5. projectionDatatype:[3(MySQL_INT32), 3(MySQL_INT32)]
+1-6. projectionDatatype:[3(MySQL_INT32)]
+1-7. projectionDatatype:[3(MySQL_INT32)]
+1-11. projectionDatatype:[3(MySQL_INT32), 3(MySQL_INT32), 246(MySQL_NEWDECIMAL)]
+
+2-0. projectionDatatype:[3(MySQL_INT32)]
+2-1. projectionDatatype:[14(MySQL_DATE), 3(MySQL_INT32), 3(MySQL_INT32), 3(MySQL_INT32)]
+2-2. projectionDatatype:[3(MySQL_INT32), 246(MySQL_NEWDECIMAL)]
+
+3-0. projectionDatatype:[3(MySQL_INT32), 254(MySQL_STRING)]
+3-1. projectionDatatype:[3(MySQL_INT32)]
+
+4-0. projectionDatatype:[3(MySQL_INT32), 3(MySQL_INT32)]
+4-1. projectionDatatype:[3(MySQL_INT32), 3(MySQL_INT32)]
+4-4. projectionDatatype:[3(MySQL_INT32), 3(MySQL_INT32)]
+4-5. projectionDatatype:[3(MySQL_INT32), 254(MySQL_STRING), 3(MySQL_INT32)]
+4-6. projectionDatatype:[3(MySQL_INT32)]
+
+5-0. projectionDatatype:[246(MySQL_NEWDECIMAL)]
+
+6-0. projectionDatatype:[3(MySQL_INT32), 3(MySQL_INT32)]
+6-1. projectionDatatype:[14(MySQL_DATE), 3(MySQL_INT32), 246(MySQL_NEWDECIMAL)]
+6-2. projectionDatatype:[3(MySQL_INT32), 3(MySQL_INT32)]
+6-3. projectionDatatype:[3(MySQL_INT32), 3(MySQL_INT32)]
+6-4. projectionDatatype:[254(MySQL_STRING), 3(MySQL_INT32)]
+6-5. projectionDatatype:[254(MySQL_STRING), 3(MySQL_INT32)]
+
+7-0. projectionDatatype:[15(MySQL_VARSTRING), 3(MySQL_INT32)]
+7-1. projectionDatatype:[3(MySQL_INT32), 3(MySQL_INT32)]
+7-2. projectionDatatype:[246(MySQL_NEWDECIMAL), 3(MySQL_INT32), 3(MySQL_INT32), 3(MySQL_INT32)]
+7-3. projectionDatatype:[3(MySQL_INT32), 3(MySQL_INT32), 3(MySQL_INT32)]
+7-4. projectionDatatype:[3(MySQL_INT32), 3(MySQL_INT32)]
+7-5. projectionDatatype:[3(MySQL_INT32), 3(MySQL_INT32)]
+7-6. projectionDatatype:[254(MySQL_STRING), 3(MySQL_INT32)]
+7-7. projectionDatatype:[3(MySQL_INT32), 254(MySQL_STRING)]
+
+8-0. projectionDatatype:[3(MySQL_INT32), 254(MySQL_STRING)]
+8-1. projectionDatatype:[3(MySQL_INT32), 3(MySQL_INT32)]
+8-2. projectionDatatype:[246(MySQL_NEWDECIMAL), 246(MySQL_NEWDECIMAL), 246(MySQL_NEWDECIMAL), 3(MySQL_INT32), 3(MySQL_INT32), 3(MySQL_INT32)]
+8-3. projectionDatatype:[246(MySQL_NEWDECIMAL), 3(MySQL_INT32), 3(MySQL_INT32)]
+8-4. projectionDatatype:[3(MySQL_INT32), 3(MySQL_INT32)]
+8-5. projectionDatatype:[254(MySQL_STRING), 3(MySQL_INT32)]
+
+9-0. projectionDatatype:[3(MySQL_INT32), 15(MySQL_VARSTRING), 246(MySQL_NEWDECIMAL), 15(MySQL_VARSTRING), 254(MySQL_STRING), 15(MySQL_VARSTRING), 3(MySQL_INT32)]
+9-1. projectionDatatype:[3(MySQL_INT32), 3(MySQL_INT32), 14(MySQL_DATE)]
+9-2. projectionDatatype:[246(MySQL_NEWDECIMAL), 3(MySQL_INT32), 254(MySQL_STRING)]
+9-3. projectionDatatype:[254(MySQL_STRING), 3(MySQL_INT32)]
+
+10-0. projectionDatatype:[3(MySQL_INT32)]
+10-1. projectionDatatype:[3(MySQL_INT32), 3(MySQL_INT32)]
+10-1. projectionDatatype:[246(MySQL_NEWDECIMAL), 3(MySQL_INT32)]
+10-5. projectionDatatype:[3(MySQL_INT32)]
+10-6. projectionDatatype:[3(MySQL_INT32), 3(MySQL_INT32)]
+10-7. projectionDatatype:[246(MySQL_NEWDECIMAL), 3(MySQL_INT32), 3(MySQL_INT32)]
+
+11-0. projectionDatatype:[3(MySQL_INT32), 3(MySQL_INT32), 3(MySQL_INT32)]
+11-1. projectionDatatype:[3(MySQL_INT32), 254(MySQL_STRING)]
+
+12-0. projectionDatatype:[3(MySQL_INT32), 3(MySQL_INT32)]
+12-1. projectionDatatype:[3(MySQL_INT32)]
+
+13-0. projectionDatatype:[3(MySQL_INT32), 246(MySQL_NEWDECIMAL)]
+13-1. projectionDatatype:[15(MySQL_VARSTRING), 3(MySQL_INT32)]
+
+14-0. projectionDatatype:[3(MySQL_INT32), 246(MySQL_NEWDECIMAL)]
+14-3. projectionDatatype:[3(MySQL_INT32), 254(MySQL_STRING), 15(MySQL_VARSTRING), 254(MySQL_STRING)]
+
+15-0. projectionDatatype:[3(MySQL_INT32)]
+15-1. projectionDatatype:[3(MySQL_INT32), 3(MySQL_INT32)]
+15-2. projectionDatatype:[254(MySQL_STRING), 15(MySQL_VARSTRING), 3(MySQL_INT32), 3(MySQL_INT32)]
+
+16-0. projectionDatatype:[246(MySQL_NEWDECIMAL), 3(MySQL_INT32), 246(MySQL_NEWDECIMAL)]
+16-1. projectionDatatype:[3(MySQL_INT32)]
+
+17-0. projectionDatatype:[]
+
+18-0. projectionDatatype:[]
+
+19-0. projectionDatatype:[]
+
+20-0. projectionDatatype:[]
+
+21-0. projectionDatatype:[]
+
+22-0. projectionDatatype:[246(MySQL_NEWDECIMAL)]
+22-1. projectionDatatype:[3(MySQL_INT32), 3(MySQL_INT32)]
