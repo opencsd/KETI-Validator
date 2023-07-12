@@ -1,0 +1,257 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.snippet_sample";
+option java_outer_classname = "snippet_sample_Proto";
+option objc_class_prefix = "SSP";
+
+package StorageEngineInstance;
+
+service InterfaceContainer {
+  rpc SetSnippet (stream SnippetRequest) returns (stream Result) {}
+  rpc Run (Request) returns (Result) {}
+}
+
+
+service MergingContainer {
+  rpc Aggregation (SnippetRequest) returns (Result) {}
+  rpc InitBuffer (SnippetRequest) returns (Result) {}
+  rpc EndQuery (Request) returns (Result) {}
+  rpc GetQueryResult (Request) returns (QueryResult) {}
+}
+
+service MonitoringContainer {
+  rpc SetMetaData (Request) returns (Result) {}
+  rpc GetMetaData (Request) returns (MetaDataResponse) {}
+  rpc GetCSDBlockInfo (Request) returns (TableBlockCount) {}
+  rpc SetCSDMetricsInfo (CSDMetricList) returns (Result) {}
+}
+
+service OffloadingContainer {
+  rpc Schedule (Snippet) returns (Result) {}
+  rpc PushCSDMetric (CSDStatusList) returns (Result) {}
+}
+
+service LBA2PBAManager {
+  rpc RequestPBA (LBARequest) returns (PBAResponse) {}
+}
+
+service WALManager {
+  rpc RequestWAL (WALRequest) returns (WALResponse) {}
+}
+
+message SnippetRequest {
+  enum SnippetType {
+    SCAN_SNIPPET = 0;
+    AGGREGATION_SNIPPET = 1;
+    INNER_JOIN_SNIPPET = 2;
+    LEFT_OUTER_JOIN_SNIPPET = 3;
+    RIGHT_OUTER_JOIN_SNIPPET = 4;
+    FULL_OUTER_JOIN_SNIPPET = 5;
+    DEPENDENCY_SEMI_JOIN_SNIPPET = 6;
+    DEPENDENCY_ANIT_JOIN_SNIPPET = 7;
+    NON_DEPENDENCY_SEMI_JOIN_SNIPPET = 8;
+    NON_DEPENDENCY_ANIT_JOIN_SNIPPET = 9;
+    DEPENDENCY_SUBQUERY_SNIPPET = 10;
+    NON_DEPENDENCY_SUBQUERY_SNIPPET = 11;
+    FILTER_SNIPPET = 12 ;
+    UNION_SNIPPET = 13;
+    UNION_ALL_SNIPPET = 14;
+  }
+  SnippetType type = 1;
+  Snippet snippet = 2;
+}
+
+message Snippet {
+  enum ValueType {
+    INT8 = 0;
+    INT16 = 1;
+    INT32 = 2; //DEFAULT
+    INT64 = 3;
+    FLOAT32 = 4;
+    FLOAT64 = 5;
+    NUMERIC = 6;
+    DATE = 7;
+    TIMESTAMP = 8;
+    STRING = 9;
+    COLUMN = 10;
+    OPERATOR = 11; //value string으로 연산자 확인
+  }
+  message Filter {
+    enum OperType {
+      KETI_DEFAULT = 0; //DEFAULT
+      KETI_GE = 1;
+      KETI_LE = 2;
+      KETI_GT = 3;
+      KETI_LT = 4;
+      KETI_ET = 5;
+      KETI_NE = 6;
+      KETI_LIKE = 7;
+      KETI_BETWEEN = 8;
+      KETI_IN = 9;
+      KETI_IS = 10;
+      KETI_ISNOT = 11;
+      KETI_NOT = 12;
+      KETI_AND = 13;
+      KETI_OR = 14;
+    }
+    message FilterValue{
+      repeated ValueType type = 1;
+      repeated string value = 2;
+    }
+    FilterValue LV = 1;
+    OperType Operator = 2;
+    FilterValue RV = 3;
+    repeated FilterValue EXTRA = 4;
+  }
+  message Projection {
+    enum SelectType{
+      COLUMNNAME = 0; //DEFAULT
+      SUM = 1;
+      AVG = 2;
+      COUNT = 3;
+      COUNTSTAR = 4;
+      TOP = 5;
+      MIN = 6;
+      MAX = 7;
+    }
+    SelectType select_type = 1;
+    repeated string value = 2;
+    repeated ValueType value_type = 3;    
+  }
+  message Order {
+    enum OrderDirection{
+      ASC = 0; //DEFAULT
+      DESC = 1;
+    }
+    repeated OrderDirection ascending = 1;
+    repeated string column_name = 2;
+  }
+  message Dependency {
+    repeated Projection dependency_projection = 1;
+    repeated Filter dependency_filter = 2;
+  }
+  message Limit {
+    int32 offset = 1;
+    int32 length = 2;
+  }
+  int32 query_ID = 1;
+  int32 work_ID = 2;
+  repeated string table_name = 3;
+  repeated string table_col = 4;
+  repeated Filter table_filter = 5;
+  Dependency dependency = 6;
+  repeated int32 table_offset = 7;
+  repeated int32 table_offlen = 8;
+  repeated int32 table_datatype = 9;
+  string table_alias = 10;
+  repeated string column_alias = 11;
+  repeated Projection column_projection = 12;
+  repeated string column_filtering = 13;
+  repeated string group_by = 14;
+  Order order_by = 15;
+  Limit limit = 16;
+  int32 pk_num = 17;
+}
+
+message Column {
+  enum ColType {
+    TYPE_EMPTY = 0;
+    TYPE_STRING = 1;
+    TYPE_INT = 2;
+    TYPE_FLOAT = 3;
+  }
+  ColType col_type = 2;
+  repeated string string_col = 3;
+  repeated int32 int_col = 4;
+  repeated double double_col = 5;
+}
+
+message QueryResult {
+  map<string, Column> query_result = 1;
+  int32 row_count = 2;
+}
+
+message TableBlockCount {
+  int32 table_block_count = 1;
+}
+
+message Request{
+  int32 query_id = 1;
+  int32 work_id = 2;
+  string table_name = 3;
+}
+
+message MetaDataResponse {
+  message PBAInfo {
+    map<string,string> csd_pba_map = 1;
+  }
+  map<string,PBAInfo> sst_csd_map = 1;
+  string wal_json = 2;
+}
+
+message CSDStatusList {
+  message CSDStatus{
+    string ip = 1;
+    float score = 2;
+    int32 block_count = 3;
+  }
+  map<string,CSDStatus> csd_status_map = 1;
+}
+
+message CSDMetricList{
+  message CSDMetric{
+    string id = 1;
+    string ip = 2;
+    float cpu_usage = 3;
+    float memory_usage = 4;
+    float disk_usage = 5;
+    float network = 6;
+    int32 working_block_count = 7;
+  }
+  repeated CSDMetric csd_metric_list = 1;
+}
+
+message Result {
+  string value = 1;
+}
+
+message Chunk{
+  int64 offset = 1;
+  int32 length = 2;
+}
+
+message LBA{
+  string file_name = 1;
+  repeated Chunk chunks = 2;
+}
+
+message LBARequest{
+  repeated LBA file_lba_list = 1;
+}
+
+message PBA{
+  string csd_id = 1;
+  repeated Chunk chunks = 2;
+}
+
+message PBAList{
+  string file_name = 1;
+  repeated PBA csd_pba_list = 2;
+}
+
+message PBAResponse{
+  repeated PBAList file_csd_list = 1;
+}
+
+message WALRequest {
+  string req_key = 1;
+  string type = 2;
+  string value = 3;
+}
+
+message WALResponse {
+  repeated string deleted_key = 1;
+  repeated string inserted_key = 2;
+  repeated string inserted_value = 3;
+}
