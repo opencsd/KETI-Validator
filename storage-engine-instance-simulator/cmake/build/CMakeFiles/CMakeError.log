@@ -1,25 +1,25 @@
 Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
-Change Dir: /root/workspace/Simulator/storage-engine-instance-simulator/cmake/build/CMakeFiles/CMakeTmp
+Change Dir: /root/KETI-Simulator/storage-engine-instance-simulator/cmake/build/CMakeFiles/CMakeScratch/TryCompile-Mia7Si
 
-Run Build Command(s):/usr/bin/make -f Makefile cmTC_7a9e1/fast && /usr/bin/make  -f CMakeFiles/cmTC_7a9e1.dir/build.make CMakeFiles/cmTC_7a9e1.dir/build
-make[1]: Entering directory '/root/workspace/Simulator/storage-engine-instance-simulator/cmake/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_7a9e1.dir/src.c.o
-/usr/bin/cc -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_7a9e1.dir/src.c.o -c /root/workspace/Simulator/storage-engine-instance-simulator/cmake/build/CMakeFiles/CMakeTmp/src.c
-Linking C executable cmTC_7a9e1
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7a9e1.dir/link.txt --verbose=1
-/usr/bin/cc CMakeFiles/cmTC_7a9e1.dir/src.c.o -o cmTC_7a9e1 
-CMakeFiles/cmTC_7a9e1.dir/src.c.o: In function `main':
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_20b9a/fast && /usr/bin/make  -f CMakeFiles/cmTC_20b9a.dir/build.make CMakeFiles/cmTC_20b9a.dir/build
+make[1]: Entering directory '/root/KETI-Simulator/storage-engine-instance-simulator/cmake/build/CMakeFiles/CMakeScratch/TryCompile-Mia7Si'
+Building C object CMakeFiles/cmTC_20b9a.dir/src.c.o
+/usr/bin/cc -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_20b9a.dir/src.c.o -c /root/KETI-Simulator/storage-engine-instance-simulator/cmake/build/CMakeFiles/CMakeScratch/TryCompile-Mia7Si/src.c
+Linking C executable cmTC_20b9a
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_20b9a.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_20b9a.dir/src.c.o -o cmTC_20b9a 
+CMakeFiles/cmTC_20b9a.dir/src.c.o: In function `main':
 src.c:(.text+0x3e): undefined reference to `pthread_create'
 src.c:(.text+0x4a): undefined reference to `pthread_detach'
 src.c:(.text+0x56): undefined reference to `pthread_cancel'
 src.c:(.text+0x67): undefined reference to `pthread_join'
 src.c:(.text+0x7b): undefined reference to `pthread_atfork'
 collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_7a9e1.dir/build.make:98: recipe for target 'cmTC_7a9e1' failed
-make[1]: *** [cmTC_7a9e1] Error 1
-make[1]: Leaving directory '/root/workspace/Simulator/storage-engine-instance-simulator/cmake/build/CMakeFiles/CMakeTmp'
-Makefile:127: recipe for target 'cmTC_7a9e1/fast' failed
-make: *** [cmTC_7a9e1/fast] Error 2
+CMakeFiles/cmTC_20b9a.dir/build.make:98: recipe for target 'cmTC_20b9a' failed
+make[1]: *** [cmTC_20b9a] Error 1
+make[1]: Leaving directory '/root/KETI-Simulator/storage-engine-instance-simulator/cmake/build/CMakeFiles/CMakeScratch/TryCompile-Mia7Si'
+Makefile:127: recipe for target 'cmTC_20b9a/fast' failed
+make: *** [cmTC_20b9a/fast] Error 2
 
 
 Source file was:
@@ -43,23 +43,24 @@ int main(void)
   return 0;
 }
 
-Determining if the function pthread_create exists in the pthreads failed with the following output:
-Change Dir: /root/workspace/Simulator/storage-engine-instance-simulator/cmake/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make -f Makefile cmTC_c1f3a/fast && /usr/bin/make  -f CMakeFiles/cmTC_c1f3a.dir/build.make CMakeFiles/cmTC_c1f3a.dir/build
-make[1]: Entering directory '/root/workspace/Simulator/storage-engine-instance-simulator/cmake/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_c1f3a.dir/CheckFunctionExists.c.o
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_c1f3a.dir/CheckFunctionExists.c.o -c /usr/share/cmake-3.24/Modules/CheckFunctionExists.c
-Linking C executable cmTC_c1f3a
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c1f3a.dir/link.txt --verbose=1
-/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create CMakeFiles/cmTC_c1f3a.dir/CheckFunctionExists.c.o -o cmTC_c1f3a  -lpthreads 
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/KETI-Simulator/storage-engine-instance-simulator/cmake/build/CMakeFiles/CMakeScratch/TryCompile-pQhKqo
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_4e8e0/fast && /usr/bin/make  -f CMakeFiles/cmTC_4e8e0.dir/build.make CMakeFiles/cmTC_4e8e0.dir/build
+make[1]: Entering directory '/root/KETI-Simulator/storage-engine-instance-simulator/cmake/build/CMakeFiles/CMakeScratch/TryCompile-pQhKqo'
+Building C object CMakeFiles/cmTC_4e8e0.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_4e8e0.dir/CheckFunctionExists.c.o -c /root/KETI-Simulator/storage-engine-instance-simulator/cmake/build/CMakeFiles/CMakeScratch/TryCompile-pQhKqo/CheckFunctionExists.c
+Linking C executable cmTC_4e8e0
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4e8e0.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create CMakeFiles/cmTC_4e8e0.dir/CheckFunctionExists.c.o -o cmTC_4e8e0  -lpthreads 
 /usr/bin/ld: cannot find -lpthreads
 collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_c1f3a.dir/build.make:98: recipe for target 'cmTC_c1f3a' failed
-make[1]: *** [cmTC_c1f3a] Error 1
-make[1]: Leaving directory '/root/workspace/Simulator/storage-engine-instance-simulator/cmake/build/CMakeFiles/CMakeTmp'
-Makefile:127: recipe for target 'cmTC_c1f3a/fast' failed
-make: *** [cmTC_c1f3a/fast] Error 2
+CMakeFiles/cmTC_4e8e0.dir/build.make:98: recipe for target 'cmTC_4e8e0' failed
+make[1]: *** [cmTC_4e8e0] Error 1
+make[1]: Leaving directory '/root/KETI-Simulator/storage-engine-instance-simulator/cmake/build/CMakeFiles/CMakeScratch/TryCompile-pQhKqo'
+Makefile:127: recipe for target 'cmTC_4e8e0/fast' failed
+make: *** [cmTC_4e8e0/fast] Error 2
 
 
 
