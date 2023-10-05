@@ -1,7 +1,7 @@
 FROM ubuntu:18.04
 ADD /cmake/build/simulator_container /simulator_container
 
-COPY /NewTableManager.json /
+COPY /TableManager_tpch_origin.json /
 
 COPY ./shared_library/libboost_thread.so.1.65.1 /usr/lib/x86_64-linux-gnu/
 COPY ./shared_library/libpthread.so.0 /lib/x86_64-linux-gnu/

@@ -9,7 +9,7 @@ int TableManager::initTableManager(){
 	//read TableManager.json
 	string json = "";
 	std::ifstream openFile("/TableManager_tpch_origin.json");
-	//std::ifstream openFile("/root/workspace/Simulator/storage-engine-instance-simulator/NewTableManager.json");
+	//std::ifstream openFile("/root/KETI-Simulator/Simulator/storage-engine-instance-simulator/NewTableManager.json");
 	if(openFile.is_open() ){
 		std::string line;
 		while(getline(openFile, line)){
@@ -22,11 +22,9 @@ int TableManager::initTableManager(){
 	document.Parse(json.c_str());
 
 	Value &TableList = document["Table List"];
-	
 	for(int i=0;i<TableList.Size();i++){
 		Value &TableObject = TableList[i];
 		auto tbl = new Table();
-
 		Value &tablenameObject = TableObject["tablename"];
 		tbl->tablename = tablenameObject.GetString();
 

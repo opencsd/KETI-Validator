@@ -27,11 +27,11 @@
 #define CSD_WAL_MANAGER_IP "10.0.4.83"
 #define CSD_WAL_MANAGER_PORT 40302
 
-#define CSD_1_PORT 40011
-#define CSD_2_PORT 40012
-#define CSD_3_PORT 40013
-#define CSD_4_PORT 40014
-#define CSD_5_PORT 40015
-#define CSD_6_PORT 40016
-#define CSD_7_PORT 40017
-#define CSD_8_PORT 40018
+#define CSD_1_PORT 5555
+#define CSD_2_PORT 5556
+#define CSD_3_PORT 5557
+#define CSD_4_PORT 5558
+#define CSD_5_PORT 5559
+#define CSD_6_PORT 5560
+#define CSD_7_PORT 5561
+#define CSD_8_PORT 5562
