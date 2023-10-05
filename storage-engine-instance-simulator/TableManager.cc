@@ -8,7 +8,7 @@ int TableManager::initTableManager(){
 
 	//read TableManager.json
 	string json = "";
-	std::ifstream openFile("/NewTableManager.json");
+	std::ifstream openFile("/TableManager_tpch_origin.json");
 	//std::ifstream openFile("/root/workspace/Simulator/storage-engine-instance-simulator/NewTableManager.json");
 	if(openFile.is_open() ){
 		std::string line;

@@ -212,6 +212,9 @@ CMAKE_STRIP:FILEPATH=/usr/bin/strip
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
+//The directory containing a CMake configuration file for Protobuf.
+Protobuf_DIR:PATH=/lib/cmake/protobuf
+
 //Value Computed by CMake
 Simulator_BINARY_DIR:STATIC=/root/KETI-Simulator/storage-engine-instance-simulator/cmake/build
 
@@ -221,8 +224,20 @@ Simulator_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 Simulator_SOURCE_DIR:STATIC=/root/KETI-Simulator/storage-engine-instance-simulator
 
+//The directory containing a CMake configuration file for absl.
+absl_DIR:PATH=/lib/cmake/absl
+
+//The directory containing a CMake configuration file for gRPC.
+gRPC_DIR:PATH=/lib/cmake/grpc
+
+//CMake built-in FindProtobuf.cmake module compatible
+protobuf_MODULE_COMPATIBLE:BOOL=OFF
+
+//Enable for verbose output
+protobuf_VERBOSE:BOOL=OFF
+
 //Dependencies for the target
-ss_grpc_proto_LIB_DEPENDS:STATIC=general;grpc++_reflection;general;grpc++;general;protobuf;
+ss_grpc_proto_LIB_DEPENDS:STATIC=general;gRPC::grpc++_reflection;general;gRPC::grpc++;general;protobuf::libprotobuf;general;grpc++_reflection;general;grpc++;general;protobuf;
 
 
 ########################
@@ -382,4 +397,8 @@ CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
 //linker supports push/pop state
 _CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED:INTERNAL=TRUE
+//ADVANCED property for variable: protobuf_MODULE_COMPATIBLE
+protobuf_MODULE_COMPATIBLE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: protobuf_VERBOSE
+protobuf_VERBOSE-ADVANCED:INTERNAL=1
 
