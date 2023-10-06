@@ -16,15 +16,15 @@
 #define SE_MONITORING_CONTAINER_PORT 40003
 
 // Storage Node :: CSD Proxy
-#define CSD_PROXY_IP "10.0.4.82"
+#define CSD_PROXY_IP "10.0.4.86"
 #define CSD_PROXY_PORT 40002
 
 // Storage Node :: LBA2PBA Manager
-#define CSD_LBA2PBA_IP "10.0.4.83"
+#define CSD_LBA2PBA_IP "10.0.4.86"
 #define CSD_LBA2PBA_PORT 40301
 
 // Storage Node :: WAL Manager
-#define CSD_WAL_MANAGER_IP "10.0.4.83"
+#define CSD_WAL_MANAGER_IP "10.0.4.86"
 #define CSD_WAL_MANAGER_PORT 40302
 
 #define CSD_1_PORT 5555

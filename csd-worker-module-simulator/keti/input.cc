@@ -21,7 +21,7 @@ void Input::InputSnippet(){
         memset(&serv_addr, 0, sizeof(serv_addr));
         serv_addr.sin_family = AF_INET;
         serv_addr.sin_addr.s_addr = INADDR_ANY;
-        serv_addr.sin_port = htons(40011); // port
+        serv_addr.sin_port = htons(5555); // port
 
         if (bind(server_fd, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0){
           perror("bind");
@@ -108,7 +108,11 @@ void Input::InputSnippet(){
                 int multiple_count = 0;
                 for (int j = 0; j < snippet.column_projection[i].values.size(); j++){
                     if(snippet.column_projection[i].values[j] == "*"){
+                      if(snippet.column_projection[i].values[j-1] == "ps_availqty"){//임시로 작성!!!!
+                        multiple_count--;
+                      }else{
                         multiple_count++;
+                    }
                     }
                 }
                 if(multiple_count == 1){

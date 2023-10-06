@@ -1,7 +1,7 @@
 #pragma once
 #include <stack>
 #include <bitset>
-	#include <math.h>
+#include <math.h>
 
 #include "return.h"
 
@@ -33,6 +33,9 @@ public:
     void Merging();
     void MergeBlock(Result &result);
 
+    inline const static std::string LOGTAG = "CSD Merge Manager";
+    char msg[200];
+
 private:
     unordered_map<pair_key, MergeResult, pair_hash> m_MergeManager;// key=<qid,wid>
 
@@ -43,6 +46,12 @@ private:
     int calculSubstring(FilterInfo filter_info, char* origin_row_data, int* col_offset, int l, char* dest);
     int calculExtract(FilterInfo filter_info, char* origin_row_data, int* col_offset, int l, char* dest);
     int calculPostfix(vector<string> values, vector<int> types, FilterInfo filter_info, char* origin_row_data, int* col_offset, char* dest, int projection_datatype);
+};
+
+struct Projection{
+    int projection; // KETI_SELECT_TYPE
+    vector<string> values;
+    vector<int> types; // KETI_ValueType
 };
 
 struct FilterInfo{
@@ -86,14 +95,12 @@ struct Result{
     vector<int> row_offset;
     vector<vector<int>> row_column_offset;
     int result_block_count;
-    int raw_row_count;
 
     //scan, filter의 최초 생성자
     Result(
       int query_id_, int work_id_, string csd_name_,
       int total_block_count_, FilterInfo filter_info_,
       int result_block_count_ = 0)
-      
       : query_id(query_id_),
         work_id(work_id_), 
         csd_name(csd_name_),
@@ -114,7 +121,6 @@ struct Result{
     row_offset.clear();
     row_column_offset.clear();
     result_block_count = 0;
-    raw_row_count = 0;
   }
 };
 

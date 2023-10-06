@@ -23,5 +23,5 @@ COPY ./shared_library/libssl.so.1.1 /usr/lib/x86_64-linux-gnu/libssl.so.1.1
 
 ENV LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/
 ENV LD_LIBRARY_PATH=/usr/local/lib
-EXPOSE 40011
+EXPOSE 5555
 ENTRYPOINT ["/simulator_csd_container1"]

@@ -1,0 +1,7 @@
+#define NUM_OF_BLOCKS 15
+#define BUFF_SIZE (NUM_OF_BLOCKS * 5000)
+#define INPUT_IF_PORT 40303
+#define PACKET_SIZE 36
+
+#define BUFF_M_PORT 40204
+#define BUFF_M_IP "X.X.X.X"

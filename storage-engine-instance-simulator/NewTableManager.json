@@ -102,40 +102,71 @@
 			],
 			"SST List": [
                 {
-                    "filename": "000088.sst",
+                    "filename": "001379.sst",
                     "csd_name": "1"
                     },
                     {
-                    "filename": "000147.sst",
+                    "filename": "001382.sst",
                     "csd_name": "2"
                     },
                     {
-                    "filename": "000148.sst",
+                    "filename": "001383.sst",
                     "csd_name": "3"
                     },
                     {
-                    "filename": "000149.sst",
+                    "filename": "001384.sst",
                     "csd_name": "4"
                     },
                     {
-                    "filename": "000150.sst",
+                    "filename": "001400.sst",
                     "csd_name": "5"
                     },
                     {
-                    "filename": "000209.sst",
+                    "filename": "001434.sst",
                     "csd_name": "6"
                     },
                     {
-                    "filename": "000210.sst",
+                    "filename": "001435.sst",
                     "csd_name": "7"
                     },
                     {
-                    "filename": "000211.sst",
+                    "filename": "001436.sst",
+                    "csd_name": "8"
+                    },
+                    {
+                    "filename": "001437.sst",
+                    "csd_name": "1"
+                    },
+                    {
+                    "filename": "001471.sst",
+                    "csd_name": "2"
+                    },
+                    {
+                    "filename": "001472.sst",
+                    "csd_name": "3"
+                    },
+                    {
+                    "filename": "001473.sst",
+                    "csd_name": "4"
+                    },
+                    {
+                    "filename": "001474.sst",
+                    "csd_name": "5"
+                    },
+                    {
+                    "filename": "001506.sst",
+                    "csd_name": "6"
+                    },
+                    {
+                    "filename": "001507.sst",
+                    "csd_name": "7"
+                    },
+                    {
+                    "filename": "001508.sst",
                     "csd_name": "8"
                     }
-                    
 			],
-            "table_rows":60000
+            "table_rows":6000000
 		},
         {
 			"tablename": "orders",
@@ -197,39 +228,39 @@
 			],
 			"SST List": [
                 {
-                    "filename": "000212.sst",
+                    "filename": "000290.sst",
                     "csd_name": "1"
                     },
                     {
-                    "filename": "000271.sst",
+                    "filename": "000291.sst",
                     "csd_name": "2"
                     },
                     {
-                    "filename": "000272.sst",
+                    "filename": "000292.sst",
                     "csd_name": "3"
                     },
                     {
-                    "filename": "000273.sst",
+                    "filename": "000351.sst",
                     "csd_name": "4"
                     },
                     {
-                    "filename": "000274.sst",
+                    "filename": "000352.sst",
                     "csd_name": "5"
                     },
                     {
-                    "filename": "000333.sst",
+                    "filename": "000353.sst",
                     "csd_name": "6"
                     },
                     {
-                    "filename": "000334.sst",
+                    "filename": "000354.sst",
                     "csd_name": "7"
                     },
                     {
-                    "filename": "000335.sst",
+                    "filename": "000413.sst",
                     "csd_name": "8"
                     }
 			],
-            "table_rows" : 15000
+            "table_rows" : 1500000
 		},
         {
 			"tablename": "customer",
@@ -285,40 +316,40 @@
 			],
 			"SST List": [
                 {
-                    "filename": "000644.sst",
+                    "filename": "000664.sst",
                     "csd_name": "1"
                     },
                     {
-                    "filename": "000645.sst",
+                    "filename": "000723.sst",
                     "csd_name": "2"
                     },
                     {
-                    "filename": "000646.sst",
+                    "filename": "000724.sst",
                     "csd_name": "3"
                     },
                     {
-                    "filename": "000705.sst",
+                    "filename": "000725.sst",
                     "csd_name": "4"
                     },
                     {
-                    "filename": "000706.sst",
+                    "filename": "000726.sst",
                     "csd_name": "5"
                     },
                     {
-                    "filename": "000707.sst",
+                    "filename": "000785.sst",
                     "csd_name": "6"
                     },
                     {
-                    "filename": "000708.sst",
+                    "filename": "000786.sst",
                     "csd_name": "7"
                     },
                     {
-                    "filename": "000767.sst",
+                    "filename": "000787.sst",
                     "csd_name": "8"
 
                     }
 			],
-            "table_rows" : 1500
+            "table_rows" : 150000
 		},
         {
 			"tablename": "region",
@@ -344,7 +375,7 @@
 			],
 			"SST List": [
                 {
-                    "filename": "000584.sst",
+                    "filename": "002005.sst",
                     "csd_name": "1"
                 }
 			],
@@ -398,39 +429,39 @@
 			],
 			"SST List": [
                 {
-                    "filename": "000768.sst",
+                    "filename": "000788.sst",
                     "csd_name": "1"
                     },
                     {
-                    "filename": "000769.sst",
+                    "filename": "000847.sst",
                     "csd_name": "2"
                     },
                     {
-                    "filename": "000770.sst",
+                    "filename": "000848.sst",
                     "csd_name": "3"
                     },
                     {
-                    "filename": "000829.sst",
+                    "filename": "000849.sst",
                     "csd_name": "4"
                     },
                     {
-                    "filename": "000830.sst",
+                    "filename": "000850.sst",
                     "csd_name": "5"
                     },
                     {
-                    "filename": "000831.sst",
+                    "filename": "000923.sst",
                     "csd_name": "6"
                     },
                     {
-                    "filename": "000832.sst",
+                    "filename": "000924.sst",
                     "csd_name": "7"
                     },
                     {
-                    "filename": "000834.sst",
+                    "filename": "000925.sst",
                     "csd_name": "8"
                     }
 			],
-            "table_rows" : 100
+            "table_rows" : 10000
 		},
         {
 			"tablename": "part",
@@ -492,39 +523,39 @@
 			],
 			"SST List": [
                 {
-                    "filename": "000336.sst",
+                    "filename": "003805.sst",
                     "csd_name": "1"
                     },
                     {
-                    "filename": "000395.sst",
+                    "filename": "003806.sst",
                     "csd_name": "2"
                     },
                     {
-                    "filename": "000396.sst",
+                    "filename": "003807.sst",
                     "csd_name": "3"
                     },
                     {
-                    "filename": "000397.sst",
+                    "filename": "003808.sst",
                     "csd_name": "4"
                     },
                     {
-                    "filename": "000398.sst",
+                    "filename": "003809.sst",
                     "csd_name": "5"
                     },
                     {
-                    "filename": "000457.sst",
+                    "filename": "003810.sst",
                     "csd_name": "6"
                     },
                     {
-                    "filename": "000458.sst",
+                    "filename": "003811.sst",
                     "csd_name": "7"
                     },
                     {
-                    "filename": "000459.sst",
+                    "filename": "003812.sst",
                     "csd_name": "8"
                     }      
 			],
-            "table_rows" : 2000
+            "table_rows" : 200000
 		},
         {
 			"tablename": "partsupp",
@@ -562,40 +593,40 @@
 			],
 			"SST List": [
                 {
-                    "filename": "000460.sst",
+                    "filename": "000538.sst",
                     "csd_name": "1"
                     },
                     {
-                    "filename": "000519.sst",
+                    "filename": "000539.sst",
                     "csd_name": "2"
                     },
                     {
-                    "filename": "000520.sst",
+                    "filename": "000540.sst",
                     "csd_name": "3"
                     },
                     {
-                    "filename": "000521.sst",
+                    "filename": "000599.sst",
                     "csd_name": "4"
                     },
                     {
-                    "filename": "000522.sst",
+                    "filename": "000600.sst",
                     "csd_name": "5"
                     },
                     {
-                    "filename": "000581.sst",
+                    "filename": "000601.sst",
                     "csd_name": "6"
                     },
                     {
-                    "filename": "000582.sst",
+                    "filename": "000602.sst",
                     "csd_name": "7"
                     },
                     {
-                    "filename": "000583.sst",
+                    "filename": "000661.sst",
                     "csd_name": "8"
                 }
                     
 			],
-            "table_rows" : 8000
+            "table_rows" : 800000
 		},
         {
 			"tablename": "nation",
@@ -627,7 +658,7 @@
 			],
 			"SST List": [
                 {
-                    "filename": "000643.sst",
+                    "filename": "002064.sst",
                     "csd_name": "2"
                 }
 			],

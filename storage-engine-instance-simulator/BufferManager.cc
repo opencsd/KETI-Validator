@@ -314,7 +314,7 @@ void BufferManager::mergeBlock(BlockResult result){
                 (*it).second.type = TYPE_FLOAT;
             }else if((*it).second.intvec.size() != 0){
                 (*it).second.type = TYPE_INT;
-            }else{
+            }else if((*it).second.strvec.size()!= 0){
                 (*it).second.type = TYPE_STRING;
             }
         }

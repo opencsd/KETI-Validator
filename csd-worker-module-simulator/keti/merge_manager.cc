@@ -47,7 +47,7 @@ void MergeManager::MergeBlock(Result &result){
                 string value;
 
                 if(projection_type != COL_NAME){
-                    cout << "<error> what projection type: " << projection_type << endl;
+                    KETILOG::FATALLOG(LOGTAG,"<error> what projection type: " + to_string(projection_type));
 
                 //단순 컬럼 획득(len==1인데 단순 컬럼이 아닌 경우가 있나?)
                 }else if(result.filter_info.column_projection[l].values.size() == 1){
@@ -59,7 +59,7 @@ void MergeManager::MergeBlock(Result &result){
                         col_len = col_offset[idx+1] - col_offset[idx];
                         memcpy(col_data, origin_row_data+offset, col_len);
                     }else{//colname이 아닌 경우가 존재?
-                        cout << "merge_manager> col_projection> type not string" << endl;
+                        KETILOG::FATALLOG(LOGTAG,"merge_manager> col_projection> type not string");
                     }
 
                 //연산수행
@@ -84,7 +84,7 @@ void MergeManager::MergeBlock(Result &result){
                     memcpy(new_row_data+new_row_len, col_data, col_len);
                     new_row_len += col_len;
                 }else{
-                    cout << "projection type error " << projection_type;
+                    KETILOG::FATALLOG(LOGTAG,"projection type error ");
                 }
             }
             
@@ -106,17 +106,22 @@ void MergeManager::MergeBlock(Result &result){
 
     m_MergeManager[key].current_block_count += result.result_block_count;
     m_MergeManager[key].result_block_count += result.result_block_count;
-    m_MergeManager[key].raw_row_count += result.raw_row_count;
 
     float temp_size = float(m_MergeManager[key].length) / float(1024);
-    printf("[CSD Merge Manager] Merging Block ... (Current Buffer Size : %.1fK)\n",temp_size);
-    // printf("[CSD Merge Manager] Merging Block ... (Block : %d/%d)\n",m_MergeManager[key].current_block_count,m_MergeManager[key].total_block_count);
+
+    memset(msg, '\0', sizeof(msg));
+    sprintf(msg,"Merging Block ... (Current Buffer Size : %.1fK)\n",temp_size);
+    KETILOG::DEBUGLOG(LOGTAG, msg);
 
     //전체 블록 병합이 끝났는지 확인
     if(m_MergeManager[key].total_block_count == m_MergeManager[key].current_block_count){
         ReturnQueue.push_work(m_MergeManager[key]);
         m_MergeManager[key].InitMergeResult();
-        printf("[CSD Merge Manager] Merging Block {ID : %d-%d} Done (Block : %d/%d)\n",result.query_id,result.work_id,result.total_block_count,result.total_block_count);
+
+        memset(msg, '\0', sizeof(msg));
+        sprintf(msg,"Merging Block {ID : %d-%d} Done (Block : %d/%d)\n",result.query_id,result.work_id,result.total_block_count,result.total_block_count);
+        KETILOG::DEBUGLOG(LOGTAG, msg);
+
         m_MergeManager.erase(key);
     }
     
@@ -151,6 +156,7 @@ int MergeManager::calculPostfix(vector<string> values, vector<int> types, Filter
                 }case DOUBLE:{
                     T t;
                     t.varDouble = stod(value);
+                    t.real_size = 1;//임시작성!!! tpch20
                     oper_stack.push(make_pair(t,DOUBLE_));
                     break;
                 }case STRING:{
@@ -193,7 +199,7 @@ int MergeManager::calculPostfix(vector<string> values, vector<int> types, Filter
                     t.real_size = 1;
                     oper_stack.push(make_pair(t,DOUBLE_));
                 }else{
-                    cout << "merge_m>operator>plus>else" << endl;
+                    KETILOG::FATALLOG(LOGTAG,"merge_m>operator>plus>else");
                 }
             }else if(value == "-"){
                 if(op1.second == INT_ && op2.second == DOUBLE_){
@@ -215,7 +221,7 @@ int MergeManager::calculPostfix(vector<string> values, vector<int> types, Filter
                     t.real_size = max(op1.first.real_size, op2.first.real_size);
                     oper_stack.push(make_pair(t,DOUBLE_));
                 }else{
-                    cout << "merge_m>operator>minus>else" << endl;
+                    KETILOG::FATALLOG(LOGTAG,"merge_m>operator>minus>else");
                 }
             }else if(value == "*"){
                 if(op1.second == DOUBLE_ && op2.second == DOUBLE_){
@@ -234,10 +240,10 @@ int MergeManager::calculPostfix(vector<string> values, vector<int> types, Filter
                     double result = op1.first.varInt * op2.first.varDouble;
                     T t;
                     t.varDouble = result;
-                    t.real_size = op2.first.real_size;
+                    t.real_size = op1.first.real_size;
                     oper_stack.push(make_pair(t,DOUBLE_));
                 }else{
-                    cout << "merge_m>operator>multiple>else" << endl;
+                    KETILOG::FATALLOG(LOGTAG,"merge_m>operator>multiple>else");
                 }
             }else if(value == "/"){
                 if(op1.second == INT_ && op2.second == DOUBLE_){
@@ -253,7 +259,7 @@ int MergeManager::calculPostfix(vector<string> values, vector<int> types, Filter
                     t.real_size = 1;
                     oper_stack.push(make_pair(t,DOUBLE_));
                 }else{
-                    cout << "merge_m>operator>divide>else" << endl;
+                    KETILOG::FATALLOG(LOGTAG,"merge_m>operator>divide>else");
                 }
             }else if(value == "="){
                 if(op1.second == STRING_ && op2.second == STRING_){
@@ -265,7 +271,7 @@ int MergeManager::calculPostfix(vector<string> values, vector<int> types, Filter
                         return 1;
                     }
                 }else{
-                    cout << "merge_m>operator>equal>else" << endl;
+                    KETILOG::FATALLOG(LOGTAG,"merge_m>operator>equal>else");
                 }
             }else if(value == "<>"){
                 if(op1.second == STRING_ && op2.second == STRING_){
@@ -277,7 +283,7 @@ int MergeManager::calculPostfix(vector<string> values, vector<int> types, Filter
                         return 1;
                     }
                 }else{
-                    cout << "merge_m>operator>not equal>else" << endl;
+                    KETILOG::FATALLOG(LOGTAG,"merge_m>operator>not equal>else");
                 }
             }else if(value == "LIKE"){
                 if(op1.second == STRING_ && op2.second == STRING_){
@@ -315,10 +321,10 @@ int MergeManager::calculPostfix(vector<string> values, vector<int> types, Filter
                     }
                     
                 }else{
-                    cout << "merge_m>operator>like>else" << endl;
+                    KETILOG::FATALLOG(LOGTAG,"merge_m>operator>like>else");
                 }
             }else{
-                cout << "else: " << value << endl;
+                KETILOG::FATALLOG(LOGTAG,"else: " + value);
             }
         }
     }
@@ -336,7 +342,7 @@ int MergeManager::calculPostfix(vector<string> values, vector<int> types, Filter
 int MergeManager::calculCase(FilterInfo filter_info, char* origin_row_data, int* col_offset, int l, char* dest){
     int case_len = filter_info.column_projection[l].values.size();
     vector<pair<int,int>> when_then_offset;
-    int else_offset, when,then = 0;
+    int else_offset, when, then = 0;
     int dest_type = filter_info.projection_datatype[l];
 
     for(int i = 1; i<case_len; i++){
@@ -446,7 +452,7 @@ int MergeManager::calculCase(FilterInfo filter_info, char* origin_row_data, int*
                 memcpy(dest, &result, sizeof(int));
                 return 4;
             }default:{
-                cout << "else clause dest_type error" << endl;
+                KETILOG::FATALLOG(LOGTAG,"else clause dest_type error");
             }
         }
     }
@@ -488,7 +494,7 @@ int MergeManager::calculSubstring(FilterInfo filter_info, char* origin_row_data,
         strcpy(col_data, str.c_str());
         memcpy(dest, col_data+start_offset, read_length);
     }else{
-        cout << "calcul Substring > not defined : " << type << endl;
+        KETILOG::FATALLOG(LOGTAG,"calcul Substring > not defined : " + to_string(type));
     }
 
     return read_length;
@@ -510,7 +516,7 @@ int MergeManager::calculExtract(FilterInfo filter_info, char* origin_row_data, i
         dest[3] = 0x00;
         value = *((int *)dest);
     }else{
-        cout << "calcul Extract > not defined : " << type << endl;
+        KETILOG::FATALLOG(LOGTAG,"calcul Extract > not defined : " + to_string(type));
     }
 
     if(unit == "YEAR"){
@@ -523,7 +529,7 @@ int MergeManager::calculExtract(FilterInfo filter_info, char* origin_row_data, i
         value %= 32;
         result = value;
     }else{
-        cout << "calcul Extract > not defined : " << unit << endl;
+        KETILOG::FATALLOG(LOGTAG,"calcul Extract > not defined : " + unit);
     }
 
     memcpy(dest, &result, sizeof(int));
@@ -627,14 +633,14 @@ pair<T,int> MergeManager::stack_charToValue(char* src, int type, int len){
             result = make_pair(t,STRING_);
             break;
         }default:{
-            cout << "charToValue>default>Type:" << type << " Is Not Defined!!" << endl;
+            KETILOG::FATALLOG(LOGTAG,"charToValue>default>Type > not defined: " + to_string(type));
         }
     }
     return result;
 }
 
 int MergeManager::stack_valueToChar(char* dest, int dest_type, T value, int type){
-    	    switch(type){
+    	switch(type){
          case INT_:{
             int src = value.varInt;
             char out[4];
@@ -678,7 +684,7 @@ int MergeManager::stack_valueToChar(char* dest, int dest_type, T value, int type
                     dest[7] = real_data[1];
                     dest[8] = real_data[0];
                 }else{
-                    cout << "value.real_size ???: " << value.real_size << endl;
+                    KETILOG::FATALLOG(LOGTAG,"value.real_size ???: " + to_string(value.real_size));
                 }
                 dest[0] = 0x80;
                 if(is_negative){
@@ -689,7 +695,7 @@ int MergeManager::stack_valueToChar(char* dest, int dest_type, T value, int type
                 }
                 return 6+value.real_size;
             }else{
-                cout << "DOUBLE_>dest type: " << dest_type <<endl;
+                KETILOG::FATALLOG(LOGTAG,"DOUBLE_>dest type: " + to_string(dest_type));
                 return 0;
             }
         }case STRING_:{
@@ -700,7 +706,7 @@ int MergeManager::stack_valueToChar(char* dest, int dest_type, T value, int type
             memcpy(dest, char_array, l);
             return l;
         }default:{
-            cout << "valueToChar>default>Type:" << type << " Is Not Defined!!" << endl;
+            KETILOG::FATALLOG(LOGTAG,"valueToChar>default>type > not defined" + to_string(type));
             return 0;
         }
     }

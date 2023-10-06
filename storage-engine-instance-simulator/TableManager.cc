@@ -8,7 +8,7 @@ int TableManager::initTableManager(){
 
 	//read TableManager.json
 	string json = "";
-	std::ifstream openFile("/TableManager_tpch_origin.json");
+	std::ifstream openFile("/NewTableManager.json");
 	//std::ifstream openFile("/root/KETI-Simulator/Simulator/storage-engine-instance-simulator/NewTableManager.json");
 	if(openFile.is_open() ){
 		std::string line;
@@ -25,6 +25,7 @@ int TableManager::initTableManager(){
 	for(int i=0;i<TableList.Size();i++){
 		Value &TableObject = TableList[i];
 		auto tbl = new Table();
+
 		Value &tablenameObject = TableObject["tablename"];
 		tbl->tablename = tablenameObject.GetString();
 
@@ -45,7 +46,7 @@ int TableManager::initTableManager(){
 		// 	}
 		// }
 		// debug code check filename
-		//std::cout << "tablename : " << tbl.tablename << std::endl;
+		std::cout << "tablename : " << tbl->tablename << std::endl;
 		Value &SchemaObject = TableObject["Schema"];
 		for(int j=0;j<SchemaObject.Size();j++){
 			Value &ColumnObject = SchemaObject[j];
@@ -58,7 +59,7 @@ int TableManager::initTableManager(){
 
 			tbl->Schema.push_back(*Column);
 			//debug code check Schema
-			//std::cout << "Schema : " << tbl.Schema[j].column_name << std::endl;
+			std::cout << "Schema : " << tbl->Schema[j].column_name << std::endl;
 		}
 		Value &SSTList = TableObject["SST List"];
 		for(int j=0;j<SSTList.Size();j++){
@@ -80,7 +81,7 @@ int TableManager::initTableManager(){
 
 			tbl->SSTList.push_back(*SstFile);
 			//debug code check sst filename
-			//std::cout << "SST : " << SSTObject["filename"].GetString() << std::endl;
+			std::cout << "SST : " << SSTObject["filename"].GetString() << std::endl;
 		}
 		Value &tablerowObject = TableObject["table_rows"];
 		tbl -> tablerow = tablerowObject.GetInt();

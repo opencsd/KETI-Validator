@@ -1,17 +1,24 @@
 #pragma once
-#include <stdlib.h>
-#include <sstream>
-#include <tuple>
+#include <iostream>
+#include <unordered_map>
 #include <sys/ipc.h>
 #include <sys/types.h>
 #include <sys/msg.h>
-#include <any>
-#include <cstdlib>
+#include <sys/socket.h>
+#include <netinet/in.h> 
+#include <arpa/inet.h>
+#include <unistd.h>
 
-#include "input.h"
+#include "rapidjson/document.h"
+#include "rapidjson/stringbuffer.h"
+#include "rapidjson/writer.h"
+#include "rapidjson/prettywriter.h"
 
-#define BUFF_M_PORT 40003
-#define BUFF_M_IP "10.0.4.82"
+#include "internal_queue.h"
+#include "config.h"
+#include "keti_type.h"
+#include "keti_log.h"
+
 using namespace rapidjson;
 using namespace std;
 
@@ -24,11 +31,9 @@ class Return{
         Return(){}
         void ReturnResult();
         void SendDataToBufferManager(MergeResult &mergeResult);
-};
 
-struct message{
-    long msg_type;
-    char msg[2000];
+        inline const static std::string LOGTAG = "CSD Return";
+        char msg[200];
 };
 
 struct MergeResult{
@@ -44,7 +49,6 @@ struct MergeResult{
     int total_block_count;
     int result_block_count;
     int current_block_count;
-    int raw_row_count;
 
     MergeResult(){}
     //merge.cc의 최초 생성자
@@ -63,7 +67,6 @@ struct MergeResult{
         memset(&data, 0, sizeof(BUFF_SIZE));
         result_block_count = 0;
         current_block_count = 0;
-        raw_row_count = 0;
     }
 
     void InitMergeResult(){
@@ -72,6 +75,5 @@ struct MergeResult{
         row_count = 0;
         length = 0;
         result_block_count = 0;
-                raw_row_count = 0;
     }
 };  
