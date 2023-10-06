@@ -7,7 +7,7 @@ while [[ "$1" != "" ]]; do
             OPTION="$1"
             disk_number="${OPTION#-csd}"
             FORWARD_PORT=$((7776+disk_number))
-            NETWORK_PORT=$((5554+disk_number))
+            NETWORK_PORT=$((4444+disk_number))
             ;;
         *)
             echo "Unknown Option: $1"
@@ -17,7 +17,7 @@ while [[ "$1" != "" ]]; do
     shift
 done
 #disk_image="csd_disk${disk_number}.img"
-disk_image="disk_cp.img"
+disk_image="disk.img"
 
 
 export PATH=$PATH:/root/workspace/QEMU/qemu-6.2.0/build/

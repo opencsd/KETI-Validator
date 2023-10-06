@@ -34,10 +34,20 @@ librocksdb:
 # 	$(CXX) $(CXXFLAGS) $@.cc return.cc merge_manager.cc filter.cc csd_table_manager.cc scan.cc  -o$@ ../rocksdb/librocksdb.a -I../rocksdb/include -L/usr/local/lib -lzstd -lsnappy -lz -llz4 -lbz2 -ldl -O2 -std=c++17 $(PLATFORM_LDFLAGS) $(PLATFORM_CXXFLAGS) $(EXEC_LDFLAGS)	
 
 main: librocksdb main.cc
+<<<<<<< Updated upstream
 	$(CXX) $(CXXFLAGS) $@.cc return.cc merge_manager.cc filter.cc csd_table_manager.cc scan.cc  -o$@ ../rocksdb/librocksdb.a -I../rocksdb/include ../../compress_libs/zstd/lib/libzstd.a ../../compress_libs/lz4/lib/liblz4.a ../../compress_libs/snappy/build/libsnappy.a ../../compress_libs/zlib/libz.a ../../compress_libs/bzip2/build/libbz2_static.a -ldl -O2 -std=c++17 $(PLATFORM_LDFLAGS) $(PLATFORM_CXXFLAGS) $(EXEC_LDFLAGS)
 
 metric: librocksdb main.cc
 	$(CXX) $(CXXFLAGS) $@.cc return.cc merge_manager.cc filter.cc csd_table_manager.cc scan.cc  -o$@ ../rocksdb/librocksdb.a -I../rocksdb/include ../../compress_libs/zstd/lib/libzstd.a ../../compress_libs/lz4/lib/liblz4.a ../../compress_libs/snappy/build/libsnappy.a ../../compress_libs/zlib/libz.a ../../compress_libs/bzip2/build/libbz2_static.a -ldl -O2 -std=c++17 $(PLATFORM_LDFLAGS) $(PLATFORM_CXXFLAGS) $(EXEC_LDFLAGS)
+=======
+	$(CXX) $(CXXFLAGS) $@.cc return.cc merge_manager.cc filter.cc csd_table_manager.cc scan.cc  -o$@ ../rocksdb/librocksdb.a -I../rocksdb/include -L/usr/local/lib -lzstd -lsnappy -lz -llz4 -lbz2 -ldl -O2 -std=c++17 $(PLATFORM_LDFLAGS) $(PLATFORM_CXXFLAGS) $(EXEC_LDFLAGS)	
+
+#main: librocksdb main.cc
+#	$(CXX) $(CXXFLAGS) $@.cc return.cc merge_manager.cc filter.cc csd_table_manager.cc scan.cc  -o$@ ../rocksdb/librocksdb.a -I../rocksdb/include ../../compress_libs/zstd/lib/libzstd.a ../../compress_libs/lz4/lib/liblz4.a ../../compress_libs/snappy/build/libsnappy.a ../../compress_libs/zlib/libz.a ../../compress_libs/bzip2/build/libbz2_static.a -ldl -O2 -std=c++17 $(PLATFORM_LDFLAGS) $(PLATFORM_CXXFLAGS) $(EXEC_LDFLAGS)
+
+#metric: librocksdb main.cc
+#	$(CXX) $(CXXFLAGS) $@.cc return.cc merge_manager.cc filter.cc csd_table_manager.cc scan.cc  -o$@ ../rocksdb/librocksdb.a -I../rocksdb/include ../../compress_libs/zstd/lib/libzstd.a ../../compress_libs/lz4/lib/liblz4.a ../../compress_libs/snappy/build/libsnappy.a ../../compress_libs/zlib/libz.a ../../compress_libs/bzip2/build/libbz2_static.a -ldl -O2 -std=c++17 $(PLATFORM_LDFLAGS) $(PLATFORM_CXXFLAGS) $(EXEC_LDFLAGS)
+>>>>>>> Stashed changes
 
 # main: librocksdb main.cc
 # 	$(CXX) $(CXXFLAGS) $@.cc return.cc merge_manager.cc filter.cc csd_table_manager.cc scan.cc  -o$@ ../../csd_file_scan/rocksdb/librocksdb.a -I../rocksdb/include ../../compress_libs/zstd/lib/libzstd.a ../../compress_libs/lz4/lib/liblz4.a ../../compress_libs/snappy/build/libsnappy.a ../../compress_libs/zlib/libz.a ../../compress_libs/bzip2/build/libbz2_static.a -ldl -O2 -std=c++17 $(PLATFORM_LDFLAGS) $(PLATFORM_CXXFLAGS) $(EXEC_LDFLAGS)
