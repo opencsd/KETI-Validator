@@ -1,5 +1,5 @@
 FROM ubuntu:18.04
-ADD /main /simulator_csd_container8
+ADD /main /simulator_csd_container1
 
 COPY ./shared_library/libsnappy.so.1 /usr/lib/x86_64-linux-gnu/libsnappy.so.1
 COPY ./shared_library/libzstd.so.1.5.5 /usr/lib/x86_64-linux-gnu/libzstd.so.1.5.5
@@ -23,10 +23,6 @@ COPY ./shared_library/libssl.so.1.1 /usr/lib/x86_64-linux-gnu/libssl.so.1.1
 
 ENV LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/
 ENV LD_LIBRARY_PATH=/usr/local/lib
-<<<<<<< Updated upstream
+
 EXPOSE 5555
 ENTRYPOINT ["/simulator_csd_container1"]
-=======
-EXPOSE 5562
-ENTRYPOINT ["/simulator_csd_container8"]
->>>>>>> Stashed changes

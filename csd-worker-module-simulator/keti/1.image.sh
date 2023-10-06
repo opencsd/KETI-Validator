@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 registry="ketidevit2"
-imageName="simulator_csd_container8" #이미지명
+imageName="simulator_csd_container1" #이미지명
 version="v0.1" #버전
 dockerFilePath="." #도커파일경로
 
