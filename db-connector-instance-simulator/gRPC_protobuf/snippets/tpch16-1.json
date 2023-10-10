@@ -35,7 +35,7 @@
         246,
         15
       ],
-      "tableAlias": "snippet15-1",
+      "tableAlias": "ProcessTable15-1",
       "columnAlias": [
         "ps_suppkey",
         "ps_partkey"
@@ -60,10 +60,6 @@
           ]
         }
       ],
-      "columnFiltering": [
-        "ps_suppkey",
-        "ps_partkey"
-      ],
-      "groupBy": []
+      "pkNum" : 0
     }
   }

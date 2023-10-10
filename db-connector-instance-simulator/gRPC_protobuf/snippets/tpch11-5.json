@@ -1,17 +1,13 @@
 {
-  "type": 0,
+  "type": 3,
   "snippet": {
     "queryID": 10,
     "workID": 5,
     "tableName": [
-      "nation"
+      "ProcessTable10-0",
+      "ProcessTable10-1"
     ],
-    "tableCol":[
-      "n_nationkey",  
-      "n_name",
-      "n_regionkey",
-      "n_comment"
-    ],
+    "tableCol": [],
     "tableFilter": [
       {
         "LV": {
@@ -19,55 +15,57 @@
             10
           ],
           "value": [
-            "n_name"
+            "ps_suppkey"
           ]
         },
         "Operator": 5,
         "RV": {
           "type": [
-            9
+            10
           ],
           "value": [
-            "MOZAMBIQUE"
+            "s_suppkey"
           ]
-        },
-        "EXTRA": []
+        }
       }
     ],
-    "tableOffset":[
-      0,
-      4,
-      29,
-      33
-    ],
-    "tableOfflen":[
-      4,
-      25,
-      4,
-      152
-    ],
-    "tableDatatype":[
-      3,
-      254,
-      3,
-      15
-    ],
-    "tableAlias": "snippet10-5",
+    "tableOffset": [ ],
+    "tableOfflen": [ ],
+    "tableDatatype": [ ],
+    "tableAlias": "ProcessTable10-5",
     "columnAlias": [
-      "n_nationkey"
+      "ProcessTable10-5-c1",
+      "s_nationkey",
+      "ps_partkey"
     ],
     "columnProjection": [
       {
         "selectType": 0,
         "value": [
-          "n_nationkey"
+          "ProcessTable10-0-c1"
+        ],
+        "valueType": [
+          10
+        ]
+      },
+      {
+        "selectType": 0,
+        "value": [
+          "s_nationkey"
+        ],
+        "valueType": [
+          10
+        ]
+      },
+      {
+        "selectType": 0,
+        "value": [
+          "ps_partkey"
         ],
         "valueType": [
           10
         ]
       }
-    ],
-    "columnFiltering": [ ],
-    "groupBy": [ ]
+    ]
   }
 }

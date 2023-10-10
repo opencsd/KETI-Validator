@@ -4,99 +4,66 @@
     "queryID": 17,
     "workID": 2,
     "tableName": [
-      "lineitem"
+      "customer"
     ],
-    "tableCol":[
-      "l_orderkey",
-      "l_partkey",
-      "l_suppkey",
-      "l_linenumber",
-      "l_quantity",
-      "l_extendedprice",
-      "l_discount",
-      "l_tax",
-      "l_returnflag",
-      "l_linestatus",
-      "l_shipdate",
-      "l_commitdate",
-      "l_receiptdate",
-      "l_shipinstruct",
-      "l_shipmode",
-      "l_comment"
+    "tableCol": [
+      "c_custkey",
+      "c_name",
+      "c_address",
+      "c_nationkey",
+      "c_phone",
+      "c_acctbal",
+      "c_mktsegment",
+      "c_comment"
     ],
-    "tableFilter":[],
-    "tableOffset":[
+    "tableFilter": [],
+    "tableOffset": [
       0,
       4,
-      8,
-      12,
-      16,
-      23,
-      30,
-      37,
-      44,
-      45,
-      46,
-      49,
-      52,
-      55,
-      80,
-      90
+      29,
+      69,
+      73,
+      88,
+      95,
+      105
     ],
-    "tableOfflen":[
+    "tableOfflen": [
       4,
-      4,
-      4,
-      4,
-      7,
-      7,
-      7,
-      7,
-      1,
-      1,
-      3,
-      3,
-      3,
       25,
+      40,
+      4,
+      15,
+      7,
       10,
-      44
+      117
     ],
-    "tableDatatype":[
+    "tableDatatype": [
       3,
+      15,
+      15,
       3,
-      3,
-      3,
-      246,
-      246,
-      246,
-      246,
       254,
-      254,
-      14,
-      14,
-      14,
-      254,
+      246,
       254,
       15
     ],
-    "tableAlias": "snippet17-2",
+    "tableAlias": "ProcessTable17-2",
     "columnAlias": [
-      "l_orderkey",
-      "l_quantity"
+      "c_name",
+      "c_custkey"
     ],
     "columnProjection": [
       {
           "selectType": 0,
-          "value": ["l_orderkey"],
+          "value": ["c_name"],
           "valueType": [10]
       },
       {
           "selectType": 0,
-          "value": ["l_quantity"],
+          "value": ["c_custkey"],
           "valueType": [10]
       }
     ],
-    "columnFiltering": [],
-    "groupBy": []
+    "pkNum" : 0
   }
 }

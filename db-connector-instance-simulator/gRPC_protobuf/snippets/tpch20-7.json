@@ -1,34 +1,63 @@
 {
-  "type" : 2,
+  "type" : 8,
   "snippet":
   {
     "queryID":19,
     "workID":7,
-    "tableName": ["snippet19-0","snippet19-6"],
+    "tableName": ["ProcessTable19-5","ProcessTable19-4"],
     "tableCol":[],
     "tableFilter":[
       {
         "LV": {
           "type": [10],
-          "value": ["s_nationkey"]
+          "value": ["s_suppkey"]
       },
-      "Operator" : 5, 
+      "Operator" : 9, 
       "RV" : {
           "type": [10],
-          "value": ["n_nationkey"]
+          "value": ["ProcessTable19-4-c1"]
         }
       }
     ],
-    "tableOffset":[],
-    "tableOfflen":[],
-    "tableDatatype":[],
-    "blockList":[],
-    "tableAlias": "snippet19-7",
+    "tableOffset":[
+      0,
+      4,
+      29,
+      69,
+      73,
+      88,
+      95
+    ],
+    "tableOfflen":[
+      4,
+      25,
+      40,
+      4,
+      15,
+      7,
+      101
+    ],
+    "tableDatatype":[
+      3,
+      254,
+      15,
+      3,
+      254,
+      246,
+      15
+    ],
+    "tableAlias": "ProcessTable19-7",
     "columnAlias": [
-        "s_name",
-        "s_address"
+      "s_nationkey",
+      "s_name",
+      "s_address"
     ],
     "columnProjection": [
+      {
+        "selectType": 0,
+        "value": ["s_nationkey"],
+        "valueType": [10]
+      },
       {
         "selectType": 0,
         "value": ["s_name"],
@@ -39,9 +68,6 @@
         "value": ["s_address"],
         "valueType": [10]
       }
-    ],
-    "columnFiltering": [],
-    "groupBy": []
+    ]
   }
-
 }

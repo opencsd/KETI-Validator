@@ -4,15 +4,15 @@
   {
     "queryID":21,
     "workID":1,
-    "tableName": ["snippet21-0"],
+    "tableName": ["ProcessTable21-0"],
     "tableCol":[],
     "tableFilter":[],
     "tableOffset":[],
     "tableOfflen":[],
     "tableDatatype":[],
-    "tableAlias": "snippet21-1",
+    "tableAlias": "ProcessTable21-1",
     "columnAlias": [
-        "snippet21-1.c_acctbal"
+        "ProcessTable21-1.c1"
     ],
     "columnProjection": [
       {
@@ -20,8 +20,6 @@
         "value": ["c_acctbal"],
         "valueType": [10]
       }
-    ],
-    "columnFiltering": [],
-    "groupBy": []
+    ]
   }
 }

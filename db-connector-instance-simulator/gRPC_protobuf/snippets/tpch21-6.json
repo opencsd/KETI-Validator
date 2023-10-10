@@ -1,45 +1,55 @@
 {
-  "type" : 2,
+  "type" : 3,
   "snippet":
   {
     "queryID":20,
     "workID":6,
-    "tableName": ["snippet20-0","snippet20-3"],
+    "tableName": ["ProcessTable20-3","l1"],
     "tableCol":[],
     "tableFilter":[
       {
         "LV": {
           "type": [10],
-          "value": ["s_nationkey"]
+          "value": ["s_suppkey"]
       },
       "Operator" : 5, 
       "RV" : {
           "type": [10],
-          "value": ["n_nationkey"]
+          "value": ["l1.l_suppkey"]
         }
       }
     ],
     "tableOffset":[],
     "tableOfflen":[],
     "tableDatatype":[],
-    "tableAlias": "snippet20-6",
+    "tableAlias": "ProcessTable20-6",
     "columnAlias": [
-        "s_suppkey",
-        "s_name"
+        "s_name",
+        "s_nationkey",
+        "l1.l_orderkey",
+        "l1.l_suppkey"
     ],
     "columnProjection": [
       {
         "selectType": 0,
-        "value": ["s_suppkey"],
+        "value": ["s_name"],
         "valueType": [10]
       },
       {
         "selectType": 0,
-        "value": ["s_name"],
+        "value": ["s_nationkey"],
+        "valueType": [10]
+      },
+      {
+        "selectType": 0,
+        "value": ["l1.l_orderkey"],
+        "valueType": [10]
+      },
+      {
+        "selectType": 0,
+        "value": ["l1.l_suppkey"],
         "valueType": [10]
       }
-    ],
-    "columnFiltering": [],
-    "groupBy": []
+    ]
   }
 }

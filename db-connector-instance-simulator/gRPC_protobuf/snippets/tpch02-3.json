@@ -4,100 +4,51 @@
   {
     "queryID":1,
     "workID":3,
-    "tableName": ["supplier"],
+    "tableName": ["region"],
     "tableCol":[
-      "s_suppkey",
-      "s_name",
-      "s_address",
-      "s_nationkey",
-      "s_phone",
-      "s_acctbal",
-      "s_comment"
+      "r_regionkey",  
+      "r_name",
+      "r_comment"
     ],
-    "tableFilter":[],
+    "tableFilter":[
+      {
+        "LV": {
+          "type": [10],
+          "value": ["r_name"]
+      },
+      "Operator" : 5, 
+      "RV" : {
+          "type": [9],
+          "value": ["ASIA"]
+        }
+      }
+    ],
     "tableOffset":[
       0,
       4,
-      29,
-      69,
-      73,
-      88,
-      95
+      29
     ],
     "tableOfflen":[
       4,
       25,
-      40,
-      4,
-      15,
-      7,
-      101
+      152
     ],
     "tableDatatype":[
       3,
       254,
-      15,
-      3,
-      254,
-      246,
       15
     ],
-    "tableAlias": "snippet1-3",
+    "tableAlias": "ProcessTable1-3",
     "columnAlias": [
-        "s_suppkey", 
-        "s_nationkey",
-        "s_acctbal",
-        "s_name",
-        "s_address",
-        "s_phone",
-        "s_comment"
+        "r_regionkey"
     ],
     "columnProjection": [
       {
         "selectType": 0,
-        "value": ["s_suppkey"],
-        "valueType": [10]
-      },
-      {
-        "selectType": 0,
-        "value": ["s_nationkey"],
-        "valueType": [10]
-      },
-      {
-        "selectType": 0,
-        "value": ["s_acctbal"],
-        "valueType": [10]
-      },
-      {
-        "selectType": 0,
-        "value": ["s_name"],
-        "valueType": [10]
-      },
-      {
-        "selectType": 0,
-        "value": ["s_address"],
-        "valueType": [10]
-      },
-      {
-        "selectType": 0,
-        "value": ["s_phone"],
-        "valueType": [10]
-      },
-      {
-        "selectType": 0,
-        "value": ["s_comment"],
+        "value": ["r_regionkey"],
         "valueType": [10]
       }
     ],
-    "columnFiltering": [
-        "s_suppkey", 
-        "s_nationkey",
-        "s_acctbal",
-        "s_name",
-        "s_address",
-        "s_phone",
-        "s_comment"
-      ],
-    "groupBy": []
+    "pkNum" : 0
   }
 }

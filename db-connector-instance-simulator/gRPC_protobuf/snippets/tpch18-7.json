@@ -4,33 +4,21 @@
     "queryID": 17,
     "workID": 7,
     "tableName": [
-      "snippet17-6", "snippet17-4"
+      "ProcessTable17-6"
     ],
     "tableCol": [],
-    "tableFilter": [
-      {
-          "LV": {
-              "type": [10],
-              "value": ["o_orderkey"]
-          },
-          "Operator" : 9, 
-          "RV" : {
-              "type": [10],
-              "value": ["in_lorderkey"]
-          }
-      }
-    ],
+    "tableFilter": [],
     "tableOffset": [],
     "tableOfflen": [],
     "tableDatatype": [],
-    "tableAlias": "snippet17-7",
+    "tableAlias":"ResultTable17",
     "columnAlias": [
       "c_name",
       "c_custkey",
       "o_orderkey",
       "o_orderdate",
       "o_totalprice",
-      "l_quantity"
+      "Sum(l_quantity)"
     ],
     "columnProjection": [
       {
@@ -59,12 +47,25 @@
           "valueType": [10]
       },
       {
-          "selectType": 0,
+          "selectType": 1,
           "value": ["l_quantity"],
           "valueType": [10]
       }
     ],
-    "columnFiltering": [],
-    "groupBy": []
+    "groupBy": [
+      "c_name",
+      "c_custkey",
+      "o_orderkey",
+      "o_orderdate",
+      "o_totalprice"
+    ],
+    "orderBy": {
+      "ascending" : [1,0],
+      "columnName" : ["o_totalprice","o_orderdate"]
+    },
+    "limit" : {
+      "offset" : 0,
+      "length" : 100
+    }
   }
 }

@@ -1,11 +1,11 @@
 {
-  "type": 2,
+  "type": 3,
   "snippet": {
     "queryID": 16,
     "workID": 2,
     "tableName": [
-      "snippet16-1",
-      "snippet16-0"
+      "ProcessTable16-1",
+      "ProcessTable16-0"
     ],
     "tableCol": [],
     "tableFilter": [
@@ -32,10 +32,11 @@
     "tableOffset": [],
     "tableOfflen": [],
     "tableDatatype": [],
-    "tableAlias": "snippet16-2",
+    "tableAlias": "ProcessTable16-2",
     "columnAlias": [
       "l_quantity",
-      "l_extendedprice"
+      "l_extendedprice",
+      "p_partkey"
     ],
     "columnProjection": [
       {
@@ -55,9 +56,16 @@
         "valueType": [
           10
         ]
-      } 
-    ],
-    "columnFiltering": [],
-    "groupBy": []
+      },
+      {
+        "selectType": 0,
+        "value": [
+          "p_partkey"
+        ],
+        "valueType": [
+          10
+        ]
+      }
+    ]
   }
 }

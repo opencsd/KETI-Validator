@@ -1,38 +1,43 @@
 {
-  "type" : 2,
+  "type" : 3,
   "snippet":
   {
     "queryID":20,
     "workID":7,
-    "tableName": ["snippet20-6","l1"],
+    "tableName": ["ProcessTable20-4","ProcessTable20-6"],
     "tableCol":[],
     "tableFilter":[
       {
         "LV": {
           "type": [10],
-          "value": ["s_suppkey"]
+          "value": ["o_orderkey"]
       },
       "Operator" : 5, 
       "RV" : {
           "type": [10],
-          "value": ["l1.l_suppkey"]
+          "value": ["l1.l_orderkey"]
         }
       }
     ],
     "tableOffset":[],
     "tableOfflen":[],
     "tableDatatype":[],
-    "blockList":[],
-    "tableAlias": "snippet20-7",
+    "tableAlias": "ProcessTable20-7",
     "columnAlias": [
-        "s_name",
-        "l1.l_orderkey",
-        "l1.l_suppkey"
+      "s_name",
+      "s_nationkey",
+      "l1.l_orderkey",
+      "l1.l_suppkey"
     ],
     "columnProjection": [
       {
         "selectType": 0,
         "value": ["s_name"],
+        "valueType": [10]
+      },
+      {
+        "selectType": 0,
+        "value": ["s_nationkey"],
         "valueType": [10]
       },
       {
@@ -45,8 +50,6 @@
         "value": ["l1.l_suppkey"],
         "valueType": [10]
       }
-    ],
-    "columnFiltering": [],
-    "groupBy": []
+    ]
   }
 }

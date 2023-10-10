@@ -1,23 +1,38 @@
 {
-  "type": 3,
+  "type": 0,
   "snippet":
   {
     "queryID":21,
     "workID":3,
-    "tableName": ["snippet21-2","snippet21-1"],
+    "tableName": ["customer"],
     "tableCol": [
+      "c_custkey",
+      "c_name",
+      "c_address",
+      "c_nationkey",
+      "c_phone",
+      "c_acctbal",
+      "c_mktsegment",
+      "c_comment"
     ],
     "tableFilter":[
       {
         "LV": {
           "type": [10],
-          "value": ["c_acctbal"]
-      },
-      "Operator" : 3,
-      "RV" : {
-          "type": [10],
-          "value": ["snippet21-1.c_acctbal"]
+          "value": ["c_phone"]
+        },
+        "Operator" : 16,
+        "RV" : {
+            "type": [9,9],
+            "value": ["1","2"]
         }
+      },
+      {
+        "Operator" : 9,
+        "RV" : {
+            "type": [9,9,9,9,9,9,9],
+            "value": ["20","40","22","30","39","42","21"]
+          }
       }
     ],
     "tableOffset": [
@@ -50,7 +65,7 @@
       254,
       15
     ],
-    "tableAlias": "snippet21-3",
+    "tableAlias": "ProcessTable21-3",
     "columnAlias": [
         "c_acctbal",
         "c_custkey",
@@ -69,11 +84,10 @@
       },
       {
         "selectType": 0,
-        "value": ["cntrycode"],
-        "valueType": [10]
+        "value": ["SUBSTRING","c_phone","1","2"],
+        "valueType": [11,10,2,2]
       }
     ],
-    "columnFiltering": [],
-    "groupBy": []
+    "pkNum" : 0
   }
 }

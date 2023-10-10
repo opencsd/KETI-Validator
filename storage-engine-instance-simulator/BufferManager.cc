@@ -143,10 +143,6 @@ void BufferManager::mergeBlock(BlockResult result){
             origin_row_len = new_row_offset[i+1] - new_row_offset[i];
             char row_data[origin_row_len];
             memcpy(row_data,result.data+result.row_offset[i],origin_row_len);
-            // for(int i=0; i<origin_row_len; i++){
-            //     printf("%02X ",(u_char)row_data[i]);
-            // }
-            // cout << endl;
 
             col_count = myWorkBuffer->table_column.size();
             int col_offset_list[col_count + 1];
@@ -361,10 +357,8 @@ void BufferManager::initQuery(int qid){
 
 int BufferManager::checkTableStatus(int qid, string tname){
     if(DataBuff.find(qid) == DataBuff.end()){
-        cout << qid << endl;
-        return QueryIDError;
+        return NonInitQuery;
     }else if(DataBuff[qid]->tablename_workid_map.find(tname) == DataBuff[qid]->tablename_workid_map.end()){
-        cout << qid << tname << endl;
         return NonInitTable;
     }else{
         return DataBuff[qid]->work_buffer_list[DataBuff[qid]->tablename_workid_map[tname]]->status;
@@ -381,52 +375,47 @@ int BufferManager::endQuery(int qid){
     return 1;
 }
 
-TableData BufferManager::getTableData(int qid, string tname){ //flag : 스니펫 첫번째 테이블 여부 (중간 테이블일수도 있음)
-    int MAX_TIME = 20;//wait 10sec
+TableData BufferManager::getTableData(int qid, string tname){ 
     TableData tableData;
 
-    while(MAX_TIME > 0){
+    while(1){
         int status = CheckTableStatus(qid,tname);
 
-        if(status == NotFinished){
-            cout << "<test> Not Finished " << qid << ":" << tname << endl;
+        if(status == NonInitQuery || status == NonInitTable){
+            cout<<"BUFFER NOT INIT "<<to_string(qid)<<" : "<<tname<<endl;
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        }
+        else{
             int wid = DataBuff[qid]->tablename_workid_map[tname];
             WorkBuffer* workBuffer = DataBuff[qid]->work_buffer_list[wid];
-            unique_lock<mutex> lock(workBuffer->mu);
-            workBuffer->cond.wait(lock);
-            tableData.table_data = workBuffer->table_data;
-            tableData.valid = true;
-            tableData.row_count = workBuffer->row_count;
-            //디버깅 출력
-            for(auto i : workBuffer->table_data){
-                cout << i.first << "|" << i.second.row_count << endl;
+            unique_lock<mutex> buffer_lock(workBuffer -> mu);
+            int status = CheckTableStatus(qid,tname);
+            
+            if(status == NotFinished){
+                cout << "BUFFER Not Finished " << qid << ":" << tname << endl;
+                workBuffer -> cond.wait(buffer_lock);
+                tableData.table_data = workBuffer->table_data;
+                tableData.valid = true;
+                tableData.row_count = workBuffer->row_count;
+
+                for(auto i : workBuffer->table_data){
+                    cout << i.first << "|" << i.second.row_count << endl;
+                }
+                cout << "Finished BUFFER" << qid << ":" << tname << endl;
+                break;
             }
-            cout << "<test> Finished " << qid << ":" << tname << endl;
-            break;
-        }else if(status == WorkDone){
-            int wid = DataBuff[qid]->tablename_workid_map[tname];
-            WorkBuffer* workBuffer = DataBuff[qid]->work_buffer_list[wid];
-            unique_lock<mutex> lock(workBuffer->mu);
-            tableData.table_data = workBuffer->table_data;
-            tableData.valid = true;
-            tableData.row_count = workBuffer->row_count;
-            // Debug Code   
-            for(auto i : workBuffer->table_data){
-                cout << i.first << "|" << i.second.row_count << "|" << i.second.type << endl;
+            else if (status == WorkDone){
+                tableData.table_data = workBuffer->table_data;
+                tableData.valid = true;
+                tableData.row_count = workBuffer->row_count;
+                cout << "Done " << qid << ":" << tname << endl;
+                break;
             }
-            cout << "<test> Done " << qid << ":" << tname << endl;
-            break;
-        }else{// QueryIDError | NonInitTable
-            string msg = "QueryIDError | NonInitTable, wait phase : "+to_string(21-MAX_TIME)+" {"+to_string(qid)+"|"+tname+"}";
-            KETILOG(LOGTAG,msg);
-            sleep(1);
-            MAX_TIME--;
         }
     }
-
     return tableData;
 }
-    
+
 string BufferManager::getTableDataToString(int qid, string tname)
 {
     TableData queryResult = BufferManager::GetTableData(qid, tname);
@@ -490,45 +479,48 @@ string BufferManager::getTableDataToString(int qid, string tname)
 
             result.mutable_query_result()->insert({col_name, col});
         }
-        result.set_row_count(queryResult.row_count);
     }
 
-			stringstream result_string;
-			int length = 18;
-			std::string line((length+1) * result.query_result_size() - 1, '-');
-			//Proto Buffer 형식 결과를 임시로 string으로 저장 -> 나중엔 DB Connector Instance 에서 출력		
-			result_string << "+"+line+"+\n";
-			const auto& my_map = result.query_result();
-			
-			result_string << "|";
-			for (const auto& entry : my_map) {
-				result_string << setw(length) << left << entry.first << "|";
-			}
-			result_string << "\n";
+    stringstream result_string;
+    // Proto Buffer 형식 결과를 임시로 string으로 저장 -> 나중엔 DB Connector Instance 에서 출력
+    result_string << "+--------------------------------+\n ";
+    const auto &my_map = result.query_result();
 
-			result_string <<  "+"+line+"+\n";
+    for (const auto &entry : my_map)
+    {
+        result_string.width(15);
+        result_string << right << entry.first;
+    }
+    result_string << "\n";
 
-			for(int i=0; i<result.row_count(); i++){
-				result_string << "|";
-				for (const auto& entry : my_map) {
-					switch(entry.second.col_type()){
-						case StorageEngineInstance::Column::TYPE_STRING:
-							result_string << setw(length) << left << entry.second.string_col(i) << "|";
-							break;
-						case StorageEngineInstance::Column::TYPE_INT:
-							result_string << setw(length) << left << to_string(entry.second.int_col(i)) << "|";
-							break;
-						case StorageEngineInstance::Column::TYPE_FLOAT:
-							result_string << setw(length) << left << to_string(entry.second.double_col(i)) << "|";
-							break;
-					}
-				}
-				result_string << "\n";
-			}
+    result_string << "+--------------------------------+\n";
 
-			result_string <<  "+"+line+"+\n";
+    for (int i = 0; i < result.row_count(); i++)
+    {
+        for (const auto &entry : my_map)
+        {
+            switch (entry.second.col_type())
+            {
+            case StorageEngineInstance::Column::TYPE_STRING:
+                result_string.width(15);
+                result_string << right << entry.second.string_col(i);
+                break;
+            case StorageEngineInstance::Column::TYPE_INT:
+                result_string.width(15);
+                result_string << right << entry.second.int_col(i);
+                break;
+            case StorageEngineInstance::Column::TYPE_FLOAT:
+                result_string.width(15);
+                result_string << right << entry.second.double_col(i);
+                break;
+            }
+        }
+        result_string << "\n";
+    }
 
-			return result_string.str();
+    result_string << "+--------------------------------+\n";
+
+    return result_string.str();
 }
 
 int BufferManager::saveTableData(int qid, string tname, TableData table_data_, int offset, int length){
@@ -539,70 +531,39 @@ int BufferManager::saveTableData(int qid, string tname, TableData table_data_, i
     WorkBuffer* workBuffer = DataBuff[qid]->work_buffer_list[wid];
     unique_lock<mutex> lock(workBuffer->mu);
 
-    cout << offset << " " << length << endl;
-    for(auto &coldata: table_data_.table_data){
-        ColData column;
-        if(coldata.second.type == TYPE_STRING){
-            column.strvec.assign(coldata.second.strvec.begin()+offset, coldata.second.strvec.begin()+length); 
-            column.isnull.assign(coldata.second.isnull.begin()+offset, coldata.second.isnull.begin()+length);
-            column.row_count = length - offset;
-        }else if(coldata.second.type == TYPE_INT){
-            column.intvec.assign(coldata.second.intvec.begin()+offset, coldata.second.intvec.begin()+length); 
-            column.isnull.assign(coldata.second.isnull.begin()+offset, coldata.second.isnull.begin()+length);
-            column.row_count = length - offset;
-        }else if(coldata.second.type == TYPE_FLOAT){
-            column.floatvec.assign(coldata.second.floatvec.begin()+offset, coldata.second.floatvec.begin()+length); 
-            column.isnull.assign(coldata.second.isnull.begin()+offset, coldata.second.isnull.begin()+length);
-            column.row_count = length - offset;
-        }else if(coldata.second.type == TYPE_EMPTY){
-        }else{
-            cout << "save table row type check plz... " << endl;
+    if(length <= table_data_.row_count){
+        for(auto &coldata: table_data_.table_data){
+            ColData column;
+            if(coldata.second.type == TYPE_STRING){
+                column.strvec.assign(coldata.second.strvec.begin()+offset, coldata.second.strvec.begin()+length); 
+                column.isnull.assign(coldata.second.isnull.begin()+offset, coldata.second.isnull.begin()+length);
+                column.row_count = length - offset;
+            }else if(coldata.second.type == TYPE_INT){
+                column.intvec.assign(coldata.second.intvec.begin()+offset, coldata.second.intvec.begin()+length); 
+                column.isnull.assign(coldata.second.isnull.begin()+offset, coldata.second.isnull.begin()+length);
+                column.row_count = length - offset;
+            }else if(coldata.second.type == TYPE_FLOAT){
+                column.floatvec.assign(coldata.second.floatvec.begin()+offset, coldata.second.floatvec.begin()+length); 
+                column.isnull.assign(coldata.second.isnull.begin()+offset, coldata.second.isnull.begin()+length);
+                column.row_count = length - offset;
+            }else if(coldata.second.type == TYPE_EMPTY){
+            }else{
+                cout << "save table row type check plz... " << endl;
+            }
+            column.type = coldata.second.type;
+            workBuffer->table_data.insert({coldata.first, column});
         }
-        column.type = coldata.second.type;
-        workBuffer->table_data.insert({coldata.first, column});
+        workBuffer -> row_count = length - offset;
     }
-
-    workBuffer->row_count = length - offset;
+    else{
+        DataBuff[qid]->work_buffer_list[wid]->table_data = table_data_.table_data;
+        DataBuff[qid]->work_buffer_list[wid]->row_count = table_data_.row_count;
+    }
     DataBuff[qid]->work_buffer_list[wid]->status = WorkDone;
     DataBuff[qid]->work_buffer_list[wid]->cond.notify_all();
     
-    //디버깅 출력
-    // for(auto it = DataBuff[qid]->work_buffer_list.begin(); it != DataBuff[qid]->work_buffer_list.end(); it++){
-    //     cout << "workID: " << (*it).first << " tableName: " << (*it).second->table_alias << endl;
-    // }
-    // for(auto it = DataBuff[qid]->table_status.begin(); it != DataBuff[qid]->table_status.end(); it++){
-    //     cout << "tableName: " << (*it).first << " workID: " << (*it).second.first << "status: " << (*it).second.second << endl;
-    // }
-    
     return 1;
 }
-
-// int BufferManager::DeleteTableData(int qid, string tname){ 
-//     int status = CheckTableStatus(qid,tname);
-//     switch(status){
-//         case QueryIDError:
-//         case NonInitTable:{
-//             return -1;
-//         }case NotFinished:{
-//             int wid = DataBuff[qid]->tablename_workid_map[tname];
-//             WorkBuffer* workBuffer = DataBuff[qid]->work_buffer_list[wid];
-            
-//             unique_lock<mutex> lock(workBuffer->mu);
-//             workBuffer->cond.wait(lock);
-
-//             workBuffer->table_data.clear();
-//         }case WorkDone:{
-//             int wid = DataBuff[qid]->tablename_workid_map[tname];
-//             WorkBuffer* workBuffer = DataBuff[qid]->work_buffer_list[wid];
-//             unique_lock<mutex> lock(workBuffer->mu);
-
-//             workBuffer->table_data.clear();
-//             return 0;
-//         }
-//     }
-
-//     return 1;
-// }
 
 void getColOffset(const char* row_data, int* col_offset_list, vector<int> return_datatype, vector<int> table_offlen){
     int col_type = 0, col_len = 0, col_offset = 0, new_col_offset = 0, tune = 0;

@@ -1,5 +1,5 @@
 {
-  "type" : 2,
+  "type" : 3,
   "snippet":
   {
     "queryID":13,
@@ -16,8 +16,7 @@
         "RV" : {
             "type": [10],
             "value": ["p_partkey"]
-        },
-        "EXTRA": []
+        }
       }   
     ],
     "tableOffset":[],

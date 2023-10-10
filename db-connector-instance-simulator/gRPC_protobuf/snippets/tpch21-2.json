@@ -4,28 +4,35 @@
   {
     "queryID":20,
     "workID":2,
-    "tableName": ["orders"],
+    "tableName": ["lineitem"],
     "tableCol":[
-      "o_orderkey",
-      "o_custkey",
-      "o_orderstatus",
-      "o_totalprice",
-      "o_orderDATE",
-      "o_orderpriority",
-      "o_clerk",
-      "o_shippriority",
-      "o_comment"
+      "l_orderkey",
+      "l_partkey",
+      "l_suppkey",
+      "l_linenumber",
+      "l_quantity",
+      "l_extendedprice",
+      "l_discount",
+      "l_tax",
+      "l_returnflag",
+      "l_linestatus",
+      "l_shipdate",
+      "l_commitdate",
+      "l_receiptdate",
+      "l_shipinstruct",
+      "l_shipmode",
+      "l_comment"
     ],
     "tableFilter":[
       {
         "LV": {
           "type": [10],
-          "value": ["o_orderstatus"]
+          "value": ["l_receiptdate"]
       },
-      "Operator" : 5, 
+      "Operator" : 3, 
       "RV" : {
-          "type": [9],
-          "value": ["F"]
+          "type": [10],
+          "value": ["l_commitdate"]
         }
       }
     ],
@@ -33,48 +40,73 @@
       0,
       4,
       8,
-      9,
+      12,
       16,
-      19,
-      34,
+      23,
+      30,
+      37,
+      44,
+      45,
+      46,
       49,
-      53
+      52,
+      55,
+      80,
+      90
     ],
     "tableOfflen":[
       4,
       4,
-      1,
-      7,
-      3,
-      15,
-      15,
       4,
-      79
+      4,
+      7,
+      7,
+      7,
+      7,
+      1,
+      1,
+      3,
+      3,
+      3,
+      25,
+      10,
+      44
     ],
     "tableDatatype":[
       3,
       3,
-      254,
+      3,
+      3,
       246,
+      246,
+      246,
+      246,
+      254,
+      254,
+      14,
+      14,
       14,
       254,
       254,
-      3,
       15
     ],
-    "tableAlias": "snippet20-2",
+    "tableAlias": "l1",
     "columnAlias": [
-        "o_orderkey"
+        "l1.l_orderkey",
+        "l1.l_suppkey"
     ],
     "columnProjection": [
       {
         "selectType": 0,
-        "value": ["o_orderkey"],
+        "value": ["l_orderkey"],
+        "valueType": [10]
+      },
+      {
+        "selectType": 0,
+        "value": ["l_suppkey"],
         "valueType": [10]
       }
     ],
-    "columnFiltering": [
-      ],
-    "groupBy": []
+    "pkNum" : 0
   }
 }

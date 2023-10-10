@@ -4,26 +4,23 @@
   {
     "queryID":19,
     "workID":6,
-    "tableName": ["supplier","snippet19-5"],
+    "tableName": ["nation"],
     "tableCol":[
-      "s_suppkey",
-      "s_name",
-      "s_address",
-      "s_nationkey",
-      "s_phone",
-      "s_acctbal",
-      "s_comment"
+      "n_nationkey",  
+      "n_name",
+      "n_regionkey",
+      "n_comment"
     ],
     "tableFilter":[
       {
         "LV": {
           "type": [10],
-          "value": ["s_suppkey"]
+          "value": ["n_name"]
       },
-      "Operator" : 9, 
+      "Operator" : 5, 
       "RV" : {
-          "type": [10],
-          "value": ["snippet19-5.ps_suppkey"]
+          "type": [9],
+          "value": ["ALGERIA"]
         }
       }
     ],
@@ -31,59 +28,37 @@
       0,
       4,
       29,
-      69,
-      73,
-      88,
-      95
+      33
     ],
     "tableOfflen":[
       4,
       25,
-      40,
       4,
-      15,
-      7,
-      101
+      152
     ],
     "tableDatatype":[
       3,
       254,
-      15,
       3,
-      254,
-      246,
       15
     ],
-    "tableAlias": "snippet19-6",
+    "tableAlias": "ProcessTable19-6",
     "columnAlias": [
-        "s_suppkey",
-        "s_nationkey",
-        "s_name",
-        "s_address"
+        "n_nationkey",
+        "n_name"
     ],
     "columnProjection": [
       {
         "selectType": 0,
-        "value": ["s_suppkey"],
+        "value": ["n_nationkey"],
         "valueType": [10]
       },
       {
         "selectType": 0,
-        "value": ["s_nationkey"],
-        "valueType": [10]
-      },
-      {
-        "selectType": 0,
-        "value": ["s_name"],
-        "valueType": [10]
-      },
-      {
-        "selectType": 0,
-        "value": ["s_address"],
+        "value": ["n_name"],
         "valueType": [10]
       }
     ],
-    "columnFiltering": [],
-    "groupBy": []
+    "pkNum" : 0
   }
 }

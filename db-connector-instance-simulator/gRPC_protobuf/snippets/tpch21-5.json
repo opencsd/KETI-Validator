@@ -4,110 +4,55 @@
   {
     "queryID":20,
     "workID":5,
-    "tableName": ["lineitem"],
+    "tableName": ["nation"],
     "tableCol":[
-      "l_orderkey",
-      "l_partkey",
-      "l_suppkey",
-      "l_linenumber",
-      "l_quantity",
-      "l_extendedprice",
-      "l_discount",
-      "l_tax",
-      "l_returnflag",
-      "l_linestatus",
-      "l_shipdate",
-      "l_commitdate",
-      "l_receiptdate",
-      "l_shipinstruct",
-      "l_shipmode",
-      "l_comment"
+      "n_nationkey",  
+      "n_name",
+      "n_regionkey",
+      "n_comment"
     ],
     "tableFilter":[
       {
         "LV": {
           "type": [10],
-          "value": ["l_receiptdate"]
+          "value": ["n_name"]
       },
-      "Operator" : 3, 
+      "Operator" : 5, 
       "RV" : {
-          "type": [10],
-          "value": ["l_commitdate"]
+          "type": [9],
+          "value": ["EGYPT"]
         }
       }
     ],
     "tableOffset":[
       0,
       4,
-      8,
-      12,
-      16,
-      23,
-      30,
-      37,
-      44,
-      45,
-      46,
-      49,
-      52,
-      55,
-      80,
-      90
+      29,
+      33
     ],
     "tableOfflen":[
       4,
-      4,
-      4,
-      4,
-      7,
-      7,
-      7,
-      7,
-      1,
-      1,
-      3,
-      3,
-      3,
       25,
-      10,
-      44
+      4,
+      152
     ],
     "tableDatatype":[
       3,
+      254,
       3,
-      3,
-      3,
-      246,
-      246,
-      246,
-      246,
-      254,
-      254,
-      14,
-      14,
-      14,
-      254,
-      254,
       15
     ],
-    "tableAlias": "l3",
+    "tableAlias": "ProcessTable20-5",
     "columnAlias": [
-        "l3.l_orderkey",
-        "l3.l_suppkey"
+        "n_nationkey"
     ],
     "columnProjection": [
       {
         "selectType": 0,
-        "value": ["l_orderkey"],
-        "valueType": [10]
-      },
-      {
-        "selectType": 0,
-        "value": ["l_suppkey"],
+        "value": ["n_nationkey"],
         "valueType": [10]
       }
-    ],
-    "columnFiltering": [],
-    "groupBy": []
+    ]
   }
+
 }

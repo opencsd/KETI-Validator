@@ -1,11 +1,11 @@
 {
-  "type": 2,
+  "type": 3,
   "snippet": {
     "queryID": 10,
     "workID": 4,
     "tableName": [
-      "snippet10-2",
-      "snippet10-3"
+      "ProcessTable10-2",
+      "ProcessTable10-3"
     ],
     "tableCol": [ ],
     "tableFilter": [
@@ -15,7 +15,7 @@
             10
           ],
           "value": [
-            "ps_suppkey"
+            "n_nationkey"
           ]
         },
         "Operator": 5,
@@ -24,31 +24,28 @@
             10
           ],
           "value": [
-            "s_suppkey"
+            "s_nationkey"
           ]
-        },
-        "EXTRA": []
+        }
       }
     ],
     "tableOffset": [ ],
     "tableOfflen": [ ],
     "tableDatatype": [ ],
-    "tableAlias": "snippet10-4",
+    "tableAlias": "ProcessTable10-4",
     "columnAlias": [
-      "snippet10-4.ps_supplycost"
+      "ProcessTable10-4-c1"
     ],
     "columnProjection": [
       {
-        "selectType": 0,
+        "selectType":1,
         "value": [
-          "snippet10-2.0"
+          "ProcessTable10-3-c1","0.0001000000","*"
         ],
         "valueType": [
-          10
+          10,5,11
         ]
       }
-    ],
-    "columnFiltering": [ ],
-    "groupBy": [ ]
+    ]
   }
 }

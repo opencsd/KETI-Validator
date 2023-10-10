@@ -79,7 +79,7 @@
       254,
       15
     ],
-    "tableAlias": "snippet16-0",
+    "tableAlias": "ProcessTable16-0",
     "columnAlias": [
         "l_extendedprice",
         "l_partkey",
@@ -114,7 +114,6 @@
         ]
         }
     ],
-    "columnFiltering": [],
-    "groupBy": []
+    "pkNum" : 0
   }
 }

@@ -79,7 +79,7 @@
       254,
       15
     ],
-    "tableAlias": "snippet21-0",
+    "tableAlias": "ProcessTable21-0",
     "columnAlias": [
         "c_acctbal"
     ],
@@ -90,9 +90,6 @@
         "valueType": [10]
       }
     ],
-    "columnFiltering": [
-        "c_acctbal"
-      ],
-    "groupBy": []
+    "pkNum" : 0
   }
 }

@@ -1,94 +1,66 @@
 {
-  "type": 0,
+  "type" : 0,
   "snippet":
   {
     "queryID":21,
     "workID":2,
-    "tableName": ["customer"],
-    "tableCol": [
-      "c_custkey",
-      "c_name",
-      "c_address",
-      "c_nationkey",
-      "c_phone",
-      "c_acctbal",
-      "c_mktsegment",
-      "c_comment"
+    "tableName": ["orders"],
+    "tableCol":[
+      "o_orderkey",
+      "o_custkey",
+      "o_orderstatus",
+      "o_totalprice",
+      "o_orderdate",
+      "o_orderpriority",
+      "o_clerk",
+      "o_shippriority",
+      "o_comment"
     ],
-    "tableFilter":[
-      {
-        "LV": {
-          "type": [10],
-          "value": ["c_phone"]
-        },
-        "Operator" : 16,
-        "RV" : {
-            "type": [9,9],
-            "value": ["1","2"]
-        }
-      },
-      {
-      "Operator" : 9,
-      "RV" : {
-          "type": [9,9,9,9,9,9,9],
-          "value": ["20","40","22","30","39","42","21"]
-        }
-      }
-    ],
-    "tableOffset": [
+    "tableFilter":[],
+    "tableOffset":[
       0,
       4,
-      29,
-      69,
-      73,
-      88,
-      95,
-      105
+      8,
+      9,
+      16,
+      19,
+      34,
+      49,
+      53
     ],
-    "tableOfflen": [
+    "tableOfflen":[
       4,
-      25,
-      40,
       4,
-      15,
+      1,
       7,
-      10,
-      117
-    ],
-    "tableDatatype": [
       3,
       15,
       15,
+      4,
+      79
+    ],
+    "tableDatatype":[
+      3,
       3,
       254,
       246,
+      14,
       254,
+      254,
+      3,
       15
     ],
-    "tableAlias": "snippet21-2",
+    "tableAlias": "ProcessTable21-2",
     "columnAlias": [
-        "c_acctbal",
-        "c_custkey",
-        "cntrycode"
+      "o_custkey"
     ],
     "columnProjection": [
       {
         "selectType": 0,
-        "value": ["c_acctbal"],
+        "value": ["o_custkey"],
         "valueType": [10]
-      },
-      {
-        "selectType": 0,
-        "value": ["c_custkey"],
-        "valueType": [10]
-      },
-      {
-        "selectType": 0,
-        "value": ["SUBSTRING","c_phone","1","2"],
-        "valueType": [11,10,2,2]
       }
     ],
-    "columnFiltering": [],
-    "groupBy": []
+    "pkNum" : 0
   }
 }

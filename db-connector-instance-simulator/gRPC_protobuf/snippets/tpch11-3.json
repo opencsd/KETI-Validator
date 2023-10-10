@@ -1,13 +1,13 @@
 {
-  "type": 2,
+  "type": 3,
   "snippet": {
     "queryID": 10,
     "workID": 3,
     "tableName": [
-      "snippet10-0",
-      "snippet10-1"
+      "ProcessTable10-0",
+      "ProcessTable10-1"
     ],
-    "tableCol": [ ],
+    "tableCol": [],
     "tableFilter": [
       {
         "LV": {
@@ -15,7 +15,7 @@
             10
           ],
           "value": [
-            "n_nationkey"
+            "ps_suppkey"
           ]
         },
         "Operator": 5,
@@ -24,31 +24,38 @@
             10
           ],
           "value": [
-            "s_nationkey"
+            "s_suppkey"
           ]
-        },
-        "EXTRA": []
+        }
       }
     ],
     "tableOffset": [ ],
     "tableOfflen": [ ],
     "tableDatatype": [ ],
-    "tableAlias": "snippet10-3",
+    "tableAlias": "ProcessTable10-3",
     "columnAlias": [
-      "s_suppkey"
+      "ProcessTable10-3-c1",
+      "s_nationkey"
     ],
     "columnProjection": [
       {
         "selectType": 0,
         "value": [
-          "s_suppkey"
+          "ProcessTable10-0-c1"
+        ],
+        "valueType": [
+          10
+        ]
+      },
+      {
+        "selectType": 0,
+        "value": [
+          "s_nationkey"
         ],
         "valueType": [
           10
         ]
       }
-    ],
-    "columnFiltering": [ ],
-    "groupBy": [ ]
+    ]
   }
 }

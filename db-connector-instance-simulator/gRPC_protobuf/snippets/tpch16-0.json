@@ -55,7 +55,7 @@
         246,
         15
       ],
-      "tableAlias": "snippet15-0",
+      "tableAlias": "ProcessTable15-0",
       "columnAlias": [
         "s_suppkey"
       ],
@@ -70,9 +70,6 @@
           ]
         }
       ],
-      "columnFiltering": [
-        "s_suppkey"
-      ],
-      "groupBy": []
+      "pkNum" : 0
     }
   }  

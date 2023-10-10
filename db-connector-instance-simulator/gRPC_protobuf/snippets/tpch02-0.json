@@ -4,54 +4,59 @@
   {
     "queryID":1,
     "workID":0,
-    "tableName": ["region"],
+    "tableName": ["partsupp"],
     "tableCol":[
-      "r_regionkey",  
-      "r_name",
-      "r_comment"
+      "ps_partkey",  
+      "ps_suppkey",
+      "ps_availqty",
+      "ps_supplycost",
+      "ps_comment"
     ],
-    "tableFilter":[
-      {
-        "LV": {
-          "type": [10],
-          "value": ["r_name"]
-      },
-      "Operator" : 5, 
-      "RV" : {
-          "type": [9],
-          "value": ["ASIA"]
-        }
-      }
-    ],
-    "tableOffset":[
+    "tableFilter":[],
+    "tableOffset": [
       0,
       4,
-      29
+      8,
+      12,
+      19
     ],
-    "tableOfflen":[
+    "tableOfflen": [
       4,
-      25,
-      152
+      4,
+      4,
+      7,
+      199
     ],
-    "tableDatatype":[
+    "tableDatatype": [
       3,
-      254,
+      3,
+      3,
+      246,
       15
     ],
-    "tableAlias": "snippet1-0",
+    "tableAlias": "ProcessTable1-0",
     "columnAlias": [
-        "r_regionkey"
+        "ps_partkey", 
+        "ps_suppkey",
+        "ps_supplycost"
     ],
     "columnProjection": [
       {
         "selectType": 0,
-        "value": ["r_regionkey"],
+        "value": ["ps_partkey"],
+        "valueType": [10]
+      },
+      {
+        "selectType": 0,
+        "value": ["ps_suppkey"],
+        "valueType": [10]
+      },
+      {
+        "selectType": 0,
+        "value": ["ps_supplycost"],
         "valueType": [10]
       }
     ],
-    "columnFiltering": [
-        "r_regionkey"
-      ],
-    "groupBy": []
+    "pkNum" : 0
   }
 }

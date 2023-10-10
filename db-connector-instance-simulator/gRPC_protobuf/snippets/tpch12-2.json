@@ -1,5 +1,5 @@
 {
-  "type": 2,
+  "type": 3,
   "snippet": {
     "queryID": 11,
     "workID": 2,
@@ -32,7 +32,7 @@
     "tableOffset": [ ],
     "tableOfflen": [ ],
     "tableDatatype": [ ],
-    "tableAlias": "ProcessTable11-2",
+    "tableAlias": "ResultTable11",
     "columnAlias": [
       "l_shipmode",
       "high_line_count",
@@ -49,7 +49,7 @@
         ]
       },
       {
-        "selectType": 0,
+        "selectType": 1,
         "value": [
           "high_line_count"
         ],
@@ -58,7 +58,7 @@
         ]
       },
       {
-        "selectType": 0,
+        "selectType": 1,
         "value": [
           "low_line_count"
         ],
@@ -66,6 +66,13 @@
           10
         ]
       }
-    ]
+    ],
+    "groupBy": [
+	    "l_shipmode"
+    ],
+    "orderBy": {
+      "ascending" : [0],
+      "columnName" : ["l_shipmode"]
+    }
   }
 }

@@ -1,5 +1,5 @@
 {
-    "type": 2,
+    "type": 3,
     "snippet": {
       "queryID": 14,
       "workID": 4,
@@ -26,8 +26,7 @@
             "value": [
               "ProcessTable14-3-c1"
             ]
-          },
-          "EXTRA": []
+          }
         }
       ],
       "tableOffset": [],

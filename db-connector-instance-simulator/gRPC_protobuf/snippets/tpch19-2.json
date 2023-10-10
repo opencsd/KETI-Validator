@@ -1,10 +1,10 @@
 {
-  "type": 2,
+  "type": 3,
   "snippet": {
     "queryID": 18,
     "workID": 2,
     "tableName": [
-      "snippet18-0", "snippet18-1"
+      "ProcessTable19-1", "ProcessTable19-0"
     ],
     "tableCol": [],
     "tableFilter": [
@@ -27,66 +27,16 @@
     "tableOffset": [],
     "tableOfflen": [],
     "tableDatatype": [],
-    "tableAlias": "snippet18-2",
+    "tableAlias": "ProcessTable19-2",
     "columnAlias": [
-      "p_brand",
-      "p_container",
-      "p_size",
-      "l_quantity",
-      "l_shipmode",
-      "l_shipinstruct",
-      "l_extendedprice",
-      "l_discount",
-      "pre_revenue"
+      "revenue"
     ],
     "columnProjection": [
       {
           "selectType": 0,
-          "value": ["p_brand"],
-          "valueType": [10]
-      },
-      {
-          "selectType": 0,
-          "value": ["p_container"],
-          "valueType": [10]
-      },
-      {
-          "selectType": 0,
-          "value": ["p_size"],
-          "valueType": [10]
-      },
-      {
-          "selectType": 0,
-          "value": ["l_quantity"],
-          "valueType": [10]
-      },
-      {
-          "selectType": 0,
-          "value": ["l_shipmode"],
-          "valueType": [10]
-      },
-      {
-          "selectType": 0,
-          "value": ["l_shipinstruct"],
-          "valueType": [10]
-      },
-      {
-          "selectType": 0,
-          "value": ["l_extendedprice"],
-          "valueType": [10]
-      },
-      {
-          "selectType": 0,
-          "value": ["l_discount"],
-          "valueType": [10]
-      },
-      {
-          "selectType": 0,
-          "value": ["pre_revenue"],
+          "value": ["revenue"],
           "valueType": [10]
       }
-    ],
-    "columnFiltering": [],
-    "groupBy": []
+    ]
   }
 }

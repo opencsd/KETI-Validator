@@ -4,37 +4,47 @@
     "queryID": 17,
     "workID": 4,
     "tableName": [
-      "snippet17-3"
+      "ProcessTable17-3", "ProcessTable17-1"
     ],
     "tableCol": [],
     "tableFilter": [
       {
           "LV": {
               "type": [10],
-              "value": ["sum_lquantity"]
+              "value": ["o_orderkey"]
           },
-          "Operator" : 3, 
+          "Operator" : 9, 
           "RV" : {
-              "type": [5],
-              "value": ["314"]
+              "type": [10],
+              "value": ["ProcessTable17-1-c1"]
           }
       }
     ],
     "tableOffset": [],
     "tableOfflen": [],
     "tableDatatype": [],
-    "tableAlias": "snippet17-4",
+    "tableAlias": "ProcessTable17-4",
     "columnAlias": [
-      "in_lorderkey"
+      "o_orderkey",
+      "o_orderdate",
+      "o_totalprice"
     ],
     "columnProjection": [
       {
           "selectType": 0,
-          "value": ["l_orderkey"],
+          "value": ["o_orderkey"],
+          "valueType": [10]
+      },
+      {
+          "selectType": 0,
+          "value": ["o_orderdate"],
+          "valueType": [10]
+      },
+      {
+          "selectType": 0,
+          "value": ["o_totalprice"],
           "valueType": [10]
       }
-    ],
-    "columnFiltering": [],
-    "groupBy": []
+    ]
   }
 }

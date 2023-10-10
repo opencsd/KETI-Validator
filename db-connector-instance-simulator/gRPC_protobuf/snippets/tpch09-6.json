@@ -1,5 +1,5 @@
 {
-  "type" : 2,
+  "type" : 3,
   "snippet":
   {
     "queryID":8,
@@ -16,8 +16,7 @@
         "RV" : {
             "type": [10],
             "value": ["l_suppkey"]
-        },
-        "EXTRA": []
+        }
       } 
     ],
     "tableOffset":[],

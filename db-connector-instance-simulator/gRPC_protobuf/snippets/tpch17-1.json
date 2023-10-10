@@ -77,7 +77,7 @@
       246,
       15
     ],
-    "tableAlias": "snippet16-1",
+    "tableAlias": "ProcessTable16-1",
     "columnAlias": [
       "p_partkey"
     ],
@@ -92,7 +92,6 @@
         ]
       }
     ],
-    "columnFiltering": [],
-    "groupBy": []
+    "pkNum" : 0
   }
 }

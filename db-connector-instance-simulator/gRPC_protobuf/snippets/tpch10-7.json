@@ -10,7 +10,6 @@
     "tableOffset":[],
     "tableOfflen":[],
     "tableDatatype":[],
-    "blockList":[],
     "tableAlias": "ResultTable9",
     "columnAlias": [
       "c_custkey",

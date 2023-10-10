@@ -1,5 +1,5 @@
 {
-  "type" : 2,
+  "type" : 3,
   "snippet":
   {
     "queryID":9,
@@ -22,7 +22,6 @@
     "tableOffset":[],
     "tableOfflen":[],
     "tableDatatype":[],
-    "blockList":[],
     "tableAlias": "ProcessTable9-6",
     "columnAlias": [
       "revenue",

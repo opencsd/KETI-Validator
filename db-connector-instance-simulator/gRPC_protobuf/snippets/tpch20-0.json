@@ -4,62 +4,129 @@
   {
     "queryID":19,
     "workID":0,
-    "tableName": ["nation"],
+    "tableName": ["lineitem"],
     "tableCol":[
-      "n_nationkey",  
-      "n_name",
-      "n_regionkey",
-      "n_comment"
+      "l_orderkey",
+      "l_partkey",
+      "l_suppkey",
+      "l_linenumber",
+      "l_quantity",
+      "l_extendedprice",
+      "l_discount",
+      "l_tax",
+      "l_returnflag",
+      "l_linestatus",
+      "l_shipdate",
+      "l_commitdate",
+      "l_receiptdate",
+      "l_shipinstruct",
+      "l_shipmode",
+      "l_comment"
     ],
     "tableFilter":[
       {
         "LV": {
           "type": [10],
-          "value": ["n_name"]
+          "value": ["l_shipdate"]
       },
-      "Operator" : 5, 
+      "Operator" : 1, 
       "RV" : {
-          "type": [9],
-          "value": ["ALGERIA"]
+          "type": [7],
+          "value": ["1020449"]
+        }
+      },
+      {
+        "Operator" : 13
+      },
+      {
+        "LV": {
+          "type": [10],
+          "value": ["l_shipdate"]
+      },
+      "Operator" : 4, 
+      "RV" : {
+          "type": [7],
+          "value": ["1020961"]
         }
       }
     ],
     "tableOffset":[
       0,
       4,
-      29,
-      33
+      8,
+      12,
+      16,
+      23,
+      30,
+      37,
+      44,
+      45,
+      46,
+      49,
+      52,
+      55,
+      80,
+      90
     ],
     "tableOfflen":[
       4,
-      25,
       4,
-      152
+      4,
+      4,
+      7,
+      7,
+      7,
+      7,
+      1,
+      1,
+      3,
+      3,
+      3,
+      25,
+      10,
+      44
     ],
     "tableDatatype":[
       3,
-      254,
       3,
+      3,
+      3,
+      246,
+      246,
+      246,
+      246,
+      254,
+      254,
+      14,
+      14,
+      14,
+      254,
+      254,
       15
     ],
-    "tableAlias": "snippet19-0",
+    "tableAlias": "ProcessTable19-0",
     "columnAlias": [
-        "n_nationkey",
-        "n_name"
+        "ProcessTable19-0-c1",
+        "l_partkey",
+        "l_suppkey"
     ],
     "columnProjection": [
       {
         "selectType": 0,
-        "value": ["n_nationkey"],
+        "value": ["l_quantity","0.5","*"],
+        "valueType": [10, 5, 11]
+      },
+      {
+        "selectType": 0,
+        "value": ["l_partkey"],
         "valueType": [10]
       },
       {
         "selectType": 0,
-        "value": ["n_name"],
+        "value": ["l_suppkey"],
         "valueType": [10]
       }
     ],
-    "columnFiltering": [],
-    "groupBy": []
+    "pkNum" : 0
   }
 }

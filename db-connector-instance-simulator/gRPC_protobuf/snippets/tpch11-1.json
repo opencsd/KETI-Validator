@@ -43,7 +43,7 @@
       246,
       15
     ],
-    "tableAlias": "snippet10-1",
+    "tableAlias": "ProcessTable10-1",
     "columnAlias": [
       "s_nationkey",
       "s_suppkey"
@@ -68,7 +68,6 @@
         ]
       }
     ],
-    "columnFiltering": [ ],
-    "groupBy": [ ]
+    "pkNum" : 0
   }
 }

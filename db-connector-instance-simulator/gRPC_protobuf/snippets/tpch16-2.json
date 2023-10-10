@@ -35,16 +35,13 @@
             "value": [
               "Brand#34"
             ]
-          },
-          "EXTRA": []
+          }
         },
         {
-          "Operator": 13,
-          "EXTRA": []
+          "Operator": 13
         },
         {
-          "Operator": 12,
-          "EXTRA": []
+          "Operator": 12
         },
         {
           "LV": {
@@ -63,12 +60,10 @@
             "value": [
               "LARGE BRUSHED%"
             ]
-          },
-          "EXTRA": []
+          }
         },
         {
-          "Operator": 13,
-          "EXTRA": []
+          "Operator": 13
         },
         {
           "LV": {
@@ -87,8 +82,7 @@
             "value": [
               "48","19","12","4","41","7","21","39"
             ]
-          },
-          "EXTRA": []
+          }
         }
       ],
       "tableOffset": [
@@ -124,7 +118,7 @@
         246,
         15
       ],
-      "tableAlias": "snippet15-2",
+      "tableAlias": "ProcessTable15-2",
       "columnAlias": [
         "p_brand",
         "p_type",
@@ -169,12 +163,6 @@
           ]
         }
       ],
-      "columnFiltering": [
-        "p_brand",
-        "p_type",
-        "p_size",
-        "p_partkey"
-      ],
-      "groupBy": []
+      "pkNum" : 0
     }
   }

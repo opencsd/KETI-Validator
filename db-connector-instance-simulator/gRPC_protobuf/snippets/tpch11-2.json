@@ -3,64 +3,67 @@
   "snippet": {
     "queryID": 10,
     "workID": 2,
-    "tableName": [
-      "partsupp"
-    ],
+    "tableName": ["nation"],
     "tableCol":[
-      "ps_partkey",  
-      "ps_suppkey",
-      "ps_availqty",
-      "ps_supplycost",
-      "ps_comment"
+      "n_nationkey",  
+      "n_name",
+      "n_regionkey",
+      "n_comment"
     ],
-    "tableFilter":[],
-    "tableOffset": [
+    "tableFilter": [
+      {
+        "LV": {
+          "type": [
+            10
+          ],
+          "value": [
+            "n_name"
+          ]
+        },
+        "Operator": 5,
+        "RV": {
+          "type": [
+            9
+          ],
+          "value": [
+            "MOZAMBIQUE"
+          ]
+        }
+      }
+    ],
+    "tableOffset":[
       0,
       4,
-      8,
-      12,
-      19
+      29,
+      33
     ],
-    "tableOfflen": [
+    "tableOfflen":[
       4,
+      25,
       4,
-      4,
-      7,
-      199
+      152
     ],
-    "tableDatatype": [
+    "tableDatatype":[
       3,
+      254,
       3,
-      3,
-      246,
       15
     ],
-    "tableAlias": "snippet10-2",
+    "tableAlias": "ProcessTable10-2",
     "columnAlias": [
-      "snippet10-2.0",
-      "ps_suppkey"
+      "n_nationkey"
     ],
     "columnProjection": [
       {
         "selectType": 0,
         "value": [
-          "ps_supplycost","ps_availqty","*","0.0001000000","*"
-        ],
-        "valueType": [
-          10,10,11,5,11
-        ]
-      },
-      {
-        "selectType": 0,
-        "value": [
-          "ps_suppkey"
+          "n_nationkey"
         ],
         "valueType": [
           10
         ]
       }
     ],
-    "columnFiltering": [ ],
-    "groupBy": [ ]
+    "pkNum" : 0
   }
 }

@@ -4,207 +4,152 @@
     "queryID": 18,
     "workID": 0,
     "tableName": [
-      "part"
+      "lineitem"
     ],
     "tableCol":[
-      "p_partkey", 
-      "p_name", 
-      "p_mfgr", 
-      "p_brand", 
-      "p_type", 
-      "p_size", 
-      "p_container", 
-      "p_retailprice", 
-      "p_comment"
+      "l_orderkey",
+      "l_partkey",
+      "l_suppkey",
+      "l_linenumber",
+      "l_quantity",
+      "l_extendedprice",
+      "l_discount",
+      "l_tax",
+      "l_returnflag",
+      "l_linestatus",
+      "l_shipdate",
+      "l_commitdate",
+      "l_receiptdate",
+      "l_shipinstruct",
+      "l_shipmode",
+      "l_comment"
     ],
     "tableFilter": [
       {
         "LV": {
             "type": [10],
-            "value": ["p_brand"]
+            "value": ["l_quantity"]
+        },
+        "Operator" : 1, 
+        "RV" : {
+            "type": [6],
+            "value": ["80000000000400"]
+        }
+      },
+      {
+        "Operator" : 13
+      },
+      {
+        "LV": {
+            "type": [10],
+            "value": ["l_quantity"]
+        },
+        "Operator" : 2, 
+        "RV" : {
+            "type": [6],
+            "value": ["80000000000e00"]
+        }
+      },
+      {
+        "Operator" : 13
+      },
+      {
+        "LV": {
+            "type": [10],
+            "value": ["l_shipmode"]
+        },
+        "Operator" : 9, 
+        "RV" : {
+            "type": [9, 9],
+            "value": ["AIR", "AIR REG"]
+        }
+      },
+      {
+        "Operator" : 13
+      },
+      {
+        "LV": {
+            "type": [10],
+            "value": ["l_shipinstruct"]
         },
         "Operator" : 5, 
         "RV" : {
             "type": [9],
-            "value": ["Brand#52"]
-        }
-      },
-      {
-        "Operator" : 13
-      },
-      {
-        "LV": {
-            "type": [10],
-            "value": ["p_container"]
-        },
-        "Operator" : 9, 
-        "RV" : {
-            "type": [9, 9, 9, 9],
-            "value": ["SM CASE" , "SM BOX", "SM PACK", "SM PKG"]
-        }
-      },
-      {
-        "Operator" : 13
-      },
-      {
-        "LV": {
-            "type": [10],
-            "value": ["p_size"]
-        },
-        "Operator" : 8, 
-        "RV" : {
-            "type": [2, 2],
-            "value": ["1", "5"]
-        }
-      },
-      {
-        "Operator" : 14
-      },
-      {
-        "LV": {
-            "type": [10],
-            "value": ["p_brand"]
-        },
-        "Operator" : 5, 
-        "RV" : {
-            "type": [9],
-            "value": ["Brand#11"]
-        }
-      },
-      {
-        "Operator" : 13
-      },
-      {
-        "LV": {
-            "type": [10],
-            "value": ["p_container"]
-        },
-        "Operator" : 9, 
-        "RV" : {
-            "type": [9, 9, 9, 9],
-            "value": ["MED BAG" , "MED BOX", "MED PKG", "MED PACK"]
-        }
-      },
-      {
-        "Operator" : 13
-      },
-      {
-        "LV": {
-            "type": [10],
-            "value": ["p_size"]
-        },
-        "Operator" : 8, 
-        "RV" : {
-            "type": [2, 2],
-            "value": ["1", "10"]
-        }
-      },
-      {
-        "Operator" : 14
-      },
-      {
-        "LV": {
-            "type": [10],
-            "value": ["p_brand"]
-        },
-        "Operator" : 5, 
-        "RV" : {
-            "type": [9],
-            "value": ["Brand#51"]
-        }
-      },
-      {
-        "Operator" : 13
-      },
-      {
-        "LV": {
-            "type": [10],
-            "value": ["p_container"]
-        },
-        "Operator" : 9, 
-        "RV" : {
-            "type": [9, 9, 9, 9],
-            "value": ["LG CASE" , "LG BOX", "LG PACK", "LG PKG"]
-        }
-      },
-      {
-        "Operator" : 13
-      },
-      {
-        "LV": {
-            "type": [10],
-            "value": ["p_size"]
-        },
-        "Operator" : 8, 
-        "RV" : {
-            "type": [2, 2],
-            "value": ["1", "15"]
+            "value": ["DELIVER IN PERSON"]
         }
       }
     ],
     "tableOffset":[
       0,
       4,
-      59,
-      84,
-      94,
-      119,
-      123,
-      133,
-      140
+      8,
+      12,
+      16,
+      23,
+      30,
+      37,
+      44,
+      45,
+      46,
+      49,
+      52,
+      55,
+      80,
+      90
     ],
     "tableOfflen":[
       4,
-      55,
-      25,
-      10,
-      25,
       4,
-      10,
+      4,
+      4,
       7,
-      23
+      7,
+      7,
+      7,
+      1,
+      1,
+      3,
+      3,
+      3,
+      25,
+      10,
+      44
     ],
     "tableDatatype":[
       3,
-      15,
-      254,
-      254,
-      15,
       3,
-      254,
+      3,
+      3,
       246,
+      246,
+      246,
+      246,
+      254,
+      254,
+      14,
+      14,
+      14,
+      254,
+      254,
       15
     ],
-    "tableAlias": "snippet18-0",
+    "tableAlias": "ProcessTable19-0",
     "columnAlias": [
-      "p_partkey",
-      "p_brand",
-      "p_container",
-      "p_size"
+      "l_partkey",
+      "revenue"
     ],
     "columnProjection": [
       {
           "selectType": 0,
-          "value": ["p_partkey"],
+          "value": ["l_partkey"],
           "valueType": [10]
       },
       {
-          "selectType": 0,
-          "value": ["p_brand"],
-          "valueType": [10]
-      },
-      {
-          "selectType": 0,
-          "value": ["p_container"],
-          "valueType": [10]
-      },
-      {
-          "selectType": 0,
-          "value": ["p_size"],
-          "valueType": [10]
+        "selectType": 0,
+        "value": ["l_extendedprice", "1", "l_discount", "-", "*"],
+        "valueType": [10, 2, 10, 11, 11]
       }
     ],
-    "columnFiltering": [],
-    "groupBy": []
+    "pkNum" : 0
   }
 }

@@ -4,61 +4,91 @@
   {
     "queryID":1,
     "workID":1,
-    "tableName": ["nation"],
+    "tableName": ["supplier"],
     "tableCol":[
-      "n_nationkey",  
-      "n_name",
-      "n_regionkey",
-      "n_comment"
+      "s_suppkey",
+      "s_name",
+      "s_address",
+      "s_nationkey",
+      "s_phone",
+      "s_acctbal",
+      "s_comment"
     ],
     "tableFilter":[],
     "tableOffset":[
       0,
       4,
       29,
-      33
+      69,
+      73,
+      88,
+      95
     ],
     "tableOfflen":[
       4,
       25,
+      40,
       4,
-      152
+      15,
+      7,
+      101
     ],
     "tableDatatype":[
       3,
       254,
+      15,
       3,
+      254,
+      246,
       15
     ],
-    "tableAlias": "snippet1-1",
+    "tableAlias": "ProcessTable1-1",
     "columnAlias": [
-        "n_nationkey", 
-        "n_regionkey",
-        "n_name"
+        "s_suppkey", 
+        "s_nationkey",
+        "s_acctbal",
+        "s_name",
+        "s_address",
+        "s_phone",
+        "s_comment"
     ],
     "columnProjection": [
       {
         "selectType": 0,
-        "value": ["n_nationkey"],
+        "value": ["s_suppkey"],
         "valueType": [10]
       },
       {
         "selectType": 0,
-        "value": ["n_regionkey"],
+        "value": ["s_nationkey"],
         "valueType": [10]
       },
       {
         "selectType": 0,
-        "value": ["n_name"],
+        "value": ["s_acctbal"],
+        "valueType": [10]
+      },
+      {
+        "selectType": 0,
+        "value": ["s_name"],
+        "valueType": [10]
+      },
+      {
+        "selectType": 0,
+        "value": ["s_address"],
+        "valueType": [10]
+      },
+      {
+        "selectType": 0,
+        "value": ["s_phone"],
+        "valueType": [10]
+      },
+      {
+        "selectType": 0,
+        "value": ["s_comment"],
         "valueType": [10]
       }
     ],
-    "columnFiltering": [
-      "n_nationkey", 
-      "n_regionkey",
-      "n_name"
-    ],
-    "groupBy": []
+    "pkNum" : 0
   }
-
 }

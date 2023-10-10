@@ -1,42 +1,46 @@
 {
-  "type" : 4,
+  "type" : 10,
   "snippet":
   {
     "queryID":20,
     "workID":9,
-    "tableName": ["snippet20-8","l2"],
+    "tableName": ["ProcessTable20-8","l2"],
     "tableCol":[],
-    "tableFilter":[
-      {
-        "LV": {
-          "type": [10],
-          "value": ["l1.l_orderkey"]
-      },
-      "Operator" : 5, 
-      "RV" : {
-          "type": [10],
-          "value": ["l2.l_orderkey"]
+    "tableFilter":[],
+    "dependency":{
+      "dependencyProjection":[],
+      "dependencyFilter" : [
+        {
+          "LV": {
+            "type": [10],
+            "value": ["l1.l_orderkey"]
+        },
+        "Operator" : 5, 
+        "RV" : {
+            "type": [10],
+            "value": ["l2.l_orderkey"]
+          }
+        },
+        {
+        "Operator" : 13
+        },
+        {
+          "LV": {
+            "type": [10],
+            "value": ["l1.l_suppkey"]
+        },
+        "Operator" : 6, 
+        "RV" : {
+            "type": [10],
+            "value": ["l2.l_suppkey"]
+          }
         }
-      },
-      {
-      "Operator" : 13
-      },
-      {
-        "LV": {
-          "type": [10],
-          "value": ["l1.l_suppkey"]
-      },
-      "Operator" : 6, 
-      "RV" : {
-          "type": [10],
-          "value": ["l2.l_suppkey"]
-        }
-      }
-    ],
+      ]
+    },
     "tableOffset":[],
     "tableOfflen":[],
     "tableDatatype":[],
-    "tableAlias": "snippet20-9",
+    "tableAlias": "ProcessTable20-9",
     "columnAlias": [
         "s_name",
         "l1.l_orderkey",
@@ -58,9 +62,7 @@
         "value": ["l1.l_suppkey"],
         "valueType": [10]
       }
-    ],
-    "columnFiltering": [],
-    "groupBy": []
+    ]
   }
 
 }

@@ -17,7 +17,7 @@
     ],
     "columnProjection": [
       {
-        "selectType": 7,
+        "selectType": 8,
         "value": [
           "total_revenue"
         ],

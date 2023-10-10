@@ -23,19 +23,7 @@
       "l_shipmode",
       "l_comment"
     ],
-    "tableFilter":[
-      {
-        "LV": {
-          "type": [10],
-          "value": ["l_receiptdate"]
-      },
-      "Operator" : 3, 
-      "RV" : {
-          "type": [10],
-          "value": ["l_commitdate"]
-        }
-      }
-    ],
+    "tableFilter":[],
     "tableOffset":[
       0,
       4,
@@ -90,10 +78,10 @@
       254,
       15
     ],
-    "tableAlias": "l1",
+    "tableAlias": "l2",
     "columnAlias": [
-        "l1.l_suppkey",
-        "l1.l_orderkey"
+        "l2.l_suppkey",
+        "l2.l_orderkey"
     ],
     "columnProjection": [
       {
@@ -107,7 +95,6 @@
         "valueType": [10]
       }
     ],
-    "columnFiltering": [],
-    "groupBy": []
+    "pkNum" : 0
   }
 }

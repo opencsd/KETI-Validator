@@ -42,12 +42,10 @@
           "value": [
             "1022337"
           ]
-        },
-        "EXTRA": []
+        }
       },
       {
-        "Operator" : 13,
-        "EXTRA": []
+        "Operator" : 13
       },
       {
         "LV": {
@@ -66,8 +64,7 @@
           "value": [
             "1022497"
           ]
-        },
-        "EXTRA": []
+        }
       }
     ],
     "tableOffset": [

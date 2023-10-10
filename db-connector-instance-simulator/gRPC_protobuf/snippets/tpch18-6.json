@@ -1,10 +1,10 @@
 {
-  "type": 2,
+  "type": 3,
   "snippet": {
     "queryID": 17,
     "workID": 6,
     "tableName": [
-      "snippet17-5", "snippet17-2"
+      "ProcessTable17-5", "ProcessTable17-0"
     ],
     "tableCol": [],
     "tableFilter": [
@@ -23,7 +23,7 @@
     "tableOffset": [],
     "tableOfflen": [],
     "tableDatatype": [],
-    "tableAlias": "snippet17-6",
+    "tableAlias": "ProcessTable17-6",
     "columnAlias": [
       "c_name",
       "c_custkey",
@@ -63,8 +63,6 @@
         "value": ["l_quantity"],
         "valueType": [10]
       }
-    ],
-    "columnFiltering": [],
-    "groupBy": []
+    ]
   }
 }
