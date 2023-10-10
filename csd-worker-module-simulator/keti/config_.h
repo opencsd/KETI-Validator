@@ -3,5 +3,5 @@
 #define INPUT_IF_PORT 40303
 #define PACKET_SIZE 36
 
-#define BUFF_M_PORT 40204
+#define BUFF_M_PORT 40003
 #define BUFF_M_IP "X.X.X.X"

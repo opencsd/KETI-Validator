@@ -97,7 +97,7 @@ void BufferManager::runBufferManager(){
     while (1){
         BlockResult blockResult = PopQueue();
         string msg = "# Receive Data from CSD Return Interface {" + to_string(blockResult.query_id) + "|" + to_string(blockResult.work_id) + "}";
-        KETILOG(LOGTAG, msg);
+        //KETILOG(LOGTAG, msg);
         if((DataBuff.find(blockResult.query_id) == DataBuff.end()) || 
            (DataBuff[blockResult.query_id]->work_buffer_list.find(blockResult.work_id) 
                     == DataBuff[blockResult.query_id]->work_buffer_list.end())){
@@ -127,17 +127,17 @@ void BufferManager::mergeBlock(BlockResult result){
         new_row_offset.push_back(result.length);
 
         
-        {
-        // 리턴 데이터 형식 확인 - Debug Code   
-        for(int i = 0; i<result.return_datatype.size(); i++){
-            cout << result.return_datatype[i] << " ";
-        }
-        cout << endl;
-        for(int i = 0; i<result.return_datatype.size(); i++){
-            cout << result.return_offlen[i] << " ";
-        }
-        cout << endl;  
-        }
+        // {
+        // // 리턴 데이터 형식 확인 - Debug Code   
+        // for(int i = 0; i<result.return_datatype.size(); i++){
+        //     cout << result.return_datatype[i] << " ";
+        // }
+        // cout << endl;
+        // for(int i = 0; i<result.return_datatype.size(); i++){
+        //     cout << result.return_offlen[i] << " ";
+        // }
+        // cout << endl;  
+        // }
 
         for(int i=0; i<result.row_count; i++){
             origin_row_len = new_row_offset[i+1] - new_row_offset[i];
@@ -303,9 +303,9 @@ void BufferManager::mergeBlock(BlockResult result){
     myWorkBuffer->row_count += result.row_count;
     myWorkBuffer->left_low_count -= result.raw_row_count;
     
-    KETILOG(LOGTAG,"Merging Data ... (Left Block : " + std::to_string(myWorkBuffer->left_low_count) + ")");
+    //KETILOG(LOGTAG,"Merging Data ... (Left Block : " + std::to_string(myWorkBuffer->left_low_count) + ")" + std::to_string(result.raw_row_count));
 
-    if(myWorkBuffer->left_low_count == 0){
+    if(myWorkBuffer->left_low_count <= 0){
         string msg = "Merging Data {" + to_string(qid) + "|" + to_string(wid) + "|" + myWorkBuffer->table_alias + "} Done";
         KETILOG(LOGTAG,msg);
 

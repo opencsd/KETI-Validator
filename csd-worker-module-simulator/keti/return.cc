@@ -11,7 +11,7 @@ void Return::ReturnResult(){
 
 void Return::SendDataToBufferManager(MergeResult &mergeResult){
     float temp_size = float(mergeResult.length) / float(1024);
-    printf("[CSD Return Interface] Send Data to Buffer Manager (Return Buffer Size : %.1fK)\n",temp_size);
+    // printf("[CSD Return Interface] Send Data to Buffer Manager (Return Buffer Size : %.1fK)\n",temp_size);
     // printf("[CSD Return Interface] Send Data to Buffer Manager \n");
 
     StringBuffer block_buf;
@@ -76,8 +76,8 @@ void Return::SendDataToBufferManager(MergeResult &mergeResult){
     }
     memset(&serv_addr, 0, sizeof(serv_addr));
     serv_addr.sin_family = AF_INET;
-    serv_addr.sin_addr.s_addr = inet_addr(BUFF_M_IP);
-    serv_addr.sin_port = htons(BUFF_M_PORT);
+    serv_addr.sin_addr.s_addr = inet_addr("10.0.4.86");
+    serv_addr.sin_port = htons(40003);
 
     connect(sockfd,(const sockaddr*)&serv_addr,sizeof(serv_addr));
 	

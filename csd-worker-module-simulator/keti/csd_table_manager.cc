@@ -8,7 +8,7 @@ void TableManager::InitCSDTableManager(){
     table_rep.insert({{"1","part"},"/tpch_origin_sst/part/003805.sst"});
     table_rep.insert({{"1","supplier"},"/tpch_origin_sst/supplier/000788.sst"});
     table_rep.insert({{"1","partsupp"},"/tpch_origin_sst/partsupp/000538.sst"});
-    table_rep.insert({{"1","region"},"/tpch_origin_sst/region/002005.sst"});
+    table_rep.insert({{"1","region"},"/tpch_origin_sst/region/000662.sst"});
 
     table_rep.insert({{"2","lineitem"},"/tpch_origin_sst/lineitem/B/001382.sst"});
     table_rep.insert({{"2","lineitem"},"/tpch_origin_sst/lineitem/B/001471.sst"});
@@ -17,7 +17,7 @@ void TableManager::InitCSDTableManager(){
     table_rep.insert({{"2","part"},"/tpch_origin_sst/part/003806.sst"});
     table_rep.insert({{"2","supplier"},"/tpch_origin_sst/supplier/000847.sst"});
     table_rep.insert({{"2","partsupp"},"/tpch_origin_sst/partsupp/000539.sst"});
-    table_rep.insert({{"2","nation"},"/tpch_origin_sst/nation/002064.sst"});
+    table_rep.insert({{"2","nation"},"/tpch_origin_sst/nation/000663.sst"});
 
     table_rep.insert({{"3","lineitem"},"/tpch_origin_sst/lineitem/A/001383.sst"});
     table_rep.insert({{"3","lineitem"},"/tpch_origin_sst/lineitem/A/001472.sst"});
@@ -62,7 +62,7 @@ void TableManager::InitCSDTableManager(){
     table_rep.insert({{"8","lineitem"},"/tpch_origin_sst/lineitem/B/001436.sst"});
     table_rep.insert({{"8","lineitem"},"/tpch_origin_sst/lineitem/B/001508.sst"});
     table_rep.insert({{"8","customer"},"/tpch_origin_sst/customer/000787.sst"});
-    table_rep.insert({{"8","orders"},"/tpch_origin_sst/orders/000355.sst"});//
+    table_rep.insert({{"8","orders"},"/tpch_origin_sst/orders/000413.sst"});//
     table_rep.insert({{"8","part"},"/tpch_origin_sst/part/003812.sst"});
     table_rep.insert({{"8","supplier"},"/tpch_origin_sst/supplier/000925.sst"});
     table_rep.insert({{"8","partsupp"},"/tpch_origin_sst/partsupp/000661.sst"});

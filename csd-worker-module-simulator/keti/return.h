@@ -68,6 +68,8 @@ struct MergeResult{
         memset(&data, 0, sizeof(BUFF_SIZE));
         result_block_count = 0;
         current_block_count = 0;
+        raw_row_count = 0;
+
     }
 
     void InitMergeResult(){
@@ -76,5 +78,6 @@ struct MergeResult{
         row_count = 0;
         length = 0;
         result_block_count = 0;
+        raw_row_count = 0;
     }
 };  

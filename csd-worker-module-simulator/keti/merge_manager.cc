@@ -106,12 +106,13 @@ void MergeManager::MergeBlock(Result &result){
 
     m_MergeManager[key].current_block_count += result.result_block_count;
     m_MergeManager[key].result_block_count += result.result_block_count;
+    m_MergeManager[key].raw_row_count += result.raw_row_count;
 
     float temp_size = float(m_MergeManager[key].length) / float(1024);
 
     memset(msg, '\0', sizeof(msg));
     sprintf(msg,"Merging Block ... (Current Buffer Size : %.1fK)\n",temp_size);
-    KETILOG::DEBUGLOG(LOGTAG, msg);
+    //KETILOG::DEBUGLOG(LOGTAG, msg);
 
     //전체 블록 병합이 끝났는지 확인
     if(m_MergeManager[key].total_block_count == m_MergeManager[key].current_block_count){
@@ -240,7 +241,7 @@ int MergeManager::calculPostfix(vector<string> values, vector<int> types, Filter
                     double result = op1.first.varInt * op2.first.varDouble;
                     T t;
                     t.varDouble = result;
-                    t.real_size = op1.first.real_size;
+                    t.real_size = op2.first.real_size;
                     oper_stack.push(make_pair(t,DOUBLE_));
                 }else{
                     KETILOG::FATALLOG(LOGTAG,"merge_m>operator>multiple>else");
