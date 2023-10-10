@@ -27,7 +27,7 @@ int main(int argc, char** argv) {
     }else{
         KETILOG::SetDefaultLogLevel();
     }
-        TableManager CSDTableManager;
+    TableManager CSDTableManager;
     CSDTableManager.InitCSDTableManager();
 
     thread InputInterface = thread(&Input::InputSnippet, Input());

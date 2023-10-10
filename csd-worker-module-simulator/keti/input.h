@@ -34,57 +34,43 @@ void Input::InputSnippet(){
               perror("setsockopt");
               exit(EXIT_FAILURE);
           }
-        cout<<"1"<<endl;
         memset(&serv_addr, 0, sizeof(serv_addr));
         serv_addr.sin_family = AF_INET;
         serv_addr.sin_addr.s_addr = INADDR_ANY;
-        serv_addr.sin_port = htons(5562); // port
-        cout<<"2"<<endl;
+        serv_addr.sin_port = htons(5560); // port
         if (bind(server_fd, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0){
           perror("bind");
           exit(EXIT_FAILURE);
         } // 소켓을 지정 주소와 포트에 바인딩
-        cout<<"3"<<endl;
         if (listen(server_fd, 3) < 0){
           perror("listen");
           exit(EXIT_FAILURE);
         } // 리스닝
-        cout<<"4"<<endl;
         while(1){
           if ((client_fd = accept(server_fd, (struct sockaddr*)&client_addr, (socklen_t*)&addrlen)) < 0){
             perror("accept");
                 exit(EXIT_FAILURE);
           }
-        cout<<"5"<<endl;
           std::string json;
           char buffer[BUFF_SIZE] = {0};
-                  cout<<"6"<<endl;
           size_t length;
           int temp = read( client_fd , &length, sizeof(length));
           if(temp == 0){
             cout << "read error" << endl;
           }
-        cout<<"7"<<endl;
           int numread;
           while(1) {
-            cout<<"20"<<endl;
             if ((numread = read( client_fd , buffer, BUFF_SIZE - 1)) == -1) {
               cout << "read error" << endl;
               perror("read");
               exit(1);
             }
-            cout<<"8"<<endl;
-            cout<<length<<endl;
-            cout<<numread<<endl;
             length -= numread;
               buffer[numread] = '\0';
             json += buffer;
-            cout<<"9"<<endl;
               if (length == 0)
               break;
           }
-            cout<<"10"<<endl;
-            cout<<json<<endl;
             cout << "*******************Snippet JSON*****************" << endl;
             cout << json.c_str() << endl;
             cout << "************************************************" << endl;
@@ -120,11 +106,8 @@ void Input::InputSnippet(){
           // std::cout << "Snippet start info sent" << std::endl;
 
           // close(sock);
-            cout<<"11"<<endl;
           Snippet parsedSnippet(json.c_str());
-                      cout<<"12"<<endl;
           calculForReturnData(parsedSnippet);
-            cout<<"13"<<endl;
           //로그
           char msg[200];
           memset(msg, '\0', sizeof(msg));
@@ -134,7 +117,6 @@ void Input::InputSnippet(){
           // printf("[CSD Input Interface] Receive Snippet {ID : %d-%d} from Storage Engine Instance\n",parsedSnippet.query_id, parsedSnippet.work_id);
 
           ScanQueue.push_work(parsedSnippet);
-            cout<<"14"<<endl;
           close(client_fd);
         }
 

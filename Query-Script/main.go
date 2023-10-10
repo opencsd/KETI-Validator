@@ -614,9 +614,9 @@ AND l_shipdate < DATE '1996-12-01' + interval '1' month; `}
 	errRecord := []float64{}
 	errRecordcsd := []float64{}
 	errRecordstor := []float64{}	
-	errRecordPer10 := []float64{}
-	errRecordPer10csd := []float64{}
-	errRecordPer10stor := []float64{}
+	// errRecordPer10 := []float64{}
+	// errRecordPer10csd := []float64{}
+	// errRecordPer10stor := []float64{}
 	ak := 85 / (1.9*1.9*1.9)
 	fk := ak * (0.8*0.8*0.8)
 	
@@ -626,8 +626,8 @@ AND l_shipdate < DATE '1996-12-01' + interval '1' month; `}
     }
     defer f.Close()
 
-	for i:= 0; i < 50; i++{
-	fmt.Printf("Send Query %d times\n",i+1)
+	// for i:= 0; i < 50; i++{
+	// fmt.Printf("Send Query %d times\n",i+1)
 
 	filePath := "/sys/class/powercap/intel-rapl:0:0/energy_uj"
 
@@ -827,15 +827,15 @@ AND l_shipdate < DATE '1996-12-01' + interval '1' month; `}
         log.Fatal(err)
     }
     defer pprof.StopCPUProfile()
-	if i % 10 == 9{
+	// if i % 10 == 9{
 
-		//fmt.Printf("Average error when %d times of Query Execution: %.3f\n", i+1, avg(errRecord))
-		errRecordPer10 = append(errRecordPer10,avg(errRecord))
-		fmt.Printf("Average CSD error when %d times of Query Execution    : %.5f\n", i+1, avg(errRecordcsd))
-		fmt.Printf("Average Storage error when %d times of Query Execution: %.5f\n\n", i+1, avg(errRecordstor))
-		errRecordPer10csd = append(errRecordPer10csd,avg(errRecordcsd))
-		errRecordPer10stor = append(errRecordPer10stor,avg(errRecordstor))
-	}
+	// 	//fmt.Printf("Average error when %d times of Query Execution: %.3f\n", i+1, avg(errRecord))
+	// 	errRecordPer10 = append(errRecordPer10,avg(errRecord))
+	// 	fmt.Printf("Average CSD error when %d times of Query Execution    : %.5f\n", i+1, avg(errRecordcsd))
+	// 	fmt.Printf("Average Storage error when %d times of Query Execution: %.5f\n\n", i+1, avg(errRecordstor))
+	// 	errRecordPer10csd = append(errRecordPer10csd,avg(errRecordcsd))
+	// 	errRecordPer10stor = append(errRecordPer10stor,avg(errRecordstor))
+	// }
 
 	fmt.Printf("\n\nstart TPCH Query With CSD...\n")
 	fmt.Printf("Query Done... Time -> %.2f s\n",duration-0.08)
@@ -845,7 +845,6 @@ AND l_shipdate < DATE '1996-12-01' + interval '1' month; `}
 
 	fmt.Println("sleep for 10 s\n--------------------------------------------")
 	time.Sleep(5 * time.Second) 
-	}
 
 	// for j:=1; j<21;j++{
 	// 	fmt.Printf("Average CSD weight when %d times of Query Execution: %.5f\n",j*10,errRecordPer10csd[j-1])

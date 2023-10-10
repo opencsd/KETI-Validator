@@ -96,7 +96,7 @@ void BufferManager::inputBufferManager(){
 void BufferManager::runBufferManager(){
     while (1){
         BlockResult blockResult = PopQueue();
-        string msg = "# Receive Data from CSD Return Interface {" + to_string(blockResult.query_id) + "|" + to_string(blockResult.work_id) + "}";
+        //string msg = "# Receive Data from CSD Return Interface {" + to_string(blockResult.query_id) + "|" + to_string(blockResult.work_id) + "}";
         //KETILOG(LOGTAG, msg);
         if((DataBuff.find(blockResult.query_id) == DataBuff.end()) || 
            (DataBuff[blockResult.query_id]->work_buffer_list.find(blockResult.work_id) 

@@ -42,10 +42,22 @@ class Scan{
         void WalScan(Snippet *snippet_, Result *scan_result);
 
     private:
+
+            int getPrimaryKeyData(const char* ikey_data, char* dest, list<PrimaryKey> pk_list);
+        char* hexstr_to_char(const char* hexstr, int* row_size);
+        string char_to_hexstr(const char *data, int len);
+
         TableManager CSDTableManager_;
         unordered_map<string,int> newoffmap;
         unordered_map<string,int> newlenmap;
         // int dev_fd;
+        uint64_t kNumInternalBytes_;
+        bool index_valid;
+        int ipk;
+        bool check;
+        char origin_index_num[INDEX_NUM_SIZE];
+        int total_block_row_count;
+        int current_block_count;
 
 };
 

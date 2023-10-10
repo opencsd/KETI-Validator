@@ -241,9 +241,10 @@ int MergeManager::calculPostfix(vector<string> values, vector<int> types, Filter
                     double result = op1.first.varInt * op2.first.varDouble;
                     T t;
                     t.varDouble = result;
-                    t.real_size = op2.first.real_size;
-                    oper_stack.push(make_pair(t,DOUBLE_));
-                }else{
+                    t.real_size = op1.first.real_size;
+                   oper_stack.push(make_pair(t,DOUBLE_));
+                }
+                else{
                     KETILOG::FATALLOG(LOGTAG,"merge_m>operator>multiple>else");
                 }
             }else if(value == "/"){
@@ -665,6 +666,7 @@ int MergeManager::stack_valueToChar(char* dest, int dest_type, T value, int type
                 char integer_data[8], real_data[8];
                 real_temp = modf( value.varDouble, &integer_temp);
                 integer = integer_temp;
+
                 memcpy(integer_data, &integer, sizeof(int64_t));
                 for(int i=0; i<6; i++){
                     dest[i] = integer_data[5-i];
@@ -692,7 +694,7 @@ int MergeManager::stack_valueToChar(char* dest, int dest_type, T value, int type
                     for(int i=0; i<7; i++){
                         dest[i] = ~dest[i];
                     }
-                    // dest[6] += 1;//이거테스트
+                     //dest[6] += 1;//이거테스트
                 }
                 return 6+value.real_size;
             }else{

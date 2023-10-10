@@ -653,7 +653,6 @@ Status BlockBasedTable::Open(
   IOOptions opts;
   s = file->PrepareIOOptions(ro, opts);
   if (s.ok()) {
-    printf("check3-1\n");
     s = ReadFooterFromFile(opts, file.get(), prefetch_buffer.get(), file_size,
                            &footer, kBlockBasedTableMagicNumber);
   }

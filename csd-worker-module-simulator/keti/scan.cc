@@ -4,13 +4,6 @@
 //  (found in the LICENSE.Apache file in the root directory)
 #include "scan.h"
 
-uint64_t kNumInternalBytes_;
-const int indexnum_size = 4;
-bool index_valid;
-bool check;
-char origin_index_num[indexnum_size];
-int current_block_count;
-
 char sep = 0x03;
 char gap = 0x20;
 char fin = 0x02;
@@ -21,19 +14,23 @@ int getPrimaryKeyData(const char* ikey_data, char* dest, list<PrimaryKey> pk_lis
 char* hexstr_to_char(const char* hexstr, int* row_size);
 string char_to_hexstr(const char *data, int len);
 
-inline Slice ExtractUserKey(const Slice& internal_key) {
-  assert(internal_key.size() >= kNumInternalBytes_);
-  return Slice(internal_key.data(), internal_key.size() - kNumInternalBytes_);
+inline Slice ExtractUserKey(const Slice& internal_key, uint64_t kNumInternalBytes) {
+  assert(internal_key.size() >= kNumInternalBytes);
+  return Slice(internal_key.data(), internal_key.size() - kNumInternalBytes);
 }
 
 class InternalKey {
  private:
   string rep_;
+  uint64_t kNumInternalBytes_;
 
  public:
   InternalKey() {}  // Leave rep_ as empty to indicate it is invalid
-  void DecodeFrom(const Slice& s) { rep_.assign(s.data(), s.size()); }
-  Slice user_key() const { return ExtractUserKey(rep_); }
+  void DecodeFrom(const Slice& s, uint64_t k) { 
+    rep_.assign(s.data(), s.size()); 
+    kNumInternalBytes_ = k;
+  }
+  Slice user_key() const { return ExtractUserKey(rep_, kNumInternalBytes_); }
 };
 
 void Scan::Scanning(){
@@ -62,12 +59,6 @@ void Scan::Scanning(){
         check = true;
         index_valid = true;
 
-        // if(snippet.is_inserted){
-        //   WalScan(&snippet, &scanResult);
-        //   EnQueueData(scanResult, snippet.scan_type);
-        //   scanResult.InitResult();
-        // }
-
         BlockScan(&sstFileReader, &snippet, &scanResult, file_path);
         if(!index_valid){
             scanResult.result_block_count += snippet.total_block_count - current_block_count;
@@ -93,11 +84,7 @@ void Scan::WalScan(Snippet *snippet_, Result *scan_result){
       int row_size = 0;
       char* inserted_data;
       inserted_data = hexstr_to_char(snippet_->inserted_value[i].c_str(),&row_size);
-      // cout << "inserted_data: ";
-      // for(int i=0; i<row_size; i++){
-      //     printf("%02X ",(u_char)inserted_data[i]);
-      // }
-      // cout << endl;
+
       memcpy(scan_result->data+scan_result->length,inserted_data,row_size);
       scan_result->length += row_size;
       scan_result->row_count++;
@@ -130,41 +117,26 @@ void Scan::BlockScan(SstFileReader* sstFileReader_, Snippet *snippet_, Result *s
       const Slice& value = datablock_iter->value();
 
       InternalKey ikey;
-      ikey.DecodeFrom(key);
+      ikey.DecodeFrom(key, snippet_->kNumInternalBytes);
 
       ikey_data = ikey.user_key().data();
       row_data = value.data();
       row_size = value.size();
       
       if(check){//index num 획득 임시 추가
-        memcpy(origin_index_num,ikey_data,indexnum_size);
+        memcpy(origin_index_num,ikey_data,INDEX_NUM_SIZE);
         check = false;
       }
 
       //check row index number
-      char index_num[indexnum_size];
-      memcpy(index_num,ikey_data,indexnum_size);
-      if(memcmp(origin_index_num/*snippet_->index_num*/, index_num, indexnum_size) != 0){//출력 지우지 말기
-        cout << "different index number: ";
-        for(int i=0; i<indexnum_size; i++){
-          printf("(%02X %02X)",(u_char)origin_index_num[i],(u_char)index_num[i]);
-        }
-        cout << endl;
+      char index_num[INDEX_NUM_SIZE];
+      memcpy(index_num,ikey_data,INDEX_NUM_SIZE);
+      if(memcmp(origin_index_num/*snippet_->index_num*/, index_num, INDEX_NUM_SIZE) != 0){//출력 지우지 말기
+        cout << "different index number: \n";
         index_valid = false;
         return;
       }
-
       row_count++;
-
-      //check is deleted key
-      // const char *key_data = key.data();
-      // string keystr = char_to_hexstr(key_data,kNumInternalBytes_+indexnum_size);
-      // if(!(find(snippet_->deleted_key.begin(), snippet_->deleted_key.end(), keystr) == snippet_->deleted_key.end())) { 
-      //   cout << "deleted" << endl;
-      //   continue;
-      // }
-
-      // std::cout << "[Row(HEX)] KEY: " << ikey.user_key().ToString(true) << " | VALUE: " << value.ToString(true) << endl;
 
       if(snippet_->primary_length != 0){ //pk있으면 붙이기
         char total_row_data[snippet_->primary_length+row_size];
@@ -183,7 +155,7 @@ void Scan::BlockScan(SstFileReader* sstFileReader_, Snippet *snippet_, Result *s
               current_block_count += 15;
               float temp_size = float(scan_result->length) / float(1024);
               scan_result->result_block_count = 15;
-              printf("[CSD Scan] Scanning Data ... (Block : %d/%d)\n",current_block_count,snippet_->total_block_count);
+              //printf("[CSD Scan] Scanning Data ... (Block : %d/%d)\n",current_block_count,snippet_->total_block_count);
               Result scan_result_(scan_result->query_id,scan_result->work_id,scan_result->csd_name,scan_result->total_block_count,
               scan_result->filter_info,scan_result->result_block_count);
               scan_result_.row_count = scan_result->row_count;
@@ -194,25 +166,36 @@ void Scan::BlockScan(SstFileReader* sstFileReader_, Snippet *snippet_, Result *s
 
               EnQueueData(scan_result_, snippet_->scan_type);
               scan_result->InitResult();
-                                      cout<<"send to filter"<<endl;
+                                      //cout<<"send to filter"<<endl;
           }
           scan_result->row_offset.push_back(scan_result->length);
           memcpy(scan_result->data+scan_result->length, row_data, row_size);
           scan_result->length += row_size;
           scan_result->row_count++;
           scan_result -> raw_row_count++;
-
       }
-
     } 
-
   }else{//index scan
-    
   }
-  
 }
 
-int getPrimaryKeyData(const char* ikey_data, char* dest, list<PrimaryKey> pk_list){
+void Scan::EnQueueData(Result scan_result, int scan_type){
+    if(scan_type == Full_Scan_Filter){
+        FilterQueue.push_work(scan_result);        
+    }else if(scan_type == Full_Scan){//scan->merge
+      MergeQueue.push_work(scan_result);
+    }else if(scan_type == Index_Scan_Filter){//scan->filter
+      if(scan_result.length != 0){
+        FilterQueue.push_work(scan_result);
+      }else{
+        MergeQueue.push_work(scan_result);
+      }
+    }else{//Index_Scan, scan->merge
+      MergeQueue.push_work(scan_result);
+    }
+}
+
+int Scan::getPrimaryKeyData(const char* ikey_data, char* dest, list<PrimaryKey> pk_list){
   int offset = 4;
   int pk_length = 0;
 
@@ -295,36 +278,7 @@ int getPrimaryKeyData(const char* ikey_data, char* dest, list<PrimaryKey> pk_lis
   return pk_length;
 }
 
-void Scan::EnQueueData(Result scan_result, int scan_type){
-    if(scan_type == Full_Scan_Filter){
-      if(scan_result.length != 0){//scan->filter
-        FilterQueue.push_work(scan_result);        
-      }else{//scan->merge
-        MergeQueue.push_work(scan_result);
-      }
-
-    }else if(scan_type == Full_Scan){//scan->merge
-      // if(scan_result.filter_info.need_col_filtering){
-      //   Column_Filtering(&scan_result, snippet_);
-      // }
-      MergeQueue.push_work(scan_result);
-
-    }else if(scan_type == Index_Scan_Filter){//scan->filter
-      if(scan_result.length != 0){
-        FilterQueue.push_work(scan_result);
-      }else{
-        MergeQueue.push_work(scan_result);
-      }
-      
-    }else{//Index_Scan, scan->merge
-      // if(scan_result.filter_info.need_col_filtering){
-      //   Column_Filtering(&scan_result, snippet_);
-      // }
-      MergeQueue.push_work(scan_result);
-    }
-}
-
-char* hexstr_to_char(const char* hexstr, int* row_size){
+char* Scan::hexstr_to_char(const char* hexstr, int* row_size){
     size_t len = strlen(hexstr);
     if(len % 2 != 0){
         return NULL;
@@ -340,7 +294,7 @@ char* hexstr_to_char(const char* hexstr, int* row_size){
 
 constexpr char hexmap[] = {'0', '1', '2', '3', '4', '5', '6', '7',
                            '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
-string char_to_hexstr(const char *data, int len){
+string Scan::char_to_hexstr(const char *data, int len){
   std::string s(len * 2, ' ');
   for (int i = 0; i < len; ++i) {
     s[2 * i]     = hexmap[(data[i] & 0xF0) >> 4];

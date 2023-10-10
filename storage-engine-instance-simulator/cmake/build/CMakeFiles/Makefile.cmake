@@ -17,6 +17,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/lib/cmake/grpc/gRPCTargets.cmake"
   "/lib/cmake/protobuf/protobuf-config-version.cmake"
   "/lib/cmake/protobuf/protobuf-config.cmake"
+  "/lib/cmake/protobuf/protobuf-module.cmake"
   "/lib/cmake/protobuf/protobuf-options.cmake"
   "/lib/cmake/protobuf/protobuf-targets-noconfig.cmake"
   "/lib/cmake/protobuf/protobuf-targets.cmake"
@@ -50,6 +51,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/local/share/cmake-3.25/Modules/Platform/Linux-GNU.cmake"
   "/usr/local/share/cmake-3.25/Modules/Platform/Linux.cmake"
   "/usr/local/share/cmake-3.25/Modules/Platform/UnixPaths.cmake"
+  "/usr/local/share/cmake-3.25/Modules/SelectLibraryConfigurations.cmake"
   )
 
 # The corresponding makefile is:

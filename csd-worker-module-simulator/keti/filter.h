@@ -1,10 +1,7 @@
 #pragma once
 #include <string.h>
-#include <vector>
-#include <stdint.h>
-#include <unistd.h>
-#include <time.h>
 #include <sstream>
+#include <stdio.h>
 
 #include "merge_manager.h"
 struct ScanResult;

@@ -38,8 +38,7 @@ public:
 
 private:
     unordered_map<pair_key, MergeResult, pair_hash> m_MergeManager;// key=<qid,wid>
-
-    pair<T,int> stack_charToValue(char* dest, int type, int len);
+pair<T,int> stack_charToValue(char* dest, int type, int len);
     int stack_valueToChar(char* dest, int dest_type, T value, int type);
     void getColOffset(const char *origin_row_data, FilterInfo filter_info, int* col_offset);
     int calculCase(FilterInfo filter_info, char* origin_row_data, int* col_offset, int l, char* dest);
@@ -130,12 +129,10 @@ inline std::string& rtrim_(std::string& s, const char* t = " \t\n\r\f\v\0"){
 	s.erase(s.find_last_not_of(t) + 1);
 	return s;
 }
-
 inline std::string& ltrim_(std::string& s, const char* t = " \t\n\r\f\v\0"){
 	s.erase(0, s.find_first_not_of(t));
 	return s;
 }
-
 inline std::string& trim_(std::string& s, const char* t = " \t\n\r\f\v\0"){
 	return ltrim_(rtrim_(s, t), t);
 }

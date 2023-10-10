@@ -1,25 +1,9 @@
 #include "filter.h"
 
 int rownum = 0;
-// int test = 0;
 int saverowcount = 0;
 int totalrownum = 0;
-
-inline std::string& rtrim(std::string& s, const char* t = " \t\n\r\f\v\0"){
-	s.erase(s.find_last_not_of(t) + 1);
-	return s;
-}
-
-inline std::string& ltrim(std::string& s, const char* t = " \t\n\r\f\v\0")
-{
-	s.erase(0, s.find_first_not_of(t));
-	return s;
-}
-
-inline std::string& trim(std::string& s, const char* t = " \t\n\r\f\v\0")
-{
-	return ltrim(rtrim(s, t), t);
-}
+int current_block_count = 0;
 
 void Filter::Filtering()
 {
@@ -36,9 +20,10 @@ void Filter::Filtering()
     while (1)
     {
         Result scanResult = FilterQueue.wait_and_pop();//ScanResult scanResult = FilterQueue.wait_and_pop();
+        current_block_count += scanResult.result_block_count;
         // float temp_size = float(filterresult_.length) / float(1024);
 
-        printf("[CSD Filter] Filtering Data ... \n");
+        //printf("[CSD Filter] Filtering Data ... \n");
 
         // string rowfilter = "Filtering Using Filter Queue : Work ID " + to_string(scanResult.work_id) + " Block ID " + to_string(scanResult.block_id) + " Row Num " + to_string(scanResult.rows) + " Filter Json " + scanResult.table_filter;
         // strcpy(msg.msg, rowfilter.c_str());
@@ -74,7 +59,7 @@ int Filter::BlockFilter(Result &scanResult)
     Result filterresult(scanResult.query_id, scanResult.work_id, scanResult.csd_name, 
         scanResult.total_block_count, scanResult.filter_info, scanResult.result_block_count);
     filterresult.raw_row_count = scanResult.raw_row_count;
-    cout<<scanResult.csd_name<<" "<<scanResult.raw_row_count<<endl;
+    //cout<<scanResult.csd_name<<" "<<scanResult.raw_row_count<<endl;
     // Result filterresult(scanResult.work_id, 0, 0, scanResult.csd_name, scanResult.filter_info,
     //                     scanResult.total_block_count, scanResult.result_block_count, scanResult.last_valid_block_id);
     // filterresult.column_name = scanResult.filter_info.column_filter;
@@ -1634,7 +1619,7 @@ void Filter::sendfilterresult(Result &filterresult_)
     // }
     // cout << "------------------------------------------------\n";
     float temp_size = float(filterresult_.length) / float(1024);	
-    printf("[CSD Filter] Filtering Data ... (Filtered Size : %.1fK)\n",temp_size);	
+    //printf("[CSD Filter] Filtering Data ... (Filtered Size : %.1fK)\n",temp_size);	
     // printf("[CSD Filter] Filtering Data ... \n");	
     // printf("[CSD Filter] Filtering Data ... (Block : %d/%d)\n",current_block_count,filterresult_.total_block_count);
     MergeQueue.push_work(filterresult_);
@@ -2405,6 +2390,7 @@ void Filter::compareLT(int LV, int RV, bool &CV, bool &TmpV, bool &canSaved, boo
 }
 void Filter::compareET(string LV, string RV, bool &CV, bool &TmpV, bool &canSaved, bool isnot)
 {
+    LV = trim_(LV);
     if (LV == RV)
     {
         if (TmpV == true)

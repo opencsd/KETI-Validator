@@ -1,7 +1,7 @@
 #include "return.h"
+#include "httplib.h"
 
 void Return::ReturnResult(){
-    // cout << "<-----------  Return Layer Running...  ----------->\n";
     while (1){
         MergeResult mergeResult = ReturnQueue.wait_and_pop();
                 
@@ -11,8 +11,6 @@ void Return::ReturnResult(){
 
 void Return::SendDataToBufferManager(MergeResult &mergeResult){
     float temp_size = float(mergeResult.length) / float(1024);
-    // printf("[CSD Return Interface] Send Data to Buffer Manager (Return Buffer Size : %.1fK)\n",temp_size);
-    // printf("[CSD Return Interface] Send Data to Buffer Manager \n");
 
     StringBuffer block_buf;
     PrettyWriter<StringBuffer> writer(block_buf);
@@ -94,25 +92,6 @@ void Return::SendDataToBufferManager(MergeResult &mergeResult){
     len = mergeResult.length;
     send(sockfd,&len,sizeof(len),0);
     send(sockfd, mergeResult.data, BUFF_SIZE, 0);
-    // cout << "send ok" << endl;
-    // free(mergeResult.data);
-
-    // printf("~MergeBlock~ # workid: %d, blockid: %d, rows: %d, length: %d, offset_len: %ld\n",result.work_id, result.block_id, result.rows, result.totallength, result.offset.size());
-    // rowfilter = "[Json Send To Buffer Manager]\n";
-    // rowfilter += block_buf_;
-    
-    // strcpy(msg.msg,rowfilter.c_str());
-    // if(msgsnd(msqid,&msg,sizeof(msg.msg),0)==-1){
-    //     printf("msgsnd failed\n");
-    //     exit(0);
-    // }
-
-    //로그
-    // printf("[CSD Return Interface] CSD Worker Module send the merged data <%d-%d>\n",mergeResult.query_id,mergeResult.work_id);
-    // char log_char[100];
-    // sprintf(log_char, "CSD Worker Module send the merged data (%d-%d)",mergeResult.query_id,mergeResult.work_id);
-    // string log_str(log_char);
-    // cout << log_str << endl;// log(log_str);
     
     close(sockfd);
 }
