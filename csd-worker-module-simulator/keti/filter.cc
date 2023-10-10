@@ -1,11 +1,28 @@
 #include "filter.h"
 
 int rownum = 0;
-int current_block_count = 0;
+// int test = 0;
 int saverowcount = 0;
 int totalrownum = 0;
 
-void Filter::Filtering(){
+inline std::string& rtrim(std::string& s, const char* t = " \t\n\r\f\v\0"){
+	s.erase(s.find_last_not_of(t) + 1);
+	return s;
+}
+
+inline std::string& ltrim(std::string& s, const char* t = " \t\n\r\f\v\0")
+{
+	s.erase(0, s.find_first_not_of(t));
+	return s;
+}
+
+inline std::string& trim(std::string& s, const char* t = " \t\n\r\f\v\0")
+{
+	return ltrim(rtrim(s, t), t);
+}
+
+void Filter::Filtering()
+{
     // cout << "<-----------  Filter Layer Running...  ----------->\n";
     // key_t key = 12345;
     // int msqid;
@@ -19,7 +36,10 @@ void Filter::Filtering(){
     while (1)
     {
         Result scanResult = FilterQueue.wait_and_pop();//ScanResult scanResult = FilterQueue.wait_and_pop();
-        current_block_count += scanResult.result_block_count;
+        // float temp_size = float(filterresult_.length) / float(1024);
+
+        printf("[CSD Filter] Filtering Data ... \n");
+
         // string rowfilter = "Filtering Using Filter Queue : Work ID " + to_string(scanResult.work_id) + " Block ID " + to_string(scanResult.block_id) + " Row Num " + to_string(scanResult.rows) + " Filter Json " + scanResult.table_filter;
         // strcpy(msg.msg, rowfilter.c_str());
         // if (msgsnd(msqid, &msg, sizeof(msg.msg), 0) == -1)
@@ -53,7 +73,8 @@ int Filter::BlockFilter(Result &scanResult)
 
     Result filterresult(scanResult.query_id, scanResult.work_id, scanResult.csd_name, 
         scanResult.total_block_count, scanResult.filter_info, scanResult.result_block_count);
-
+    filterresult.raw_row_count = scanResult.raw_row_count;
+    cout<<scanResult.csd_name<<" "<<scanResult.raw_row_count<<endl;
     // Result filterresult(scanResult.work_id, 0, 0, scanResult.csd_name, scanResult.filter_info,
     //                     scanResult.total_block_count, scanResult.result_block_count, scanResult.last_valid_block_id);
     // filterresult.column_name = scanResult.filter_info.column_filter;
@@ -79,7 +100,6 @@ int Filter::BlockFilter(Result &scanResult)
     bool isvarchar = 0;     // varchar 형을 포함한 컬럼인지에 대한 변수
     
     isvarchar = isvarc(datatype, ColNum, varcharlist);
-
     // rowfilterdata(scanResult.table_offset, scanResult.table_offlen, scanResult.table_datatype, scanResult.table_col, varcharlist,scanResult.colindexmap);
     rowfilterdata.ColIndexmap = scanResult.filter_info.colindexmap;
     rowfilterdata.ColName = scanResult.filter_info.table_col;
@@ -88,18 +108,16 @@ int Filter::BlockFilter(Result &scanResult)
     rowfilterdata.startoff = scanResult.filter_info.table_offset;
     rowfilterdata.rowbuf = scanResult.data;
     rowfilterdata.varcharlist = varcharlist;
-
     bool substringflag;
     string tmpsubstring;
     // makedefaultmap(ColName, startoff, offlen, datatype, ColNum, startptr, lengthRaw, typedata);
     for(int i = 0; i < ColNum; i ++){
         typedata.insert(make_pair(rowfilterdata.ColName[i],rowfilterdata.datatype[i]));
-        // cout << typedata[rowfilterdata.ColName[i]] << " " << rowfilterdata.datatype[i] << endl;
     }
     int iter = 0; //각 row의 시작점
-    // cout << RowNum << endl;
     totalrownum += RowNum;
-    // cout << totalrownum << endl;
+    saverowcount += RowNum;
+    // cout << "saverowcount: " << saverowcount << endl;
     for (int i = 0; i < RowNum; i++)
     {
         // saverowcount++;
@@ -182,9 +200,7 @@ int Filter::BlockFilter(Result &scanResult)
                     // {
                     if (filterarray[j]["LV"].IsString())
                     {
-                        // cout << filterarray[j]["LV"].GetString() << endl;        
                        // 6은 스트링 --> 스트링이다는 컬럼이름이거나 char이거나 decimal이다
-                    //    cout << typedata[filterarray[j]["LV"].GetString()] << endl;
                         if (typedata[filterarray[j]["LV"].GetString()] == 3 || typedata[filterarray[j]["LV"].GetString()] == 14 || typedata[filterarray[j]["LV"].GetString()] == 8) //리틀에디안
                         {
                             // cout << typedata[filterarray[j]["LV"].GetString()] << endl;
@@ -782,6 +798,7 @@ int Filter::BlockFilter(Result &scanResult)
                             }
                             compareET(LV, RV, CV, TmpV, canSaved, isnot);
                             // cout << "type big" << endl;
+                            // cout << "type big" << endl;
                         }
                         else if (typedata[filterarray[j]["LV"].GetString()] == 246) //예외 Decimal일때
                         {
@@ -862,15 +879,6 @@ int Filter::BlockFilter(Result &scanResult)
                         {
                             string LV = typeBig(filterarray[j]["LV"].GetString(), rowbuf);
                             string RV;
-                            // if (filterarray[j]["RV"].IsString())
-                            // {
-                            //     RV = typeBig(filterarray[j]["RV"].GetString(), rowbuf);
-                            // }
-                            // else
-                            // {
-                            //     RV = filterarray[j]["RV"].GetString();
-                            //     RV = RV.substr(1);
-                            // }
                             if (filterarray[j]["RV"].IsString())
                             {
                                 if (typedata[filterarray[j]["RV"].GetString()] == 246)
@@ -1208,10 +1216,9 @@ int Filter::BlockFilter(Result &scanResult)
                             // cout << LV << endl;
                             for (int k = 0; k < filterarray[j]["EXTRA"].Size(); k++)
                             {
-                                // cout << filterarray[j]["EXTRA"][k].GetString() << endl;
+                                // cout << filterarray[j]["EXTRA"][k].GetType() << endl;
                                 if (filterarray[j]["EXTRA"][k].IsString())
                                 { //컬럼명 또는 스트링이다. --> 스트링이다 == float가 decimal로 800000000으로 들어온다
-                                    // cout << typedata[filterarray[j]["EXTRA"][k].GetString()] << endl;
                                     if (typedata[filterarray[j]["EXTRA"][k].GetString()] == 3 || typedata[filterarray[j]["EXTRA"][k].GetString()] == 14)
                                     {
                                         if (k == 0)
@@ -1461,7 +1468,6 @@ int Filter::BlockFilter(Result &scanResult)
                     //2. RV에서 Value를 읽고, LV의 SUBSTRING을 구한다.
                     //3. LV의 SUBSTRING을 저장한다.
                     //4. SUBSTRING FLAG를 On한다.
-                    // 이거 쓰는거 보고싶으면 22번 쿼리 동작시키면 됨
                     int subFrom;
                     int subFor;
                         if (typedata[filterarray[j]["LV"].GetString()] == 254 || typedata[filterarray[j]["LV"].GetString()] == 15) //빅에디안
@@ -1476,6 +1482,10 @@ int Filter::BlockFilter(Result &scanResult)
                             RV = tmps.substr(1);
                             subFor = atoi(RV.c_str());
                             tmpsubstring = LV.substr(subFrom,subFor);
+                            // Value &Extra = filterarray[j]["EXTRA"];
+                            // // Extra = filterarray[j]["EXTRA"].GetArray();
+                            // CV = InOperator(LV, Extra, typedata, rowbuf);
+                            // cout << "type big" << endl;
                         }
                         else if (typedata[filterarray[j]["LV"].GetString()] == 246) //예외 Decimal일때
                         {
@@ -1503,12 +1513,6 @@ int Filter::BlockFilter(Result &scanResult)
                 char *ptr = rowbuf;
                 if (i == scanResult.row_count - 1)
                 {
-                    // char *tmpsave = new char[scanResult.scan_size - scanResult.row_offset[i]];
-                    // memcpy(tmpsave, ptr + scanResult.row_offset[i], scanResult.scan_size - scanResult.row_offset[i]);
-                    // SavedRow(tmpsave, filteroffset, filterresult, scanResult.scan_size - scanResult.row_offset[i]);
-                    // filteroffset += scanResult.scan_size - scanResult.row_offset[i];
-                    // free(tmpsave); 
-                    //scan_size -> length
                     char *tmpsave = new char[scanResult.length - scanResult.row_offset[i]];
                     //여기 수정 필요
                     memcpy(tmpsave, ptr + scanResult.row_offset[i], scanResult.length - scanResult.row_offset[i]);
@@ -1553,6 +1557,8 @@ int Filter::BlockFilter(Result &scanResult)
             else
             {
                 // cout << scanResult.row_offset[i + 1] - scanResult.row_offset[i] << endl;
+                // char *tmpsave = new char[scanResult.row_offset[i + 1] - scanResult.row_offset[i]];
+	
                 char *tmpsave = new char[scanResult.row_offset[i + 1] - scanResult.row_offset[i]];
                 memcpy(tmpsave, ptr + scanResult.row_offset[i], scanResult.row_offset[i + 1] - scanResult.row_offset[i]);
                 SavedRow(tmpsave, filteroffset, filterresult, scanResult.row_offset[i + 1] - scanResult.row_offset[i]);
@@ -1585,8 +1591,8 @@ int Filter::BlockFilter(Result &scanResult)
     // cout << "-------------------------------------------------------" << endl;
 
     sendfilterresult(filterresult);
-    saverowcount += rownum;
-    // cout << saverowcount << endl;
+    	    saverowcount += rownum;
+    // cout << rownum << endl;
     return 0;
 }
 
@@ -1627,12 +1633,10 @@ void Filter::sendfilterresult(Result &filterresult_)
     //     printf("%02X", (u_char)filterresult_.data[i]);
     // }
     // cout << "------------------------------------------------\n";
-    
-    memset(msg, '\0', sizeof(msg));
-    float temp_size = float(filterresult_.length) / float(1024);
-    // printf("[CSD Filter] Filtering Data ... \n");
-    // printf("[CSD Filter] Filtering Data ... (Block : %d/%d)\n",current_block_count,filterresult_.total_block_count);    sprintf(msg,"[CSD Filter] Filtering Data ... (Filtered Size : %.1fK)\n",temp_size);
-    KETILOG::DEBUGLOG(LOGTAG, msg);
+    float temp_size = float(filterresult_.length) / float(1024);	
+    printf("[CSD Filter] Filtering Data ... (Filtered Size : %.1fK)\n",temp_size);	
+    // printf("[CSD Filter] Filtering Data ... \n");	
+    // printf("[CSD Filter] Filtering Data ... (Block : %d/%d)\n",current_block_count,filterresult_.total_block_count);
     MergeQueue.push_work(filterresult_);
 }
 
@@ -1797,7 +1801,6 @@ bool Filter::InOperator(string lv, Value &rv, unordered_map<string, int> typedat
         }
         else //걍 int면?
         {
-            cout << "# " << rv[i].GetInt() << endl;
             RV = ItoDec(rv[i].GetInt());
         }
         lv = rtrim_(lv);
@@ -2400,8 +2403,8 @@ void Filter::compareLT(int LV, int RV, bool &CV, bool &TmpV, bool &canSaved, boo
         }
     }
 }
-void Filter::compareET(string LV, string RV, bool &CV, bool &TmpV, bool &canSaved, bool isnot){
-    LV = trim_(LV); 
+void Filter::compareET(string LV, string RV, bool &CV, bool &TmpV, bool &canSaved, bool isnot)
+{
     if (LV == RV)
     {
         if (TmpV == true)
@@ -2547,6 +2550,7 @@ int Filter::typeLittle(unordered_map<string, int> typedata, string colname, char
     // cout << "tttteeessssttttt  " << typedata[colname] << endl;
     if (typedata[colname] == 14)
     { // date
+        // cout << 1 << endl;
         int *tmphex;
         char temphexbuf[4];
         //  = new char[4];
@@ -2629,7 +2633,6 @@ int Filter::typeLittle(unordered_map<string, int> typedata, string colname, char
         //  cout << intbuff[0] << endl;
         return retint;
     }else{
-        cout << "error no join" << endl;
         string tmpstring = joinmap[colname];
         return stoi(tmpstring);
     }
@@ -2647,7 +2650,8 @@ string Filter::typeBig(string colname, char *rowbuf)
     GetColumnoff(colname);
     // }
     string tmpstring = "";
-    for (int k = 0; k < newlengthraw[colname]; k++){
+    for (int k = 0; k < newlengthraw[colname]; k++)
+    {
         tmpstring = tmpstring + (char)rowbuf[newstartptr[colname] + k];
     }
     return tmpstring;

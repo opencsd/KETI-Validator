@@ -27,13 +27,13 @@ int main(int argc, char** argv) {
     }else{
         KETILOG::SetDefaultLogLevel();
     }
-
-    CSDTableManager::InitCSDTableManager();
+        TableManager CSDTableManager;
+    CSDTableManager.InitCSDTableManager();
 
     thread InputInterface = thread(&Input::InputSnippet, Input());
     // Scan scan = Scan(CSDTableManager);
     // scan.Scanning();
-    thread ScanLayer = thread(&Scan::Scanning, Scan());
+    thread ScanLayer = thread(&Scan::Scanning, Scan(CSDTableManager));
     thread FilterLayer1 = thread(&Filter::Filtering, Filter());
     // thread FilterLayer2 = thread(&Filter::Filtering, Filter());
     // thread FilterLayer3 = thread(&Filter::Filtering, Filter());

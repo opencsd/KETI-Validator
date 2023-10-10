@@ -49,6 +49,7 @@ struct MergeResult{
     int total_block_count;
     int result_block_count;
     int current_block_count;
+    int raw_row_count;
 
     MergeResult(){}
     //merge.cc의 최초 생성자

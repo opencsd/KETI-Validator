@@ -45,9 +45,9 @@ main: librocksdb main.cc
 # main: librocksdb main.cc
 # 	$(CXX) $(CXXFLAGS) $@.cc return.cc merge_manager.cc filter.cc csd_table_manager.cc scan.cc  -o$@ ../../csd_file_scan/rocksdb/librocksdb.a -I../rocksdb/include ../../compress_libs/zstd/lib/libzstd.a ../../compress_libs/lz4/lib/liblz4.a ../../compress_libs/snappy/build/libsnappy.a ../../compress_libs/zlib/libz.a ../../compress_libs/bzip2/build/libbz2_static.a -ldl -O2 -std=c++17 $(PLATFORM_LDFLAGS) $(PLATFORM_CXXFLAGS) $(EXEC_LDFLAGS)
 
-arm: armclang++ -fno-rtti main.cc input.cc return.cc merge_manager.cc filter.cc csd_table_manager.cc scan.cc  -oarmmainstring ../rocksdb/librocksdb.a -I../rocksdb/include -ldl -lz -lsnappy -O2 -std=c++17     -lpthread -armpl
+arm: armclang++ -fno-rtti main.cc  return.cc merge_manager.cc filter.cc csd_table_manager.cc scan.cc  -oarmmainstring ../rocksdb/librocksdb.a -I../rocksdb/include -ldl -lz -lsnappy -O2 -std=c++17     -lpthread -armpl
 
-arm8: armclang++ -fno-rtti main.cc input.cc return.cc merge_manager.cc filter.cc csd_table_manager.cc scan.cc  -oarm_main ../rocksdb/librocksdb.a -I../rocksdb/include -ldl -lz -lbz2 -O2 -std=c++17     -lpthread -armpl
+arm8: armclang++ -fno-rtti main.cc  return.cc merge_manager.cc filter.cc csd_table_manager.cc scan.cc  -oarm_main ../rocksdb/librocksdb.a -I../rocksdb/include -ldl -lz -lbz2 -O2 -std=c++17     -lpthread -armpl
 
 cross: librocksdb 
-	$(CROSS_COMPILER) $(CXXFLAGS) main.cc input.cc return.cc merge_manager.cc filter.cc csd_table_manager.cc scan.cc  -o$@ ../rocksdb/librocksdb.a -I../rocksdb/include -ldl -lz -lsnappy -O2 -std=c++17 $(PLATFORM_LDFLAGS) $(PLATFORM_CXXFLAGS) $(EXEC_LDFLAGS)	
+	$(CROSS_COMPILER) $(CXXFLAGS) main.cc  return.cc merge_manager.cc filter.cc csd_table_manager.cc scan.cc  -o$@ ../rocksdb/librocksdb.a -I../rocksdb/include -ldl -lz -lsnappy -O2 -std=c++17 $(PLATFORM_LDFLAGS) $(PLATFORM_CXXFLAGS) $(EXEC_LDFLAGS)	

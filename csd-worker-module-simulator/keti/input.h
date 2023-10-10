@@ -67,6 +67,7 @@ void Input::InputSnippet(){
         cout<<"7"<<endl;
           int numread;
           while(1) {
+            cout<<"20"<<endl;
             if ((numread = read( client_fd , buffer, BUFF_SIZE - 1)) == -1) {
               cout << "read error" << endl;
               perror("read");
@@ -82,13 +83,11 @@ void Input::InputSnippet(){
               if (length == 0)
               break;
           }
-
-          if(KETILOG::IsLogLevelUnder(TRACE)){
+            cout<<"10"<<endl;
+            cout<<json<<endl;
             cout << "*******************Snippet JSON*****************" << endl;
             cout << json.c_str() << endl;
             cout << "************************************************" << endl;
-          }
-
           // //start
           // // send_Query_info
           // const char* message = "Query Start";
@@ -121,10 +120,11 @@ void Input::InputSnippet(){
           // std::cout << "Snippet start info sent" << std::endl;
 
           // close(sock);
-
+            cout<<"11"<<endl;
           Snippet parsedSnippet(json.c_str());
+                      cout<<"12"<<endl;
           calculForReturnData(parsedSnippet);
-
+            cout<<"13"<<endl;
           //로그
           char msg[200];
           memset(msg, '\0', sizeof(msg));
@@ -134,7 +134,7 @@ void Input::InputSnippet(){
           // printf("[CSD Input Interface] Receive Snippet {ID : %d-%d} from Storage Engine Instance\n",parsedSnippet.query_id, parsedSnippet.work_id);
 
           ScanQueue.push_work(parsedSnippet);
-
+            cout<<"14"<<endl;
           close(client_fd);
         }
 

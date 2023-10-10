@@ -28,34 +28,27 @@ const int INDEX_NUM_SIZE = 4;
 
 class Scan{
     public:
-        Scan(){}
+        Scan(TableManager table_m){
+            CSDTableManager_ = table_m;
+        }
         
         void Scanning();
-        void BlockScan(SstBlockReader* sstBlockReader_, BlockInfo* blockInfo, 
-                        Snippet *snippet_, Result *scan_result);
+        void BlockScan(SstFileReader* sstBlockReader_, Snippet *snippet_, Result *scan_result, string file_path);//file path 추가
         void IndexScan(SstBlockReader* sstBlockReader_, BlockInfo* blockInfo, 
                         Snippet *snippet_, Result *scan_result);
-        void EnQueueData(Result scan_result, Snippet snippet_);
+        void EnQueueData(Result scan_result, int scan_type);
         void Column_Filtering(Result *scan_result, Snippet snippet_);
         void GetColumnOff(char* data, Snippet snippet_, int colindex, int &varcharflag);
         void WalScan(Snippet *snippet_, Result *scan_result);
 
-        inline const static std::string LOGTAG = "CSD Scan";
-        char msg[200];
-
     private:
-        int getPrimaryKeyData(const char* ikey_data, char* dest, list<PrimaryKey> pk_list);
-        char* hexstr_to_char(const char* hexstr, int* row_size);
-        string char_to_hexstr(const char *data, int len);
+        TableManager CSDTableManager_;
+        unordered_map<string,int> newoffmap;
+        unordered_map<string,int> newlenmap;
+        // int dev_fd;
 
-        uint64_t kNumInternalBytes_;
-        bool index_valid;
-        int ipk;
-        bool check;
-        char origin_index_num[INDEX_NUM_SIZE];
-        int total_block_row_count;
-        int current_block_count;
 };
+
 
 struct PrimaryKey{
   string key_name;
@@ -82,6 +75,7 @@ struct Snippet{
     vector<Projection> column_projection;//*select문 정보
     vector<int> projection_datatype;//컬럼 프로젝션 후 컬럼의 데이터타입
     vector<int> projection_length;//컬럼 프로젝션 후 컬럼의 길이
+    vector<string> groupby_col;
     int scan_type;//스캔 타입 결정
     vector<string> seek_pk_list;
     vector<string> deleted_key;//*delete key
@@ -110,27 +104,27 @@ struct Snippet{
           kNumInternalBytes = 0;
         }
 
-        uint64_t block_offset_, block_length_;
-        int block_id_ = 0;//필요없을듯
+        // uint64_t block_offset_, block_length_;
+        // int block_id_ = 0;//필요없을듯
         
-        //block list 정보 저장
-        block_info_list.clear();
-        Value &pba = document["pba"];
-        Value &block_list = pba["blockList"];
-        for(int i = 0; i<block_list.Size(); i++){
-            block_offset_ = block_list[i]["offset"].GetInt64();
-            for(int j = 0; j < block_list[i]["length"].Size(); j++){
-                block_length_ = block_list[i]["length"][j].GetInt64();
-                BlockInfo newBlock(block_id_, block_offset_, block_length_);
-                block_info_list.push_back(newBlock);
-                block_offset_ = block_offset_ + block_length_;
-                block_id_++;
-                total_block_count++;
-                if(block_length_ > 4096){
-                  cout << "block#" << block_id_ <<  " length is over 4096 : " << block_length_ << endl;
-                }
-            }
-        }   
+        // //block list 정보 저장
+        // block_info_list.clear();
+        // Value &pba = document["pba"];
+        // Value &block_list = pba["blockList"];
+        // for(int i = 0; i<block_list.Size(); i++){
+        //     block_offset_ = block_list[i]["offset"].GetInt64();
+        //     for(int j = 0; j < block_list[i]["length"].Size(); j++){
+        //         block_length_ = block_list[i]["length"][j].GetInt64();
+        //         BlockInfo newBlock(block_id_, block_offset_, block_length_);
+        //         block_info_list.push_back(newBlock);
+        //         block_offset_ = block_offset_ + block_length_;
+        //         block_id_++;
+        //         total_block_count++;
+        //         if(block_length_ > 4096){
+        //           cout << "block#" << block_id_ <<  " length is over 4096 : " << block_length_ << endl;
+        //         }
+        //     }
+        // }   
 
         //테이블 스키마 정보 저장
         table_col.clear();

@@ -95,6 +95,7 @@ struct Result{
     vector<int> row_offset;
     vector<vector<int>> row_column_offset;
     int result_block_count;
+    int raw_row_count;
 
     //scan, filter의 최초 생성자
     Result(
@@ -121,6 +122,7 @@ struct Result{
     row_offset.clear();
     row_column_offset.clear();
     result_block_count = 0;
+    raw_row_count = 0;
   }
 };
 

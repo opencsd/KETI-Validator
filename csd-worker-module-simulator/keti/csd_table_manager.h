@@ -1,47 +1,31 @@
- #include <unordered_map>
 #include <iostream>
+#include <unordered_map>
+#include <fcntl.h>
+#include <unistd.h>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
-struct TableRep{
-    string dev_name;
-    bool blocks_maybe_compressed;
-    bool blocks_definitely_zstd_compressed;
-    bool immortal_table;
-    uint32_t read_amp_bytes_per_bit;
-    string compression_name;
+#include "rocksdb/sst_file_reader.h"
+
+typedef std::pair<string, string> string_pair_key;
+struct pair_hash2{
+    template <class T1, class T2>
+    std::size_t operator() (const std::pair<T1, T2> &pair) const{
+        return std::hash<T1>()(pair.first) ^ std::hash<T2>()(pair.second);
+    }
 };
 
-class CSDTableManager{
-  public:
-    static void InitCSDTableManager(){
-      GetInstance().initCSDTableManager();
-    }
+class TableManager{
+public:
+    TableManager() {}
+    void InitCSDTableManager();//임시로 데이터 넣어놓음
+    string GetTableRep(string csd_name, string table_name);
 
-    static TableRep GetTableRep(string table_name){
-      return GetInstance().getTableRep(table_name);
-    }
-
-  private:
-    CSDTableManager(){};
-
-    CSDTableManager(const CSDTableManager&);
-    ~CSDTableManager() {};
-    CSDTableManager& operator=(const CSDTableManager&){
-        return *this;
-    };
-
-    static CSDTableManager& GetInstance() {
-        static CSDTableManager csdTableManager;
-        return csdTableManager;
-    }
-
-    void initCSDTableManager();
-    TableRep getTableRep(string table_name);
-
-    inline const static std::string LOGTAG = "CSD Table Manager";
-    char msg[200];
-
-  private:
-    unordered_map<string,struct TableRep> table_rep_;// key=table_name
+private:
+    unordered_map<string_pair_key,string, pair_hash2> table_rep;
+    //<csd_name, <table_name, file_path>> 
+    //              key          value  
+    //    key              value
 };

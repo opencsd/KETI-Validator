@@ -1,10 +1,12 @@
 #pragma once
 #include <string.h>
+#include <vector>
+#include <stdint.h>
+#include <unistd.h>
+#include <time.h>
 #include <sstream>
-#include <stdio.h>
 
 #include "merge_manager.h"
-
 struct ScanResult;
 struct FilterResult;
 
@@ -67,7 +69,4 @@ public:
     void GetColumnoff(string ColName);
 
     int row_offset;    
-
-    inline const static std::string LOGTAG = "CSD Filter";
-    char msg[200];
 };

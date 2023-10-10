@@ -1,7 +1,7 @@
 #include "return.h"
-#include "httplib.h"
 
 void Return::ReturnResult(){
+    // cout << "<-----------  Return Layer Running...  ----------->\n";
     while (1){
         MergeResult mergeResult = ReturnQueue.wait_and_pop();
                 
@@ -11,20 +11,8 @@ void Return::ReturnResult(){
 
 void Return::SendDataToBufferManager(MergeResult &mergeResult){
     float temp_size = float(mergeResult.length) / float(1024);
-    memset(msg, '\0', sizeof(msg));
-    sprintf(msg,"Send Data to Buffer Manager (Return Buffer Size : %.1fK)\n\n",temp_size);
-    KETILOG::DEBUGLOG(LOGTAG, msg);
-
-    if(mergeResult.total_block_count == mergeResult.current_block_count){
-        if(KETILOG::GetLogLevel() == METRIC){
-            httplib::Client cli("localhost",40502);
-            auto res = cli.Get("/endCSD");
-        }
-        
-        memset(msg, '\0', sizeof(msg));
-        sprintf(msg,"Snippet {ID : %d-%d} Done\n",mergeResult.query_id,mergeResult.work_id);
-        KETILOG::INFOLOG(LOGTAG, msg);
-    }
+    printf("[CSD Return Interface] Send Data to Buffer Manager (Return Buffer Size : %.1fK)\n",temp_size);
+    // printf("[CSD Return Interface] Send Data to Buffer Manager \n");
 
     StringBuffer block_buf;
     PrettyWriter<StringBuffer> writer(block_buf);
@@ -42,13 +30,16 @@ void Return::SendDataToBufferManager(MergeResult &mergeResult){
 
     writer.Key("rowOffset");
     writer.StartArray();
-    for (int i = 0; i < mergeResult.row_offset.size(); i++){
+    for (int i = 0; i < mergeResult.row_offset.size(); i ++){
         writer.Int(mergeResult.row_offset[i]);
     }
     writer.EndArray();
 
     writer.Key("length");
     writer.Int(mergeResult.length);
+
+    writer.Key("raw_row_count");
+    writer.Int(mergeResult.raw_row_count);
 
     writer.Key("returnDatatype");
     writer.StartArray();
@@ -66,6 +57,9 @@ void Return::SendDataToBufferManager(MergeResult &mergeResult){
 
     writer.Key("csdName");
     writer.String(mergeResult.csd_name.c_str());
+
+    // writer.Key("Last valid block id");
+    // writer.Int(mergeResult.last_valid_block_id);
 
     writer.Key("resultBlockCount");
     writer.Int(mergeResult.result_block_count);
@@ -93,13 +87,32 @@ void Return::SendDataToBufferManager(MergeResult &mergeResult){
 
     static char cBuffer[PACKET_SIZE];
     if (recv(sockfd, cBuffer, PACKET_SIZE, 0) == 0){
-        KETILOG::FATALLOG(LOGTAG,"client recv Error");
+        cout << "client recv Error" << endl;
         return;
     };
 
     len = mergeResult.length;
     send(sockfd,&len,sizeof(len),0);
     send(sockfd, mergeResult.data, BUFF_SIZE, 0);
+    // cout << "send ok" << endl;
+    // free(mergeResult.data);
+
+    // printf("~MergeBlock~ # workid: %d, blockid: %d, rows: %d, length: %d, offset_len: %ld\n",result.work_id, result.block_id, result.rows, result.totallength, result.offset.size());
+    // rowfilter = "[Json Send To Buffer Manager]\n";
+    // rowfilter += block_buf_;
+    
+    // strcpy(msg.msg,rowfilter.c_str());
+    // if(msgsnd(msqid,&msg,sizeof(msg.msg),0)==-1){
+    //     printf("msgsnd failed\n");
+    //     exit(0);
+    // }
+
+    //로그
+    // printf("[CSD Return Interface] CSD Worker Module send the merged data <%d-%d>\n",mergeResult.query_id,mergeResult.work_id);
+    // char log_char[100];
+    // sprintf(log_char, "CSD Worker Module send the merged data (%d-%d)",mergeResult.query_id,mergeResult.work_id);
+    // string log_str(log_char);
+    // cout << log_str << endl;// log(log_str);
     
     close(sockfd);
 }
