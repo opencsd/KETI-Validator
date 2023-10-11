@@ -4,7 +4,7 @@ using namespace rapidjson;
 
 //테이블 스키마 정보 임의로 저장 >> 이후 DB File Monitoring을 통해 데이터 저장 -> 업데이트시 DB Connector Instance로 반영
 int TableManager::initTableManager(){
-	KETILOG(LOGTAG, "# Init TableManager");
+	//KETILOG::DEBUGLOG(LOGTAG, "# Init TableManager");
 
 	//read TableManager.json
 	string json = "";

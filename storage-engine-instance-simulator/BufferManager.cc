@@ -41,7 +41,7 @@ void BufferManager::inputBufferManager(){
 		exit(EXIT_FAILURE);
 	}
 
-    KETILOG(LOGTAG,"CSD Return Server Listening on 10.0.4.82:40003");
+    //KETILOG(LOGTAG,"CSD Return Server Listening on 10.0.4.82:40003");
 
 	while(1){
 		if ((client_fd = accept(server_fd, (struct sockaddr*)&client_addr, (socklen_t*)&addrlen)) < 0){
@@ -97,7 +97,7 @@ void BufferManager::runBufferManager(){
     while (1){
         BlockResult blockResult = PopQueue();
         //string msg = "# Receive Data from CSD Return Interface {" + to_string(blockResult.query_id) + "|" + to_string(blockResult.work_id) + "}";
-        //KETILOG(LOGTAG, msg);
+        ////KETILOG(LOGTAG, msg);
         if((DataBuff.find(blockResult.query_id) == DataBuff.end()) || 
            (DataBuff[blockResult.query_id]->work_buffer_list.find(blockResult.work_id) 
                     == DataBuff[blockResult.query_id]->work_buffer_list.end())){
@@ -116,7 +116,7 @@ void BufferManager::mergeBlock(BlockResult result){
     unique_lock<mutex> lock(myWorkBuffer->mu);
     if(myWorkBuffer->status == WorkDone){
         string msg = " error>> Work {" + to_string(qid) + "|" + to_string(wid) + "} is already done!";
-        KETILOG(LOGTAG, msg);
+        //KETILOG(LOGTAG, msg);
         return;
     }
     
@@ -279,7 +279,7 @@ void BufferManager::mergeBlock(BlockResult result){
                         break;
                     }default:{
                         string msg = " error>> Type: " + to_string(col_type) + " is not defined!";
-                        KETILOG(LOGTAG, msg);
+                        ////KETILOG(LOGTAG, msg);
                     }
                 }
                 myWorkBuffer->table_data[col_name].isnull.push_back(false);
@@ -299,11 +299,11 @@ void BufferManager::mergeBlock(BlockResult result){
     myWorkBuffer->row_count += result.row_count;
     myWorkBuffer->left_low_count -= result.raw_row_count;
     
-    //KETILOG(LOGTAG,"Merging Data ... (Left Block : " + std::to_string(myWorkBuffer->left_low_count) + ")" + std::to_string(result.raw_row_count));
+    ////KETILOG(LOGTAG,"Merging Data ... (Left Block : " + std::to_string(myWorkBuffer->left_low_count) + ")" + std::to_string(result.raw_row_count));
 
     if(myWorkBuffer->left_low_count <= 0){
         string msg = "Merging Data {" + to_string(qid) + "|" + to_string(wid) + "|" + myWorkBuffer->table_alias + "} Done";
-        KETILOG(LOGTAG,msg);
+        //KETILOG(LOGTAG,msg);
 
         for(auto it = myWorkBuffer->table_data.begin(); it != myWorkBuffer->table_data.end(); it++){
             if((*it).second.floatvec.size() != 0){
@@ -326,7 +326,7 @@ int BufferManager::initWork(StorageEngineInstance::Snippet masked_snippet, int r
     }else if(DataBuff[masked_snippet.query_id()]->work_buffer_list.find(masked_snippet.work_id()) 
                 != DataBuff[masked_snippet.query_id()]->work_buffer_list.end()){
         string msg = " error>> ID Duplicate Error {" + to_string(masked_snippet.query_id()) + "|" + to_string(masked_snippet.work_id()) + "}";
-        KETILOG(LOGTAG, msg);
+        //KETILOG(LOGTAG, msg);
         return -1;            
     }   
 
@@ -368,7 +368,7 @@ int BufferManager::checkTableStatus(int qid, string tname){
 int BufferManager::endQuery(int qid){
     if(DataBuff.find(qid) == DataBuff.end()){
         string msg = " error>> There's No Query ID {" + to_string(qid) + "}";
-        KETILOG(LOGTAG, msg);
+        //KETILOG(LOGTAG, msg);
         return 0;
     }
     DataBuff.erase(qid);
@@ -525,7 +525,7 @@ string BufferManager::getTableDataToString(int qid, string tname)
 
 int BufferManager::saveTableData(int qid, string tname, TableData table_data_, int offset, int length){
     string msg = "Save Table {" + to_string(qid) + "|" + tname + "}";
-    KETILOG(LOGTAG,msg);
+    //KETILOG(LOGTAG,msg);
 
     int wid = DataBuff[qid]->tablename_workid_map[tname];
     WorkBuffer* workBuffer = DataBuff[qid]->work_buffer_list[wid];

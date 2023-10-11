@@ -188,27 +188,24 @@ PROTOBUF_NAMESPACE_CLOSE
 namespace StorageEngineInstance {
 
 enum SnippetRequest_SnippetType : int {
-  SnippetRequest_SnippetType_SCAN_SNIPPET = 0,
+  SnippetRequest_SnippetType_CSD_SCAN_SNIPPET = 0,
   SnippetRequest_SnippetType_AGGREGATION_SNIPPET = 1,
-  SnippetRequest_SnippetType_INNER_JOIN_SNIPPET = 2,
-  SnippetRequest_SnippetType_LEFT_OUTER_JOIN_SNIPPET = 3,
-  SnippetRequest_SnippetType_RIGHT_OUTER_JOIN_SNIPPET = 4,
-  SnippetRequest_SnippetType_FULL_OUTER_JOIN_SNIPPET = 5,
-  SnippetRequest_SnippetType_DEPENDENCY_SEMI_JOIN_SNIPPET = 6,
-  SnippetRequest_SnippetType_DEPENDENCY_ANIT_JOIN_SNIPPET = 7,
-  SnippetRequest_SnippetType_NON_DEPENDENCY_SEMI_JOIN_SNIPPET = 8,
-  SnippetRequest_SnippetType_NON_DEPENDENCY_ANIT_JOIN_SNIPPET = 9,
-  SnippetRequest_SnippetType_DEPENDENCY_SUBQUERY_SNIPPET = 10,
-  SnippetRequest_SnippetType_NON_DEPENDENCY_SUBQUERY_SNIPPET = 11,
-  SnippetRequest_SnippetType_FILTER_SNIPPET = 12,
-  SnippetRequest_SnippetType_UNION_SNIPPET = 13,
-  SnippetRequest_SnippetType_UNION_ALL_SNIPPET = 14,
+  SnippetRequest_SnippetType_STORAGE_FILTER_SNIPPET = 2,
+  SnippetRequest_SnippetType_INNER_JOIN_SNIPPET = 3,
+  SnippetRequest_SnippetType_LEFT_OUTER_JOIN_SNIPPET = 4,
+  SnippetRequest_SnippetType_RIGHT_OUTER_JOIN_SNIPPET = 5,
+  SnippetRequest_SnippetType_CROSS_JOIN_SNIPPET = 6,
+  SnippetRequest_SnippetType_UNION_SNIPPET = 7,
+  SnippetRequest_SnippetType_IN_SNIPPET = 8,
+  SnippetRequest_SnippetType_DEPENDENCY_INNER_JOIN_SNIPPET = 9,
+  SnippetRequest_SnippetType_DEPENDENCY_EXIST_SNIPPET = 10,
+  SnippetRequest_SnippetType_DEPENDENCY_IN_SNIPPET = 11,
   SnippetRequest_SnippetType_SnippetRequest_SnippetType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
   SnippetRequest_SnippetType_SnippetRequest_SnippetType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
 };
 bool SnippetRequest_SnippetType_IsValid(int value);
-constexpr SnippetRequest_SnippetType SnippetRequest_SnippetType_SnippetType_MIN = SnippetRequest_SnippetType_SCAN_SNIPPET;
-constexpr SnippetRequest_SnippetType SnippetRequest_SnippetType_SnippetType_MAX = SnippetRequest_SnippetType_UNION_ALL_SNIPPET;
+constexpr SnippetRequest_SnippetType SnippetRequest_SnippetType_SnippetType_MIN = SnippetRequest_SnippetType_CSD_SCAN_SNIPPET;
+constexpr SnippetRequest_SnippetType SnippetRequest_SnippetType_SnippetType_MAX = SnippetRequest_SnippetType_DEPENDENCY_IN_SNIPPET;
 constexpr int SnippetRequest_SnippetType_SnippetType_ARRAYSIZE = SnippetRequest_SnippetType_SnippetType_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* SnippetRequest_SnippetType_descriptor();
@@ -269,9 +266,10 @@ enum Snippet_Projection_SelectType : int {
   Snippet_Projection_SelectType_AVG = 2,
   Snippet_Projection_SelectType_COUNT = 3,
   Snippet_Projection_SelectType_COUNTSTAR = 4,
-  Snippet_Projection_SelectType_TOP = 5,
-  Snippet_Projection_SelectType_MIN = 6,
-  Snippet_Projection_SelectType_MAX = 7,
+  Snippet_Projection_SelectType_COUNTDISTINCT = 5,
+  Snippet_Projection_SelectType_TOP = 6,
+  Snippet_Projection_SelectType_MIN = 7,
+  Snippet_Projection_SelectType_MAX = 8,
   Snippet_Projection_SelectType_Snippet_Projection_SelectType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
   Snippet_Projection_SelectType_Snippet_Projection_SelectType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
 };
@@ -503,36 +501,30 @@ class SnippetRequest final :
   // nested types ----------------------------------------------------
 
   typedef SnippetRequest_SnippetType SnippetType;
-  static constexpr SnippetType SCAN_SNIPPET =
-    SnippetRequest_SnippetType_SCAN_SNIPPET;
+  static constexpr SnippetType CSD_SCAN_SNIPPET =
+    SnippetRequest_SnippetType_CSD_SCAN_SNIPPET;
   static constexpr SnippetType AGGREGATION_SNIPPET =
     SnippetRequest_SnippetType_AGGREGATION_SNIPPET;
+  static constexpr SnippetType STORAGE_FILTER_SNIPPET =
+    SnippetRequest_SnippetType_STORAGE_FILTER_SNIPPET;
   static constexpr SnippetType INNER_JOIN_SNIPPET =
     SnippetRequest_SnippetType_INNER_JOIN_SNIPPET;
   static constexpr SnippetType LEFT_OUTER_JOIN_SNIPPET =
     SnippetRequest_SnippetType_LEFT_OUTER_JOIN_SNIPPET;
   static constexpr SnippetType RIGHT_OUTER_JOIN_SNIPPET =
     SnippetRequest_SnippetType_RIGHT_OUTER_JOIN_SNIPPET;
-  static constexpr SnippetType FULL_OUTER_JOIN_SNIPPET =
-    SnippetRequest_SnippetType_FULL_OUTER_JOIN_SNIPPET;
-  static constexpr SnippetType DEPENDENCY_SEMI_JOIN_SNIPPET =
-    SnippetRequest_SnippetType_DEPENDENCY_SEMI_JOIN_SNIPPET;
-  static constexpr SnippetType DEPENDENCY_ANIT_JOIN_SNIPPET =
-    SnippetRequest_SnippetType_DEPENDENCY_ANIT_JOIN_SNIPPET;
-  static constexpr SnippetType NON_DEPENDENCY_SEMI_JOIN_SNIPPET =
-    SnippetRequest_SnippetType_NON_DEPENDENCY_SEMI_JOIN_SNIPPET;
-  static constexpr SnippetType NON_DEPENDENCY_ANIT_JOIN_SNIPPET =
-    SnippetRequest_SnippetType_NON_DEPENDENCY_ANIT_JOIN_SNIPPET;
-  static constexpr SnippetType DEPENDENCY_SUBQUERY_SNIPPET =
-    SnippetRequest_SnippetType_DEPENDENCY_SUBQUERY_SNIPPET;
-  static constexpr SnippetType NON_DEPENDENCY_SUBQUERY_SNIPPET =
-    SnippetRequest_SnippetType_NON_DEPENDENCY_SUBQUERY_SNIPPET;
-  static constexpr SnippetType FILTER_SNIPPET =
-    SnippetRequest_SnippetType_FILTER_SNIPPET;
+  static constexpr SnippetType CROSS_JOIN_SNIPPET =
+    SnippetRequest_SnippetType_CROSS_JOIN_SNIPPET;
   static constexpr SnippetType UNION_SNIPPET =
     SnippetRequest_SnippetType_UNION_SNIPPET;
-  static constexpr SnippetType UNION_ALL_SNIPPET =
-    SnippetRequest_SnippetType_UNION_ALL_SNIPPET;
+  static constexpr SnippetType IN_SNIPPET =
+    SnippetRequest_SnippetType_IN_SNIPPET;
+  static constexpr SnippetType DEPENDENCY_INNER_JOIN_SNIPPET =
+    SnippetRequest_SnippetType_DEPENDENCY_INNER_JOIN_SNIPPET;
+  static constexpr SnippetType DEPENDENCY_EXIST_SNIPPET =
+    SnippetRequest_SnippetType_DEPENDENCY_EXIST_SNIPPET;
+  static constexpr SnippetType DEPENDENCY_IN_SNIPPET =
+    SnippetRequest_SnippetType_DEPENDENCY_IN_SNIPPET;
   static inline bool SnippetType_IsValid(int value) {
     return SnippetRequest_SnippetType_IsValid(value);
   }
@@ -1180,6 +1172,8 @@ class Snippet_Projection final :
     Snippet_Projection_SelectType_COUNT;
   static constexpr SelectType COUNTSTAR =
     Snippet_Projection_SelectType_COUNTSTAR;
+  static constexpr SelectType COUNTDISTINCT =
+    Snippet_Projection_SelectType_COUNTDISTINCT;
   static constexpr SelectType TOP =
     Snippet_Projection_SelectType_TOP;
   static constexpr SelectType MIN =
@@ -3292,6 +3286,7 @@ class MetaDataResponse_PBAInfo final :
 
   enum : int {
     kCsdPbaMapFieldNumber = 1,
+    kSeekPkListFieldNumber = 2,
   };
   // map<string, string> csd_pba_map = 1;
   int csd_pba_map_size() const;
@@ -3310,6 +3305,30 @@ class MetaDataResponse_PBAInfo final :
   ::PROTOBUF_NAMESPACE_ID::Map< std::string, std::string >*
       mutable_csd_pba_map();
 
+  // repeated string seek_pk_list = 2;
+  int seek_pk_list_size() const;
+  private:
+  int _internal_seek_pk_list_size() const;
+  public:
+  void clear_seek_pk_list();
+  const std::string& seek_pk_list(int index) const;
+  std::string* mutable_seek_pk_list(int index);
+  void set_seek_pk_list(int index, const std::string& value);
+  void set_seek_pk_list(int index, std::string&& value);
+  void set_seek_pk_list(int index, const char* value);
+  void set_seek_pk_list(int index, const char* value, size_t size);
+  std::string* add_seek_pk_list();
+  void add_seek_pk_list(const std::string& value);
+  void add_seek_pk_list(std::string&& value);
+  void add_seek_pk_list(const char* value);
+  void add_seek_pk_list(const char* value, size_t size);
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>& seek_pk_list() const;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>* mutable_seek_pk_list();
+  private:
+  const std::string& _internal_seek_pk_list(int index) const;
+  std::string* _internal_add_seek_pk_list();
+  public:
+
   // @@protoc_insertion_point(class_scope:StorageEngineInstance.MetaDataResponse.PBAInfo)
  private:
   class _Internal;
@@ -3322,6 +3341,7 @@ class MetaDataResponse_PBAInfo final :
       std::string, std::string,
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING,
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING> csd_pba_map_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string> seek_pk_list_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_storage_5fengine_5finstance_2eproto;
 };
@@ -8050,6 +8070,81 @@ inline ::PROTOBUF_NAMESPACE_ID::Map< std::string, std::string >*
 MetaDataResponse_PBAInfo::mutable_csd_pba_map() {
   // @@protoc_insertion_point(field_mutable_map:StorageEngineInstance.MetaDataResponse.PBAInfo.csd_pba_map)
   return _internal_mutable_csd_pba_map();
+}
+
+// repeated string seek_pk_list = 2;
+inline int MetaDataResponse_PBAInfo::_internal_seek_pk_list_size() const {
+  return seek_pk_list_.size();
+}
+inline int MetaDataResponse_PBAInfo::seek_pk_list_size() const {
+  return _internal_seek_pk_list_size();
+}
+inline void MetaDataResponse_PBAInfo::clear_seek_pk_list() {
+  seek_pk_list_.Clear();
+}
+inline std::string* MetaDataResponse_PBAInfo::add_seek_pk_list() {
+  std::string* _s = _internal_add_seek_pk_list();
+  // @@protoc_insertion_point(field_add_mutable:StorageEngineInstance.MetaDataResponse.PBAInfo.seek_pk_list)
+  return _s;
+}
+inline const std::string& MetaDataResponse_PBAInfo::_internal_seek_pk_list(int index) const {
+  return seek_pk_list_.Get(index);
+}
+inline const std::string& MetaDataResponse_PBAInfo::seek_pk_list(int index) const {
+  // @@protoc_insertion_point(field_get:StorageEngineInstance.MetaDataResponse.PBAInfo.seek_pk_list)
+  return _internal_seek_pk_list(index);
+}
+inline std::string* MetaDataResponse_PBAInfo::mutable_seek_pk_list(int index) {
+  // @@protoc_insertion_point(field_mutable:StorageEngineInstance.MetaDataResponse.PBAInfo.seek_pk_list)
+  return seek_pk_list_.Mutable(index);
+}
+inline void MetaDataResponse_PBAInfo::set_seek_pk_list(int index, const std::string& value) {
+  seek_pk_list_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set:StorageEngineInstance.MetaDataResponse.PBAInfo.seek_pk_list)
+}
+inline void MetaDataResponse_PBAInfo::set_seek_pk_list(int index, std::string&& value) {
+  seek_pk_list_.Mutable(index)->assign(std::move(value));
+  // @@protoc_insertion_point(field_set:StorageEngineInstance.MetaDataResponse.PBAInfo.seek_pk_list)
+}
+inline void MetaDataResponse_PBAInfo::set_seek_pk_list(int index, const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  seek_pk_list_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:StorageEngineInstance.MetaDataResponse.PBAInfo.seek_pk_list)
+}
+inline void MetaDataResponse_PBAInfo::set_seek_pk_list(int index, const char* value, size_t size) {
+  seek_pk_list_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:StorageEngineInstance.MetaDataResponse.PBAInfo.seek_pk_list)
+}
+inline std::string* MetaDataResponse_PBAInfo::_internal_add_seek_pk_list() {
+  return seek_pk_list_.Add();
+}
+inline void MetaDataResponse_PBAInfo::add_seek_pk_list(const std::string& value) {
+  seek_pk_list_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:StorageEngineInstance.MetaDataResponse.PBAInfo.seek_pk_list)
+}
+inline void MetaDataResponse_PBAInfo::add_seek_pk_list(std::string&& value) {
+  seek_pk_list_.Add(std::move(value));
+  // @@protoc_insertion_point(field_add:StorageEngineInstance.MetaDataResponse.PBAInfo.seek_pk_list)
+}
+inline void MetaDataResponse_PBAInfo::add_seek_pk_list(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  seek_pk_list_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:StorageEngineInstance.MetaDataResponse.PBAInfo.seek_pk_list)
+}
+inline void MetaDataResponse_PBAInfo::add_seek_pk_list(const char* value, size_t size) {
+  seek_pk_list_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:StorageEngineInstance.MetaDataResponse.PBAInfo.seek_pk_list)
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>&
+MetaDataResponse_PBAInfo::seek_pk_list() const {
+  // @@protoc_insertion_point(field_list:StorageEngineInstance.MetaDataResponse.PBAInfo.seek_pk_list)
+  return seek_pk_list_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>*
+MetaDataResponse_PBAInfo::mutable_seek_pk_list() {
+  // @@protoc_insertion_point(field_mutable_list:StorageEngineInstance.MetaDataResponse.PBAInfo.seek_pk_list)
+  return &seek_pk_list_;
 }
 
 // -------------------------------------------------------------------

@@ -8,12 +8,12 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/root/workspace/Simulator/db-connector-instance-simulator/gRPC_Protobuf/storage_engine_instance.cc" "CMakeFiles/storage_engine_instance.dir/storage_engine_instance.cc.o" "gcc" "CMakeFiles/storage_engine_instance.dir/storage_engine_instance.cc.o.d"
+  "/root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/storage_engine_instance.cc" "CMakeFiles/storage_engine_instance.dir/storage_engine_instance.cc.o" "gcc" "CMakeFiles/storage_engine_instance.dir/storage_engine_instance.cc.o.d"
   )
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/root/workspace/Simulator/db-connector-instance-simulator/gRPC_Protobuf/cmake/build/CMakeFiles/ss_grpc_proto.dir/DependInfo.cmake"
+  "/root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/ss_grpc_proto.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

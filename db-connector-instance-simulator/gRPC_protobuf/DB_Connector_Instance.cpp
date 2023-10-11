@@ -10,11 +10,11 @@
 
 using namespace rapidjson;
 
-DB_Connector_Instance::DB_Connector_Instance() : storageEngineInterface_(grpc::CreateChannel("10.0.4.82:40001", grpc::InsecureChannelCredentials())), meta_data_manager_("10.0.4.82:40001")
+DB_Connector_Instance::DB_Connector_Instance() : storageEngineInterface_(grpc::CreateChannel("10.0.4.86:40001", grpc::InsecureChannelCredentials())), meta_data_manager_("10.0.4.86:40001")
 {
     //ctor
 }
-DB_Connector_Instance::DB_Connector_Instance(utility::string_t url):m_listener(url), storageEngineInterface_(grpc::CreateChannel("10.0.4.82:40001", grpc::InsecureChannelCredentials())), meta_data_manager_("10.0.4.82:40001")
+DB_Connector_Instance::DB_Connector_Instance(utility::string_t url):m_listener(url), storageEngineInterface_(grpc::CreateChannel("10.0.4.86:40001", grpc::InsecureChannelCredentials())), meta_data_manager_("10.0.4.86:40001")
 {
     cout << "url: " << url << endl;
     m_listener.support(methods::GET, std::bind(&DB_Connector_Instance::handle_get, this, std::placeholders::_1));

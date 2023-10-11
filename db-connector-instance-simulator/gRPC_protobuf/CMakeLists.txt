@@ -21,7 +21,7 @@ cmake_minimum_required(VERSION 3.5.1)
 
 project(snippet_sample C CXX)
 
-include(../cmake/common.cmake)
+include(./cmake/common.cmake)
 
 # Proto file
 get_filename_component(ss_proto "./proto/snippet_sample.proto" ABSOLUTE)

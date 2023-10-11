@@ -855,7 +855,7 @@ AND l_shipdate < DATE '1996-12-01' + interval '1' month; `}
 	fmt.Printf("CSD Weight Result     : %.5f\n",weight_per_column)
 	fmt.Printf("Storage Weight Result : %.5f\n",weight_per_sum)
 	fmt.Printf("Average Storage Working Time: %.4f\n",avg(durationRecord))
-	fmt.Printf("Average CSD Working Time: %.4f\n",avg(csdworkRecord))
+	fmt.Printf("Average CSD Working Time: %.4f\n",sum(csdworkRecord))
 }
 
 type Usage struct {
@@ -901,12 +901,16 @@ func monitorUsage(done <-chan struct{}, usageCh chan<- Usage) {
 	csdWork := []float64{}
 	//loopTimeCheck := []float64{}
 	prevnet := float64(0)
-	count1 := 0
+	count1 := 0.0
 	count2 := 0
 	count3 := 0.0
-	count4 := 0
-	count5 := 0
-	count6 := 0
+	count4 := 0.0
+	count5 := 0.0
+	count6 := 0.0
+	count7 := 0.0
+	count8 := 0.0
+	count9 := 0.0
+	count10 := 0.0
 
 	netInfo, _ := net.IOCounters(false)
     prevnet = float64(netInfo[0].BytesRecv + netInfo[0].BytesSent)
@@ -916,7 +920,16 @@ func monitorUsage(done <-chan struct{}, usageCh chan<- Usage) {
 		case <-done:
 			netInfo, _ := net.IOCounters(false)
             netUsage := float64(netInfo[0].BytesRecv+netInfo[0].BytesSent) - prevnet
-			csdWork = append(csdWork,count3*0.016)
+			csdWork = append(csdWork,count3*0.02)
+			csdWork = append(csdWork,count4*0.02)
+			csdWork = append(csdWork,count5*0.02)
+			csdWork = append(csdWork,count6*0.02)
+			csdWork = append(csdWork,count7*0.02)
+			csdWork = append(csdWork,count8*0.02)
+			csdWork = append(csdWork,count9*0.02)
+			csdWork = append(csdWork,count10*0.02)
+			fmt.Printf("```````````````storage working time```````````````%.4f\n",count1*0.02)
+			fmt.Printf("%.4f, %.4f, %.4f, %.4f, %.4f, %.4f, %.4f, %.4f\n",csdWork[0],csdWork[1],csdWork[2],csdWork[3],csdWork[4],csdWork[5],csdWork[6],csdWork[7])
 			usageCh <- Usage{
 				CPU:     avg(cpuUsage),
 				Memory:  avg(memUsage),
@@ -975,12 +988,16 @@ func monitorUsage(done <-chan struct{}, usageCh chan<- Usage) {
 			}
 		// }()
 		paths := []string{
-			"/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq",
 			"/sys/devices/system/cpu/cpu1/cpufreq/scaling_cur_freq",
 			"/sys/devices/system/cpu/cpu2/cpufreq/scaling_cur_freq",
 			"/sys/devices/system/cpu/cpu3/cpufreq/scaling_cur_freq",
 			"/sys/devices/system/cpu/cpu4/cpufreq/scaling_cur_freq",
 			"/sys/devices/system/cpu/cpu5/cpufreq/scaling_cur_freq",
+			"/sys/devices/system/cpu/cpu6/cpufreq/scaling_cur_freq",
+			"/sys/devices/system/cpu/cpu7/cpufreq/scaling_cur_freq",
+			"/sys/devices/system/cpu/cpu8/cpufreq/scaling_cur_freq",
+			"/sys/devices/system/cpu/cpu9/cpufreq/scaling_cur_freq",
+			"/sys/devices/system/cpu/cpu10/cpufreq/scaling_cur_freq",
 		}
 
 		for _, path := range paths {
@@ -991,33 +1008,49 @@ func monitorUsage(done <-chan struct{}, usageCh chan<- Usage) {
 					panic(err)
 				}
 				switch p {
-				case "/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq":
+				case "/sys/devices/system/cpu/cpu10/cpufreq/scaling_cur_freq":
 					powerSimulator = append(powerSimulator, calculateFreqPower(freq))
-					//fmt.Printf("Execution time of one loop: %.3f\n", freq)
-					count1 = count1+1
-				case "/sys/devices/system/cpu/cpu1/cpufreq/scaling_cur_freq":
+					count1 = count1+freq
+				case "/sys/devices/system/cpu/cpu9/cpufreq/scaling_cur_freq":
 					powerDbConnect = append(powerDbConnect, calculateFreqPower(freq))
 					count2 = count2+1
-				case "/sys/devices/system/cpu/cpu2/cpufreq/scaling_cur_freq":
+				case "/sys/devices/system/cpu/cpu1/cpufreq/scaling_cur_freq":
 					powerCsd1 = append(powerCsd1, calculateFreqPower(freq))
+					if(freq > 1.2){
+						count3 = count3+freq
+					}
+				case "/sys/devices/system/cpu/cpu2/cpufreq/scaling_cur_freq":
 					powerCsd2 = append(powerCsd2, calculateFreqPower(freq))
-					if(freq > 1){
-						count3 = count3+1
+					if(freq >1.2){
+						count4 = count4+freq
 					}
 				case "/sys/devices/system/cpu/cpu3/cpufreq/scaling_cur_freq":
 					powerCsd3 = append(powerCsd3, calculateFreqPower(freq))
-					powerCsd4 = append(powerCsd4, calculateFreqPower(freq))
-					count4 = count4+1
+					if(freq > 1.2){
+					count5 = count5+freq}
 				case "/sys/devices/system/cpu/cpu4/cpufreq/scaling_cur_freq":
-					powerCsd5 = append(powerCsd5, calculateFreqPower(freq))
-					powerCsd6 = append(powerCsd6, calculateFreqPower(freq))
-					count5 = count5+1
+					powerCsd4 = append(powerCsd4, calculateFreqPower(freq))
+					if(freq > 1.2){
+					count6 = count6+freq}
 				case "/sys/devices/system/cpu/cpu5/cpufreq/scaling_cur_freq":
+					powerCsd5 = append(powerCsd5, calculateFreqPower(freq))
+					if(freq > 1.2){
+					count7 = count7+freq}
+				case "/sys/devices/system/cpu/cpu6/cpufreq/scaling_cur_freq":
+					powerCsd6 = append(powerCsd6, calculateFreqPower(freq))
+					if(freq > 1.2){
+						count8 = count8+freq
+					}
+				case "/sys/devices/system/cpu/cpu7/cpufreq/scaling_cur_freq":
 					powerCsd7 = append(powerCsd7, calculateFreqPower(freq))
+					if(freq > 1.2){
+						count9 = count9+freq
+					}
+				case "/sys/devices/system/cpu/cpu8/cpufreq/scaling_cur_freq":
 					powerCsd8 = append(powerCsd8, calculateFreqPower(freq))
-					count6 = count6+1
-				//case "/sys/devices/system/cpu/cpu/cpufreq/scaling_cur_freq":
-					//powerHost = append(powerHost, calculateFreqPower(freq))
+					if(freq > 1.2){
+						count10 = count10 + freq
+					}
 				}
 			}(path)
 
@@ -1077,7 +1110,7 @@ func waitForFileAndReadFrequency(path string) (float64, error) {
 	}
 
 	// Convert from kHz to MHz
-	frequency /= 1000000.0
+	frequency /= 1000000.0000
 	return frequency, nil
 }
 

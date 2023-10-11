@@ -1,4 +1,4 @@
-# Install script for directory: /root/workspace/Simulator/db-connector-instance-simulator/gRPC_Protobuf
+# Install script for directory: /root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/root/workspace/Simulator/db-connector-instance-simulator/gRPC_Protobuf/cmake/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

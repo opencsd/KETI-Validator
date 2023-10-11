@@ -228,7 +228,8 @@ struct MetaDataResponse_PBAInfo_CsdPbaMapEntry_DoNotUseDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT MetaDataResponse_PBAInfo_CsdPbaMapEntry_DoNotUseDefaultTypeInternal _MetaDataResponse_PBAInfo_CsdPbaMapEntry_DoNotUse_default_instance_;
 constexpr MetaDataResponse_PBAInfo::MetaDataResponse_PBAInfo(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : csd_pba_map_(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}){}
+  : csd_pba_map_(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{})
+  , seek_pk_list_(){}
 struct MetaDataResponse_PBAInfoDefaultTypeInternal {
   constexpr MetaDataResponse_PBAInfoDefaultTypeInternal()
     : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
@@ -594,6 +595,7 @@ const uint32_t TableStruct_storage_5fengine_5finstance_2eproto::offsets[] PROTOB
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::StorageEngineInstance::MetaDataResponse_PBAInfo, csd_pba_map_),
+  PROTOBUF_FIELD_OFFSET(::StorageEngineInstance::MetaDataResponse_PBAInfo, seek_pk_list_),
   PROTOBUF_FIELD_OFFSET(::StorageEngineInstance::MetaDataResponse_SstCsdMapEntry_DoNotUse, _has_bits_),
   PROTOBUF_FIELD_OFFSET(::StorageEngineInstance::MetaDataResponse_SstCsdMapEntry_DoNotUse, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -746,22 +748,22 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 117, -1, -1, sizeof(::StorageEngineInstance::Request)},
   { 126, 134, -1, sizeof(::StorageEngineInstance::MetaDataResponse_PBAInfo_CsdPbaMapEntry_DoNotUse)},
   { 136, -1, -1, sizeof(::StorageEngineInstance::MetaDataResponse_PBAInfo)},
-  { 143, 151, -1, sizeof(::StorageEngineInstance::MetaDataResponse_SstCsdMapEntry_DoNotUse)},
-  { 153, -1, -1, sizeof(::StorageEngineInstance::MetaDataResponse)},
-  { 161, -1, -1, sizeof(::StorageEngineInstance::CSDStatusList_CSDStatus)},
-  { 170, 178, -1, sizeof(::StorageEngineInstance::CSDStatusList_CsdStatusMapEntry_DoNotUse)},
-  { 180, -1, -1, sizeof(::StorageEngineInstance::CSDStatusList)},
-  { 187, -1, -1, sizeof(::StorageEngineInstance::CSDMetricList_CSDMetric)},
-  { 200, -1, -1, sizeof(::StorageEngineInstance::CSDMetricList)},
-  { 207, -1, -1, sizeof(::StorageEngineInstance::Result)},
-  { 214, -1, -1, sizeof(::StorageEngineInstance::Chunk)},
-  { 222, -1, -1, sizeof(::StorageEngineInstance::LBA)},
-  { 230, -1, -1, sizeof(::StorageEngineInstance::LBARequest)},
-  { 237, -1, -1, sizeof(::StorageEngineInstance::PBA)},
-  { 245, -1, -1, sizeof(::StorageEngineInstance::PBAList)},
-  { 253, -1, -1, sizeof(::StorageEngineInstance::PBAResponse)},
-  { 260, -1, -1, sizeof(::StorageEngineInstance::WALRequest)},
-  { 269, -1, -1, sizeof(::StorageEngineInstance::WALResponse)},
+  { 144, 152, -1, sizeof(::StorageEngineInstance::MetaDataResponse_SstCsdMapEntry_DoNotUse)},
+  { 154, -1, -1, sizeof(::StorageEngineInstance::MetaDataResponse)},
+  { 162, -1, -1, sizeof(::StorageEngineInstance::CSDStatusList_CSDStatus)},
+  { 171, 179, -1, sizeof(::StorageEngineInstance::CSDStatusList_CsdStatusMapEntry_DoNotUse)},
+  { 181, -1, -1, sizeof(::StorageEngineInstance::CSDStatusList)},
+  { 188, -1, -1, sizeof(::StorageEngineInstance::CSDMetricList_CSDMetric)},
+  { 201, -1, -1, sizeof(::StorageEngineInstance::CSDMetricList)},
+  { 208, -1, -1, sizeof(::StorageEngineInstance::Result)},
+  { 215, -1, -1, sizeof(::StorageEngineInstance::Chunk)},
+  { 223, -1, -1, sizeof(::StorageEngineInstance::LBA)},
+  { 231, -1, -1, sizeof(::StorageEngineInstance::LBARequest)},
+  { 238, -1, -1, sizeof(::StorageEngineInstance::PBA)},
+  { 246, -1, -1, sizeof(::StorageEngineInstance::PBAList)},
+  { 254, -1, -1, sizeof(::StorageEngineInstance::PBAResponse)},
+  { 261, -1, -1, sizeof(::StorageEngineInstance::WALRequest)},
+  { 270, -1, -1, sizeof(::StorageEngineInstance::WALResponse)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -800,156 +802,156 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 
 const char descriptor_table_protodef_storage_5fengine_5finstance_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\035storage_engine_instance.proto\022\025Storage"
-  "EngineInstance\"\301\004\n\016SnippetRequest\022\?\n\004typ"
+  "EngineInstance\"\307\003\n\016SnippetRequest\022\?\n\004typ"
   "e\030\001 \001(\01621.StorageEngineInstance.SnippetR"
   "equest.SnippetType\022/\n\007snippet\030\002 \001(\0132\036.St"
-  "orageEngineInstance.Snippet\"\274\003\n\013SnippetT"
-  "ype\022\020\n\014SCAN_SNIPPET\020\000\022\027\n\023AGGREGATION_SNI"
-  "PPET\020\001\022\026\n\022INNER_JOIN_SNIPPET\020\002\022\033\n\027LEFT_O"
-  "UTER_JOIN_SNIPPET\020\003\022\034\n\030RIGHT_OUTER_JOIN_"
-  "SNIPPET\020\004\022\033\n\027FULL_OUTER_JOIN_SNIPPET\020\005\022 "
-  "\n\034DEPENDENCY_SEMI_JOIN_SNIPPET\020\006\022 \n\034DEPE"
-  "NDENCY_ANIT_JOIN_SNIPPET\020\007\022$\n NON_DEPEND"
-  "ENCY_SEMI_JOIN_SNIPPET\020\010\022$\n NON_DEPENDEN"
-  "CY_ANIT_JOIN_SNIPPET\020\t\022\037\n\033DEPENDENCY_SUB"
-  "QUERY_SNIPPET\020\n\022#\n\037NON_DEPENDENCY_SUBQUE"
-  "RY_SNIPPET\020\013\022\022\n\016FILTER_SNIPPET\020\014\022\021\n\rUNIO"
-  "N_SNIPPET\020\r\022\025\n\021UNION_ALL_SNIPPET\020\016\"\354\016\n\007S"
-  "nippet\022\020\n\010query_ID\030\001 \001(\005\022\017\n\007work_ID\030\002 \001("
-  "\005\022\022\n\ntable_name\030\003 \003(\t\022\021\n\ttable_col\030\004 \003(\t"
-  "\022;\n\014table_filter\030\005 \003(\0132%.StorageEngineIn"
-  "stance.Snippet.Filter\022=\n\ndependency\030\006 \001("
-  "\0132).StorageEngineInstance.Snippet.Depend"
-  "ency\022\024\n\014table_offset\030\007 \003(\005\022\024\n\014table_offl"
-  "en\030\010 \003(\005\022\026\n\016table_datatype\030\t \003(\005\022\023\n\013tabl"
-  "e_alias\030\n \001(\t\022\024\n\014column_alias\030\013 \003(\t\022D\n\021c"
-  "olumn_projection\030\014 \003(\0132).StorageEngineIn"
-  "stance.Snippet.Projection\022\030\n\020column_filt"
-  "ering\030\r \003(\t\022\020\n\010group_by\030\016 \003(\t\0226\n\010order_b"
-  "y\030\017 \001(\0132$.StorageEngineInstance.Snippet."
-  "Order\0223\n\005limit\030\020 \001(\0132$.StorageEngineInst"
-  "ance.Snippet.Limit\022\016\n\006pk_num\030\021 \001(\005\032\301\004\n\006F"
-  "ilter\022=\n\002LV\030\001 \001(\01321.StorageEngineInstanc"
-  "e.Snippet.Filter.FilterValue\022@\n\010Operator"
-  "\030\002 \001(\0162..StorageEngineInstance.Snippet.F"
-  "ilter.OperType\022=\n\002RV\030\003 \001(\01321.StorageEngi"
-  "neInstance.Snippet.Filter.FilterValue\022@\n"
-  "\005EXTRA\030\004 \003(\01321.StorageEngineInstance.Sni"
-  "ppet.Filter.FilterValue\032T\n\013FilterValue\0226"
-  "\n\004type\030\001 \003(\0162(.StorageEngineInstance.Sni"
-  "ppet.ValueType\022\r\n\005value\030\002 \003(\t\"\336\001\n\010OperTy"
-  "pe\022\020\n\014KETI_DEFAULT\020\000\022\013\n\007KETI_GE\020\001\022\013\n\007KET"
-  "I_LE\020\002\022\013\n\007KETI_GT\020\003\022\013\n\007KETI_LT\020\004\022\013\n\007KETI"
-  "_ET\020\005\022\013\n\007KETI_NE\020\006\022\r\n\tKETI_LIKE\020\007\022\020\n\014KET"
-  "I_BETWEEN\020\010\022\013\n\007KETI_IN\020\t\022\013\n\007KETI_IS\020\n\022\016\n"
-  "\nKETI_ISNOT\020\013\022\014\n\010KETI_NOT\020\014\022\014\n\010KETI_AND\020"
-  "\r\022\013\n\007KETI_OR\020\016\032\211\002\n\nProjection\022I\n\013select_"
-  "type\030\001 \001(\01624.StorageEngineInstance.Snipp"
-  "et.Projection.SelectType\022\r\n\005value\030\002 \003(\t\022"
-  "<\n\nvalue_type\030\003 \003(\0162(.StorageEngineInsta"
-  "nce.Snippet.ValueType\"c\n\nSelectType\022\016\n\nC"
-  "OLUMNNAME\020\000\022\007\n\003SUM\020\001\022\007\n\003AVG\020\002\022\t\n\005COUNT\020\003"
-  "\022\r\n\tCOUNTSTAR\020\004\022\007\n\003TOP\020\005\022\007\n\003MIN\020\006\022\007\n\003MAX"
-  "\020\007\032\211\001\n\005Order\022F\n\tascending\030\001 \003(\01623.Storag"
-  "eEngineInstance.Snippet.Order.OrderDirec"
-  "tion\022\023\n\013column_name\030\002 \003(\t\"#\n\016OrderDirect"
-  "ion\022\007\n\003ASC\020\000\022\010\n\004DESC\020\001\032\230\001\n\nDependency\022H\n"
-  "\025dependency_projection\030\001 \003(\0132).StorageEn"
-  "gineInstance.Snippet.Projection\022@\n\021depen"
-  "dency_filter\030\002 \003(\0132%.StorageEngineInstan"
-  "ce.Snippet.Filter\032\'\n\005Limit\022\016\n\006offset\030\001 \001"
-  "(\005\022\016\n\006length\030\002 \001(\005\"\234\001\n\tValueType\022\010\n\004INT8"
-  "\020\000\022\t\n\005INT16\020\001\022\t\n\005INT32\020\002\022\t\n\005INT64\020\003\022\013\n\007F"
-  "LOAT32\020\004\022\013\n\007FLOAT64\020\005\022\013\n\007NUMERIC\020\006\022\010\n\004DA"
-  "TE\020\007\022\r\n\tTIMESTAMP\020\010\022\n\n\006STRING\020\t\022\n\n\006COLUM"
-  "N\020\n\022\014\n\010OPERATOR\020\013\"\304\001\n\006Column\0227\n\010col_type"
-  "\030\002 \001(\0162%.StorageEngineInstance.Column.Co"
-  "lType\022\022\n\nstring_col\030\003 \003(\t\022\017\n\007int_col\030\004 \003"
-  "(\005\022\022\n\ndouble_col\030\005 \003(\001\"H\n\007ColType\022\016\n\nTYP"
-  "E_EMPTY\020\000\022\017\n\013TYPE_STRING\020\001\022\014\n\010TYPE_INT\020\002"
-  "\022\016\n\nTYPE_FLOAT\020\003\"\276\001\n\013QueryResult\022I\n\014quer"
-  "y_result\030\001 \003(\01323.StorageEngineInstance.Q"
-  "ueryResult.QueryResultEntry\022\021\n\trow_count"
-  "\030\002 \001(\005\032Q\n\020QueryResultEntry\022\013\n\003key\030\001 \001(\t\022"
-  ",\n\005value\030\002 \001(\0132\035.StorageEngineInstance.C"
-  "olumn:\0028\001\",\n\017TableBlockCount\022\031\n\021table_bl"
-  "ock_count\030\001 \001(\005\"@\n\007Request\022\020\n\010query_id\030\001"
-  " \001(\005\022\017\n\007work_id\030\002 \001(\005\022\022\n\ntable_name\030\003 \001("
-  "\t\"\347\002\n\020MetaDataResponse\022K\n\013sst_csd_map\030\001 "
-  "\003(\01326.StorageEngineInstance.MetaDataResp"
-  "onse.SstCsdMapEntry\022\020\n\010wal_json\030\002 \001(\t\032\220\001"
-  "\n\007PBAInfo\022S\n\013csd_pba_map\030\001 \003(\0132>.Storage"
-  "EngineInstance.MetaDataResponse.PBAInfo."
-  "CsdPbaMapEntry\0320\n\016CsdPbaMapEntry\022\013\n\003key\030"
-  "\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\032a\n\016SstCsdMapEnt"
-  "ry\022\013\n\003key\030\001 \001(\t\022>\n\005value\030\002 \001(\0132/.Storage"
-  "EngineInstance.MetaDataResponse.PBAInfo:"
-  "\0028\001\"\201\002\n\rCSDStatusList\022N\n\016csd_status_map\030"
-  "\001 \003(\01326.StorageEngineInstance.CSDStatusL"
-  "ist.CsdStatusMapEntry\032;\n\tCSDStatus\022\n\n\002ip"
-  "\030\001 \001(\t\022\r\n\005score\030\002 \001(\002\022\023\n\013block_count\030\003 \001"
-  "(\005\032c\n\021CsdStatusMapEntry\022\013\n\003key\030\001 \001(\t\022=\n\005"
-  "value\030\002 \001(\0132..StorageEngineInstance.CSDS"
-  "tatusList.CSDStatus:\0028\001\"\351\001\n\rCSDMetricLis"
-  "t\022G\n\017csd_metric_list\030\001 \003(\0132..StorageEngi"
-  "neInstance.CSDMetricList.CSDMetric\032\216\001\n\tC"
-  "SDMetric\022\n\n\002id\030\001 \001(\t\022\n\n\002ip\030\002 \001(\t\022\021\n\tcpu_"
-  "usage\030\003 \001(\002\022\024\n\014memory_usage\030\004 \001(\002\022\022\n\ndis"
-  "k_usage\030\005 \001(\002\022\017\n\007network\030\006 \001(\002\022\033\n\023workin"
-  "g_block_count\030\007 \001(\005\"\027\n\006Result\022\r\n\005value\030\001"
-  " \001(\t\"\'\n\005Chunk\022\016\n\006offset\030\001 \001(\003\022\016\n\006length\030"
-  "\002 \001(\005\"F\n\003LBA\022\021\n\tfile_name\030\001 \001(\t\022,\n\006chunk"
-  "s\030\002 \003(\0132\034.StorageEngineInstance.Chunk\"\?\n"
-  "\nLBARequest\0221\n\rfile_lba_list\030\001 \003(\0132\032.Sto"
-  "rageEngineInstance.LBA\"C\n\003PBA\022\016\n\006csd_id\030"
-  "\001 \001(\t\022,\n\006chunks\030\002 \003(\0132\034.StorageEngineIns"
-  "tance.Chunk\"N\n\007PBAList\022\021\n\tfile_name\030\001 \001("
-  "\t\0220\n\014csd_pba_list\030\002 \003(\0132\032.StorageEngineI"
-  "nstance.PBA\"D\n\013PBAResponse\0225\n\rfile_csd_l"
-  "ist\030\001 \003(\0132\036.StorageEngineInstance.PBALis"
-  "t\":\n\nWALRequest\022\017\n\007req_key\030\001 \001(\t\022\014\n\004type"
-  "\030\002 \001(\t\022\r\n\005value\030\003 \001(\t\"P\n\013WALResponse\022\023\n\013"
-  "deleted_key\030\001 \003(\t\022\024\n\014inserted_key\030\002 \003(\t\022"
-  "\026\n\016inserted_value\030\003 \003(\t2\266\001\n\022InterfaceCon"
-  "tainer\022X\n\nSetSnippet\022%.StorageEngineInst"
-  "ance.SnippetRequest\032\035.StorageEngineInsta"
-  "nce.Result\"\000(\0010\001\022F\n\003Run\022\036.StorageEngineI"
-  "nstance.Request\032\035.StorageEngineInstance."
-  "Result\"\0002\344\002\n\020MergingContainer\022U\n\013Aggrega"
-  "tion\022%.StorageEngineInstance.SnippetRequ"
-  "est\032\035.StorageEngineInstance.Result\"\000\022T\n\n"
-  "InitBuffer\022%.StorageEngineInstance.Snipp"
-  "etRequest\032\035.StorageEngineInstance.Result"
-  "\"\000\022K\n\010EndQuery\022\036.StorageEngineInstance.R"
-  "equest\032\035.StorageEngineInstance.Result\"\000\022"
-  "V\n\016GetQueryResult\022\036.StorageEngineInstanc"
-  "e.Request\032\".StorageEngineInstance.QueryR"
-  "esult\"\0002\370\002\n\023MonitoringContainer\022N\n\013SetMe"
-  "taData\022\036.StorageEngineInstance.Request\032\035"
-  ".StorageEngineInstance.Result\"\000\022X\n\013GetMe"
-  "taData\022\036.StorageEngineInstance.Request\032\'"
-  ".StorageEngineInstance.MetaDataResponse\""
-  "\000\022[\n\017GetCSDBlockInfo\022\036.StorageEngineInst"
-  "ance.Request\032&.StorageEngineInstance.Tab"
-  "leBlockCount\"\000\022Z\n\021SetCSDMetricsInfo\022$.St"
-  "orageEngineInstance.CSDMetricList\032\035.Stor"
-  "ageEngineInstance.Result\"\0002\272\001\n\023Offloadin"
-  "gContainer\022K\n\010Schedule\022\036.StorageEngineIn"
-  "stance.Snippet\032\035.StorageEngineInstance.R"
-  "esult\"\000\022V\n\rPushCSDMetric\022$.StorageEngine"
-  "Instance.CSDStatusList\032\035.StorageEngineIn"
-  "stance.Result\"\0002g\n\016LBA2PBAManager\022U\n\nReq"
-  "uestPBA\022!.StorageEngineInstance.LBAReque"
-  "st\032\".StorageEngineInstance.PBAResponse\"\000"
-  "2c\n\nWALManager\022U\n\nRequestWAL\022!.StorageEn"
-  "gineInstance.WALRequest\032\".StorageEngineI"
-  "nstance.WALResponse\"\000B6\n\026io.grpc.snippet"
-  "_sampleB\024snippet_sample_ProtoP\001\242\002\003SSPb\006p"
-  "roto3"
+  "orageEngineInstance.Snippet\"\302\002\n\013SnippetT"
+  "ype\022\024\n\020CSD_SCAN_SNIPPET\020\000\022\027\n\023AGGREGATION"
+  "_SNIPPET\020\001\022\032\n\026STORAGE_FILTER_SNIPPET\020\002\022\026"
+  "\n\022INNER_JOIN_SNIPPET\020\003\022\033\n\027LEFT_OUTER_JOI"
+  "N_SNIPPET\020\004\022\034\n\030RIGHT_OUTER_JOIN_SNIPPET\020"
+  "\005\022\026\n\022CROSS_JOIN_SNIPPET\020\006\022\021\n\rUNION_SNIPP"
+  "ET\020\007\022\016\n\nIN_SNIPPET\020\010\022!\n\035DEPENDENCY_INNER"
+  "_JOIN_SNIPPET\020\t\022\034\n\030DEPENDENCY_EXIST_SNIP"
+  "PET\020\n\022\031\n\025DEPENDENCY_IN_SNIPPET\020\013\"\377\016\n\007Sni"
+  "ppet\022\020\n\010query_ID\030\001 \001(\005\022\017\n\007work_ID\030\002 \001(\005\022"
+  "\022\n\ntable_name\030\003 \003(\t\022\021\n\ttable_col\030\004 \003(\t\022;"
+  "\n\014table_filter\030\005 \003(\0132%.StorageEngineInst"
+  "ance.Snippet.Filter\022=\n\ndependency\030\006 \001(\0132"
+  ").StorageEngineInstance.Snippet.Dependen"
+  "cy\022\024\n\014table_offset\030\007 \003(\005\022\024\n\014table_offlen"
+  "\030\010 \003(\005\022\026\n\016table_datatype\030\t \003(\005\022\023\n\013table_"
+  "alias\030\n \001(\t\022\024\n\014column_alias\030\013 \003(\t\022D\n\021col"
+  "umn_projection\030\014 \003(\0132).StorageEngineInst"
+  "ance.Snippet.Projection\022\030\n\020column_filter"
+  "ing\030\r \003(\t\022\020\n\010group_by\030\016 \003(\t\0226\n\010order_by\030"
+  "\017 \001(\0132$.StorageEngineInstance.Snippet.Or"
+  "der\0223\n\005limit\030\020 \001(\0132$.StorageEngineInstan"
+  "ce.Snippet.Limit\022\016\n\006pk_num\030\021 \001(\005\032\301\004\n\006Fil"
+  "ter\022=\n\002LV\030\001 \001(\01321.StorageEngineInstance."
+  "Snippet.Filter.FilterValue\022@\n\010Operator\030\002"
+  " \001(\0162..StorageEngineInstance.Snippet.Fil"
+  "ter.OperType\022=\n\002RV\030\003 \001(\01321.StorageEngine"
+  "Instance.Snippet.Filter.FilterValue\022@\n\005E"
+  "XTRA\030\004 \003(\01321.StorageEngineInstance.Snipp"
+  "et.Filter.FilterValue\032T\n\013FilterValue\0226\n\004"
+  "type\030\001 \003(\0162(.StorageEngineInstance.Snipp"
+  "et.ValueType\022\r\n\005value\030\002 \003(\t\"\336\001\n\010OperType"
+  "\022\020\n\014KETI_DEFAULT\020\000\022\013\n\007KETI_GE\020\001\022\013\n\007KETI_"
+  "LE\020\002\022\013\n\007KETI_GT\020\003\022\013\n\007KETI_LT\020\004\022\013\n\007KETI_E"
+  "T\020\005\022\013\n\007KETI_NE\020\006\022\r\n\tKETI_LIKE\020\007\022\020\n\014KETI_"
+  "BETWEEN\020\010\022\013\n\007KETI_IN\020\t\022\013\n\007KETI_IS\020\n\022\016\n\nK"
+  "ETI_ISNOT\020\013\022\014\n\010KETI_NOT\020\014\022\014\n\010KETI_AND\020\r\022"
+  "\013\n\007KETI_OR\020\016\032\234\002\n\nProjection\022I\n\013select_ty"
+  "pe\030\001 \001(\01624.StorageEngineInstance.Snippet"
+  ".Projection.SelectType\022\r\n\005value\030\002 \003(\t\022<\n"
+  "\nvalue_type\030\003 \003(\0162(.StorageEngineInstanc"
+  "e.Snippet.ValueType\"v\n\nSelectType\022\016\n\nCOL"
+  "UMNNAME\020\000\022\007\n\003SUM\020\001\022\007\n\003AVG\020\002\022\t\n\005COUNT\020\003\022\r"
+  "\n\tCOUNTSTAR\020\004\022\021\n\rCOUNTDISTINCT\020\005\022\007\n\003TOP\020"
+  "\006\022\007\n\003MIN\020\007\022\007\n\003MAX\020\010\032\211\001\n\005Order\022F\n\tascendi"
+  "ng\030\001 \003(\01623.StorageEngineInstance.Snippet"
+  ".Order.OrderDirection\022\023\n\013column_name\030\002 \003"
+  "(\t\"#\n\016OrderDirection\022\007\n\003ASC\020\000\022\010\n\004DESC\020\001\032"
+  "\230\001\n\nDependency\022H\n\025dependency_projection\030"
+  "\001 \003(\0132).StorageEngineInstance.Snippet.Pr"
+  "ojection\022@\n\021dependency_filter\030\002 \003(\0132%.St"
+  "orageEngineInstance.Snippet.Filter\032\'\n\005Li"
+  "mit\022\016\n\006offset\030\001 \001(\005\022\016\n\006length\030\002 \001(\005\"\234\001\n\t"
+  "ValueType\022\010\n\004INT8\020\000\022\t\n\005INT16\020\001\022\t\n\005INT32\020"
+  "\002\022\t\n\005INT64\020\003\022\013\n\007FLOAT32\020\004\022\013\n\007FLOAT64\020\005\022\013"
+  "\n\007NUMERIC\020\006\022\010\n\004DATE\020\007\022\r\n\tTIMESTAMP\020\010\022\n\n\006"
+  "STRING\020\t\022\n\n\006COLUMN\020\n\022\014\n\010OPERATOR\020\013\"\304\001\n\006C"
+  "olumn\0227\n\010col_type\030\002 \001(\0162%.StorageEngineI"
+  "nstance.Column.ColType\022\022\n\nstring_col\030\003 \003"
+  "(\t\022\017\n\007int_col\030\004 \003(\005\022\022\n\ndouble_col\030\005 \003(\001\""
+  "H\n\007ColType\022\016\n\nTYPE_EMPTY\020\000\022\017\n\013TYPE_STRIN"
+  "G\020\001\022\014\n\010TYPE_INT\020\002\022\016\n\nTYPE_FLOAT\020\003\"\276\001\n\013Qu"
+  "eryResult\022I\n\014query_result\030\001 \003(\01323.Storag"
+  "eEngineInstance.QueryResult.QueryResultE"
+  "ntry\022\021\n\trow_count\030\002 \001(\005\032Q\n\020QueryResultEn"
+  "try\022\013\n\003key\030\001 \001(\t\022,\n\005value\030\002 \001(\0132\035.Storag"
+  "eEngineInstance.Column:\0028\001\",\n\017TableBlock"
+  "Count\022\031\n\021table_block_count\030\001 \001(\005\"@\n\007Requ"
+  "est\022\020\n\010query_id\030\001 \001(\005\022\017\n\007work_id\030\002 \001(\005\022\022"
+  "\n\ntable_name\030\003 \001(\t\"\375\002\n\020MetaDataResponse\022"
+  "K\n\013sst_csd_map\030\001 \003(\01326.StorageEngineInst"
+  "ance.MetaDataResponse.SstCsdMapEntry\022\020\n\010"
+  "wal_json\030\002 \001(\t\032\246\001\n\007PBAInfo\022S\n\013csd_pba_ma"
+  "p\030\001 \003(\0132>.StorageEngineInstance.MetaData"
+  "Response.PBAInfo.CsdPbaMapEntry\022\024\n\014seek_"
+  "pk_list\030\002 \003(\t\0320\n\016CsdPbaMapEntry\022\013\n\003key\030\001"
+  " \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\032a\n\016SstCsdMapEntr"
+  "y\022\013\n\003key\030\001 \001(\t\022>\n\005value\030\002 \001(\0132/.StorageE"
+  "ngineInstance.MetaDataResponse.PBAInfo:\002"
+  "8\001\"\201\002\n\rCSDStatusList\022N\n\016csd_status_map\030\001"
+  " \003(\01326.StorageEngineInstance.CSDStatusLi"
+  "st.CsdStatusMapEntry\032;\n\tCSDStatus\022\n\n\002ip\030"
+  "\001 \001(\t\022\r\n\005score\030\002 \001(\002\022\023\n\013block_count\030\003 \001("
+  "\005\032c\n\021CsdStatusMapEntry\022\013\n\003key\030\001 \001(\t\022=\n\005v"
+  "alue\030\002 \001(\0132..StorageEngineInstance.CSDSt"
+  "atusList.CSDStatus:\0028\001\"\351\001\n\rCSDMetricList"
+  "\022G\n\017csd_metric_list\030\001 \003(\0132..StorageEngin"
+  "eInstance.CSDMetricList.CSDMetric\032\216\001\n\tCS"
+  "DMetric\022\n\n\002id\030\001 \001(\t\022\n\n\002ip\030\002 \001(\t\022\021\n\tcpu_u"
+  "sage\030\003 \001(\002\022\024\n\014memory_usage\030\004 \001(\002\022\022\n\ndisk"
+  "_usage\030\005 \001(\002\022\017\n\007network\030\006 \001(\002\022\033\n\023working"
+  "_block_count\030\007 \001(\005\"\027\n\006Result\022\r\n\005value\030\001 "
+  "\001(\t\"\'\n\005Chunk\022\016\n\006offset\030\001 \001(\003\022\016\n\006length\030\002"
+  " \001(\005\"F\n\003LBA\022\021\n\tfile_name\030\001 \001(\t\022,\n\006chunks"
+  "\030\002 \003(\0132\034.StorageEngineInstance.Chunk\"\?\n\n"
+  "LBARequest\0221\n\rfile_lba_list\030\001 \003(\0132\032.Stor"
+  "ageEngineInstance.LBA\"C\n\003PBA\022\016\n\006csd_id\030\001"
+  " \001(\t\022,\n\006chunks\030\002 \003(\0132\034.StorageEngineInst"
+  "ance.Chunk\"N\n\007PBAList\022\021\n\tfile_name\030\001 \001(\t"
+  "\0220\n\014csd_pba_list\030\002 \003(\0132\032.StorageEngineIn"
+  "stance.PBA\"D\n\013PBAResponse\0225\n\rfile_csd_li"
+  "st\030\001 \003(\0132\036.StorageEngineInstance.PBAList"
+  "\":\n\nWALRequest\022\017\n\007req_key\030\001 \001(\t\022\014\n\004type\030"
+  "\002 \001(\t\022\r\n\005value\030\003 \001(\t\"P\n\013WALResponse\022\023\n\013d"
+  "eleted_key\030\001 \003(\t\022\024\n\014inserted_key\030\002 \003(\t\022\026"
+  "\n\016inserted_value\030\003 \003(\t2\224\002\n\022InterfaceCont"
+  "ainer\022X\n\nSetSnippet\022%.StorageEngineInsta"
+  "nce.SnippetRequest\032\035.StorageEngineInstan"
+  "ce.Result\"\000(\0010\001\022F\n\003Run\022\036.StorageEngineIn"
+  "stance.Request\032\035.StorageEngineInstance.R"
+  "esult\"\000\022\\\n\020SetSnippetAndRun\022%.StorageEng"
+  "ineInstance.SnippetRequest\032\035.StorageEngi"
+  "neInstance.Result\"\000(\0012\344\002\n\020MergingContain"
+  "er\022U\n\013Aggregation\022%.StorageEngineInstanc"
+  "e.SnippetRequest\032\035.StorageEngineInstance"
+  ".Result\"\000\022T\n\nInitBuffer\022%.StorageEngineI"
+  "nstance.SnippetRequest\032\035.StorageEngineIn"
+  "stance.Result\"\000\022K\n\010EndQuery\022\036.StorageEng"
+  "ineInstance.Request\032\035.StorageEngineInsta"
+  "nce.Result\"\000\022V\n\016GetQueryResult\022\036.Storage"
+  "EngineInstance.Request\032\".StorageEngineIn"
+  "stance.QueryResult\"\0002\370\002\n\023MonitoringConta"
+  "iner\022N\n\013SetMetaData\022\036.StorageEngineInsta"
+  "nce.Snippet\032\035.StorageEngineInstance.Resu"
+  "lt\"\000\022X\n\013GetMetaData\022\036.StorageEngineInsta"
+  "nce.Request\032\'.StorageEngineInstance.Meta"
+  "DataResponse\"\000\022[\n\017GetCSDBlockInfo\022\036.Stor"
+  "ageEngineInstance.Request\032&.StorageEngin"
+  "eInstance.TableBlockCount\"\000\022Z\n\021SetCSDMet"
+  "ricsInfo\022$.StorageEngineInstance.CSDMetr"
+  "icList\032\035.StorageEngineInstance.Result\"\0002"
+  "\272\001\n\023OffloadingContainer\022K\n\010Schedule\022\036.St"
+  "orageEngineInstance.Snippet\032\035.StorageEng"
+  "ineInstance.Result\"\000\022V\n\rPushCSDMetric\022$."
+  "StorageEngineInstance.CSDStatusList\032\035.St"
+  "orageEngineInstance.Result\"\0002g\n\016LBA2PBAM"
+  "anager\022U\n\nRequestPBA\022!.StorageEngineInst"
+  "ance.LBARequest\032\".StorageEngineInstance."
+  "PBAResponse\"\0002c\n\nWALManager\022U\n\nRequestWA"
+  "L\022!.StorageEngineInstance.WALRequest\032\".S"
+  "torageEngineInstance.WALResponse\"\000B6\n\026io"
+  ".grpc.snippet_sampleB\024snippet_sample_Pro"
+  "toP\001\242\002\003SSPb\006proto3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_storage_5fengine_5finstance_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_storage_5fengine_5finstance_2eproto = {
-  false, false, 5845, descriptor_table_protodef_storage_5fengine_5finstance_2eproto, "storage_engine_instance.proto", 
+  false, false, 5858, descriptor_table_protodef_storage_5fengine_5finstance_2eproto, "storage_engine_instance.proto", 
   &descriptor_table_storage_5fengine_5finstance_2eproto_once, nullptr, 0, 31,
   schemas, file_default_instances, TableStruct_storage_5fengine_5finstance_2eproto::offsets,
   file_level_metadata_storage_5fengine_5finstance_2eproto, file_level_enum_descriptors_storage_5fengine_5finstance_2eproto, file_level_service_descriptors_storage_5fengine_5finstance_2eproto,
@@ -979,9 +981,6 @@ bool SnippetRequest_SnippetType_IsValid(int value) {
     case 9:
     case 10:
     case 11:
-    case 12:
-    case 13:
-    case 14:
       return true;
     default:
       return false;
@@ -989,21 +988,18 @@ bool SnippetRequest_SnippetType_IsValid(int value) {
 }
 
 #if (__cplusplus < 201703) && (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
-constexpr SnippetRequest_SnippetType SnippetRequest::SCAN_SNIPPET;
+constexpr SnippetRequest_SnippetType SnippetRequest::CSD_SCAN_SNIPPET;
 constexpr SnippetRequest_SnippetType SnippetRequest::AGGREGATION_SNIPPET;
+constexpr SnippetRequest_SnippetType SnippetRequest::STORAGE_FILTER_SNIPPET;
 constexpr SnippetRequest_SnippetType SnippetRequest::INNER_JOIN_SNIPPET;
 constexpr SnippetRequest_SnippetType SnippetRequest::LEFT_OUTER_JOIN_SNIPPET;
 constexpr SnippetRequest_SnippetType SnippetRequest::RIGHT_OUTER_JOIN_SNIPPET;
-constexpr SnippetRequest_SnippetType SnippetRequest::FULL_OUTER_JOIN_SNIPPET;
-constexpr SnippetRequest_SnippetType SnippetRequest::DEPENDENCY_SEMI_JOIN_SNIPPET;
-constexpr SnippetRequest_SnippetType SnippetRequest::DEPENDENCY_ANIT_JOIN_SNIPPET;
-constexpr SnippetRequest_SnippetType SnippetRequest::NON_DEPENDENCY_SEMI_JOIN_SNIPPET;
-constexpr SnippetRequest_SnippetType SnippetRequest::NON_DEPENDENCY_ANIT_JOIN_SNIPPET;
-constexpr SnippetRequest_SnippetType SnippetRequest::DEPENDENCY_SUBQUERY_SNIPPET;
-constexpr SnippetRequest_SnippetType SnippetRequest::NON_DEPENDENCY_SUBQUERY_SNIPPET;
-constexpr SnippetRequest_SnippetType SnippetRequest::FILTER_SNIPPET;
+constexpr SnippetRequest_SnippetType SnippetRequest::CROSS_JOIN_SNIPPET;
 constexpr SnippetRequest_SnippetType SnippetRequest::UNION_SNIPPET;
-constexpr SnippetRequest_SnippetType SnippetRequest::UNION_ALL_SNIPPET;
+constexpr SnippetRequest_SnippetType SnippetRequest::IN_SNIPPET;
+constexpr SnippetRequest_SnippetType SnippetRequest::DEPENDENCY_INNER_JOIN_SNIPPET;
+constexpr SnippetRequest_SnippetType SnippetRequest::DEPENDENCY_EXIST_SNIPPET;
+constexpr SnippetRequest_SnippetType SnippetRequest::DEPENDENCY_IN_SNIPPET;
 constexpr SnippetRequest_SnippetType SnippetRequest::SnippetType_MIN;
 constexpr SnippetRequest_SnippetType SnippetRequest::SnippetType_MAX;
 constexpr int SnippetRequest::SnippetType_ARRAYSIZE;
@@ -1069,6 +1065,7 @@ bool Snippet_Projection_SelectType_IsValid(int value) {
     case 5:
     case 6:
     case 7:
+    case 8:
       return true;
     default:
       return false;
@@ -1081,6 +1078,7 @@ constexpr Snippet_Projection_SelectType Snippet_Projection::SUM;
 constexpr Snippet_Projection_SelectType Snippet_Projection::AVG;
 constexpr Snippet_Projection_SelectType Snippet_Projection::COUNT;
 constexpr Snippet_Projection_SelectType Snippet_Projection::COUNTSTAR;
+constexpr Snippet_Projection_SelectType Snippet_Projection::COUNTDISTINCT;
 constexpr Snippet_Projection_SelectType Snippet_Projection::TOP;
 constexpr Snippet_Projection_SelectType Snippet_Projection::MIN;
 constexpr Snippet_Projection_SelectType Snippet_Projection::MAX;
@@ -4678,7 +4676,8 @@ class MetaDataResponse_PBAInfo::_Internal {
 MetaDataResponse_PBAInfo::MetaDataResponse_PBAInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned),
-  csd_pba_map_(arena) {
+  csd_pba_map_(arena),
+  seek_pk_list_(arena) {
   SharedCtor();
   if (!is_message_owned) {
     RegisterArenaDtor(arena);
@@ -4686,7 +4685,8 @@ MetaDataResponse_PBAInfo::MetaDataResponse_PBAInfo(::PROTOBUF_NAMESPACE_ID::Aren
   // @@protoc_insertion_point(arena_constructor:StorageEngineInstance.MetaDataResponse.PBAInfo)
 }
 MetaDataResponse_PBAInfo::MetaDataResponse_PBAInfo(const MetaDataResponse_PBAInfo& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      seek_pk_list_(from.seek_pk_list_) {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   csd_pba_map_.MergeFrom(from.csd_pba_map_);
   // @@protoc_insertion_point(copy_constructor:StorageEngineInstance.MetaDataResponse.PBAInfo)
@@ -4727,6 +4727,7 @@ void MetaDataResponse_PBAInfo::Clear() {
   (void) cached_has_bits;
 
   csd_pba_map_.Clear();
+  seek_pk_list_.Clear();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -4746,6 +4747,21 @@ const char* MetaDataResponse_PBAInfo::_InternalParse(const char* ptr, ::PROTOBUF
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
           } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
+        } else
+          goto handle_unusual;
+        continue;
+      // repeated string seek_pk_list = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            auto str = _internal_add_seek_pk_list();
+            ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+            CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "StorageEngineInstance.MetaDataResponse.PBAInfo.seek_pk_list"));
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<18>(ptr));
         } else
           goto handle_unusual;
         continue;
@@ -4824,6 +4840,16 @@ uint8_t* MetaDataResponse_PBAInfo::_InternalSerialize(
     }
   }
 
+  // repeated string seek_pk_list = 2;
+  for (int i = 0, n = this->_internal_seek_pk_list_size(); i < n; i++) {
+    const auto& s = this->_internal_seek_pk_list(i);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      s.data(), static_cast<int>(s.length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "StorageEngineInstance.MetaDataResponse.PBAInfo.seek_pk_list");
+    target = stream->WriteString(2, s, target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -4849,6 +4875,14 @@ size_t MetaDataResponse_PBAInfo::ByteSizeLong() const {
     total_size += MetaDataResponse_PBAInfo_CsdPbaMapEntry_DoNotUse::Funcs::ByteSizeLong(it->first, it->second);
   }
 
+  // repeated string seek_pk_list = 2;
+  total_size += 1 *
+      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(seek_pk_list_.size());
+  for (int i = 0, n = seek_pk_list_.size(); i < n; i++) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      seek_pk_list_.Get(i));
+  }
+
   return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
 }
 
@@ -4872,6 +4906,7 @@ void MetaDataResponse_PBAInfo::MergeFrom(const MetaDataResponse_PBAInfo& from) {
   (void) cached_has_bits;
 
   csd_pba_map_.MergeFrom(from.csd_pba_map_);
+  seek_pk_list_.MergeFrom(from.seek_pk_list_);
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
@@ -4890,6 +4925,7 @@ void MetaDataResponse_PBAInfo::InternalSwap(MetaDataResponse_PBAInfo* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   csd_pba_map_.InternalSwap(&other->csd_pba_map_);
+  seek_pk_list_.InternalSwap(&other->seek_pk_list_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata MetaDataResponse_PBAInfo::GetMetadata() const {

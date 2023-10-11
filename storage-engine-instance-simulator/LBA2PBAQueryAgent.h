@@ -67,7 +67,7 @@ public:
     inline const static std::string LOGTAG = "Monitoring Container::LBA2PBA Query Agent";
 
     static void RequestPBA(int qid, int wid, string tname){
-        KETILOG(LOGTAG, "# Request PBA Called");
+        //KETILOG(LOGTAG, "# Request PBA Called");
 
         MetaDataResponse response_;
 

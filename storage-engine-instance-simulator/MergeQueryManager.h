@@ -4,6 +4,16 @@
 
 using namespace std;
 
+inline std::string& rtrim(std::string& s, const char* t = " \t\n\r\f\v\0"){
+	s.erase(s.find_last_not_of(t) + 1);
+	return s;
+}inline std::string& ltrim(std::string& s, const char* t = " \t\n\r\f\v\0"){
+	s.erase(0, s.find_first_not_of(t));
+	return s;
+}inline std::string& trim(std::string& s, const char* t = " \t\n\r\f\v\0"){
+	return ltrim(rtrim(s, t), t);
+}
+
 struct T{
     string varString;
     int64_t varInt;
@@ -39,10 +49,11 @@ public:
         for(int g=0; g<snippet.group_by_size(); g++){
             string groupby_col_name = snippet.group_by(g);
             int groupby_col_type = target_table.table_data[groupby_col_name].type;
-            string k;
+            string trim_str;
             switch(groupby_col_type){
             case TYPE_STRING:
-                key += "|" + target_table.table_data[groupby_col_name].strvec[row_index];
+                trim_str = trim(target_table.table_data[groupby_col_name].strvec[row_index]);
+                key += "|"+trim_str;
                 break;
             case TYPE_INT:
                 key += "|" + to_string(target_table.table_data[groupby_col_name].intvec[row_index]);
@@ -64,11 +75,13 @@ private:
     bool isGroupby;//그룹바이 여부
     bool isOrderby;//오더바이 여부
     bool isLimit;//리미트 여부
-    bool smallFlag;//true = derived is smaller, false = driving is smaller
-    TableData driving_table;//table1(좌항)
-    TableData derived_table;//table2(우항)
-    unordered_map<string,vector<int>> hash_table;//key:index 해시 조인 시(driving, derived 로우가 적은 쪽)
-    TableData target_table;//프로젝션 대상 테이블(driving_table X derived_table)
+
+    bool right_is_smaller;
+    bool equal_join_exist;
+    TableData left_table;//table1(좌항)
+    TableData right_table;//table2(우항)
+    unordered_map<string,vector<int>> hash_table;//key:index 해시 조인 시(left, right 로우가 적은 쪽)
+    TableData target_table;//프로젝션 대상 테이블(left_table X right_table)
     map<string,int> group_by_key;//<그룹바이기준컬럼,그룹바이 테이블 인덱스>
     vector<TableData> group_by_table;//그룹바이된 테이블 컬럼(group by)
     TableData result_table;//결과 테이블(projected)->버퍼저장
@@ -81,21 +94,21 @@ private:
     T Postfix(int groupIndex, int projectionIndex, int rowIndex, int start, int end);//실제 postfix 계산
     void GroupBy();//group by, 그룹바이 절이 있으면 수행
     void OrderBy();//order by, 오더바이 절이 있으면 수행
-    void createHashTable();//create hash table for hash join
     void InnerJoin_nestedloop();//inner join (nested loop join)
-    void InnerJoin_hash();//inner join (hash join)
+    void InnerJoin_hash();//inner join (hash join + nested loop join)
     void LeftOuterJoin_nestedloop();//left outer join (nested loop join)
     void LeftOuterJoin_hash();//left outer join (hash join)
-    void RightOuterJoin();//right outer join
+    void RightOuterJoin_hash();//right outer join (hash join)
     void FullOuterJoin();//full outer join
-    void DependencySemiJoin();//dependency exist/in
-    void DependencyAntiJoin();//dependency not exist/not in
-    void NonDependencySemiJoin();//non dependency exist/in
-    void NonDependencyAntiJoin();//non dependency not exist/not in
-    void DependencySubquery();//dependency not exist/not in
-    void NonDependencySubquery();//non dependency exist/in
-    void Filtering();//single table filtering (having)
-    void Union();//single table filtering (having)
-    void UnionAll();//single table filtering (having)
     void CrossJoin();//cartesian product
+    void Union();//single table filtering (having)
+    void In();
+    void DependencyInnerJoin();//dependency exist/in
+    void DependencyExist();//dependency exist/in
+    void DependencyIn();//dependency not exist/not in
+    void Filtering();//single table filtering (having)
+    void createHashTable(vector<int> equal_join_index);//create hash table for hash join
+    // bool compareByOperator(int oper, string left_column, string right_column, int left_index, int right_index);
+    template <typename T>
+    bool compareByOperator(int oper, const T& arg1, const T& arg2);
 };

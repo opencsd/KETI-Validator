@@ -42,7 +42,7 @@ class InterfaceContainerServiceImpl final : public InterfaceContainer::Service
       if (flag)
       {
         string msg = "==:Set Snippet:== {" + to_string(snippet_request.snippet().query_id()) + "}";
-        KETILOG("Interface Container", msg);
+        //KETILOG("Interface Container", msg);
         SnippetManager::InsertQueryID(snippet_request.snippet().query_id());
         flag = false;
       }
@@ -73,10 +73,10 @@ class InterfaceContainerServiceImpl final : public InterfaceContainer::Service
     string table_name = SnippetManager::GetTableName(query_id); // 최종 테이블 네임
     cout<<"======="<<table_name<<"======"<<endl;
 
-    KETILOG("Interface Container", "==:RUN:== {" + to_string(query_id) + "}");
+    //KETILOG("Interface Container", "==:RUN:== {" + to_string(query_id) + "}");
 
     string msg = "==:Get Query Result:== {" + to_string(request -> query_id()) + "|" + table_name + "}";
-    KETILOG("Merging Container", msg);
+    //KETILOG("Merging Container", msg);
 
     string result_string = BufferManager::GetTableDataToString(request -> query_id(), table_name);
     result->set_value(result_string);
@@ -84,7 +84,7 @@ class InterfaceContainerServiceImpl final : public InterfaceContainer::Service
     SnippetManager::EraseQueryID(query_id);
     
     msg = "==:End Query:== {" + to_string(query_id) + "}";
-    KETILOG("Merging Container", msg);
+    //KETILOG("Merging Container", msg);
     BufferManager::EndQuery(query_id);
     //end here
     return Status::OK;
@@ -104,7 +104,7 @@ void RunServer()
   builder.RegisterService(&service);
   // Finally assemble the server.
   std::unique_ptr<Server> server(builder.BuildAndStart());
-  KETILOG("Interface Container", "Storage Engine Interface Server Listening on " + server_address);
+  //KETILOG("Interface Container", "Storage Engine Interface Server Listening on " + server_address);
 
   // Wait for the server to shutdown. Note that some other thread must be
   // responsible for shutting down the server for this call to ever return.

@@ -8,7 +8,7 @@ void Scheduler::runScheduler(){ //스니펫 큐 확인해서 스니펫 들어오
         Object scheduling_target = Scheduler::PopQueue();
 
         string id = "{" + to_string(scheduling_target.snippet.query_id()) + "|" + to_string(scheduling_target.snippet.work_id()) + "}";
-        KETILOG(LOGTAG, "# Snippet Scheduling Start " + id);
+        //KETILOG(LOGTAG, "# Snippet Scheduling Start " + id);
         vector<TableManager::SSTFile> SSTList = scheduling_target.targetTable.SSTList;
 
         int sock;
@@ -79,7 +79,7 @@ void Scheduler::runScheduler(){ //스니펫 큐 확인해서 스니펫 들어오
             snippetbuf.Clear();
             serialize(snippetbuf, scheduling_target.snippet, bestcsd);
             
-            KETILOG(LOGTAG, "# Send Snippet(" + SSTList[i].filename + ") to CSD Worker Module [CSD" + bestcsd + "]");
+            //KETILOG(LOGTAG, "# Send Snippet(" + SSTList[i].filename + ") to CSD Worker Module [CSD" + bestcsd + "]");
             string snippetJson = snippetbuf.GetString();
             // std::thread trd(&Scheduler::sendSnippetToCSD, &Scheduler::GetInstance(), snippetJson ,csdIP);
             // trd.detach();
@@ -96,13 +96,13 @@ void Scheduler::runScheduler(){ //스니펫 큐 확인해서 스니펫 들어오
 void Scheduler::scheduling(Object &scheduling_target, string sst_name, string bestCSD){
     //get best csd
     string bestcsd = bestCSD;
-    KETILOG(LOGTAG, "got best CSD");
+    //KETILOG(LOGTAG, "got best CSD");
     StringBuffer snippetbuf;
     snippetbuf.Clear();
     serialize(snippetbuf, scheduling_target.snippet, bestcsd);
 
     //send snippet
-    KETILOG(LOGTAG, "# Send Snippet(" + sst_name + ") to CSD Worker Module [CSD" + bestcsd + "]");
+    //KETILOG(LOGTAG, "# Send Snippet(" + sst_name + ") to CSD Worker Module [CSD" + bestcsd + "]");
     string snippetJson = snippetbuf.GetString();
     // CSD IP 형식 : "10.1.${id}.2" 
     //         ex) 10.1.1.2 ~ 10.1.8.2

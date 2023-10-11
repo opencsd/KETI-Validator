@@ -88,13 +88,13 @@ private:
 
             /* Request Set MetaData */
             Snippet snippet = snippetrequest.snippet(); 
-            if(snippetrequest.type() == StorageEngineInstance::SnippetRequest_SnippetType_SCAN_SNIPPET) {
-                //KETILOG(LOGTAG,"# Request Monitoring Container Setting Metadata");
+            if(snippetrequest.type() == StorageEngineInstance::SnippetRequest::CSD_SCAN_SNIPPET) {
+                ////KETILOG(LOGTAG,"# Request Monitoring Container Setting Metadata");
                 //LBA2PBAQueryAgent::RequestPBA(snippetrequest.snippet().query_id(),snippetrequest.snippet().work_id(),snippetrequest.snippet().table_name(0));
             }
 
             /* Init Buffer Manager */
-            KETILOG(LOGTAG,"# Init Buffer Manager");                
+            //KETILOG(LOGTAG,"# Init Buffer Manager");                
             
             // FieldMask mask;
             // mask.add_paths("query_ID");
@@ -111,12 +111,12 @@ private:
             //Init Buffer
 
 
-            if(snippetrequest.type() == StorageEngineInstance::SnippetRequest_SnippetType_SCAN_SNIPPET){
+            if(snippetrequest.type() == StorageEngineInstance::SnippetRequest::CSD_SCAN_SNIPPET){
                 // GET CSD BlockInfo
                 // string key = TableManager::makeKey(snippet.query_id(), snippet.work_id());
-                // KETILOG(LOGTAG,"# TableManager Make Key");     
+                // //KETILOG(LOGTAG,"# TableManager Make Key");     
                 // Response *data = TableManager::GetReturnData(key);
-                // KETILOG(LOGTAG,"# TableManager Get Return Data");     
+                // //KETILOG(LOGTAG,"# TableManager Get Return Data");     
                 // unique_lock<mutex> lock(data->mu);
                 // if (!data->is_done)
                 // {
@@ -124,7 +124,7 @@ private:
                 // }
                 // row_cnt = data -> row_count;
             }   
-                        KETILOG(LOGTAG,"# Init Buffer Manager");         
+                        //KETILOG(LOGTAG,"# Init Buffer Manager");         
 
             {
             // // Check Masked Snippet - Debug Code   
@@ -138,8 +138,8 @@ private:
             }
 
             /* Send Snippet to Container */
-            if(snippetrequest.type() == StorageEngineInstance::SnippetRequest_SnippetType_SCAN_SNIPPET) {
-                KETILOG(LOGTAG,"# Send Snippet to Offloading Container");
+            if(snippetrequest.type() == StorageEngineInstance::SnippetRequest::CSD_SCAN_SNIPPET) {
+                //KETILOG(LOGTAG,"# Send Snippet to Offloading Container");
                                 cout<<snippetrequest.snippet().table_name(0)<<endl;
                 TableManager::Table targetTable = TableManager::GetTable(snippetrequest.snippet().table_name(0));
                 cout<<"check1"<<endl;
@@ -154,7 +154,7 @@ private:
                 Scheduler::PushQueue(schedulingTarget);
             } 
             else { // Aggregation 
-                KETILOG(LOGTAG,"# Send Snippet to Merging Container");
+                //KETILOG(LOGTAG,"# Send Snippet to Merging Container");
                             BufferManager::InitWork(snippet, 0);
                 thread MergeQueryInstance = thread(&MergeQueryManager::RunSnippetWork, MergeQueryManager(snippetrequest));
                 MergeQueryInstance.detach();
