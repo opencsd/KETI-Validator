@@ -45,32 +45,60 @@ void DB_Connector_Instance::handle_error(pplx::task<void>& t)
 //
 void DB_Connector_Instance::handle_get(http_request message)
 {
-    clock_t start, end;
-    double time;
-
-    start = clock();
+    struct timespec  begin, end;
+    clock_gettime(CLOCK_MONOTONIC, &begin);
+    std::string uri_path = message.relative_uri().to_string();
+    cout<<uri_path<<endl;
 
     auto body_json = message.extract_string();
     std::string json = utility::conversions::to_utf8string(body_json.get());
+    cout << json << endl;
     
     Document document;
     document.Parse(json.c_str());
-    
-    Parsed_Query parsed_query(document["query"].GetString());
-    
-    keti_log("DB Connector Instance","\t------------:: STEP 1 ::------------");
-    keti_log("DB Connector Instance","Recv Query");
-    query_planner_.Parse(meta_data_manager_,parsed_query);
-    std::string rep = plan_executer_.Execute_Query(storageEngineInterface_,parsed_query) + "\n";
-    
-    message.reply(status_codes::OK,rep);
 
-    end = clock();
-    time = (double)(end-start)/CLOCKS_PER_SEC;
-    
-    keti_log("DB Connector Instance","End Query time :" + std::to_string(time));
+    if(!uri_path.find("/simulate/log/compare/")){
 
-    return;
+    }
+    else if(!uri_path.find("/simulate/log/option/")){
+
+    }
+    else if(!uri_path.find("/simulate/option")){
+
+    }
+    else if(uri_path == "/simulate/log"){
+
+    }
+
+    // std::string uri_path = message.relative_uri().to_string();
+    // cout<<uri_path<<endl;
+
+    // clock_t start, end;
+    // double time;
+
+    // start = clock();
+
+    // auto body_json = message.extract_string();
+    // std::string json = utility::conversions::to_utf8string(body_json.get());
+    
+    // Document document;
+    // document.Parse(json.c_str());
+    
+    // Parsed_Query parsed_query(document["query"].GetString());
+    
+    // keti_log("DB Connector Instance","\t------------:: STEP 1 ::------------");
+    // keti_log("DB Connector Instance","Recv Query");
+    // query_planner_.Parse(meta_data_manager_,parsed_query);
+    // std::string rep = plan_executer_.Execute_Query(storageEngineInterface_,parsed_query) + "\n";
+    
+    // message.reply(status_codes::OK,rep);
+
+    // end = clock();
+    // time = (double)(end-start)/CLOCKS_PER_SEC;
+    
+    // keti_log("DB Connector Instance","End Query time :" + std::to_string(time));
+
+    // return;
 
 };
 
@@ -79,30 +107,41 @@ void DB_Connector_Instance::handle_get(http_request message)
 //
 void DB_Connector_Instance::handle_post(http_request message)
 {    
-    cout << "check" << endl;
-    struct timespec  begin, end;
 
-    clock_gettime(CLOCK_MONOTONIC, &begin);
-    
+    std::string uri_path = message.relative_uri().to_string();
+    cout<<uri_path<<endl;
+
     auto body_json = message.extract_string();
     std::string json = utility::conversions::to_utf8string(body_json.get());
     cout << json << endl;
     
     Document document;
     document.Parse(json.c_str());
-    
-    Parsed_Query parsed_query(document["query"].GetString());
-    
-    keti_log("DB Connector Instance","Recv Query");
-    query_planner_.Parse(meta_data_manager_,parsed_query);
-    std::string rep = plan_executer_.Execute_Query(storageEngineInterface_,parsed_query) + "\n";
-    
-    clock_gettime(CLOCK_MONOTONIC, &end);
-    double time = (double)(end.tv_sec - begin.tv_sec) + (double)(end.tv_nsec - begin.tv_nsec)/1000000000;
 
-    message.reply(status_codes::OK,/*rep + */"End Query time : " + std::to_string(time) + "s");
+    if(uri_path == "/simulate/template"){
+
+    }
+    else if(uri_path == "/simulate/simulation"){
+
+    }
+    else if(uri_path == "/simulate/option/new"){
+
+    }
+    else if(uri_path == "/simulate"){
+            struct timespec  begin, end;
+            clock_gettime(CLOCK_MONOTONIC, &begin);
+            Parsed_Query parsed_query(document["query"].GetString());
+            keti_log("DB Connector Instance","Recv Query");
+            query_planner_.Parse(meta_data_manager_,parsed_query);
+            std::string rep = plan_executer_.Execute_Query(storageEngineInterface_,parsed_query) + "\n";
     
-    keti_log("DB Connector Instance","End Query time : " + std::to_string(time) + "s");
+            clock_gettime(CLOCK_MONOTONIC, &end);
+            double time = (double)(end.tv_sec - begin.tv_sec) + (double)(end.tv_nsec - begin.tv_nsec)/1000000000;
+
+            message.reply(status_codes::OK,/*rep + */"End Query time : " + std::to_string(time) + "s");
+    
+            keti_log("DB Connector Instance","End Query time : " + std::to_string(time) + "s");
+    }
     return;
 };
 
@@ -111,6 +150,23 @@ void DB_Connector_Instance::handle_post(http_request message)
 //
 void DB_Connector_Instance::handle_delete(http_request message)
 {
+    std::string uri_path = message.relative_uri().to_string();
+    cout<<uri_path<<endl;
+
+    auto body_json = message.extract_string();
+    std::string json = utility::conversions::to_utf8string(body_json.get());
+    cout << json << endl;
+    
+    Document document;
+    document.Parse(json.c_str());
+
+    if(!uri_path.find("/simulate/option/")){
+
+    }
+    else if(!uri_path.find("/simulate/log/")){
+
+    }
+
     ucout <<  message.to_string() << endl;
     message.reply(status_codes::NotFound,U("SUPPORT ONLY GET API"));
     return;
@@ -122,6 +178,21 @@ void DB_Connector_Instance::handle_delete(http_request message)
 //
 void DB_Connector_Instance::handle_put(http_request message)
 {
+    std::string uri_path = message.relative_uri().to_string();
+    cout<<uri_path<<endl;
+
+    auto body_json = message.extract_string();
+    std::string json = utility::conversions::to_utf8string(body_json.get());
+    cout << json << endl;
+    
+    Document document;
+    document.Parse(json.c_str());
+
+    if(!uri_path.find("/simulate/option/")){
+
+    }
+
+
     ucout <<  message.to_string() << endl;
     message.reply(status_codes::NotFound,U("SUPPORT ONLY GET API"));
     return;
