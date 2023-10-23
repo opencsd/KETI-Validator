@@ -1,31 +1,31 @@
-# KETI-VALIDATOR
-# Emulate CSD validator using QEMU
-CSD 환경을 에뮬레이팅 하기 위해 같은 ARM cortexa53을 CPU로 쓰는 Raspberry Pi 3b를 기반으로 한 디스크 이미지 기반 동작 
+# KETI SIMULATOR
+# Emulate CSD on Raspberry Pi 3b using QEMU in 64 bit 
+In this tutorial we will see how we can emulate Raspberry Pi 3 b using QEMU in linux environment. I have tried to piece together information from different repositories and assemble them together so it works right out of the box. Hope it helps. 
 
 ## Install QEMU 6.2 from source:
-1. 미리 설치된 QEMU가 없도록 확인
+1. Make sure you do not have QEMU preinstalled. Remove the existing installation if needed by executing the following - 
 ```
 $ sudo apt-get autoremove qemu*
 ```
 
-2. qemu 6.2 다운로드 [here](https://download.qemu.org/qemu-6.2.0.tar.xz) - 
+2. Download QEMU 6.2 from [here](https://download.qemu.org/qemu-6.2.0.tar.xz) - 
 ```
 $ wget https://download.qemu.org/qemu-6.2.0.tar.xz
 ```
 
-3. QEMU 6.2의 소스 코드 압축해제
+3. Decompress the source code for QEMU 6.2
 ```
 $ tar xvJf qemu-6.2.0.tar.xz
 ```
 
-4. QEMU 6.2 의 요구 사항 설치- 
+4. Install the prerequisites for QEMU 6.2 - 
 ```
 $ sudo apt-get install build-essential zlib1g-dev pkg-config libglib2.0-dev \
 binutils-dev libboost-all-dev autoconf libtool libssl-dev libpixman-1-dev \
 python-capstone virtualenv ninja-build
 ```
 
-5. qemu-6.2.0 로 이동
+5. Change to qemu-6.2.0 directory 
 ```
 $ cd qemu-6.2.0
 ```
@@ -51,10 +51,9 @@ $ source ~/.bashrc
 
 ## Download Required Files:
 For the next step you need to download the kernel, dtb and disk image and save them to any folder. You would also need to download the launch script. 
-1. Launch Script: [launch.sh](launch.sh) 
-2. Kernel: [kernel8.img](kernel8.img)
-3. DTB: [bcm2710-rpi-3-b-plus.dtb](bcm2710-rpi-3-b-plus.dtb)
-4. Disk Image (disk.img): You can use download either the .xz format or the .img format directly -
+1. Kernel: [kernel8.img](kernel8.img)
+2. DTB: [bcm2710-rpi-3-b-plus.dtb](bcm2710-rpi-3-b-plus.dtb)
+3. Disk Image (disk.img): You can use download either the .xz format or the .img format directly -
     
     a. [disk.xz](https://drive.google.com/file/d/19rMQRcKmV8g-wfR1IOHp4uLPXYmExoCx/view?usp=sharing) Archive .xz format (~833MB) need to decompress using (``` $ tar xvJf disk.xz ```)  
 
@@ -68,6 +67,25 @@ Once you are done downloading, put all the files in the same directory and you s
 
 If you did this successfully you should be able to see this - 
 ![Success!](success.png "Success")
+
+# Execute QEMU CSD Validator
+## Modify Port
+modify launch.sh script to set port you want
+```
+-netdev user,id=net0,hostfwd=tcp::"$FORWARD_PORT"-:22,hostfwd=tcp::"$NETWORK_PORT"-:"$NETWORK_PORT"
+```
+## Execute DB-Connector Instance 
+launch db-connector-instance using docker
+copy snippet file to db-connector-instance docker
+```
+tar -czf- snippets/ | docker exec -i simulator_db_connector_container tar -C / -xzf-
+```
+## Run Query Using Query-Script
+put option that what you want to execute
+```
+./runquery 1 11
+```
+
 ## References:
 These are the references used for executing the script. However, you might need to modify the files directly obtained from these sources. 
 - Kernel: https://github.com/dhruvvyas90/qemu-rpi-kernel/blob/master/native-emulation/5.4.51%20kernels/kernel8.img
