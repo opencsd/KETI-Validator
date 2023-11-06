@@ -699,9 +699,8 @@ AND l_shipdate < DATE '1996-12-01' + interval '1' month; `}
 
 	pbyte, _ := json.Marshal(querydata)
 	buff := bytes.NewBuffer(pbyte)	
-	
 	// send query request and wait for response
-	resp, err := http.Post("http://127.0.0.1:40000/simulate", "application/json", buff)
+	resp, err := http.Post("http://127.0.0.1:40000/simulate/recording/SSD", "application/json", buff)
 	if err != nil {
 		panic(err)
 	}
