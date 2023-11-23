@@ -1,6 +1,6 @@
 # KETI SIMULATOR
 # Emulate CSD on Raspberry Pi 3b using QEMU in 64 bit 
-
+KETI-Simulator
 
 ## Install QEMU 6.2 from source:
 1. Make sure you do not have QEMU preinstalled. Remove the existing installation if needed by executing the following - 
