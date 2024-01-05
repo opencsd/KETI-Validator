@@ -1,5 +1,0 @@
-/root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/ss_grpc_proto.dir
-/root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/simulator_db_connector_container.dir
-/root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/storage_engine_instance.dir
-/root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/edit_cache.dir
-/root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/rebuild_cache.dir
