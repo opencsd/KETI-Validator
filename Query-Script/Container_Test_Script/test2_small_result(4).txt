@@ -1,0 +1,55 @@
+End Query time : 12.589454s
+End Query time : 25.312827s
+End Query time : 38.221703s
+End Query time : 50.849929s
+End Query time : 63.644464s
+End Query time : 76.475220s
+End Query time : 89.157143s
+End Query time : 101.846703s
+End Query time : 114.430695s
+End Query time : 127.318470s
+End Query time : 139.988746s
+End Query time : 152.543531s
+End Query time : 164.983661s
+End Query time : 177.826747s
+End Query time : 190.323340s
+End Query time : 203.001147s
+End Query time : 215.707312s
+End Query time : 228.452310s
+End Query time : 241.503847s
+End Query time : 254.275221s
+End Query time : 267.070740s
+End Query time : 279.985112s
+End Query time : 292.601081s
+End Query time : 305.739470s
+End Query time : 318.293379s
+End Query time : 331.109942s
+End Query time : 343.665871s
+End Query time : 356.489853s
+End Query time : 369.331359s
+End Query time : 381.965337s
+End Query time : 394.590985s
+End Query time : 407.228367s
+End Query time : 419.888966s
+End Query time : 432.734337s
+End Query time : 445.610167s
+End Query time : 458.313907s
+End Query time : 470.883069s
+End Query time : 483.405734s
+End Query time : 496.035629s
+End Query time : 508.879529s
+End Query time : 509.295649s
+End Query time : 509.497744s
+End Query time : 509.389115s
+End Query time : 509.294271s
+End Query time : 509.288737s
+End Query time : 509.130403s
+End Query time : 509.482730s
+End Query time : 509.822684s
+End Query time : 510.203665s
+End Query time : 509.926395s
+
+모든 명령이 종료되었습니다
+
+=> All Query End Time : 637.266437828 sec
+

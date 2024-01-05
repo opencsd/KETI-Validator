@@ -1,0 +1,48 @@
+{
+  "type": 0,
+  "snippet": {
+    "queryID": 16,
+    "workID": 3,
+    "tableName": [
+      "snippet16-2"
+    ],
+    "tableCol": [],
+    "tableFilter": [],
+    "tableOffset": [],
+    "tableOfflen": [],
+    "tableDatatype": [],
+    "tableAlias": "snippet16-3",
+    "columnAlias": [
+      "avg",
+      "l_quantity",
+      "l_extendedprice"
+    ],
+    "columnProjection": [
+      {
+          "selectType": 0,
+          "value": ["0.2", "l_extendedprice", "*"],
+          "valueType": [5, 10, 11]
+      },
+      {
+        "selectType": 0,
+        "value": [
+          "l_quantity"
+        ],
+        "valueType": [
+          10
+        ]
+      },
+      {
+        "selectType": 0,
+        "value": [
+          "l_extendedprice"
+        ],
+        "valueType": [
+          10
+        ]
+      } 
+    ],
+    "columnFiltering": [],
+    "groupBy": []
+  }
+}

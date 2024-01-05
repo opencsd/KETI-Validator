@@ -1,0 +1,19 @@
+{
+  "queryID":4,
+  "workID":5,
+  "tableName":"region",
+  "tableCol":["r_regionkey","r_name","r_comment"],
+  "tableFilter":[{"LV":"r_name","OPERATOR":5,"RV":"+MIDDLE EAST"}],
+  "columnFiltering":["r_regionkey"],
+  "groupBy":[],
+  "Order_By":[],
+  "columnProjection":[{"selectType":0,"value":["r_regionkey"],"valueType":[10]}],
+  "tableOffset":[0,4,29],
+  "tableOfflen":[4,25,152],
+  "tableDatatype":[3,254,15],
+  "projectionDatatype":[3],
+  "blockList":[{"offset":138518528,"length":[571]}],
+  "primaryKey":0,
+  "csdName":"1",
+  "totalBlockCount": 1
+}

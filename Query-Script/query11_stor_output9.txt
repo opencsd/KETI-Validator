@@ -1,0 +1,16 @@
+# started on Wed Oct 11 19:03:58 2023
+
+
+ Performance counter stats for process id '38832':
+
+         19,466.74 msec task-clock                #    0.844 CPUs utilized          
+             1,812      context-switches          #    0.093 K/sec                  
+                 9      cpu-migrations            #    0.000 K/sec                  
+           162,717      page-faults               #    0.008 M/sec                  
+    56,106,860,211      cycles                    #    2.882 GHz                    
+    90,119,789,030      instructions              #    1.61  insn per cycle         
+    17,669,721,477      branches                  #  907.688 M/sec                  
+        22,201,515      branch-misses             #    0.13% of all branches        
+
+      23.074534735 seconds time elapsed
+

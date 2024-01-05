@@ -1,0 +1,137 @@
+{
+    "queryID":5,
+    "workID": 0,
+    "tableName": "lineitem",
+    "tableCol":[
+        "l_orderkey",
+        "l_partkey",
+        "l_suppkey",
+        "l_linenumber",
+        "l_quantity",
+        "l_extendedprice",
+        "l_discount",
+        "l_tax",
+        "l_returnflag",
+        "l_linestatus",
+        "l_shipdate",
+        "l_commitdate",
+        "l_receiptdate",
+        "l_shipinstruct",
+        "l_shipmode",
+        "l_comment"
+        ],
+    "blockList":[],
+    "tableFilter": [
+      {
+          "LV": "l_shipdate",
+          "OPERATOR": 1,
+          "RV": 1020961
+      },
+      {
+          "OPERATOR": 13
+      },
+      {
+          "LV": "l_shipdate",
+          "OPERATOR": 4,
+          "RV": 1021473
+      },
+      {
+          "OPERATOR": 13
+      },
+      {
+          "LV": "l_discount",
+          "OPERATOR": 8,
+          "EXTRA": [
+              "+80000000000005",
+              "+80000000000007"
+          ]
+      },
+      {
+          "OPERATOR": 13
+      },
+      {
+          "LV": "l_quantity",
+          "OPERATOR": 4,
+          "RV": "+80000000001800"
+      }
+  ],  "tableOffset":[
+        0,
+        4,
+        8,
+        12,
+        16,
+        23,
+        30,
+        37,
+        44,
+        45,
+        46,
+        49,
+        52,
+        55,
+        80,
+        90
+    ],
+    "tableOfflen":[
+        4,
+        4,
+        4,
+        4,
+        7,
+        7,
+        7,
+        7,
+        1,
+        1,
+        3,
+        3,
+        3,
+        25,
+        10,
+        44
+    ],
+    "tableDatatype":[
+        3,
+        3,
+        3,
+        3,
+        246,
+        246,
+        246,
+        246,
+        254,
+        254,
+        14,
+        14,
+        14,
+        254,
+        254,
+        15
+    ],
+    "tableAlias": "snippet5-0",
+    "columnAlias": [
+        "revenue"
+    ],
+    "columnProjection": [
+        {
+            "selectType": 0,
+            "value": [
+                "l_extendedprice",
+                "l_discount",
+                "*"
+            ],
+            "valueType": [
+                10,
+                10,
+                11
+            ]
+        }
+    ],
+    "columnFiltering": [],
+    "groupBy": [],
+    "csdName": "1",
+    "primaryKey": 0,
+    "projectionDatatype": [
+        246
+    ]
+  }      

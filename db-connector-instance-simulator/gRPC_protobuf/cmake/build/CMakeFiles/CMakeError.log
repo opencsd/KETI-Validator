@@ -1,0 +1,329 @@
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/workspace/Simulator/db-connector-instance-simulator/gRPC_Protobuf/cmake/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_80a7a/fast && /usr/bin/make  -f CMakeFiles/cmTC_80a7a.dir/build.make CMakeFiles/cmTC_80a7a.dir/build
+make[1]: Entering directory '/root/workspace/Simulator/db-connector-instance-simulator/gRPC_Protobuf/cmake/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_80a7a.dir/src.c.o
+/usr/bin/cc -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_80a7a.dir/src.c.o -c /root/workspace/Simulator/db-connector-instance-simulator/gRPC_Protobuf/cmake/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_80a7a
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_80a7a.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_80a7a.dir/src.c.o -o cmTC_80a7a 
+CMakeFiles/cmTC_80a7a.dir/src.c.o: In function `main':
+src.c:(.text+0x3e): undefined reference to `pthread_create'
+src.c:(.text+0x4a): undefined reference to `pthread_detach'
+src.c:(.text+0x56): undefined reference to `pthread_cancel'
+src.c:(.text+0x67): undefined reference to `pthread_join'
+src.c:(.text+0x7b): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_80a7a.dir/build.make:98: recipe for target 'cmTC_80a7a' failed
+make[1]: *** [cmTC_80a7a] Error 1
+make[1]: Leaving directory '/root/workspace/Simulator/db-connector-instance-simulator/gRPC_Protobuf/cmake/build/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_80a7a/fast' failed
+make: *** [cmTC_80a7a/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+static void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/workspace/Simulator/db-connector-instance-simulator/gRPC_Protobuf/cmake/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_78438/fast && /usr/bin/make  -f CMakeFiles/cmTC_78438.dir/build.make CMakeFiles/cmTC_78438.dir/build
+make[1]: Entering directory '/root/workspace/Simulator/db-connector-instance-simulator/gRPC_Protobuf/cmake/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_78438.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_78438.dir/CheckFunctionExists.c.o -c /usr/share/cmake-3.24/Modules/CheckFunctionExists.c
+Linking C executable cmTC_78438
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_78438.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create CMakeFiles/cmTC_78438.dir/CheckFunctionExists.c.o -o cmTC_78438  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_78438.dir/build.make:98: recipe for target 'cmTC_78438' failed
+make[1]: *** [cmTC_78438] Error 1
+make[1]: Leaving directory '/root/workspace/Simulator/db-connector-instance-simulator/gRPC_Protobuf/cmake/build/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_78438/fast' failed
+make: *** [cmTC_78438/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/CMakeScratch/TryCompile-hH3om4
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_899f4/fast && /usr/bin/make  -f CMakeFiles/cmTC_899f4.dir/build.make CMakeFiles/cmTC_899f4.dir/build
+make[1]: Entering directory '/root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/CMakeScratch/TryCompile-hH3om4'
+Building C object CMakeFiles/cmTC_899f4.dir/src.c.o
+/usr/bin/cc -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_899f4.dir/src.c.o -c /root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/CMakeScratch/TryCompile-hH3om4/src.c
+Linking C executable cmTC_899f4
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_899f4.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_899f4.dir/src.c.o -o cmTC_899f4 
+CMakeFiles/cmTC_899f4.dir/src.c.o: In function `main':
+src.c:(.text+0x3e): undefined reference to `pthread_create'
+src.c:(.text+0x4a): undefined reference to `pthread_detach'
+src.c:(.text+0x56): undefined reference to `pthread_cancel'
+src.c:(.text+0x67): undefined reference to `pthread_join'
+src.c:(.text+0x7b): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_899f4.dir/build.make:98: recipe for target 'cmTC_899f4' failed
+make[1]: *** [cmTC_899f4] Error 1
+make[1]: Leaving directory '/root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/CMakeScratch/TryCompile-hH3om4'
+Makefile:127: recipe for target 'cmTC_899f4/fast' failed
+make: *** [cmTC_899f4/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+static void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/CMakeScratch/TryCompile-2VTIbU
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_77f18/fast && /usr/bin/make  -f CMakeFiles/cmTC_77f18.dir/build.make CMakeFiles/cmTC_77f18.dir/build
+make[1]: Entering directory '/root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/CMakeScratch/TryCompile-2VTIbU'
+Building C object CMakeFiles/cmTC_77f18.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_77f18.dir/CheckFunctionExists.c.o -c /root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/CMakeScratch/TryCompile-2VTIbU/CheckFunctionExists.c
+Linking C executable cmTC_77f18
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_77f18.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create CMakeFiles/cmTC_77f18.dir/CheckFunctionExists.c.o -o cmTC_77f18  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_77f18.dir/build.make:98: recipe for target 'cmTC_77f18' failed
+make[1]: *** [cmTC_77f18] Error 1
+make[1]: Leaving directory '/root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/CMakeScratch/TryCompile-2VTIbU'
+Makefile:127: recipe for target 'cmTC_77f18/fast' failed
+make: *** [cmTC_77f18/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/CMakeScratch/TryCompile-YnwEsu
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_337ea/fast && /usr/bin/make  -f CMakeFiles/cmTC_337ea.dir/build.make CMakeFiles/cmTC_337ea.dir/build
+make[1]: Entering directory '/root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/CMakeScratch/TryCompile-YnwEsu'
+Building C object CMakeFiles/cmTC_337ea.dir/src.c.o
+/usr/bin/cc -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_337ea.dir/src.c.o -c /root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/CMakeScratch/TryCompile-YnwEsu/src.c
+Linking C executable cmTC_337ea
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_337ea.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_337ea.dir/src.c.o -o cmTC_337ea 
+CMakeFiles/cmTC_337ea.dir/src.c.o: In function `main':
+src.c:(.text+0x3e): undefined reference to `pthread_create'
+src.c:(.text+0x4a): undefined reference to `pthread_detach'
+src.c:(.text+0x56): undefined reference to `pthread_cancel'
+src.c:(.text+0x67): undefined reference to `pthread_join'
+src.c:(.text+0x7b): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_337ea.dir/build.make:98: recipe for target 'cmTC_337ea' failed
+make[1]: *** [cmTC_337ea] Error 1
+make[1]: Leaving directory '/root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/CMakeScratch/TryCompile-YnwEsu'
+Makefile:127: recipe for target 'cmTC_337ea/fast' failed
+make: *** [cmTC_337ea/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+static void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/CMakeScratch/TryCompile-s547e3
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_a9f83/fast && /usr/bin/make  -f CMakeFiles/cmTC_a9f83.dir/build.make CMakeFiles/cmTC_a9f83.dir/build
+make[1]: Entering directory '/root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/CMakeScratch/TryCompile-s547e3'
+Building C object CMakeFiles/cmTC_a9f83.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_a9f83.dir/CheckFunctionExists.c.o -c /root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/CMakeScratch/TryCompile-s547e3/CheckFunctionExists.c
+Linking C executable cmTC_a9f83
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a9f83.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create CMakeFiles/cmTC_a9f83.dir/CheckFunctionExists.c.o -o cmTC_a9f83  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_a9f83.dir/build.make:98: recipe for target 'cmTC_a9f83' failed
+make[1]: *** [cmTC_a9f83] Error 1
+make[1]: Leaving directory '/root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/CMakeScratch/TryCompile-s547e3'
+Makefile:127: recipe for target 'cmTC_a9f83/fast' failed
+make: *** [cmTC_a9f83/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/CMakeScratch/TryCompile-puuTTh
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_934c3/fast && /usr/bin/make  -f CMakeFiles/cmTC_934c3.dir/build.make CMakeFiles/cmTC_934c3.dir/build
+make[1]: Entering directory '/root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/CMakeScratch/TryCompile-puuTTh'
+Building C object CMakeFiles/cmTC_934c3.dir/src.c.o
+/usr/bin/cc -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_934c3.dir/src.c.o -c /root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/CMakeScratch/TryCompile-puuTTh/src.c
+Linking C executable cmTC_934c3
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_934c3.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_934c3.dir/src.c.o -o cmTC_934c3 
+CMakeFiles/cmTC_934c3.dir/src.c.o: In function `main':
+src.c:(.text+0x3e): undefined reference to `pthread_create'
+src.c:(.text+0x4a): undefined reference to `pthread_detach'
+src.c:(.text+0x56): undefined reference to `pthread_cancel'
+src.c:(.text+0x67): undefined reference to `pthread_join'
+src.c:(.text+0x7b): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_934c3.dir/build.make:98: recipe for target 'cmTC_934c3' failed
+make[1]: *** [cmTC_934c3] Error 1
+make[1]: Leaving directory '/root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/CMakeScratch/TryCompile-puuTTh'
+Makefile:127: recipe for target 'cmTC_934c3/fast' failed
+make: *** [cmTC_934c3/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+static void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/CMakeScratch/TryCompile-Vaak5g
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_02cb2/fast && /usr/bin/make  -f CMakeFiles/cmTC_02cb2.dir/build.make CMakeFiles/cmTC_02cb2.dir/build
+make[1]: Entering directory '/root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/CMakeScratch/TryCompile-Vaak5g'
+Building C object CMakeFiles/cmTC_02cb2.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_02cb2.dir/CheckFunctionExists.c.o -c /root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/CMakeScratch/TryCompile-Vaak5g/CheckFunctionExists.c
+Linking C executable cmTC_02cb2
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_02cb2.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create CMakeFiles/cmTC_02cb2.dir/CheckFunctionExists.c.o -o cmTC_02cb2  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_02cb2.dir/build.make:98: recipe for target 'cmTC_02cb2' failed
+make[1]: *** [cmTC_02cb2] Error 1
+make[1]: Leaving directory '/root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/CMakeScratch/TryCompile-Vaak5g'
+Makefile:127: recipe for target 'cmTC_02cb2/fast' failed
+make: *** [cmTC_02cb2/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/CMakeScratch/TryCompile-TJrkVH
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_8a69a/fast && /usr/bin/make  -f CMakeFiles/cmTC_8a69a.dir/build.make CMakeFiles/cmTC_8a69a.dir/build
+make[1]: Entering directory '/root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/CMakeScratch/TryCompile-TJrkVH'
+Building C object CMakeFiles/cmTC_8a69a.dir/src.c.o
+/usr/bin/cc -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_8a69a.dir/src.c.o -c /root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/CMakeScratch/TryCompile-TJrkVH/src.c
+Linking C executable cmTC_8a69a
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8a69a.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_8a69a.dir/src.c.o -o cmTC_8a69a 
+CMakeFiles/cmTC_8a69a.dir/src.c.o: In function `main':
+src.c:(.text+0x3e): undefined reference to `pthread_create'
+src.c:(.text+0x4a): undefined reference to `pthread_detach'
+src.c:(.text+0x56): undefined reference to `pthread_cancel'
+src.c:(.text+0x67): undefined reference to `pthread_join'
+src.c:(.text+0x7b): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_8a69a.dir/build.make:98: recipe for target 'cmTC_8a69a' failed
+make[1]: *** [cmTC_8a69a] Error 1
+make[1]: Leaving directory '/root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/CMakeScratch/TryCompile-TJrkVH'
+Makefile:127: recipe for target 'cmTC_8a69a/fast' failed
+make: *** [cmTC_8a69a/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+static void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/CMakeScratch/TryCompile-ZMeLma
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_13f19/fast && /usr/bin/make  -f CMakeFiles/cmTC_13f19.dir/build.make CMakeFiles/cmTC_13f19.dir/build
+make[1]: Entering directory '/root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/CMakeScratch/TryCompile-ZMeLma'
+Building C object CMakeFiles/cmTC_13f19.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_13f19.dir/CheckFunctionExists.c.o -c /root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/CMakeScratch/TryCompile-ZMeLma/CheckFunctionExists.c
+Linking C executable cmTC_13f19
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_13f19.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create CMakeFiles/cmTC_13f19.dir/CheckFunctionExists.c.o -o cmTC_13f19  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_13f19.dir/build.make:98: recipe for target 'cmTC_13f19' failed
+make[1]: *** [cmTC_13f19] Error 1
+make[1]: Leaving directory '/root/KETI-Simulator/db-connector-instance-simulator/gRPC_protobuf/cmake/build/CMakeFiles/CMakeScratch/TryCompile-ZMeLma'
+Makefile:127: recipe for target 'cmTC_13f19/fast' failed
+make: *** [cmTC_13f19/fast] Error 2
+
+
+

@@ -1,0 +1,16 @@
+# started on Wed Oct 11 18:54:57 2023
+
+
+ Performance counter stats for process id '29660':
+
+            309.03 msec task-clock                #    0.011 CPUs utilized          
+                41      context-switches          #    0.133 K/sec                  
+                 0      cpu-migrations            #    0.000 K/sec                  
+               311      page-faults               #    0.001 M/sec                  
+       736,883,119      cycles                    #    2.384 GHz                    
+     1,532,766,738      instructions              #    2.08  insn per cycle         
+       372,994,114      branches                  # 1206.967 M/sec                  
+           476,339      branch-misses             #    0.13% of all branches        
+
+      28.475757151 seconds time elapsed
+

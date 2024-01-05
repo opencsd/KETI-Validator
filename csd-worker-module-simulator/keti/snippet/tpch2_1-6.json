@@ -1,0 +1,49 @@
+
+  {
+    "queryID":1,
+    "workID":6,
+    "tableName": "nation",
+    "tableCol":[
+      "n_nationkey",  
+      "n_name",
+      "n_regionkey",
+      "n_comment"
+    ],
+    "tableFilter":[],
+    "tableOffset":[
+      0,
+      4,
+      29,
+      33
+    ],
+    "tableOfflen":[
+      4,
+      25,
+      4,
+      152
+    ],
+    "tableDatatype":[
+      3,
+      254,
+      3,
+      15
+    ],
+    "tableAlias": "snippet1-6",
+    "columnAlias": [
+        "n_nationkey"
+    ],
+    "columnProjection": [
+      {
+        "selectType": 0,
+        "value": ["n_nationkey"],
+        "valueType": [10]
+      }
+    ],
+    "columnFiltering": [],
+    "groupBy": [],
+    "csdName": "1",
+    "primaryKey": 0,
+    "projectionDatatype": [
+        3
+    ]
+  }

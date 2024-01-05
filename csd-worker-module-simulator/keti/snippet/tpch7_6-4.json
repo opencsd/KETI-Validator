@@ -1,0 +1,81 @@
+
+    {
+      "queryID":6,
+      "workID":4,
+      "tableName": "nation",
+      "tableCol":[
+        "n_nationkey",  
+        "n_name",
+        "n_regionkey",
+        "n_comment"
+      ],
+      "tableFilter":[
+        {
+          "LV": {
+            "type": [10],
+            "value": ["n_name"]
+          },
+          "Operator" : 5,
+          "RV" : {
+            "type": [9],
+            "value": ["japan"]
+          }
+        },
+        {
+          "Operator" : 13
+        },
+        {
+          "LV": {
+            "type": [10],
+            "value": ["n_name"]
+          },
+          "Operator" : 5, 
+          "RV" : {
+            "type": [9],
+            "value": ["india"]
+          }
+        }
+      ],
+      "tableOffset":[
+        0,
+        4,
+        29,
+        33
+      ],
+      "tableOfflen":[
+        4,
+        25,
+        4,
+        152
+      ],
+      "tableDatatype":[
+        3,
+        254,
+        3,
+        15
+      ],
+      "tableAlias": "n1",
+      "columnAlias": [
+        "n_name", 
+        "n_nationkey"
+      ],
+      "columnProjection": [
+        {
+          "selectType": 0,
+          "value": ["n_name"],
+          "valueType": [10]
+        },
+        {
+          "selectType": 0,
+          "value": ["n_nationkey"],
+          "valueType": [10]
+        }
+      ],
+      "columnFiltering": [],
+      "groupBy": [],
+      "csdName": "1",
+      "primaryKey": 0,
+      "projectionDatatype": [
+          254, 3
+      ]
+  }
