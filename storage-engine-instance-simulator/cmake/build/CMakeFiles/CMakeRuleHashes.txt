@@ -1,2 +1,0 @@
-# Hashes of file build rules.
-dfeb26fb9cda33a7b56f3c906cfc52fb storage_engine_instance.pb.cc

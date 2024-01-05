@@ -1,4 +1,0 @@
-/root/KETI-Simulator/storage-engine-instance-simulator/cmake/build/CMakeFiles/ss_grpc_proto.dir
-/root/KETI-Simulator/storage-engine-instance-simulator/cmake/build/CMakeFiles/simulator_container.dir
-/root/KETI-Simulator/storage-engine-instance-simulator/cmake/build/CMakeFiles/edit_cache.dir
-/root/KETI-Simulator/storage-engine-instance-simulator/cmake/build/CMakeFiles/rebuild_cache.dir
