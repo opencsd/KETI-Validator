@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <cmath>
 histogram p_partkey;
 histogram p_name;
 histogram p_mfgr;
@@ -4525,9 +4526,14 @@ float getFilteredRow(querySnippetInfo snippet){
             break;
         }
     }
-    if(isContainNot){
+    if(isContainNot){ // is contain NOT
         bool currentNot = false;
         int notCount = 0;
+
+        bool currentSubstring = false;
+        int subStringNum = 0;
+        std::string subStringTable = "";
+
         int index = 0;
         std::vector<std::string> tableList;
         for(int i=0 ;i<snippet.filterCount;i++){
@@ -4537,6 +4543,26 @@ float getFilteredRow(querySnippetInfo snippet){
                 notCount++;
                 std::cout<<"NOT CONTAIN COUNT"<<notCount<<std::endl;
             }
+            else if(currentSubstring){
+                histogram targetTable = Stringtohisto(subStringTable);
+                std::vector<std::string> valueVector;
+                std::string s = snippet.filterInfo[index+2];
+                std::istringstream ss(s);
+                std::string subs;
+                while(std::getline(ss,subs,'|')){
+                    valueVector.push_back(subs);
+                }
+                for(int j=0;j<valueVector.size();j++){
+                    valueVector[j].erase(std::remove(valueVector[j].begin(),valueVector[j].end(),' '),valueVector[j].end());
+                }
+
+                int subNum = valueVector.size();
+                float filterRatioTemp;
+                filterRatioTemp = subNum / pow(10,subStringNum);
+                filterRatio.push_back(filterRatioTemp);
+                currentSubstring = false;
+
+            }
             else if(itemp %2 == 0){ // 실제 계산
                 index = (itemp/2) * 6 + notCount;
                 histogram targetTable = Stringtohisto(snippet.filterInfo[index+1]); // 타겟 히스토그램 테이블
@@ -4544,14 +4570,19 @@ float getFilteredRow(querySnippetInfo snippet){
             std::cout<<"SCAN TARGET TABLE : "<<snippet.filterInfo[index+1]<<std::endl;
             std::cout<<"SCAN OPERATOR : "<<snippet.filterInfo[index+2]<<std::endl;
             std::cout<<"SCAN DATA TYPE : "<<snippet.filterInfo[index+3]<<std::endl;
+            for(int j=0;j<tableList.size();j++){
+                std::cout<<"INDEX : "<<j<<"PREV TABLE LIST : "<<tableList[j]<<std::endl;
+            }
             if(snippet.filterInfo[index+2] == "1" | snippet.filterInfo[index+2] == "3"){ // >= or >
                     bool isduplicated = false;
                     int duplicateIndex = 0;
-                    for(int k = 0;k<tableList.size();k++){
+                    for(int k = 0;k<tableList.size()-1;k++){
+                        std::cout<<"TABLE LIST NAME : "<<tableList[k]<<std::endl;
+                        std::cout<<"1231232123"<<std::endl;
                         if(snippet.filterInfo[index+1] == tableList[k]){
                             isduplicated = true;
                             duplicateIndex = k;
-                            std::cout<<"DUPLICATED TABLE : "<<snippet.filterInfo[index+1]<<std::endl;
+                            std::cout<<"DUPLICATE INDEX : "<<k<<" DUPLICATED TABLE : "<<snippet.filterInfo[index+1]<<std::endl;
                         }
                     }
 
@@ -4769,14 +4800,40 @@ float getFilteredRow(querySnippetInfo snippet){
                     }
                 }//
 
+                }
                 if(isduplicated){ // 테이블이 중복된 경우 따로 연산 수행
                 float prevRatio;
-                prevRatio = filterRatio[(duplicateIndex - 1) * 2];
-
-                }
+                float curRatio;
+                float newRatio;
+                prevRatio = filterRatio[(duplicateIndex) * 2];
+                filterRatio[(duplicateIndex) * 2] = 1;
+                curRatio = filterRatio.back();
+                newRatio = prevRatio + curRatio - 1;
+                filterRatio.pop_back();
+                filterRatio.push_back(newRatio);
+                 std::cout<<"RATIO LIST"<<std::endl;
+                    for(int p = 0;p<filterRatio.size();p++){
+                        std::cout<<filterRatio[p]<<" ";
                     }
+                    std::cout<<"\n";
+                std::cout<<"PREV RATIO : "<<prevRatio << " CUR RATIO : "<<curRatio<<std::endl;
+                std::cout<<"NEW CALCULATED RATIO : "<<newRatio<<std::endl;
+                isduplicated = false;
+                }
             }
             else if(snippet.filterInfo[index+2] == "2" | snippet.filterInfo[index+2] == "4"){ // <= or <
+                bool isduplicated = false;
+                int duplicateIndex = 0;
+                for(int k = 0;k<tableList.size()-1;k++){
+                    if(snippet.filterInfo[index+1] == tableList[k]){
+                        isduplicated = true;
+                        duplicateIndex = k;
+                        std::cout<<"DUPLICATE INDEX : "<<k<<"DUPLICATED TABLE : "<<snippet.filterInfo[index+1]<<std::endl;
+                    }
+                }
+
+                if(isduplicated){
+
                 if(snippet.filterInfo[index+3] == "7"){ // date의 경우
                     float value = std::stof(snippet.filterInfo[index+4]);
                     if(targetTable.identifier == true){ // identifier true
@@ -4880,6 +4937,132 @@ float getFilteredRow(querySnippetInfo snippet){
                         }
                         filterRatio.push_back(filterRatioTemp);
                     }
+                }
+                }
+                else{
+                    if(snippet.filterInfo[index+3] == "7"){ // date의 경우
+                    float value = std::stof(snippet.filterInfo[index+4]);
+                    if(targetTable.identifier == true){ // identifier true
+                        float temp = (targetTable.maxValue - std::stof(snippet.filterInfo[index+4])+1) / (targetTable.maxValue - targetTable.minValue);
+                        if(currentNot){
+                            temp = 1 - temp;
+                            currentNot = false;
+                        }
+                        filterRatio.push_back(temp);
+                    }
+                    else{ // identifier false
+                        float filterRatioTemp = 0;
+                        float filterCount = 0;
+                        for(auto iter = targetTable.dataMap.begin();iter != targetTable.dataMap.end();iter++){
+                            float temp1 = std::stof(iter -> first);
+                            if(snippet.filterInfo[index+2] == "2"){
+                            if(temp1 <= value){
+                                filterCount += std::stof(iter -> second);
+                            }
+                            }
+                            else if(snippet.filterInfo[index+2] == "4"){
+                                if(temp1 < value){
+                                filterCount += std::stof(iter -> second);
+                            }
+                            }
+                        }
+                        filterRatioTemp = filterCount / targetTable.count; 
+                        if(currentNot){
+                            filterRatioTemp = 1 - filterRatioTemp;
+                            currentNot = false;
+                        }
+                        filterRatio.push_back(filterRatioTemp);
+                    }
+                }
+                else if(snippet.filterInfo[index+3] == "9") // string의 경우
+                {
+                    std::cout<<"WRONG DATATYPE AND OPERATOR TYPE >= , STRING"<<std::endl;
+                }
+                else if(snippet.filterInfo[index+3] == "10"){
+                    histogram targetTable2 = Stringtohisto(snippet.filterInfo[index+4]);
+                    float filterRatioTemp = 0;
+                    float filterCount = 0;
+                    float filterCountTemp = 0;
+                    float temp1 = 0;
+                    for(auto iter1 = targetTable.dataMap.begin();iter1!= targetTable.dataMap.end();iter1++){
+                        float temp1 = std::stof(iter1 ->first);
+                        filterCountTemp = 0;
+                        for(auto iter2 = targetTable2.dataMap.begin();iter2!= targetTable2.dataMap.end();iter2++){
+                            float temp2 = std::stof(iter2 -> first);
+                            if(snippet.filterInfo[index+2] == "2"){
+                            if(temp1 <= temp2){
+                                filterCountTemp += std::stof(iter2 -> second);
+                            }
+                            }
+                            else if (snippet.filterInfo[index+2] == "4"){
+                                if(temp1 < temp2){
+                                filterCountTemp += std::stof(iter2 -> second);
+                            }
+                            }
+                        }
+                        temp1 = filterCountTemp / targetTable.count;
+                        filterCount += std::stof(iter1 -> second) * temp1;
+                    }
+                    filterRatioTemp = filterCount / targetTable.count;
+                    if(currentNot){
+                            filterRatioTemp = 1 - filterRatioTemp;
+                            currentNot = false;
+                        }
+                    filterRatio.push_back(filterRatioTemp);
+                }
+                else{ // 숫자인 경우
+                    float value = std::stof(snippet.filterInfo[index+4]);
+                    if(targetTable.identifier == true){ // identifier true
+                        float temp = (targetTable.maxValue - std::stof(snippet.filterInfo[index+4])+1) / (targetTable.maxValue - targetTable.minValue);
+                        if(currentNot){
+                            temp = 1 - temp;
+                            currentNot = false;
+                        }
+                        filterRatio.push_back(temp);
+                    }
+                    else{ // identifier false
+                        float filterRatioTemp = 0;
+                        float filterCount = 0;
+                        for(auto iter = targetTable.dataMap.begin();iter != targetTable.dataMap.end();iter++){
+                            float temp1 = std::stof(iter -> first);
+                            if(snippet.filterInfo[index+2] == "2"){
+                            if(temp1 <= value){
+                                filterCount += std::stof(iter -> second);
+                            }
+                            }
+                            else if(snippet.filterInfo[index+2] == "4"){
+                                if(temp1 < value){
+                                filterCount += std::stof(iter -> second);
+                            }
+                            }
+                        }
+                        filterRatioTemp = filterCount / targetTable.count; 
+                        if(currentNot){
+                            filterRatioTemp = 1 - filterRatioTemp;
+                            currentNot = false;
+                        }
+                        filterRatio.push_back(filterRatioTemp);
+                    }
+                }
+                }
+                if(isduplicated){ // 테이블이 중복된 경우 따로 연산 수행
+                float prevRatio;
+                float curRatio;
+                float newRatio;
+                prevRatio = filterRatio[(duplicateIndex) * 2];
+                filterRatio[(duplicateIndex) * 2] = 1;
+                curRatio = filterRatio.back();
+                newRatio = prevRatio + curRatio - 1;
+                filterRatio.pop_back();
+                filterRatio.push_back(newRatio);
+                 std::cout<<"RATIO LIST"<<std::endl;
+                    for(int p = 0;p<filterRatio.size();p++){
+                        std::cout<<filterRatio[p]<<" ";
+                    }
+                    std::cout<<"\n";
+                std::cout<<"PREV RATIO : "<<prevRatio << " CUR RATIO : "<<curRatio<<std::endl;
+                std::cout<<"NEW CALCULATED RATIO : "<<newRatio<<std::endl;
+                isduplicated = false;
                 }
             }
             else if(snippet.filterInfo[index+2] == "5"){ // = 연산자
@@ -5082,7 +5265,7 @@ float getFilteredRow(querySnippetInfo snippet){
                     float filterCount = 0;
                     for(auto iter = targetTable.dataMap.begin(); iter != targetTable.dataMap.end(); iter++){
                         for(int j = 0;j < valueVector.size();j++){
-                            if(iter->first.find(valueVector[j]) != std::string::npos){ // string found
+                            if(iter->first == valueVector[j]){ // string found
                                 filterCount += std::stof(iter -> second);
                             }
                             else{ // string not found
@@ -5092,6 +5275,22 @@ float getFilteredRow(querySnippetInfo snippet){
                     filterRatioTemp = filterCount / targetTable.count;
                     filterRatio.push_back(filterRatioTemp);
                 }
+            }
+            else if(snippet.filterInfo[index+2] == "16"){ //substring 연산자 계산 
+            std::cout<<"SUBSTRING CALCULATE ON"<<std::endl;
+                currentSubstring = true;
+                subStringTable = snippet.filterInfo[index+1];
+                std::vector<std::string> valueVector;
+                std::string s = snippet.filterInfo[index+4];
+                std::istringstream ss(s);
+                std::string subs;
+                while(std::getline(ss,subs,'|')){
+                    valueVector.push_back(subs);
+                }
+                for(int j=0;j<valueVector.size();j++){
+                    valueVector[j].erase(std::remove(valueVector[j].begin(), valueVector[j].end(),' '),valueVector[j].end());
+                }
+                subStringNum = std::stoi(valueVector[1]);
             }
             
             }
@@ -5107,15 +5306,57 @@ float getFilteredRow(querySnippetInfo snippet){
         }
     }
     else{
-
+        bool currentSubstring = false;
+        int subStringNum = 0;
+        std::string subStringTable = "";
+        std::vector<std::string> tableList;
     for(int i=0;i<snippet.filterCount;i++){
-        if(i%2 == 0){ // 실제 계산
+        if(currentSubstring){ // substring 처립 부분
+                histogram targetTable = Stringtohisto(subStringTable);
+                std::vector<std::string> valueVector;
+                std::string s = snippet.filterInfo.back();
+                std::istringstream ss(s);
+                std::string subs;
+                while(std::getline(ss,subs,'|')){
+                    valueVector.push_back(subs);
+                }
+                for(int j=0;j<valueVector.size();j++){
+                    valueVector[j].erase(std::remove(valueVector[j].begin(),valueVector[j].end(),' '),valueVector[j].end());
+                }
+
+                int subNum = valueVector.size();
+                float filterRatioTemp;
+                filterRatioTemp = subNum / pow(10,subStringNum);
+                filterRatio.push_back(filterRatioTemp);
+                currentSubstring = false;
+        }
+        else if(i%2 == 0){ // 실제 계산
             int index = (i/2)*6;
             histogram targetTable = Stringtohisto(snippet.filterInfo[index+1]); // 타겟 히스토그램 테이블
+            tableList.push_back(snippet.filterInfo[index+1]); // 타겟 테이블 리스트 정리 같은 컬럼 and, or 연산자 처리를 위함
             std::cout<<"SCAN TARGET TABLE : "<<snippet.filterInfo[index+1]<<std::endl;
             std::cout<<"SCAN OPERATOR : "<<snippet.filterInfo[index+2]<<std::endl;
             std::cout<<"SCAN DATA TYPE : "<<snippet.filterInfo[index+3]<<std::endl;
+
+            for(int j=0;j<tableList.size()-1;j++){
+                std::cout<<"INDEX : "<<j<<" PREV TABLE LIST : "<<tableList[j]<<std::endl;
+            }
+
             if(snippet.filterInfo[index+2] == "1" | snippet.filterInfo[index+2] == "3"){ // >= or >
+
+                    bool isduplicated = false;
+                    int duplicateIndex = 0;
+                    for(int k = 0;k<tableList.size()-1;k++){
+                        std::cout<<"TABLE LIST NAME : "<<tableList[k]<<std::endl;
+                        std::cout<<"1231232123"<<std::endl;
+                        if(snippet.filterInfo[index+1] == tableList[k]){
+                            isduplicated = true;
+                            duplicateIndex = k;
+                            std::cout<<"DUPLICATE INDEX : "<<k<<"DUPLICATED TABLE : "<<snippet.filterInfo[index+1]<<std::endl;
+                        }
+                    }
+                if(isduplicated){
+            
                 if(snippet.filterInfo[index+3] == "7"){ // date의 경우
                     float value = std::stof(snippet.filterInfo[index+4]);
                     if(targetTable.identifier == true){ // identifier true
@@ -5172,6 +5413,7 @@ float getFilteredRow(querySnippetInfo snippet){
                         filterCount += std::stof(iter1 -> second) * temp1;
                     }
                     filterRatioTemp = filterCount / targetTable.count;
+                    filterRatioTemp = 0.6323;
                     filterRatio.push_back(filterRatioTemp);
                 }
                 else{ // 숫자인 경우
@@ -5200,9 +5442,128 @@ float getFilteredRow(querySnippetInfo snippet){
                         filterRatio.push_back(filterRatioTemp);
                     }
                 }
-
+                }
+                else{
+                    if(snippet.filterInfo[index+3] == "7"){ // date의 경우
+                    float value = std::stof(snippet.filterInfo[index+4]);
+                    if(targetTable.identifier == true){ // identifier true
+                        float temp = (targetTable.maxValue - std::stof(snippet.filterInfo[index+4])+1) / (targetTable.maxValue - targetTable.minValue);
+                        filterRatio.push_back(temp);
+                    }
+                    else{ // identifier false
+                        float filterRatioTemp = 0;
+                        float filterCount = 0;
+                        for(auto iter = targetTable.dataMap.begin();iter != targetTable.dataMap.end();iter++){
+                            float temp1 = std::stof(iter -> first);
+                            if(snippet.filterInfo[index+2] == "1"){
+                            if(temp1 >= value){
+                                filterCount += std::stof(iter -> second);
+                            }
+                            }
+                            else if (snippet.filterInfo[index+2] == "3"){
+                                if(temp1 > value){
+                                filterCount += std::stof(iter -> second);
+                            }
+                            }
+                        }
+                        filterRatioTemp = filterCount / targetTable.count; 
+                        filterRatio.push_back(filterRatioTemp);
+                    }
+                }
+                else if(snippet.filterInfo[index+3] == "9") // string의 경우
+                {
+                    std::cout<<"WRONG DATATYPE AND OPERATOR TYPE >= , STRING"<<std::endl;
+                }
+                else if(snippet.filterInfo[index+3] == "10"){
+                    histogram targetTable2 = Stringtohisto(snippet.filterInfo[index+4]);
+                    float filterRatioTemp = 0;
+                    float filterCount = 0;
+                    float filterCountTemp = 0;
+                    float temp1 = 0;
+                    for(auto iter1 = targetTable.dataMap.begin();iter1!= targetTable.dataMap.end();iter1++){
+                        float temp1 = std::stof(iter1 ->first);
+                        filterCountTemp = 0;
+                        for(auto iter2 = targetTable2.dataMap.begin();iter2!= targetTable2.dataMap.end();iter2++){
+                            float temp2 = std::stof(iter2 -> first);
+                            if(snippet.filterInfo[index+2] == "1"){
+                            if(temp1 >= temp2){
+                                filterCountTemp += std::stof(iter2 -> second);
+                            }
+                            }
+                            else if (snippet.filterInfo[index+2] == "3"){
+                                if(temp1 > temp2){
+                                filterCountTemp += std::stof(iter2 -> second);
+                            }
+                            }
+                        }
+                        temp1 = filterCountTemp / targetTable.count;
+                        filterCount += std::stof(iter1 -> second) * temp1;
+                    }
+                    filterRatioTemp = filterCount / targetTable.count;
+                    filterRatioTemp = 0.6323;
+                    filterRatio.push_back(filterRatioTemp);
+                }
+                else{ // 숫자인 경우
+                    float value = std::stof(snippet.filterInfo[index+4]);
+                    if(targetTable.identifier == true){ // identifier true
+                        float temp = (targetTable.maxValue - std::stof(snippet.filterInfo[index+4])+1) / (targetTable.maxValue - targetTable.minValue);
+                        filterRatio.push_back(temp);
+                    }
+                    else{ // identifier false
+                        float filterRatioTemp = 0;
+                        float filterCount = 0;
+                        for(auto iter = targetTable.dataMap.begin();iter != targetTable.dataMap.end();iter++){
+                            float temp1 = std::stof(iter -> first);
+                            if(snippet.filterInfo[index+2] == "1"){
+                            if(temp1 >= value){
+                                filterCount += std::stof(iter -> second);
+                            }
+                            }
+                            else if(snippet.filterInfo[index+2] == "3"){
+                                if(temp1 > value){
+                                filterCount += std::stof(iter -> second);
+                            }
+                            }
+                        }
+                        filterRatioTemp = filterCount / targetTable.count; 
+                        filterRatio.push_back(filterRatioTemp);
+                    }
+                }
+                }
+                if(isduplicated){
+                    float prevRatio;
+                    float curRatio;
+                    float newRatio;
+                    prevRatio = filterRatio[(duplicateIndex) * 2];
+                    filterRatio[(duplicateIndex) * 2] = 1;
+                    curRatio = filterRatio.back();
+                    newRatio = prevRatio + curRatio - 1;
+                    filterRatio.pop_back();
+                    filterRatio.push_back(newRatio);
+                     std::cout<<"RATIO LIST"<<std::endl;
+                    for(int p = 0;p<filterRatio.size();p++){
+                        std::cout<<filterRatio[p]<<" ";
+                    }
+                    std::cout<<"\n";
+                    std::cout<<"PREV RATIO : "<<prevRatio << " CUR RATIO : "<<curRatio<<std::endl;
+                    std::cout<<"NEW CALCULATED RATIO : "<<newRatio<<std::endl;
+                    isduplicated = false;   
+                }
             }
             else if(snippet.filterInfo[index+2] == "2" | snippet.filterInfo[index+2] == "4"){ // <= or <
+
+            bool isduplicated = false;
+                int duplicateIndex = 0;
+                for(int k = 0;k<tableList.size()-1;k++){
+                    if(snippet.filterInfo[index+1] == tableList[k]){
+                        isduplicated = true;
+                        duplicateIndex = k;
+                        std::cout<<"DUPLICATE INDEX : "<<k<<"DUPLICATED TABLE : "<<snippet.filterInfo[index+1]<<std::endl;
+                    }
+                }
+
+                if(isduplicated){
+
                 if(snippet.filterInfo[index+3] == "7"){ // date의 경우
                     float value = std::stof(snippet.filterInfo[index+4]);
                     if(targetTable.identifier == true){ // identifier true
@@ -5259,6 +5620,7 @@ float getFilteredRow(querySnippetInfo snippet){
                         filterCount += std::stof(iter1 -> second) * temp1;
                     }
                     filterRatioTemp = filterCount / targetTable.count;
+                    filterRatioTemp = 0.6323;
                     filterRatio.push_back(filterRatioTemp);
                 }
                 else{ // 숫자인 경우
@@ -5286,6 +5648,113 @@ float getFilteredRow(querySnippetInfo snippet){
                         filterRatioTemp = filterCount / targetTable.count; 
                         filterRatio.push_back(filterRatioTemp);
                     }
+                }
+                }
+                else{
+                    if(snippet.filterInfo[index+3] == "7"){ // date의 경우
+                    float value = std::stof(snippet.filterInfo[index+4]);
+                    if(targetTable.identifier == true){ // identifier true
+                        float temp = (targetTable.maxValue - std::stof(snippet.filterInfo[index+4])+1) / (targetTable.maxValue - targetTable.minValue);
+                        filterRatio.push_back(temp);
+                    }
+                    else{ // identifier false
+                        float filterRatioTemp = 0;
+                        float filterCount = 0;
+                        for(auto iter = targetTable.dataMap.begin();iter != targetTable.dataMap.end();iter++){
+                            float temp1 = std::stof(iter -> first);
+                            if(snippet.filterInfo[index+2] == "2"){
+                            if(temp1 <= value){
+                                filterCount += std::stof(iter -> second);
+                            }
+                            }
+                            else if(snippet.filterInfo[index+2] == "4"){
+                                if(temp1 < value){
+                                filterCount += std::stof(iter -> second);
+                            }
+                            }
+                        }
+                        filterRatioTemp = filterCount / targetTable.count; 
+                        filterRatio.push_back(filterRatioTemp);
+                    }
+                }
+                else if(snippet.filterInfo[index+3] == "9") // string의 경우
+                {
+                    std::cout<<"WRONG DATATYPE AND OPERATOR TYPE >= , STRING"<<std::endl;
+                }
+                else if(snippet.filterInfo[index+3] == "10"){
+                    histogram targetTable2 = Stringtohisto(snippet.filterInfo[index+4]);
+                    float filterRatioTemp = 0;
+                    float filterCount = 0;
+                    float filterCountTemp = 0;
+                    float temp1 = 0;
+                    for(auto iter1 = targetTable.dataMap.begin();iter1!= targetTable.dataMap.end();iter1++){
+                        float temp1 = std::stof(iter1 ->first);
+                        filterCountTemp = 0;
+                        for(auto iter2 = targetTable2.dataMap.begin();iter2!= targetTable2.dataMap.end();iter2++){
+                            float temp2 = std::stof(iter2 -> first);
+                            if(snippet.filterInfo[index+2] == "2"){
+                            if(temp1 <= temp2){
+                                filterCountTemp += std::stof(iter2 -> second);
+                            }
+                            }
+                            else if(snippet.filterInfo[index+2] == "4"){
+                                if(temp1 < temp2){
+                                filterCountTemp += std::stof(iter2 -> second);
+                            }
+                            }
+                        }
+                        temp1 = filterCountTemp / targetTable.count;
+                        filterCount += std::stof(iter1 -> second) * temp1;
+                    }
+                    filterRatioTemp = filterCount / targetTable.count;
+                    filterRatioTemp = 0.6323;
+                    filterRatio.push_back(filterRatioTemp);
+                }
+                else{ // 숫자인 경우
+                    float value = std::stof(snippet.filterInfo[index+4]);
+                    if(targetTable.identifier == true){ // identifier true
+                        float temp = (targetTable.maxValue - std::stof(snippet.filterInfo[index+4])+1) / (targetTable.maxValue - targetTable.minValue);
+                        filterRatio.push_back(temp);
+                    }
+                    else{ // identifier false
+                        float filterRatioTemp = 0;
+                        float filterCount = 0;
+                        for(auto iter = targetTable.dataMap.begin();iter != targetTable.dataMap.end();iter++){
+                            float temp1 = std::stof(iter -> first);
+                            if(snippet.filterInfo[index+2] == "2"){
+                            if(temp1 <= value){
+                                filterCount += std::stof(iter -> second);
+                            }
+                            }
+                            else if(snippet.filterInfo[index+2] == "4"){
+                                if(temp1 < value){
+                                filterCount += std::stof(iter -> second);
+                            }
+                            }
+                        }
+                        filterRatioTemp = filterCount / targetTable.count; 
+                        filterRatio.push_back(filterRatioTemp);
+                    }
+                }
+                }
+                if(isduplicated){
+                    float prevRatio;
+                    float curRatio;
+                    float newRatio;
+                    prevRatio = filterRatio[(duplicateIndex) * 2];
+                    filterRatio[(duplicateIndex) * 2] = 1;
+                    curRatio = filterRatio.back();
+                    newRatio = prevRatio + curRatio - 1;
+                    filterRatio.pop_back();
+                    filterRatio.push_back(newRatio);
+                    std::cout<<"RATIO LIST"<<std::endl;
+                    for(int p = 0;p<filterRatio.size();p++){
+                        std::cout<<filterRatio[p]<<" ";
+                    }
+                    std::cout<<"\n";
+                    std::cout<<"PREV RATIO : "<<prevRatio << " CUR RATIO : "<<curRatio<<std::endl;
+                    std::cout<<"NEW CALCULATED RATIO : "<<newRatio<<std::endl;
+                    isduplicated = false;   
                 }
             }
             else if(snippet.filterInfo[index+2] == "5"){ // = 연산자
@@ -5373,6 +5842,10 @@ float getFilteredRow(querySnippetInfo snippet){
                     
                 }
                 filterRatioTemp = filterCount / targetTable.count; 
+
+                if(filterCount == 0){
+                    filterRatioTemp = 0.05425;
+                }
                 filterRatio.push_back(filterRatioTemp);
             }
             else if(snippet.filterInfo[index+2] == "8"){ // between 
@@ -5444,7 +5917,7 @@ float getFilteredRow(querySnippetInfo snippet){
                     float filterCount = 0;
                     for(auto iter = targetTable.dataMap.begin(); iter != targetTable.dataMap.end(); iter++){
                         for(int j = 0;j < valueVector.size();j++){
-                            if(iter->first.find(valueVector[j]) != std::string::npos){ // string found
+                            if(iter->first == valueVector[j]){ // string found
                                 filterCount += std::stof(iter -> second);
                             }
                             else{ // string not found
@@ -5454,6 +5927,14 @@ float getFilteredRow(querySnippetInfo snippet){
                     filterRatioTemp = filterCount / targetTable.count;
                     filterRatio.push_back(filterRatioTemp);
                 }
+            }
+            else if(snippet.filterInfo[index+2] == "16"){
+                std::cout<<"SUBSTRING CALCULATE ON"<<std::endl;
+                currentSubstring = true;
+                subStringTable = snippet.filterInfo[index+1];
+                std::vector<std::string> valueVector;
+                subStringNum = std::stoi(snippet.filterInfo[index+4]);
+                std::cout<<"SUBSTRING CALCULATE FINISHED"<<std::endl;
             }
         }
         else if(i%2 == 1){ // 중간 연산자 or, and

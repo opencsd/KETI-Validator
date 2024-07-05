@@ -1,7 +1,7 @@
 CMakeFiles/KETI_Validator.dir/QueryParser.cpp.o: \
- /root/workspace/Simulator-Instance/QueryParser.cpp \
+ /root/workspace/keti/Validator-Instance/QueryParser.cpp \
  /usr/include/stdc-predef.h \
- /root/workspace/Simulator-Instance/QueryParser.hpp \
+ /root/workspace/keti/Validator-Instance/QueryParser.hpp \
  /usr/include/c++/11/string \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -121,7 +121,7 @@ CMakeFiles/KETI_Validator.dir/QueryParser.cpp.o: \
  /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
  /usr/include/c++/11/bits/charconv.h \
  /usr/include/c++/11/bits/basic_string.tcc \
- /root/workspace/Simulator-Instance/DBManager.hpp \
+ /root/workspace/keti/Validator-Instance/DBManager.hpp \
  /usr/include/c++/11/iostream /usr/include/c++/11/ostream \
  /usr/include/c++/11/ios /usr/include/c++/11/exception \
  /usr/include/c++/11/bits/exception_ptr.h \
@@ -216,9 +216,10 @@ CMakeFiles/KETI_Validator.dir/QueryParser.cpp.o: \
  /usr/include/cppconn/driver.h /usr/include/cppconn/connection.h \
  /usr/include/cppconn/warning.h /usr/include/cppconn/variant.h \
  /usr/include/cppconn/exception.h \
- /root/workspace/Simulator-Instance/SSDValidator.hpp \
- /root/workspace/Simulator-Instance/TypeDef.hpp /usr/include/c++/11/ctime \
- /usr/include/c++/11/iomanip /usr/include/c++/11/locale \
+ /root/workspace/keti/Validator-Instance/SSDValidator.hpp \
+ /root/workspace/keti/Validator-Instance/TypeDef.hpp \
+ /usr/include/c++/11/ctime /usr/include/c++/11/iomanip \
+ /usr/include/c++/11/locale \
  /usr/include/c++/11/bits/locale_facets_nonio.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/time_members.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/messages_members.h \
@@ -227,16 +228,39 @@ CMakeFiles/KETI_Validator.dir/QueryParser.cpp.o: \
  /usr/include/c++/11/bits/locale_conv.h \
  /usr/include/c++/11/bits/quoted_string.h /usr/include/c++/11/sstream \
  /usr/include/c++/11/bits/sstream.tcc \
- /root/workspace/Simulator-Instance/HistogramTable.hpp \
- /root/workspace/Simulator-Instance/CSDValidator.hpp \
- /root/workspace/Simulator-Instance/StorageValidator.hpp \
- /usr/include/c++/11/fstream \
- /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
- /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
- /usr/include/c++/11/bits/fstream.tcc /usr/include/rapidjson/document.h \
- /usr/include/rapidjson/reader.h /usr/include/rapidjson/allocators.h \
- /usr/include/rapidjson/rapidjson.h /usr/include/c++/11/cstring \
- /usr/include/string.h /usr/include/strings.h /usr/include/c++/11/cassert \
+ /root/workspace/keti/Validator-Instance/HistogramTable.hpp \
+ /root/workspace/keti/Validator-Instance/CSDValidator.hpp \
+ /usr/include/string.h /usr/include/strings.h \
+ /usr/include/x86_64-linux-gnu/sys/socket.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
+ /usr/include/x86_64-linux-gnu/bits/socket.h \
+ /usr/include/x86_64-linux-gnu/bits/socket_type.h \
+ /usr/include/x86_64-linux-gnu/bits/sockaddr.h \
+ /usr/include/x86_64-linux-gnu/asm/socket.h \
+ /usr/include/asm-generic/socket.h \
+ /usr/include/x86_64-linux-gnu/asm/sockios.h \
+ /usr/include/asm-generic/sockios.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_osockaddr.h \
+ /usr/include/netinet/in.h /usr/include/x86_64-linux-gnu/bits/in.h \
+ /usr/include/arpa/inet.h /usr/include/c++/11/condition_variable \
+ /usr/include/c++/11/chrono /usr/include/c++/11/ratio \
+ /usr/include/c++/11/limits /usr/include/c++/11/bits/parse_numbers.h \
+ /usr/include/c++/11/bits/std_mutex.h \
+ /usr/include/c++/11/bits/unique_lock.h /usr/include/c++/11/queue \
+ /usr/include/c++/11/deque /usr/include/c++/11/bits/stl_deque.h \
+ /usr/include/c++/11/bits/deque.tcc /usr/include/c++/11/bits/stl_queue.h \
+ /usr/include/c++/11/thread /usr/include/c++/11/bits/std_thread.h \
+ /usr/include/c++/11/bits/this_thread_sleep.h \
+ /root/workspace/keti/Validator-Instance/StorageValidator.hpp \
+ /root/workspace/keti/Validator-Instance/keti_log.h \
+ /usr/include/x86_64-linux-gnu/sys/ipc.h \
+ /usr/include/x86_64-linux-gnu/bits/ipctypes.h \
+ /usr/include/x86_64-linux-gnu/bits/ipc.h \
+ /usr/include/x86_64-linux-gnu/sys/msg.h \
+ /usr/include/x86_64-linux-gnu/bits/msq.h /usr/include/c++/11/stdlib.h \
+ /usr/include/rapidjson/document.h /usr/include/rapidjson/reader.h \
+ /usr/include/rapidjson/allocators.h /usr/include/rapidjson/rapidjson.h \
+ /usr/include/c++/11/cstring /usr/include/c++/11/cassert \
  /usr/include/rapidjson/stream.h /usr/include/rapidjson/encodings.h \
  /usr/include/rapidjson/encodedstream.h \
  /usr/include/rapidjson/memorystream.h \
@@ -249,11 +273,18 @@ CMakeFiles/KETI_Validator.dir/QueryParser.cpp.o: \
  /usr/include/rapidjson/internal/ieee754.h \
  /usr/include/rapidjson/internal/biginteger.h \
  /usr/include/rapidjson/internal/diyfp.h \
- /usr/include/rapidjson/internal/pow10.h /usr/include/c++/11/limits \
+ /usr/include/rapidjson/internal/pow10.h \
  /usr/include/rapidjson/error/error.h /usr/include/rapidjson/rapidjson.h \
  /usr/include/rapidjson/internal/strfunc.h \
  /usr/include/rapidjson/stream.h /usr/include/c++/11/iterator \
- /usr/include/c++/11/bits/stream_iterator.h /usr/include/c++/11/thread \
- /usr/include/c++/11/bits/std_thread.h \
- /usr/include/c++/11/bits/this_thread_sleep.h /usr/include/c++/11/chrono \
- /usr/include/c++/11/ratio /usr/include/c++/11/bits/parse_numbers.h
+ /usr/include/c++/11/bits/stream_iterator.h \
+ /usr/include/rapidjson/writer.h /usr/include/rapidjson/internal/dtoa.h \
+ /usr/include/rapidjson/internal/itoa.h \
+ /usr/include/rapidjson/internal/itoa.h \
+ /usr/include/rapidjson/stringbuffer.h \
+ /usr/include/rapidjson/stringbuffer.h \
+ /usr/include/rapidjson/prettywriter.h /usr/include/rapidjson/writer.h \
+ /usr/include/c++/11/fstream \
+ /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
+ /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
+ /usr/include/c++/11/bits/fstream.tcc

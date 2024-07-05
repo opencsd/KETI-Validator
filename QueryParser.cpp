@@ -256,8 +256,8 @@ std::vector<querySnippetInfo> getSnippetInfo(std::string queryStatement){
         info12 = parseSnippet("/usr/local/snippet/tpch08/tpch08-12.json");
         info13 = parseSnippet("/usr/local/snippet/tpch08/tpch08-13.json");
         info14 = parseSnippet("/usr/local/snippet/tpch08/tpch08-14.json");
-        info15 = parseSnippet("/usr/local/snippet/tpch08/tpch08-13.json");
-        info16 = parseSnippet("/usr/local/snippet/tpch08/tpch08-14.json");
+        info15 = parseSnippet("/usr/local/snippet/tpch08/tpch08-15.json");
+        info16 = parseSnippet("/usr/local/snippet/tpch08/tpch08-16.json");
 
         snippetInfoVector.push_back(info0);
         snippetInfoVector.push_back(info1);
@@ -561,9 +561,10 @@ querySnippetInfo parseSnippet(std::string filename){
     std::stringstream buffer;
     buffer << file.rdbuf();
     std::string fileContent = buffer.str();
+    returnInfo.snippetOriginal = fileContent.c_str();
     Document document;
     document.Parse(fileContent.c_str());
-
+    returnInfo.snippetOriginal = fileContent.c_str();
     if(document.HasParseError()){
         std::cerr<<"Error parsing Json in file : "<<filename << std::endl;
     }
@@ -610,12 +611,15 @@ querySnippetInfo parseSnippet(std::string filename){
         returnInfo.filterCount = value["tableFilter"].Size();
         for(int i = 0; i<value["tableFilter"].Size();i++){ // not 연산 처리 필요
             const Value& tempValue = value["tableFilter"][i];
-            if(tempValue.HasMember("Operator") == true && tempValue.HasMember("LV") == false){ // not이 들어가지 않는 경우 
+            if(tempValue.HasMember("Operator") == true && tempValue.HasMember("RV") == false){ // not이 들어가지 않는 경우 
                 returnInfo.filterInfo.push_back(std::to_string(tempValue["Operator"].GetInt()));
             }
-            // if(i%2 == 1){ // 원본 
-            //     returnInfo.filterInfo.push_back(std::to_string(tempValue["Operator"].GetInt()));
-            // }
+            else if(tempValue.HasMember("Operator") == true && tempValue.HasMember("RV") == true && tempValue.HasMember("LV") == false){ // substring 이 들어가는 경우
+                const Value& tempValuerv = tempValue["RV"];
+                returnInfo.filterInfo.push_back(std::to_string(tempValue["Operator"].GetInt()));
+                returnInfo.filterInfo.push_back(std::to_string(tempValuerv["type"][0].GetInt()));
+                returnInfo.filterInfo.push_back(std::to_string(tempValuerv["value"].Size()));
+            }
             else{
                 const Value& tempValuelv = tempValue["LV"];
                 const Value& tempValuerv = tempValue["RV"];
@@ -641,6 +645,10 @@ querySnippetInfo parseSnippet(std::string filename){
                         inString += "|";
                         inString += tempValuerv["value"][1].GetString();
                         returnInfo.filterInfo.push_back(inString);
+                    }
+                    else if(returnInfo.filterInfo.back() == "16"){
+                        returnInfo.filterInfo.push_back(std::to_string(tempValuerv["type"][0].GetInt()));
+                        returnInfo.filterInfo.push_back(tempValuerv["value"][1].GetString());
                     }
                     else{
                         returnInfo.filterInfo.push_back(std::to_string(tempValuerv["type"][0].GetInt()));
@@ -668,6 +676,55 @@ querySnippetInfo parseSnippet(std::string filename){
     }
     if(value.HasMember("tableFilter") & returnInfo.snippetType == "Storage_Filter"){
         returnInfo.havingCount = value["tableFilter"].Size();
+        returnInfo.filterCount = value["tableFilter"].Size();
+        for(int i = 0; i<value["tableFilter"].Size();i++){ // not 연산 처리 필요
+            const Value& tempValue = value["tableFilter"][i];
+            if(tempValue.HasMember("Operator") == true && tempValue.HasMember("RV") == false){ // not이 들어가지 않는 경우 
+                returnInfo.filterInfo.push_back(std::to_string(tempValue["Operator"].GetInt()));
+            }
+            else if(tempValue.HasMember("Operator") == true && tempValue.HasMember("RV") == true && tempValue.HasMember("LV") == false){ // substring 이 들어가는 경우
+                const Value& tempValuerv = tempValue["RV"];
+                returnInfo.filterInfo.push_back(std::to_string(tempValue["Operator"].GetInt()));
+                returnInfo.filterInfo.push_back(std::to_string(tempValuerv["type"][0].GetInt()));
+                returnInfo.filterInfo.push_back(std::to_string(tempValuerv["value"].Size()));
+            }
+            else{
+                const Value& tempValuelv = tempValue["LV"];
+                const Value& tempValuerv = tempValue["RV"];
+                if(tempValuerv["type"].Size() != 0 & tempValuelv["type"].Size() != 0){
+                    returnInfo.filterInfo.push_back(std::to_string(tempValuelv["type"][0].GetInt()));
+                    returnInfo.filterInfo.push_back(tempValuelv["value"][0].GetString());
+                    returnInfo.filterInfo.push_back(std::to_string(tempValue["Operator"].GetInt()));
+                    if(returnInfo.filterInfo.back() == "9"){ // in 처리를 위한 if문
+                        std::string inString = "";
+                        returnInfo.filterInfo.push_back(std::to_string(tempValuerv["type"][0].GetInt()));
+                        for(int j = 0;j<tempValuerv["value"].Size();j++){
+                            inString += tempValuerv["value"][j].GetString();
+                            if(j != tempValuerv["value"].Size()-1){
+                                inString += "|";
+                            } // -> 20|40|22|30||
+                        }
+                        returnInfo.filterInfo.push_back(inString);
+                    }
+                    else if(returnInfo.filterInfo.back() == "8"){
+                        std::string inString = "";
+                        returnInfo.filterInfo.push_back(std::to_string(tempValuerv["type"][0].GetInt()));
+                        inString += tempValuerv["value"][0].GetString();
+                        inString += "|";
+                        inString += tempValuerv["value"][1].GetString();
+                        returnInfo.filterInfo.push_back(inString);
+                    }
+                    else if(returnInfo.filterInfo.back() == "16"){
+                        returnInfo.filterInfo.push_back(std::to_string(tempValuerv["type"][0].GetInt()));
+                        returnInfo.filterInfo.push_back(tempValuerv["value"][1].GetString());
+                    }
+                    else{
+                        returnInfo.filterInfo.push_back(std::to_string(tempValuerv["type"][0].GetInt()));
+                        returnInfo.filterInfo.push_back(tempValuerv["value"][0].GetString());
+                    }
+                }
+            }
+        }
     }
     if(value.HasMember("limit")){
         returnInfo.limitExist = 1;
@@ -739,9 +796,12 @@ void InsertSnippetDB(std::vector<querySnippetInfo> snippetVector){
     }
         std::string queryState = "insert into validation_snippet (validation_id, work_id, snippet_type, projection_count, filter_count, group_by_count, order_by_count,limit_exist) values (";
         queryState = queryState + std::to_string(snippetVector[i].validationID) + "," +std::to_string(snippetVector[i].workID) + "," + std::to_string(snippetType) + "," + std::to_string(snippetVector[i].projectionCount) + "," + std::to_string(snippetVector[i].filterCount) + "," + std::to_string(snippetVector[i].groupByCount) + "," +std::to_string(snippetVector[i].orderByCount) + "," + std::to_string(snippetVector[i].limitExist) +")";
-        //std::cout<<"QUERY STATE : "<<queryState<<std::endl;
+
         try{
             sql::ResultSet *resultSet = dbManager.executeQuery(queryState);
+            while(resultSet->next()){
+            std::cout<<resultSet->getString(1)<<std::endl;
+        }
             delete resultSet;
         } catch (sql::SQLException& e){
             std::cerr<<e.what();

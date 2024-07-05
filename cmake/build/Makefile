@@ -57,10 +57,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /root/workspace/Simulator-Instance
+CMAKE_SOURCE_DIR = /root/workspace/keti/Validator-Instance
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /root/workspace/Simulator-Instance/cmake/build
+CMAKE_BINARY_DIR = /root/workspace/keti/Validator-Instance/cmake/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /root/workspace/Simulator-Instance/cmake/build/CMakeFiles /root/workspace/Simulator-Instance/cmake/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /root/workspace/keti/Validator-Instance/cmake/build/CMakeFiles /root/workspace/keti/Validator-Instance/cmake/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /root/workspace/Simulator-Instance/cmake/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /root/workspace/keti/Validator-Instance/cmake/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -176,6 +176,30 @@ HistogramTable.s: HistogramTable.cpp.s
 HistogramTable.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/KETI_Validator.dir/build.make CMakeFiles/KETI_Validator.dir/HistogramTable.cpp.s
 .PHONY : HistogramTable.cpp.s
+
+QEMUHandler.o: QEMUHandler.cpp.o
+.PHONY : QEMUHandler.o
+
+# target to build an object file
+QEMUHandler.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/KETI_Validator.dir/build.make CMakeFiles/KETI_Validator.dir/QEMUHandler.cpp.o
+.PHONY : QEMUHandler.cpp.o
+
+QEMUHandler.i: QEMUHandler.cpp.i
+.PHONY : QEMUHandler.i
+
+# target to preprocess a source file
+QEMUHandler.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/KETI_Validator.dir/build.make CMakeFiles/KETI_Validator.dir/QEMUHandler.cpp.i
+.PHONY : QEMUHandler.cpp.i
+
+QEMUHandler.s: QEMUHandler.cpp.s
+.PHONY : QEMUHandler.s
+
+# target to generate assembly for a file
+QEMUHandler.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/KETI_Validator.dir/build.make CMakeFiles/KETI_Validator.dir/QEMUHandler.cpp.s
+.PHONY : QEMUHandler.cpp.s
 
 QueryParser.o: QueryParser.cpp.o
 .PHONY : QueryParser.o
@@ -312,6 +336,9 @@ help:
 	@echo "... HistogramTable.o"
 	@echo "... HistogramTable.i"
 	@echo "... HistogramTable.s"
+	@echo "... QEMUHandler.o"
+	@echo "... QEMUHandler.i"
+	@echo "... QEMUHandler.s"
 	@echo "... QueryParser.o"
 	@echo "... QueryParser.i"
 	@echo "... QueryParser.s"

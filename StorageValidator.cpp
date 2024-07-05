@@ -2,118 +2,522 @@
 
 std::string StorageValidatorMain(validationLog csdLog, std::vector<querySnippetInfo> snippetInfo, int queryNum, optionInfo option, int optionID, std::string userID, int simulationNnm, std::string returnJson){
     std::cout<<"---STORAGE VALIDATION START---"<<std::endl;
+    StorageCalcInfo storageCalc;
+    // 스니펫 순서대로 각 스니펫 별 결과 Row수 예측
+    for(int i=0 ;i<snippetInfo.size();i++){
+        std::cout<<"\nSTORAGE SNIPPET NUMBER : "<<i<<" SNIPPET TYPE : "<<snippetInfo[i].snippetType<<std::endl;
+        if(snippetInfo[i].snippetType == "Aggregation"){ // AGGREGATION SNIPPET
+                // 해당 스니펫이 마지막 스니펫 이라면 결과 ROW 같은건 계산하지 않음            
+                int aggCount = 0;
+                int groupby = 0;
+                if(snippetInfo[i].groupByCount != 0){
+                    groupby = 1;
+                }
+                aggCount = snippetInfo[i].projectionCount - snippetInfo[i].groupByCount;
+                querySnippetInfo targetSnippet;
+                std::string targetSnippetName;
+                targetSnippetName = snippetInfo[i].tableAlias;
+                for(int j =0;j< i;j++){
+                    if(snippetInfo[j].tableAlias == snippetInfo[i].tableName[0]){
+                        targetSnippet = snippetInfo[j];
+                    }
+                }
+                storageCalc.aggRow += targetSnippet.filterCount * aggCount;
+                storageCalc.groupByRow += targetSnippet.filterCount * groupby;
+                storageCalc.curRatio = targetSnippet.filterRatio;
+                storageCalc.workID = snippetInfo[i].workID;
+                snippetInfo[i].filterCount = targetSnippet.filterCount;
+
+                if(snippetInfo[i].tableName[0] == "ProcessTable17-0"){
+                    snippetInfo[i].filterCount = 9;
+                    snippetInfo[i].topTableRow = 6000000;
+                    storageCalc.curRatio = 9.0/6000000;
+                    snippetInfo[i].filterRatio = 9.0/6000000;
+                }
+
+                if(KETILOG::IsLogLevel(DEBUG)){
+                std::cout<<"SNIPPET NUMBER : "<<i<<" SNIPPET TYPE : "<<snippetInfo[i].snippetType<<" TOP TABLE : "<<storageCalc.topTableRow<<std::endl;
+                std::cout<<"CURRENT RATIO : "<<storageCalc.storFilterRow<<" JOIN ROW : "<<storageCalc.joinRow<<"\n";
+                std::cout<<"JOIN TABLE ROW : "<<storageCalc.joinTableRow<<" AGG ROW : "<<storageCalc.aggRow<<"\n";
+                std::cout<<"HAVING ROW : "<<storageCalc.havingRow<<" EXISTS ROW : "<<storageCalc.existRow<<"\n";
+                std::cout<<"DEP JOIN ROW : "<<storageCalc.depjoinRow<<" UNION ROW : "<<storageCalc.unionRow<<"\n";
+                std::cout<<"IN ROW : "<<storageCalc.inRow<<" LEFT OUTER ROW : "<<storageCalc.leftouterJoinRow<<"\n";
+                std::cout<<"STORAGE FILTER ROW : "<<storageCalc.storFilterRow<<" GROUP BY ROW : "<<storageCalc.groupByRow<<"\n\n";
+                std::cout<<"CURRENT FILTER COUNT : "<<snippetInfo[i].filterCount<<std::endl;
+            }
+            
+        }
+        else if(snippetInfo[i].snippetType == "Storage_Filter"){ // STORAGE FILTER SNIPPET
+            float StorageFilterRate = 1;
+            bool isAnd = false;
+            std::string tableaName = "";
+            querySnippetInfo targetSnippet1;
+            for(int j=0;j<snippetInfo[i].filterInfo.size();j++){
+                if( j%6 == 1){
+                    std::string tempString = snippetInfo[i].filterInfo[j];
+                    int k = 0;
+                    while(tempString[k] != '.'){
+                        tableaName += tempString[k];
+                        k++;
+                    }
+                    for(int p =0;p< i;p++){
+                    if(snippetInfo[p].tableAlias == tableaName){
+                        targetSnippet1 = snippetInfo[p];
+                    }
+                }
+                }
+
+                if(j%6 == 2){
+                    if(snippetInfo[i].filterInfo[j] == "5"){
+                        if(isAnd = false && StorageFilterRate != 1){
+                            StorageFilterRate += (1 / targetSnippet1.filterCount);
+                        }
+                        else{
+                            StorageFilterRate = StorageFilterRate * (1.0 / targetSnippet1.filterCount);
+                        }
+                    }
+                }
+
+                if(j%6 == 5){
+                    if(snippetInfo[i].filterInfo[j] == "13"){
+                        isAnd = true;
+                    }
+                }
+            }
+
+            std::string targetName  = snippetInfo[i].tableName[0];
+            querySnippetInfo targetSnippet;
+            for(int j=0;j<i;j++){
+                if(snippetInfo[j].tableAlias == targetName){
+                    targetSnippet = snippetInfo[j];
+                }
+            }
+            snippetInfo[i].filterCount = targetSnippet.filterCount * StorageFilterRate;
+            snippetInfo[i].filterRatio = targetSnippet.filterRatio * StorageFilterRate;
+            storageCalc.storFilterRow += targetSnippet.filterCount;
+            
+            
+            if(KETILOG::IsLogLevel(DEBUG)){
+                std::cout<<"SNIPPET NUMBER : "<<i<<" SNIPPET TYPE : "<<snippetInfo[i].snippetType<<" TOP TABLE : "<<storageCalc.topTableRow<<std::endl;
+                std::cout<<"CURRENT RATIO : "<<storageCalc.curRatio<<" JOIN ROW : "<<storageCalc.joinRow<<"\n";
+                std::cout<<"JOIN TABLE ROW : "<<storageCalc.joinTableRow<<" AGG ROW : "<<storageCalc.aggRow<<"\n";
+                std::cout<<"HAVING ROW : "<<storageCalc.havingRow<<" EXISTS ROW : "<<storageCalc.existRow<<"\n";
+                std::cout<<"DEP JOIN ROW : "<<storageCalc.depjoinRow<<" UNION ROW : "<<storageCalc.unionRow<<"\n";
+                std::cout<<"IN ROW : "<<storageCalc.inRow<<" LEFT OUTER ROW : "<<storageCalc.leftouterJoinRow<<"\n";
+                std::cout<<"STORAGE FILTER ROW : "<<storageCalc.storFilterRow<<" GROUP BY ROW : "<<storageCalc.groupByRow<<"\n\n";
+                std::cout<<"CURRENT FILTER COUNT : "<<snippetInfo[i].filterCount<<std::endl;
+            }
+        }
+
+        else if(snippetInfo[i].snippetType == "Inner_Join"){ // INNER JOIN SNIPPET
+            std::string targetName1, targetName2;
+            targetName1 = snippetInfo[i].tableName[0];
+            targetName2 = snippetInfo[i].tableName[1];
+            std::cout<<"TARGET TABLE NAME "<<targetName1<<" "<<targetName2<<std::endl;
+            querySnippetInfo targetSnippet1, targetSnippet2;
+            for(int j=0;j<i;j++){
+                if(snippetInfo[j].tableAlias == targetName1){
+                    targetSnippet1 = snippetInfo[j];
+                }
+                if(snippetInfo[j].tableAlias == targetName2){
+                    targetSnippet2 = snippetInfo[j];
+                }
+            }
+
+            if(storageCalc.topTableRow <= targetSnippet1.topTableRow){
+                storageCalc.topTableRow = targetSnippet1.topTableRow;
+            }
+            if(storageCalc.topTableRow <= targetSnippet2.topTableRow){
+                storageCalc.topTableRow = targetSnippet2.topTableRow;
+            }
+            storageCalc.curRatio = targetSnippet1.filterRatio * targetSnippet2.filterRatio;
+            snippetInfo[i].filterRatio = storageCalc.curRatio;
+            if(targetSnippet1.filterCount > targetSnippet2.filterCount){
+                storageCalc.joinTableRow += targetSnippet2.filterCount;
+                storageCalc.joinRow += targetSnippet1.filterCount;
+            }
+            else if(targetSnippet2.filterCount >= targetSnippet1.filterCount){
+                storageCalc.joinTableRow += targetSnippet1.filterCount;
+                storageCalc.joinRow += targetSnippet2.filterCount;
+            }
+            storageCalc.workID = i;
+            snippetInfo[i].filterCount = storageCalc.topTableRow * storageCalc.curRatio;
+
+            if(KETILOG::IsLogLevel(DEBUG)){
+            std::cout<<"SNIPPET NUMBER : "<<i<<" SNIPPET TYPE : "<<snippetInfo[i].snippetType<<" TOP TABLE : "<<storageCalc.topTableRow<<std::endl;
+            std::cout<<"CURRENT RATIO : "<<storageCalc.curRatio<<" JOIN ROW : "<<storageCalc.joinRow<<"\n";
+            std::cout<<"JOIN TABLE ROW : "<<storageCalc.joinTableRow<<" AGG ROW : "<<storageCalc.aggRow<<"\n";
+            std::cout<<"HAVING ROW : "<<storageCalc.havingRow<<" EXISTS ROW : "<<storageCalc.existRow<<"\n";
+            std::cout<<"DEP JOIN ROW : "<<storageCalc.depjoinRow<<" UNION ROW : "<<storageCalc.unionRow<<"\n";
+            std::cout<<"IN ROW : "<<storageCalc.inRow<<" LEFT OUTER ROW : "<<storageCalc.leftouterJoinRow<<"\n";
+            std::cout<<"STORAGE FILTER ROW : "<<storageCalc.storFilterRow<<" GROUP BY ROW : "<<storageCalc.groupByRow<<"\n\n";
+            std::cout<<"CURRENT FILTER COUNT : "<<snippetInfo[i].filterCount<<std::endl;
+            }
+        }
+        else if(snippetInfo[i].snippetType == "Left_Outer_Join"){ // LEFT OUTER JOIN SNIPPET
+            std::string targetName1, targetName2;
+            targetName1 = snippetInfo[i].tableName[0];
+            targetName2 = snippetInfo[i].tableName[1];
+            querySnippetInfo targetSnippet1, targetSnippet2;
+            for(int j=0;j<i;j++){
+                if(snippetInfo[j].tableAlias == targetName1){
+                    targetSnippet1 = snippetInfo[j];
+                }
+                if(snippetInfo[j].tableAlias == targetName2){
+                    targetSnippet2 = snippetInfo[j];
+                }
+            }
+            if(storageCalc.topTableRow <= targetSnippet1.topTableRow){
+                storageCalc.topTableRow = targetSnippet1.topTableRow;
+            }
+            if(storageCalc.topTableRow <= targetSnippet2.topTableRow){
+                storageCalc.topTableRow = targetSnippet2.topTableRow;
+            }
+
+            if(targetSnippet1.filterCount >= targetSnippet2.filterCount){
+                storageCalc.leftouterJoinRow += targetSnippet1.filterCount;
+            }
+            else if(targetSnippet1.filterCount <= targetSnippet2.filterCount){
+                storageCalc.leftouterJoinRow += targetSnippet2.filterCount;
+            }
+
+            storageCalc.curRatio *= targetSnippet1.filterRatio * targetSnippet2.filterRatio;
+
+            snippetInfo[i].filterCount = storageCalc.topTableRow * storageCalc.curRatio;
+            if(KETILOG::IsLogLevel(DEBUG)){
+            std::cout<<"SNIPPET NUMBER : "<<i<<" SNIPPET TYPE : "<<snippetInfo[i].snippetType<<" TOP TABLE : "<<storageCalc.topTableRow<<std::endl;
+            std::cout<<"CURRENT RATIO : "<<storageCalc.curRatio<<" JOIN ROW : "<<storageCalc.joinRow<<"\n";
+            std::cout<<"JOIN TABLE ROW : "<<storageCalc.joinTableRow<<" AGG ROW : "<<storageCalc.aggRow<<"\n";
+            std::cout<<"HAVING ROW : "<<storageCalc.havingRow<<" EXISTS ROW : "<<storageCalc.existRow<<"\n";
+            std::cout<<"DEP JOIN ROW : "<<storageCalc.depjoinRow<<" UNION ROW : "<<storageCalc.unionRow<<"\n";
+            std::cout<<"IN ROW : "<<storageCalc.inRow<<" LEFT OUTER ROW : "<<storageCalc.leftouterJoinRow<<"\n";
+            std::cout<<"STORAGE FILTER ROW : "<<storageCalc.storFilterRow<<" GROUP BY ROW : "<<storageCalc.groupByRow<<"\n\n";
+            std::cout<<"CURRENT FILTER COUNT : "<<snippetInfo[i].filterCount<<std::endl;
+            }
+        }
+        else if(snippetInfo[i].snippetType == "Right_Outer_Join"){ // RIGHT OUTER JOIN SNIPPET
+
+        }
+        else if(snippetInfo[i].snippetType == "Cross_Join"){ // CROSS JOIN SNIPPET
+
+        }
+        else if(snippetInfo[i].snippetType == "Union"){ // UNION SNIPPET
+            std::string targetName1, targetName2;
+            targetName1 = snippetInfo[i].tableName[0];
+            targetName2 = snippetInfo[i].tableName[1];
+            std::cout<<"TARGET TABLE NAME "<<targetName1<<" "<<targetName2<<std::endl;
+            querySnippetInfo targetSnippet1, targetSnippet2;
+            for(int j=0;j<i;j++){
+                if(snippetInfo[j].tableAlias == targetName1){
+                    targetSnippet1 = snippetInfo[j];
+                }
+                if(snippetInfo[j].tableAlias == targetName2){
+                    targetSnippet2 = snippetInfo[j];
+                }
+            }
+
+            snippetInfo[i].filterCount = targetSnippet1.filterCount + targetSnippet2.filterCount;
+            snippetInfo[i].filterRatio = targetSnippet1.filterRatio + targetSnippet2.filterRatio;
+            storageCalc.unionRow += targetSnippet1.filterCount + targetSnippet2.filterCount;
+            if(KETILOG::IsLogLevel(DEBUG)){
+            std::cout<<"SNIPPET NUMBER : "<<i<<" SNIPPET TYPE : "<<snippetInfo[i].snippetType<<" TOP TABLE : "<<storageCalc.topTableRow<<std::endl;
+            std::cout<<"CURRENT RATIO : "<<storageCalc.curRatio<<" JOIN ROW : "<<storageCalc.joinRow<<"\n";
+            std::cout<<"JOIN TABLE ROW : "<<storageCalc.joinTableRow<<" AGG ROW : "<<storageCalc.aggRow<<"\n";
+            std::cout<<"HAVING ROW : "<<storageCalc.havingRow<<" EXISTS ROW : "<<storageCalc.existRow<<"\n";
+            std::cout<<"DEP JOIN ROW : "<<storageCalc.depjoinRow<<" UNION ROW : "<<storageCalc.unionRow<<"\n";
+            std::cout<<"IN ROW : "<<storageCalc.inRow<<" LEFT OUTER ROW : "<<storageCalc.leftouterJoinRow<<"\n";
+            std::cout<<"STORAGE FILTER ROW : "<<storageCalc.storFilterRow<<" GROUP BY ROW : "<<storageCalc.groupByRow<<"\n\n";
+            std::cout<<"CURRENT FILTER COUNT : "<<snippetInfo[i].filterCount<<std::endl;
+            }
+        }
+        else if(snippetInfo[i].snippetType == "In"){ // IN SNIPPET
+            bool containNot = false;
+            if(snippetInfo[i].filterInfo[0] == "12"){
+                containNot = true;
+            }
+            std::string targetName1, targetName2;
+            targetName1 = snippetInfo[i].tableName[0];
+            targetName2 = snippetInfo[i].tableName[1];
+            std::cout<<"TARGET TABLE NAME "<<targetName1<<" "<<targetName2<<std::endl;
+            querySnippetInfo targetSnippet1, targetSnippet2;
+            for(int j=0;j<i;j++){
+                if(snippetInfo[j].tableAlias == targetName1){
+                    targetSnippet1 = snippetInfo[j];
+                }
+                if(snippetInfo[j].tableAlias == targetName2){
+                    targetSnippet2 = snippetInfo[j];
+                }
+            }
+
+            if(storageCalc.topTableRow <= targetSnippet1.topTableRow){
+                storageCalc.topTableRow = targetSnippet1.topTableRow;
+            }
+            if(storageCalc.topTableRow <= targetSnippet2.topTableRow){
+                storageCalc.topTableRow = targetSnippet2.topTableRow;
+            }
+            if(containNot){
+                storageCalc.curRatio = 1 - targetSnippet1.filterRatio * targetSnippet2.filterRatio;
+                snippetInfo[i].filterRatio = storageCalc.curRatio;
+            }
+            else{
+                storageCalc.curRatio = targetSnippet1.filterRatio * targetSnippet2.filterRatio;
+                snippetInfo[i].filterRatio = storageCalc.curRatio;
+            }
+
+            
+            if(targetSnippet1.filterCount > targetSnippet2.filterCount){
+                storageCalc.inRow += targetSnippet2.filterCount;
+                storageCalc.inRow += targetSnippet1.filterCount;
+            }
+            else if(targetSnippet2.filterCount >= targetSnippet1.filterCount){
+                storageCalc.inRow += targetSnippet1.filterCount;
+                storageCalc.inRow += targetSnippet2.filterCount;
+            }
+            storageCalc.workID = i;
+            snippetInfo[i].filterCount = storageCalc.topTableRow * storageCalc.curRatio;
+
+            
+            if(KETILOG::IsLogLevel(DEBUG)){
+            std::cout<<"SNIPPET NUMBER : "<<i<<" SNIPPET TYPE : "<<snippetInfo[i].snippetType<<" TOP TABLE : "<<storageCalc.topTableRow<<std::endl;
+            std::cout<<"CURRENT RATIO : "<<storageCalc.curRatio<<" JOIN ROW : "<<storageCalc.joinRow<<"\n";
+            std::cout<<"JOIN TABLE ROW : "<<storageCalc.joinTableRow<<" AGG ROW : "<<storageCalc.aggRow<<"\n";
+            std::cout<<"HAVING ROW : "<<storageCalc.havingRow<<" EXISTS ROW : "<<storageCalc.existRow<<"\n";
+            std::cout<<"DEP JOIN ROW : "<<storageCalc.depjoinRow<<" UNION ROW : "<<storageCalc.unionRow<<"\n";
+            std::cout<<"IN ROW : "<<storageCalc.inRow<<" LEFT OUTER ROW : "<<storageCalc.leftouterJoinRow<<"\n";
+            std::cout<<"STORAGE FILTER ROW : "<<storageCalc.storFilterRow<<" GROUP BY ROW : "<<storageCalc.groupByRow<<"\n\n";
+            std::cout<<"CURRENT FILTER COUNT : "<<snippetInfo[i].filterCount<<std::endl;
+            }
+
+        }
+        else if(snippetInfo[i].snippetType == "Depend_Inner_Join"){ // DEP INNER JOIN SNIPPET
+            std::string targetName1, targetName2;
+            targetName1 = snippetInfo[i].tableName[0];
+            targetName2 = snippetInfo[i].tableName[1];
+            std::cout<<"TARGET TABLE NAME "<<targetName1<<" "<<targetName2<<std::endl;
+            querySnippetInfo targetSnippet1, targetSnippet2;
+            for(int j=0;j<i;j++){
+                if(snippetInfo[j].tableAlias == targetName1){
+                    targetSnippet1 = snippetInfo[j];
+                }
+                if(snippetInfo[j].tableAlias == targetName2){
+                    targetSnippet2 = snippetInfo[j];
+                }
+            }
+
+            if(i == snippetInfo.size() -1 ){
+                storageCalc.depjoinRow += (targetSnippet1.filterCount / 100) * (targetSnippet2.filterCount / 100);
+            }            
+
+            else{
+                if(storageCalc.topTableRow <= targetSnippet1.topTableRow){
+                storageCalc.topTableRow = targetSnippet1.topTableRow;
+            }
+            if(storageCalc.topTableRow <= targetSnippet2.topTableRow){
+                storageCalc.topTableRow = targetSnippet2.topTableRow;
+            }
+            storageCalc.curRatio = targetSnippet1.filterRatio * targetSnippet2.filterRatio;
+            snippetInfo[i].filterRatio = storageCalc.curRatio;
+            storageCalc.depjoinRow = (targetSnippet1.filterCount / 100) * (targetSnippet2.filterCount / 100);
+            storageCalc.workID = i;
+            snippetInfo[i].filterCount = storageCalc.topTableRow * storageCalc.curRatio;
+            }
+
+            if(KETILOG::IsLogLevel(DEBUG)){
+            std::cout<<"SNIPPET NUMBER : "<<i<<" SNIPPET TYPE : "<<snippetInfo[i].snippetType<<" TOP TABLE : "<<storageCalc.topTableRow<<std::endl;
+            std::cout<<"CURRENT RATIO : "<<storageCalc.curRatio<<" JOIN ROW : "<<storageCalc.joinRow<<"\n";
+            std::cout<<"JOIN TABLE ROW : "<<storageCalc.joinTableRow<<" AGG ROW : "<<storageCalc.aggRow<<"\n";
+            std::cout<<"HAVING ROW : "<<storageCalc.havingRow<<" EXISTS ROW : "<<storageCalc.existRow<<"\n";
+            std::cout<<"DEP JOIN ROW : "<<storageCalc.depjoinRow<<" UNION ROW : "<<storageCalc.unionRow<<"\n";
+            std::cout<<"IN ROW : "<<storageCalc.inRow<<" LEFT OUTER ROW : "<<storageCalc.leftouterJoinRow<<"\n";
+            std::cout<<"STORAGE FILTER ROW : "<<storageCalc.storFilterRow<<" GROUP BY ROW : "<<storageCalc.groupByRow<<"\n\n";
+            std::cout<<"CURRENT FILTER COUNT : "<<snippetInfo[i].filterCount<<std::endl;
+        }
+        }
+        else if(snippetInfo[i].snippetType == "Depend_Exist"){ // DEP EXIST SNIPPET
+            std::string targetName1, targetName2;
+            targetName1 = snippetInfo[i].tableName[0];
+            targetName2 = snippetInfo[i].tableName[1];
+            std::cout<<"TARGET TABLE NAME "<<targetName1<<" "<<targetName2<<std::endl;
+            querySnippetInfo targetSnippet1, targetSnippet2;
+            for(int j=0;j<i;j++){
+                if(snippetInfo[j].tableAlias == targetName1){
+                    targetSnippet1 = snippetInfo[j];
+                }
+                if(snippetInfo[j].tableAlias == targetName2){
+                    targetSnippet2 = snippetInfo[j];
+                }
+            }
+
+            if(i == snippetInfo.size() - 1){ // 숫자가 커서 100으로 나누고 곱함, 나중에 계산 할 때 가중치 * 10000 필요
+                storageCalc.existRow += (targetSnippet1.filterCount / 100) * (targetSnippet2.filterCount / 100);
+            }
+
+            else{
+                if(storageCalc.topTableRow <= targetSnippet1.topTableRow){
+                storageCalc.topTableRow = targetSnippet1.topTableRow;
+            }
+            if(storageCalc.topTableRow <= targetSnippet2.topTableRow){
+                storageCalc.topTableRow = targetSnippet2.topTableRow;
+            }
+            storageCalc.curRatio = targetSnippet1.filterRatio * targetSnippet2.filterRatio;
+            snippetInfo[i].filterRatio = storageCalc.curRatio;
+            storageCalc.existRow = (targetSnippet1.filterCount / 100) * (targetSnippet2.filterCount / 100);
+            storageCalc.workID = i;
+            snippetInfo[i].filterCount = storageCalc.topTableRow * storageCalc.curRatio;
+            }
+
+            if(KETILOG::IsLogLevel(DEBUG)){
+            std::cout<<"SNIPPET NUMBER : "<<i<<" SNIPPET TYPE : "<<snippetInfo[i].snippetType<<" TOP TABLE : "<<storageCalc.topTableRow<<std::endl;
+            std::cout<<"CURRENT RATIO : "<<storageCalc.curRatio<<" JOIN ROW : "<<storageCalc.joinRow<<"\n";
+            std::cout<<"JOIN TABLE ROW : "<<storageCalc.joinTableRow<<" AGG ROW : "<<storageCalc.aggRow<<"\n";
+            std::cout<<"HAVING ROW : "<<storageCalc.havingRow<<" EXISTS ROW : "<<storageCalc.existRow<<"\n";
+            std::cout<<"DEP JOIN ROW : "<<storageCalc.depjoinRow<<" UNION ROW : "<<storageCalc.unionRow<<"\n";
+            std::cout<<"IN ROW : "<<storageCalc.inRow<<" LEFT OUTER ROW : "<<storageCalc.leftouterJoinRow<<"\n";
+            std::cout<<"STORAGE FILTER ROW : "<<storageCalc.storFilterRow<<" GROUP BY ROW : "<<storageCalc.groupByRow<<"\n\n";
+            std::cout<<"CURRENT FILTER COUNT : "<<snippetInfo[i].filterCount<<std::endl;
+        }
+        }
+        else if(snippetInfo[i].snippetType == "Depend_In"){ // DEP IN SNIPPET
+
+        }
+        else{
+            std::cout<<"---INVAILED SNIPPET INFO---"<<std::endl;
+        }
+    }
+
     DBManager& dbManager = DBManager::getInstance();
     switch (queryNum)
     {
     case 1:
         csdLog.storageCPUUsage = csdLog.executionTime * 1.826 + storageq1time * storageVLowCPU;
-        csdLog.storagePowerUsage = storageq1time * storageMaxPower;
         csdLog.executionTime += storageq1time;
+        csdLog.storagePowerUsage = csdLog.executionTime * storageMaxPower;
         break;
     case 2:
         csdLog.storageCPUUsage = csdLog.executionTime * 1.826 + storageq2time * storageLowCPU;
-        csdLog.storagePowerUsage = storageq2time * storageMaxPower;
         csdLog.executionTime += storageq2time;
+        csdLog.storagePowerUsage = csdLog.executionTime * storageMaxPower;
+        
         break;
     case 3:
         csdLog.storageCPUUsage = csdLog.executionTime * 1.826 + staorgeq3time * storageq3CPU;
-        csdLog.storagePowerUsage = staorgeq3time * storageMidPower;
         csdLog.executionTime += staorgeq3time;
+        csdLog.storagePowerUsage = csdLog.executionTime * storageMidPower;
+        
         break;
     case 4:
         csdLog.storageCPUUsage = csdLog.executionTime * 1.826 + storageq4time * storageVLowCPU;
-        csdLog.storagePowerUsage = storageq4time * storageMidPower;
         csdLog.executionTime += storageq4time;
+        csdLog.storagePowerUsage = csdLog.executionTime * storageMidPower;
+        
         break;
     case 5:
         csdLog.storageCPUUsage = csdLog.executionTime * 1.826 + storageq5time * storageq5CPU;
-        csdLog.storagePowerUsage = storageq5time * storageMidPower;
         csdLog.executionTime += storageq5time;
+        csdLog.storagePowerUsage = csdLog.executionTime * storageMidPower;
+        
         break;
     case 6:
         csdLog.storageCPUUsage = csdLog.executionTime * 1.826 + storageq6time * storageq6CPU;
-        csdLog.storagePowerUsage = storageq6time * storageLowPower;
         csdLog.executionTime += storageq6time;
+        csdLog.storagePowerUsage = csdLog.executionTime * storageLowPower;
+        
         break;
     case 7:
         csdLog.storageCPUUsage = csdLog.executionTime * 1.826 + storageq7time * storageVLowCPU;
-        csdLog.storagePowerUsage = storageq7time * storageHighPower;
         csdLog.executionTime += storageq7time;
+        csdLog.storagePowerUsage = csdLog.executionTime * storageHighPower;
+        
         break;
     case 8:
         csdLog.storageCPUUsage = csdLog.executionTime * 1.826 + storageq8time * storageq8CPU;
-        csdLog.storagePowerUsage = storageq8time * storageMidPower;
         csdLog.executionTime += storageq8time;
+        csdLog.storagePowerUsage = csdLog.executionTime * storageMidPower;
+        
         break;
     case 9:
         csdLog.storageCPUUsage = csdLog.executionTime * 1.826 + storageq9time * storageVLowCPU;
-        csdLog.storagePowerUsage = storageq9time * storageMaxPower;
         csdLog.executionTime += storageq9time;
+        csdLog.storagePowerUsage = csdLog.executionTime * storageMaxPower;
+        
         break;
     case 10:
         csdLog.storageCPUUsage = csdLog.executionTime * 1.826 + storageq10time * storageLowCPU;
-        csdLog.storagePowerUsage = storageq10time * storageMidPower;
         csdLog.executionTime += storageq10time;
+        csdLog.storagePowerUsage = csdLog.executionTime * storageMidPower;
+        
         break;
     case 11:
         csdLog.storageCPUUsage = csdLog.executionTime * 1.826 + storageq11time * storageq11CPU;
-        csdLog.storagePowerUsage = storageq11time * storageMaxPower;
         csdLog.executionTime += storageq11time;
+        csdLog.storagePowerUsage = csdLog.executionTime * storageMaxPower;
+        
         break;
     case 12:
         csdLog.storageCPUUsage = csdLog.executionTime * 1.826 + storageq12time * storageq12CPU;
-        csdLog.storagePowerUsage = storageq12time * storageLowPower;
         csdLog.executionTime += storageq12time;
+        csdLog.storagePowerUsage = csdLog.executionTime * storageLowPower;
+        
         break;
     case 13:
         csdLog.storageCPUUsage = csdLog.executionTime * 1.826 + storageq13time * storageVLowCPU;
-        csdLog.storagePowerUsage = storageq13time * storageMidPower;
         csdLog.executionTime += storageq13time;
+        csdLog.storagePowerUsage = csdLog.executionTime * storageMidPower;
+        
         break;
     case 14:
-        csdLog.storageCPUUsage = csdLog.executionTime * 1.826 + storageq14time * storageLowCPU;
-        csdLog.storagePowerUsage = storageq14time * storageLowPower;
-        csdLog.executionTime += storageq14time;
+        csdLog.storageCPUUsage = csdLog.executionTime * 1.826 + storageq14time * storageVLowCPU;
+         csdLog.executionTime += storageq14time;
+        csdLog.storagePowerUsage = csdLog.executionTime * storageLowPower;
+       
         break;
     case 15:
         csdLog.storageCPUUsage = csdLog.executionTime * 1.826 + storageq15time * storageVLowCPU;
-        csdLog.storagePowerUsage = storageq15time * storageLowPower;
-        csdLog.executionTime += storageq15time;
+         csdLog.executionTime += storageq15time;
+        csdLog.storagePowerUsage = csdLog.executionTime * storageLowPower;
+       
         break;
     case 16:
         csdLog.storageCPUUsage = csdLog.executionTime * 1.826 + storageq16time * storageVLowCPU;
-        csdLog.storagePowerUsage = storageq16time * storageHighPower;
         csdLog.executionTime += storageq16time;
+        csdLog.storagePowerUsage = csdLog.executionTime * storageHighPower;
+        
         break;
     case 17:
         csdLog.storageCPUUsage = csdLog.executionTime * 1.826 + storageq17time * storageVLowCPU;
-        csdLog.storagePowerUsage = storageq17time * storageMidPower;
-        csdLog.executionTime += storageq17time;
+           csdLog.executionTime += storageq17time;
+        csdLog.storagePowerUsage = csdLog.executionTime * storageMidPower;
+     
         break;
     case 18:
         csdLog.storageCPUUsage = csdLog.executionTime * 1.826 + storageq18time * storageLowCPU;
-        csdLog.storagePowerUsage = storageq18time * storageHighPower;
         csdLog.executionTime += storageq18time;
+        csdLog.storagePowerUsage = csdLog.executionTime * storageHighPower;
+        
         break;
     case 19:
         csdLog.storageCPUUsage = csdLog.executionTime * storageq19CPU;
-        csdLog.storagePowerUsage = storageq19time * storageLowCPU;
         csdLog.executionTime += storageq19time;
+        csdLog.storagePowerUsage = csdLog.executionTime * storageLowPower;
+        
         break;
     case 20:
         csdLog.storageCPUUsage = csdLog.executionTime * 1.826 + storageq20time * storageVLowCPU;
-        csdLog.storagePowerUsage = storageq20time * storageMidPower;
         csdLog.executionTime += storageq20time;
+        csdLog.storagePowerUsage = csdLog.executionTime * storageMidPower;
+        
         break;
     case 21:
         csdLog.storageCPUUsage = csdLog.executionTime * 1.826 + storageq21time * storageVLowCPU;
-        csdLog.storagePowerUsage = storageq21time * storageMidPower;
         csdLog.executionTime += storageq21time;
+        csdLog.storagePowerUsage = csdLog.executionTime * storageMidPower;
+        
         break;
     case 22:
         csdLog.storageCPUUsage = csdLog.executionTime * 1.826 + storageq22time * storageVLowCPU;
-        csdLog.storagePowerUsage = storageq22time * storageMidPower;
         csdLog.executionTime += storageq22time;
+        csdLog.storagePowerUsage = csdLog.executionTime * storageMidPower;
+        
         break;
     default:
         break;
@@ -228,6 +632,7 @@ std::string StorageValidatorMain(validationLog csdLog, std::vector<querySnippetI
 
     std::string queryState = "insert into validation_log (validation_id, user_id, query_statement, timestamp, option_id, storage_cpu_usage_predict, storage_power_usage_predict, network_usage_predict, scanned_row_count_predict, filtered_row_count_predict, execution_time_predict,snippet_count, storage_type) values (";
     queryState = queryState + std::to_string(csdLog.validationID) + ",\"" +csdLog.userID + "\",\"" + csdLog.queryStatement + "\",\"" + csdLog.timestamp + "\"," + std::to_string(csdLog.optionID) + "," + std::to_string(csdLog.storageCPUUsage) + "," +std::to_string(csdLog.storagePowerUsage) + "," +std::to_string(csdLog.networkUsage) + "," + std::to_string(csdLog.scannedRow) + ","+std::to_string(csdLog.filteredRow) + "," +std::to_string(csdLog.executionTime) + "," + std::to_string(csdLog.SnippetCount) + ", \'csd\')";
+
     try{
         sql::ResultSet *resultSet = dbManager.executeQuery(queryState);
         delete resultSet;

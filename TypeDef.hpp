@@ -73,6 +73,26 @@ struct querySnippetInfo{
     std::string tableAlias = "";
     std::string tableName[2];
     std::vector<std::string> filterInfo;
+    float filterRatio = 1;
+    int topTableRow = 0;
+    std::string snippetOriginal = "";
+};
+
+struct StorageCalcInfo{
+    int workID = 0;
+    float curRatio = 1;
+    int joinRow = 0;
+    int joinTableRow = 0;
+    int aggRow = 0;
+    int havingRow = 0;
+    int existRow = 0;
+    int depjoinRow = 0;
+    int unionRow = 0;
+    int storFilterRow = 0;
+    int groupByRow = 0;
+    int topTableRow  = 0;
+    int leftouterJoinRow = 0;
+    int inRow = 0;
 };
 
 struct optionInfo{
@@ -109,6 +129,7 @@ struct storageValidation {
     double networkUsage;
     double scannedRow;
     double filteredRow;
+    double aggregateRow;
     double executionTime;
 };
 
@@ -119,41 +140,56 @@ struct csdValidtion{
     double powerUsage;
 };
 
-const double ssdscanTime =1299508.0;
-const double ssdaggTime =537297.0;
-const double ssdjoinTime =11.95;
+const double ssdAllWeight = 1.0;
+
+const double ssdscanTime =1208000.0;
+const double ssdaggTime =559700.0;
+const double ssdRjoinTime =247.0;
+const double ssdBjoinTime = 445.0;
+const double ssdGjoinTime = 556.0;
+const double ssdYjoinTime = 703.0;
+const double ssdOjoinTime = 1098.0;
 
 const double ssdCPUWeight =99.99;
 const double ssdPowerWeight =56.1244;
 
 
-const int query1join =0;
-const int query2join =1120000;
-const int query3join=491000;
-const int query4join =206000;
-const int query5join =2560000;
-const int query6join =0;
-const int query7join =1570000;
-const long query8join =81100000000;
-const int query9join =486400;
-const int query10join =2930;
-const int query11join =650;
-const int query12join =45100;
-const int query13join =225000;
-const int query14join =15600;
-const int query15join =0.1;
-const int query16join =23100;
-const int query17join =2646;
-const int query18join =225000;
-const int query19join =2170;
-const int query20join =1890;
-const long query21join =1435000000;
-const int query22join =17500;
+const long query1join =0;
+const long query2join =12000000;
+const long query3join= 7000000;
+const long query4join =21000000;
+const long query5join =160000000;
+const long query6join =0;
+const long query7join =170000000;
+const long query8join =79000000000;
+const long query9join =410000000000;
+const long query10join =1700000;
+const long query11join =65000;
+const long query12join =4700000;
+const long query13join =20000000;
+const long query14join =1500000;
+const long query15join =750;
+const long query16join =2300000;
+const long query17join =1200000;
+const long query18join =14000;
+const long query19join =10000;
+const long query20join =1200000000;
+const long query21join =12000000000;
+const long query22join =3500000;
 
 const double csdpowerweight= 50.025;
-const double csdBadCPUweight =189.49;
-const double CSDNormalCPUweight= 157.65;
-const double CSDGoodCPUWeight= 119.38;
+const double csdRedCPUWeight = 99.65;
+const double csdOrangeCPUWeight = 149.23;
+const double csdGreenCPUWeight = 136.6;
+const double csdYellowCPUWeight = 183.71;
+const double csd13CPUWeight = 121.99;
+
+const double qemuRedWeight = 74.727;
+const double qemuOrangeWeight = 20.372;
+const double qemuYellowWeight = 28.443;
+const double qemuBrownWeight = 44.932;
+const double qemuGreenWeight = 9.87;
+
 const double csdBadScanWeight= 15368.4;
 const double csdNormalScanWeight= 20392.65;
 const double csdGoodScanWeight= 28232.84 ;
@@ -169,7 +205,7 @@ const double storageLowCPU= 153.546;
 const double storageq3CPU =457.264;
 const double storageq5CPU=273.197;
 const double storageq6CPU =6.745;
-const double storageq8CPU= 838.267;
+const double storageq8CPU= 1015.69;
 const double storageq11CPU =199.269;
 const double storageq12CPU =256.654;
 const double storageq19CPU= 0.869; // CSDtime * cpu
@@ -187,7 +223,7 @@ const double storageq10time= 13.49;
 const double storageq11time= 10.49;
 const double storageq12time =3.29;
 const double storageq13time =15.84;
-const double storageq14time =5.56;
+const double storageq14time =2.56;
 const double storageq15time =1.72;
 const double storageq16time =8.69;
 const double storageq17time =2415;

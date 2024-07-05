@@ -53,10 +53,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /root/workspace/Simulator-Instance
+CMAKE_SOURCE_DIR = /root/workspace/keti/Validator-Instance
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /root/workspace/Simulator-Instance/cmake/build
+CMAKE_BINARY_DIR = /root/workspace/keti/Validator-Instance/build/cmake/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/KETI_Validator.dir/depend.make
@@ -70,102 +70,116 @@ include CMakeFiles/KETI_Validator.dir/progress.make
 include CMakeFiles/KETI_Validator.dir/flags.make
 
 CMakeFiles/KETI_Validator.dir/QueryParser.cpp.o: CMakeFiles/KETI_Validator.dir/flags.make
-CMakeFiles/KETI_Validator.dir/QueryParser.cpp.o: /root/workspace/Simulator-Instance/QueryParser.cpp
+CMakeFiles/KETI_Validator.dir/QueryParser.cpp.o: /root/workspace/keti/Validator-Instance/QueryParser.cpp
 CMakeFiles/KETI_Validator.dir/QueryParser.cpp.o: CMakeFiles/KETI_Validator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/workspace/Simulator-Instance/cmake/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/KETI_Validator.dir/QueryParser.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/KETI_Validator.dir/QueryParser.cpp.o -MF CMakeFiles/KETI_Validator.dir/QueryParser.cpp.o.d -o CMakeFiles/KETI_Validator.dir/QueryParser.cpp.o -c /root/workspace/Simulator-Instance/QueryParser.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/workspace/keti/Validator-Instance/build/cmake/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/KETI_Validator.dir/QueryParser.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/KETI_Validator.dir/QueryParser.cpp.o -MF CMakeFiles/KETI_Validator.dir/QueryParser.cpp.o.d -o CMakeFiles/KETI_Validator.dir/QueryParser.cpp.o -c /root/workspace/keti/Validator-Instance/QueryParser.cpp
 
 CMakeFiles/KETI_Validator.dir/QueryParser.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/KETI_Validator.dir/QueryParser.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/workspace/Simulator-Instance/QueryParser.cpp > CMakeFiles/KETI_Validator.dir/QueryParser.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/workspace/keti/Validator-Instance/QueryParser.cpp > CMakeFiles/KETI_Validator.dir/QueryParser.cpp.i
 
 CMakeFiles/KETI_Validator.dir/QueryParser.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/KETI_Validator.dir/QueryParser.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/workspace/Simulator-Instance/QueryParser.cpp -o CMakeFiles/KETI_Validator.dir/QueryParser.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/workspace/keti/Validator-Instance/QueryParser.cpp -o CMakeFiles/KETI_Validator.dir/QueryParser.cpp.s
 
 CMakeFiles/KETI_Validator.dir/RestHandler.cpp.o: CMakeFiles/KETI_Validator.dir/flags.make
-CMakeFiles/KETI_Validator.dir/RestHandler.cpp.o: /root/workspace/Simulator-Instance/RestHandler.cpp
+CMakeFiles/KETI_Validator.dir/RestHandler.cpp.o: /root/workspace/keti/Validator-Instance/RestHandler.cpp
 CMakeFiles/KETI_Validator.dir/RestHandler.cpp.o: CMakeFiles/KETI_Validator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/workspace/Simulator-Instance/cmake/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/KETI_Validator.dir/RestHandler.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/KETI_Validator.dir/RestHandler.cpp.o -MF CMakeFiles/KETI_Validator.dir/RestHandler.cpp.o.d -o CMakeFiles/KETI_Validator.dir/RestHandler.cpp.o -c /root/workspace/Simulator-Instance/RestHandler.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/workspace/keti/Validator-Instance/build/cmake/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/KETI_Validator.dir/RestHandler.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/KETI_Validator.dir/RestHandler.cpp.o -MF CMakeFiles/KETI_Validator.dir/RestHandler.cpp.o.d -o CMakeFiles/KETI_Validator.dir/RestHandler.cpp.o -c /root/workspace/keti/Validator-Instance/RestHandler.cpp
 
 CMakeFiles/KETI_Validator.dir/RestHandler.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/KETI_Validator.dir/RestHandler.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/workspace/Simulator-Instance/RestHandler.cpp > CMakeFiles/KETI_Validator.dir/RestHandler.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/workspace/keti/Validator-Instance/RestHandler.cpp > CMakeFiles/KETI_Validator.dir/RestHandler.cpp.i
 
 CMakeFiles/KETI_Validator.dir/RestHandler.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/KETI_Validator.dir/RestHandler.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/workspace/Simulator-Instance/RestHandler.cpp -o CMakeFiles/KETI_Validator.dir/RestHandler.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/workspace/keti/Validator-Instance/RestHandler.cpp -o CMakeFiles/KETI_Validator.dir/RestHandler.cpp.s
 
 CMakeFiles/KETI_Validator.dir/SSDValidator.cpp.o: CMakeFiles/KETI_Validator.dir/flags.make
-CMakeFiles/KETI_Validator.dir/SSDValidator.cpp.o: /root/workspace/Simulator-Instance/SSDValidator.cpp
+CMakeFiles/KETI_Validator.dir/SSDValidator.cpp.o: /root/workspace/keti/Validator-Instance/SSDValidator.cpp
 CMakeFiles/KETI_Validator.dir/SSDValidator.cpp.o: CMakeFiles/KETI_Validator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/workspace/Simulator-Instance/cmake/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/KETI_Validator.dir/SSDValidator.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/KETI_Validator.dir/SSDValidator.cpp.o -MF CMakeFiles/KETI_Validator.dir/SSDValidator.cpp.o.d -o CMakeFiles/KETI_Validator.dir/SSDValidator.cpp.o -c /root/workspace/Simulator-Instance/SSDValidator.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/workspace/keti/Validator-Instance/build/cmake/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/KETI_Validator.dir/SSDValidator.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/KETI_Validator.dir/SSDValidator.cpp.o -MF CMakeFiles/KETI_Validator.dir/SSDValidator.cpp.o.d -o CMakeFiles/KETI_Validator.dir/SSDValidator.cpp.o -c /root/workspace/keti/Validator-Instance/SSDValidator.cpp
 
 CMakeFiles/KETI_Validator.dir/SSDValidator.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/KETI_Validator.dir/SSDValidator.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/workspace/Simulator-Instance/SSDValidator.cpp > CMakeFiles/KETI_Validator.dir/SSDValidator.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/workspace/keti/Validator-Instance/SSDValidator.cpp > CMakeFiles/KETI_Validator.dir/SSDValidator.cpp.i
 
 CMakeFiles/KETI_Validator.dir/SSDValidator.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/KETI_Validator.dir/SSDValidator.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/workspace/Simulator-Instance/SSDValidator.cpp -o CMakeFiles/KETI_Validator.dir/SSDValidator.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/workspace/keti/Validator-Instance/SSDValidator.cpp -o CMakeFiles/KETI_Validator.dir/SSDValidator.cpp.s
 
 CMakeFiles/KETI_Validator.dir/CSDValidator.cpp.o: CMakeFiles/KETI_Validator.dir/flags.make
-CMakeFiles/KETI_Validator.dir/CSDValidator.cpp.o: /root/workspace/Simulator-Instance/CSDValidator.cpp
+CMakeFiles/KETI_Validator.dir/CSDValidator.cpp.o: /root/workspace/keti/Validator-Instance/CSDValidator.cpp
 CMakeFiles/KETI_Validator.dir/CSDValidator.cpp.o: CMakeFiles/KETI_Validator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/workspace/Simulator-Instance/cmake/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/KETI_Validator.dir/CSDValidator.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/KETI_Validator.dir/CSDValidator.cpp.o -MF CMakeFiles/KETI_Validator.dir/CSDValidator.cpp.o.d -o CMakeFiles/KETI_Validator.dir/CSDValidator.cpp.o -c /root/workspace/Simulator-Instance/CSDValidator.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/workspace/keti/Validator-Instance/build/cmake/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/KETI_Validator.dir/CSDValidator.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/KETI_Validator.dir/CSDValidator.cpp.o -MF CMakeFiles/KETI_Validator.dir/CSDValidator.cpp.o.d -o CMakeFiles/KETI_Validator.dir/CSDValidator.cpp.o -c /root/workspace/keti/Validator-Instance/CSDValidator.cpp
 
 CMakeFiles/KETI_Validator.dir/CSDValidator.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/KETI_Validator.dir/CSDValidator.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/workspace/Simulator-Instance/CSDValidator.cpp > CMakeFiles/KETI_Validator.dir/CSDValidator.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/workspace/keti/Validator-Instance/CSDValidator.cpp > CMakeFiles/KETI_Validator.dir/CSDValidator.cpp.i
 
 CMakeFiles/KETI_Validator.dir/CSDValidator.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/KETI_Validator.dir/CSDValidator.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/workspace/Simulator-Instance/CSDValidator.cpp -o CMakeFiles/KETI_Validator.dir/CSDValidator.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/workspace/keti/Validator-Instance/CSDValidator.cpp -o CMakeFiles/KETI_Validator.dir/CSDValidator.cpp.s
 
 CMakeFiles/KETI_Validator.dir/HistogramTable.cpp.o: CMakeFiles/KETI_Validator.dir/flags.make
-CMakeFiles/KETI_Validator.dir/HistogramTable.cpp.o: /root/workspace/Simulator-Instance/HistogramTable.cpp
+CMakeFiles/KETI_Validator.dir/HistogramTable.cpp.o: /root/workspace/keti/Validator-Instance/HistogramTable.cpp
 CMakeFiles/KETI_Validator.dir/HistogramTable.cpp.o: CMakeFiles/KETI_Validator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/workspace/Simulator-Instance/cmake/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/KETI_Validator.dir/HistogramTable.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/KETI_Validator.dir/HistogramTable.cpp.o -MF CMakeFiles/KETI_Validator.dir/HistogramTable.cpp.o.d -o CMakeFiles/KETI_Validator.dir/HistogramTable.cpp.o -c /root/workspace/Simulator-Instance/HistogramTable.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/workspace/keti/Validator-Instance/build/cmake/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/KETI_Validator.dir/HistogramTable.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/KETI_Validator.dir/HistogramTable.cpp.o -MF CMakeFiles/KETI_Validator.dir/HistogramTable.cpp.o.d -o CMakeFiles/KETI_Validator.dir/HistogramTable.cpp.o -c /root/workspace/keti/Validator-Instance/HistogramTable.cpp
 
 CMakeFiles/KETI_Validator.dir/HistogramTable.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/KETI_Validator.dir/HistogramTable.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/workspace/Simulator-Instance/HistogramTable.cpp > CMakeFiles/KETI_Validator.dir/HistogramTable.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/workspace/keti/Validator-Instance/HistogramTable.cpp > CMakeFiles/KETI_Validator.dir/HistogramTable.cpp.i
 
 CMakeFiles/KETI_Validator.dir/HistogramTable.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/KETI_Validator.dir/HistogramTable.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/workspace/Simulator-Instance/HistogramTable.cpp -o CMakeFiles/KETI_Validator.dir/HistogramTable.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/workspace/keti/Validator-Instance/HistogramTable.cpp -o CMakeFiles/KETI_Validator.dir/HistogramTable.cpp.s
 
 CMakeFiles/KETI_Validator.dir/StorageValidator.cpp.o: CMakeFiles/KETI_Validator.dir/flags.make
-CMakeFiles/KETI_Validator.dir/StorageValidator.cpp.o: /root/workspace/Simulator-Instance/StorageValidator.cpp
+CMakeFiles/KETI_Validator.dir/StorageValidator.cpp.o: /root/workspace/keti/Validator-Instance/StorageValidator.cpp
 CMakeFiles/KETI_Validator.dir/StorageValidator.cpp.o: CMakeFiles/KETI_Validator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/workspace/Simulator-Instance/cmake/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/KETI_Validator.dir/StorageValidator.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/KETI_Validator.dir/StorageValidator.cpp.o -MF CMakeFiles/KETI_Validator.dir/StorageValidator.cpp.o.d -o CMakeFiles/KETI_Validator.dir/StorageValidator.cpp.o -c /root/workspace/Simulator-Instance/StorageValidator.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/workspace/keti/Validator-Instance/build/cmake/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/KETI_Validator.dir/StorageValidator.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/KETI_Validator.dir/StorageValidator.cpp.o -MF CMakeFiles/KETI_Validator.dir/StorageValidator.cpp.o.d -o CMakeFiles/KETI_Validator.dir/StorageValidator.cpp.o -c /root/workspace/keti/Validator-Instance/StorageValidator.cpp
 
 CMakeFiles/KETI_Validator.dir/StorageValidator.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/KETI_Validator.dir/StorageValidator.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/workspace/Simulator-Instance/StorageValidator.cpp > CMakeFiles/KETI_Validator.dir/StorageValidator.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/workspace/keti/Validator-Instance/StorageValidator.cpp > CMakeFiles/KETI_Validator.dir/StorageValidator.cpp.i
 
 CMakeFiles/KETI_Validator.dir/StorageValidator.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/KETI_Validator.dir/StorageValidator.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/workspace/Simulator-Instance/StorageValidator.cpp -o CMakeFiles/KETI_Validator.dir/StorageValidator.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/workspace/keti/Validator-Instance/StorageValidator.cpp -o CMakeFiles/KETI_Validator.dir/StorageValidator.cpp.s
+
+CMakeFiles/KETI_Validator.dir/QEMUHandler.cpp.o: CMakeFiles/KETI_Validator.dir/flags.make
+CMakeFiles/KETI_Validator.dir/QEMUHandler.cpp.o: /root/workspace/keti/Validator-Instance/QEMUHandler.cpp
+CMakeFiles/KETI_Validator.dir/QEMUHandler.cpp.o: CMakeFiles/KETI_Validator.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/workspace/keti/Validator-Instance/build/cmake/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/KETI_Validator.dir/QEMUHandler.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/KETI_Validator.dir/QEMUHandler.cpp.o -MF CMakeFiles/KETI_Validator.dir/QEMUHandler.cpp.o.d -o CMakeFiles/KETI_Validator.dir/QEMUHandler.cpp.o -c /root/workspace/keti/Validator-Instance/QEMUHandler.cpp
+
+CMakeFiles/KETI_Validator.dir/QEMUHandler.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/KETI_Validator.dir/QEMUHandler.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/workspace/keti/Validator-Instance/QEMUHandler.cpp > CMakeFiles/KETI_Validator.dir/QEMUHandler.cpp.i
+
+CMakeFiles/KETI_Validator.dir/QEMUHandler.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/KETI_Validator.dir/QEMUHandler.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/workspace/keti/Validator-Instance/QEMUHandler.cpp -o CMakeFiles/KETI_Validator.dir/QEMUHandler.cpp.s
 
 CMakeFiles/KETI_Validator.dir/main.cpp.o: CMakeFiles/KETI_Validator.dir/flags.make
-CMakeFiles/KETI_Validator.dir/main.cpp.o: /root/workspace/Simulator-Instance/main.cpp
+CMakeFiles/KETI_Validator.dir/main.cpp.o: /root/workspace/keti/Validator-Instance/main.cpp
 CMakeFiles/KETI_Validator.dir/main.cpp.o: CMakeFiles/KETI_Validator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/workspace/Simulator-Instance/cmake/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/KETI_Validator.dir/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/KETI_Validator.dir/main.cpp.o -MF CMakeFiles/KETI_Validator.dir/main.cpp.o.d -o CMakeFiles/KETI_Validator.dir/main.cpp.o -c /root/workspace/Simulator-Instance/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/workspace/keti/Validator-Instance/build/cmake/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/KETI_Validator.dir/main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/KETI_Validator.dir/main.cpp.o -MF CMakeFiles/KETI_Validator.dir/main.cpp.o.d -o CMakeFiles/KETI_Validator.dir/main.cpp.o -c /root/workspace/keti/Validator-Instance/main.cpp
 
 CMakeFiles/KETI_Validator.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/KETI_Validator.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/workspace/Simulator-Instance/main.cpp > CMakeFiles/KETI_Validator.dir/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/workspace/keti/Validator-Instance/main.cpp > CMakeFiles/KETI_Validator.dir/main.cpp.i
 
 CMakeFiles/KETI_Validator.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/KETI_Validator.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/workspace/Simulator-Instance/main.cpp -o CMakeFiles/KETI_Validator.dir/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/workspace/keti/Validator-Instance/main.cpp -o CMakeFiles/KETI_Validator.dir/main.cpp.s
 
 # Object files for target KETI_Validator
 KETI_Validator_OBJECTS = \
@@ -175,6 +189,7 @@ KETI_Validator_OBJECTS = \
 "CMakeFiles/KETI_Validator.dir/CSDValidator.cpp.o" \
 "CMakeFiles/KETI_Validator.dir/HistogramTable.cpp.o" \
 "CMakeFiles/KETI_Validator.dir/StorageValidator.cpp.o" \
+"CMakeFiles/KETI_Validator.dir/QEMUHandler.cpp.o" \
 "CMakeFiles/KETI_Validator.dir/main.cpp.o"
 
 # External object files for target KETI_Validator
@@ -186,10 +201,11 @@ KETI_Validator: CMakeFiles/KETI_Validator.dir/SSDValidator.cpp.o
 KETI_Validator: CMakeFiles/KETI_Validator.dir/CSDValidator.cpp.o
 KETI_Validator: CMakeFiles/KETI_Validator.dir/HistogramTable.cpp.o
 KETI_Validator: CMakeFiles/KETI_Validator.dir/StorageValidator.cpp.o
+KETI_Validator: CMakeFiles/KETI_Validator.dir/QEMUHandler.cpp.o
 KETI_Validator: CMakeFiles/KETI_Validator.dir/main.cpp.o
 KETI_Validator: CMakeFiles/KETI_Validator.dir/build.make
 KETI_Validator: CMakeFiles/KETI_Validator.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/root/workspace/Simulator-Instance/cmake/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable KETI_Validator"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/root/workspace/keti/Validator-Instance/build/cmake/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable KETI_Validator"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/KETI_Validator.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -201,6 +217,6 @@ CMakeFiles/KETI_Validator.dir/clean:
 .PHONY : CMakeFiles/KETI_Validator.dir/clean
 
 CMakeFiles/KETI_Validator.dir/depend:
-	cd /root/workspace/Simulator-Instance/cmake/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /root/workspace/Simulator-Instance /root/workspace/Simulator-Instance /root/workspace/Simulator-Instance/cmake/build /root/workspace/Simulator-Instance/cmake/build /root/workspace/Simulator-Instance/cmake/build/CMakeFiles/KETI_Validator.dir/DependInfo.cmake --color=$(COLOR)
+	cd /root/workspace/keti/Validator-Instance/build/cmake/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /root/workspace/keti/Validator-Instance /root/workspace/keti/Validator-Instance /root/workspace/keti/Validator-Instance/build/cmake/build /root/workspace/keti/Validator-Instance/build/cmake/build /root/workspace/keti/Validator-Instance/build/cmake/build/CMakeFiles/KETI_Validator.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/KETI_Validator.dir/depend
 

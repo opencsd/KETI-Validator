@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/KETI_Validator.dir/CSDValidator.cpp.o.d"
   "CMakeFiles/KETI_Validator.dir/HistogramTable.cpp.o"
   "CMakeFiles/KETI_Validator.dir/HistogramTable.cpp.o.d"
+  "CMakeFiles/KETI_Validator.dir/QEMUHandler.cpp.o"
+  "CMakeFiles/KETI_Validator.dir/QEMUHandler.cpp.o.d"
   "CMakeFiles/KETI_Validator.dir/QueryParser.cpp.o"
   "CMakeFiles/KETI_Validator.dir/QueryParser.cpp.o.d"
   "CMakeFiles/KETI_Validator.dir/RestHandler.cpp.o"

@@ -118,7 +118,6 @@ std::string SSDValidatorTemp(std::string queryStatement, std::vector<querySnippe
     DBManager& dbManager = DBManager::getInstance();
     std::string queryState = "insert into validation_log (validation_id, user_id, query_statement, timestamp, option_id, storage_cpu_usage_predict, storage_power_usage_predict, network_usage_predict, scanned_row_count_predict, filtered_row_count_predict, execution_time_predict,snippet_count, storage_type) values (";
     queryState = queryState + std::to_string(validateLog.validationID) + ",\"" +validateLog.userID + "\",\"" + validateLog.queryStatement + "\",\"" + validateLog.timestamp + "\"," + std::to_string(validateLog.optionID) + "," + std::to_string(validateLog.storageCPUUsage) + "," +std::to_string(validateLog.storagePowerUsage) + "," +std::to_string(validateLog.networkUsage) + "," + std::to_string(validateLog.scannedRow) + ","+std::to_string(validateLog.filteredRow) + "," +std::to_string(validateLog.executionTime) +","+ std::to_string(validateLog.SnippetCount)+ ",\'ssd\')";
-    //std::cout<<queryState<<std::endl;
     try{
         sql::ResultSet *resultSet = dbManager.executeQuery(queryState);
         delete resultSet;
@@ -147,9 +146,19 @@ storageValidation executeSSDValidate(std::vector<querySnippetInfo> snippetInfo, 
     //getnetwork, scanned row
     float network = 0;
     int scannedrow = 0;
+    int aggregaterow = 0;
     int filteredrow = 0;
+    std::vector<std::string> tableList;
+    std::vector<int> tableRowList;
+
     for(int i=0;i<snippetInfo.size();i++){
         querySnippetInfo snippet = snippetInfo[i];
+        tableList.push_back(snippetInfo[i].tableAlias);
+        std::cout<<"\n\nCURRENT TABLE LIST"<<std::endl;
+        for(int j=0;j<tableList.size();j++){
+            std::cout<<tableList[j]<<std::endl;
+        }
+
         if(snippet.snippetType == "CSD_Scan"){
             std::string tableName = snippet.tableName[0];
             float filterRatio;
@@ -159,139 +168,170 @@ storageValidation executeSSDValidate(std::vector<querySnippetInfo> snippetInfo, 
                 network += lineitemSize;
                 scannedrow += lineitemRow;
                 filteredrow += filterRatio * lineitemRow;
+                tableRowList.push_back(filterRatio * lineitemRow);
             }
             if(tableName == "region"){
                 network += regionSize;
                 scannedrow += regionRow;
                 filteredrow += filterRatio * regionRow;
+                tableRowList.push_back(filterRatio * regionRow);
             }
             if(tableName == "nation"){
                 network += nationSize;
                 scannedrow += nationRow;
                 filteredrow += filterRatio * nationRow;
+                tableRowList.push_back(filterRatio * nationRow);
             }
             if(tableName == "part"){
                 network += partSize;
                 scannedrow += partRow;
                 filteredrow += filterRatio * partRow;
+                tableRowList.push_back(filterRatio * partRow);
             }
             if(tableName == "partsupp"){
                 network += partsuppSize;
                 scannedrow += partsuppRow;
                 filteredrow += filterRatio * partsuppRow;
+                tableRowList.push_back(filterRatio * partsuppRow);
             }
             if(tableName == "customer"){
                 network += customerSize;
                 scannedrow += customerRow;
                 filteredrow += filterRatio * customerRow;
+                tableRowList.push_back(filterRatio * customerRow);
             }
             if(tableName == "orders"){
                 network += ordersSize;
                 scannedrow += ordersRow;
                 filteredrow += filterRatio * ordersRow;
+                tableRowList.push_back(filterRatio * ordersRow);
             }
             if(tableName == "supplier"){
                 network += supplierSize;
                 scannedrow += supplierRow;
                 filteredrow += filterRatio * supplierRow;
+                tableRowList.push_back(filterRatio * supplierRow);
             }
+        }
+
+        else if(snippet.snippetType == "Aggregation"){
+            std::cout<<"AGGREGATION ON"<<std::endl;
+            std::string tableName = snippet.tableName[0];
+            std::cout<<"TABLE NAME : "<<tableName<<std::endl;
+            int tableRow = 0;
+            for(int j=0;j<tableList.size();j++){
+                if(tableList[j] == tableName){
+                    std::cout<<tableRowList[j]<<std::endl;
+                    tableRow = tableRowList[j];
+                }
+            }
+            if(tableRow > 6000000){
+                tableRow = 0;
+            }
+            aggregaterow += tableRow;
         }
     }
     resultValidate.filteredRow = filteredrow;
     resultValidate.scannedRow = scannedrow;
     resultValidate.networkUsage = network;
+    resultValidate.aggregateRow = aggregaterow;
+    std::cout<<"AGGREGATE ROW : "<<aggregaterow<<"\n";
     double queryTime = 0;
+    if(aggregaterow != 0){
+        queryTime += aggregaterow / ssdaggTime;
+    }
     // queryTime
     switch (queryNum){
         case 1:
-            queryTime += query1join / ssdjoinTime;
+            queryTime += query1join / ssdGjoinTime;
             queryTime += scannedrow / ssdscanTime;
             break;
         case 2:
-            queryTime += query2join / ssdjoinTime;
+            queryTime += query2join / ssdBjoinTime;
             queryTime += scannedrow / ssdscanTime;
             break;
         case 3:
-            queryTime += query3join / ssdjoinTime;
+            queryTime += query3join / ssdOjoinTime;
             queryTime += scannedrow / ssdscanTime;
             break;
         case 4:
-            queryTime += query4join / ssdjoinTime;
+            queryTime += query4join / ssdRjoinTime;
             queryTime += scannedrow / ssdscanTime;
             break;
         case 5:
-            queryTime += query5join / ssdjoinTime;
+            queryTime += query5join / ssdYjoinTime;
             queryTime += scannedrow / ssdscanTime;
             break;
         case 6:
-            queryTime += query6join / ssdjoinTime;
+            queryTime += query6join / ssdGjoinTime;
             queryTime += scannedrow / ssdscanTime;
             break;
         case 7:
-            queryTime += query7join / ssdjoinTime;
+            queryTime += query7join / ssdYjoinTime;
             queryTime += scannedrow / ssdscanTime;
             break;
         case 8:
-            queryTime += query8join / ssdjoinTime;
+            queryTime += query8join / ssdBjoinTime;
             queryTime += scannedrow / ssdscanTime;
             break;
         case 9:
-            queryTime += query9join / ssdjoinTime;
+            queryTime += query9join / ssdYjoinTime;
             queryTime += scannedrow / ssdscanTime;
             break;
         case 10:
-            queryTime += query10join / ssdjoinTime;
+            queryTime += query10join / ssdBjoinTime;
             queryTime += scannedrow / ssdscanTime;
             break;
         case 11:
-            queryTime += query11join / ssdjoinTime;
+            queryTime += query11join / ssdOjoinTime;
             queryTime += scannedrow / ssdscanTime;
             break;
         case 12:
-            queryTime += query12join / ssdjoinTime;
+            queryTime += query12join / ssdOjoinTime;
             queryTime += scannedrow / ssdscanTime;
             break;
         case 13:
-            queryTime += query13join / ssdjoinTime;
+            queryTime += query13join / ssdOjoinTime;
             queryTime += scannedrow / ssdscanTime;
             break;
         case 14:
-            queryTime += query14join / ssdjoinTime;
+            queryTime += query14join / ssdOjoinTime;
             queryTime += scannedrow / ssdscanTime;
             break;
         case 15:
-            queryTime += query15join / ssdjoinTime;
+            queryTime += query15join / ssdRjoinTime;
             queryTime += scannedrow / ssdscanTime;
             break;
         case 16:
-            queryTime += query16join / ssdjoinTime;
+            queryTime += query16join / ssdOjoinTime;
             queryTime += scannedrow / ssdscanTime;
             break;
         case 17:
-            queryTime += query17join / ssdjoinTime;
+            queryTime += query17join / ssdYjoinTime;
             queryTime += scannedrow / ssdscanTime;
             break;
         case 18:
-            queryTime += query18join / ssdjoinTime;
+            queryTime += query18join / ssdRjoinTime;
             queryTime += scannedrow / ssdscanTime;
             break;
         case 19:
-            queryTime += query19join / ssdjoinTime;
+            queryTime += query19join / ssdGjoinTime;
             queryTime += scannedrow / ssdscanTime;
             break;
         case 20:
-            queryTime += query20join / ssdjoinTime;
+            queryTime += query20join / ssdGjoinTime;
             queryTime += scannedrow / ssdscanTime;
             break;
         case 21:
-            queryTime += query21join / ssdjoinTime;
+            queryTime += query21join / ssdGjoinTime;
             queryTime += scannedrow / ssdscanTime;
             break;
         case 22:
-            queryTime += query22join / ssdjoinTime;
+            queryTime += query22join / ssdYjoinTime;
             queryTime += scannedrow / ssdscanTime;
             break;
     }
+    queryTime *= ssdAllWeight; // SSD 최종 가중치 (나중에 가변적으로 변할때 쓰기 위함)
     std::cout<<"QUERY EXECUTION TIME : "<<queryTime<<"\n";
     queryTime = applyWeight1(queryTime);
     resultValidate.executionTime = queryTime;

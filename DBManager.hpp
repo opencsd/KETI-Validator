@@ -35,3 +35,33 @@ class DBManager {
         sql::mysql::MySQL_Driver *driver;
         sql::Connection *con;
 };
+
+class TPCHManager{
+    public:
+        static TPCHManager& getInstance(){
+            static TPCHManager instance;
+            return instance;
+        }
+
+        void initialize(const std::string& host, const std::string& user, const std::string& password, const std::string& database){
+            driver = sql::mysql::get_mysql_driver_instance();
+            con = driver -> connect("tcp:://10.0.4.80:3306", user, password);
+            con -> setSchema(database);
+        }
+
+        sql::ResultSet* executeQuery(const std::string& query){
+            sql::Statement *stmt = con -> createStatement();
+            sql::ResultSet *res = stmt -> executeQuery(query);
+        }
+
+    private:
+        TPCHManager(){}
+        ~TPCHManager(){
+            delete con;
+        }
+
+        TPCHManager(const TPCHManager&) = delete;
+        TPCHManager& operator=(const TPCHManager&) = delete;
+        sql::mysql::MySQL_Driver *driver;
+        sql::Connection *con;
+};
