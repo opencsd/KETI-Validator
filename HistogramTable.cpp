@@ -4767,7 +4767,7 @@ float getFilteredRow(querySnippetInfo snippet){
                         }
                         filterRatio.push_back(filterRatioTemp);
                     }
-                }
+                }//
 
                 if(isduplicated){ // 테이블이 중복된 경우 따로 연산 수행
                 float prevRatio;
