@@ -33,7 +33,7 @@ std::string QueryParserMain(std::string queryStatement, int optionID, std::strin
     std::cout<<"VALIDATION ID : "<<simulationNum<<std::endl;
     snippetInfo = getSnippetInfo(queryStatement);
     std::cout<<"SNIPPET COUNT : "<<snippetInfo.size()<<std::endl;
-    returnJson = "{\n\"Validation_Option\":{\n\"Option_ID\" : " + std::to_string(option.optionID) + ",\n\"User_ID\" : \"" + option.userID +"\",\n\"Option_Name\" : \"" + option.optionName + "\",\n\"DBMS_Type\" : \"" + option.DBType + "\",\n\"Storage_Type\" : \"" + option.storageType + "\",\n\"CSD_Count\" : " + std::to_string(option.csdCount) + ",\n\"CSD_Type\" : \"" + option.csdType + "\",\n\"Block_Count\" : " + std::to_string(option.blockCount) + ",\n\"Scheduling_Algorithm\" : \"" + option.schedulingAlgorithm + "\",\n\"Using_Index\" : " + std::to_string(option.usingIndex) + "\n},\n";
+    returnJson = "{\n\"Validation_Option\":{\n\"Option_ID\" : " + std::to_string(option.optionID) + "\",\n\"Option_Name\" : \"" + option.optionName + "\",\n\"DBMS_Type\" : \"" + option.DBType + "\",\n\"Storage_Type\" : \"" + option.storageType + "\",\n\"CSD_Count\" : " + std::to_string(option.csdCount) + ",\n\"CSD_Type\" : \"" + option.csdType + "\",\n\"Block_Count\" : " + std::to_string(option.blockCount) + ",\n\"Scheduling_Algorithm\" : \"" + option.schedulingAlgorithm + "\",\n\"Using_Index\" : " + std::to_string(option.usingIndex) + "\n},\n";
     
 
     returnJson = returnJson + " \"Validation_Snippet\" : {\n[\n";
@@ -62,7 +62,7 @@ std::string QueryParserMain(std::string queryStatement, int optionID, std::strin
 optionInfo getOptionInfo(int optionID, std::string userID){
     optionInfo option;
     DBManager& dbManager = DBManager::getInstance();
-    std::string queryState = "select * from validation_option where user_id = \"" + userID +"\" and option_id = " +std::to_string(optionID) + ";";
+    std::string queryState = "select * from validation_option where  option_id = " +std::to_string(optionID) + ";";
     std::cout<<"---OPTION ANALYZE---"<<std::endl;
     std::cout<<"USER ID : "<<userID<<" OPTION ID : "<<optionID<<std::endl;
     sql::ResultSet *resultSet = dbManager.executeQuery(queryState);
@@ -72,8 +72,6 @@ optionInfo getOptionInfo(int optionID, std::string userID){
         std::cout<<"OPTION ID : "<<resultSet->getInt("option_id")<<std::endl;
         option.optionName = resultSet -> getString("option_name");
         std::cout<<"OPTION NAME : "<<resultSet -> getString("option_name")<<std::endl;
-        option.userID = resultSet->getString("user_id");
-        std::cout<<"USER ID : "<<resultSet->getString("user_id")<<std::endl;
         option.DBType = (resultSet->getString("dbms_type"));
         std::cout<<"DBMS TYPE : "<< resultSet->getString("dbms_type")<<std::endl;
         option.storageType = (resultSet->getString("storage_type"));

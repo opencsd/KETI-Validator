@@ -39,7 +39,7 @@ int main(int argc, char** argv){
 
 
     DBManager& dbManager = DBManager::getInstance();
-    dbManager.initialize("localhost","keti","ketilinux","keti_opencsd");
+    dbManager.initialize("10.0.4.80","root","ketilinux","keti_opencsd");
 
     std::string queryState = "show tables;";
     

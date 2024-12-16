@@ -66,7 +66,7 @@ void QEMUHandler::inputQEMUHandler(){
          int newID = block.query_id * 100 + block.work_id;
          rowCountMap[newID]+= block.row_count;
          std::cout<<newID<<" CURRENT BLOCK COUNT : "<<rowCountMap[newID]<<std::endl;
-         if(rowCountMap[newID] >= 10000 || rowCountMap[newID] == 5 || rowCountMap[newID] == 25 || rowCountMap[newID] == 1250){
+         if(rowCountMap[newID] >= 100000 || rowCountMap[newID] == 5 || rowCountMap[newID] == 25 || rowCountMap[newID] == 1250){
             resultMap[newID] = block;
          }
         // send(client_fd, cMsg, strlen(cMsg), 0);

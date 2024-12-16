@@ -1328,9 +1328,8 @@ CMakeFiles/KETI_Validator.dir/QueryParser.cpp.o: /root/workspace/keti/Validator-
   /usr/include/c++/11/bits/fstream.tcc
 
 CMakeFiles/KETI_Validator.dir/RestHandler.cpp.o: /root/workspace/keti/Validator-Instance/RestHandler.cpp \
-  /root/workspace/Simulator-Instance/RestHandler.cpp \
   /usr/include/stdc-predef.h \
-  /root/workspace/Simulator-Instance/RestHandler.hpp \
+  /root/workspace/keti/Validator-Instance/RestHandler.hpp \
   /usr/include/c++/11/thread \
   /usr/include/c++/11/bits/std_thread.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
@@ -1352,9 +1351,9 @@ CMakeFiles/KETI_Validator.dir/RestHandler.cpp.o: /root/workspace/keti/Validator-
   /usr/include/c++/11/typeinfo \
   /usr/include/c++/11/bits/hash_bytes.h \
   /usr/include/c++/11/new \
-  /usr/include/c++/11/bits/nested_exception.h \
   /usr/include/c++/11/bits/move.h \
   /usr/include/c++/11/type_traits \
+  /usr/include/c++/11/bits/nested_exception.h \
   /usr/include/c++/11/iosfwd \
   /usr/include/c++/11/bits/stringfwd.h \
   /usr/include/c++/11/bits/memoryfwd.h \
@@ -1467,7 +1466,6 @@ CMakeFiles/KETI_Validator.dir/RestHandler.cpp.o: /root/workspace/keti/Validator-
   /usr/include/c++/11/bits/alloc_traits.h \
   /usr/include/c++/11/bits/stl_construct.h \
   /usr/include/c++/11/string_view \
-  /usr/include/c++/11/bits/ranges_base.h \
   /usr/include/c++/11/bits/string_view.tcc \
   /usr/include/c++/11/ext/string_conversions.h \
   /usr/include/c++/11/cstdlib \
@@ -1618,6 +1616,7 @@ CMakeFiles/KETI_Validator.dir/RestHandler.cpp.o: /root/workspace/keti/Validator-
   /usr/include/c++/11/unordered_map \
   /usr/include/c++/11/bits/hashtable.h \
   /usr/include/c++/11/bits/hashtable_policy.h \
+  /usr/include/c++/11/bits/enable_special_members.h \
   /usr/include/c++/11/bits/node_handle.h \
   /usr/include/c++/11/bits/unordered_map.h \
   /usr/include/c++/11/bits/erase_if.h \
@@ -2830,7 +2829,7 @@ CMakeFiles/KETI_Validator.dir/RestHandler.cpp.o: /root/workspace/keti/Validator-
   /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
   /usr/include/c++/11/bits/fstream.tcc \
   /usr/include/c++/11/iostream \
-  /root/workspace/Simulator-Instance/stdafx.hpp \
+  /root/workspace/keti/Validator-Instance/stdafx.hpp \
   /usr/include/c++/11/random \
   /usr/include/c++/11/bits/random.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/opt_random.h \
@@ -3044,8 +3043,8 @@ CMakeFiles/KETI_Validator.dir/RestHandler.cpp.o: /root/workspace/keti/Validator-
   /usr/include/cpprest/filestream.h \
   /usr/include/cpprest/details/fileio.h \
   /usr/include/cpprest/producerconsumerstream.h \
-  /root/workspace/Simulator-Instance/QueryParser.hpp \
-  /root/workspace/Simulator-Instance/DBManager.hpp \
+  /root/workspace/keti/Validator-Instance/QueryParser.hpp \
+  /root/workspace/keti/Validator-Instance/DBManager.hpp \
   /usr/include/cppconn/statement.h \
   /usr/include/cppconn/config.h \
   /usr/include/inttypes.h \
@@ -3063,11 +3062,17 @@ CMakeFiles/KETI_Validator.dir/RestHandler.cpp.o: /root/workspace/keti/Validator-
   /usr/include/cppconn/warning.h \
   /usr/include/cppconn/variant.h \
   /usr/include/cppconn/exception.h \
-  /root/workspace/Simulator-Instance/SSDValidator.hpp \
-  /root/workspace/Simulator-Instance/TypeDef.hpp \
-  /root/workspace/Simulator-Instance/HistogramTable.hpp \
-  /root/workspace/Simulator-Instance/CSDValidator.hpp \
-  /root/workspace/Simulator-Instance/StorageValidator.hpp \
+  /root/workspace/keti/Validator-Instance/SSDValidator.hpp \
+  /root/workspace/keti/Validator-Instance/TypeDef.hpp \
+  /root/workspace/keti/Validator-Instance/HistogramTable.hpp \
+  /root/workspace/keti/Validator-Instance/CSDValidator.hpp \
+  /root/workspace/keti/Validator-Instance/StorageValidator.hpp \
+  /root/workspace/keti/Validator-Instance/keti_log.h \
+  /usr/include/x86_64-linux-gnu/sys/ipc.h \
+  /usr/include/x86_64-linux-gnu/bits/ipctypes.h \
+  /usr/include/x86_64-linux-gnu/bits/ipc.h \
+  /usr/include/x86_64-linux-gnu/sys/msg.h \
+  /usr/include/x86_64-linux-gnu/bits/msq.h \
   /usr/include/rapidjson/document.h \
   /usr/include/rapidjson/reader.h \
   /usr/include/rapidjson/allocators.h \
@@ -5447,10 +5452,6 @@ CMakeFiles/KETI_Validator.dir/main.cpp.o: /root/workspace/keti/Validator-Instanc
   /root/workspace/keti/Validator-Instance/keti_type.h
 
 
-/root/workspace/Simulator-Instance/HistogramTable.hpp:
-
-/root/workspace/Simulator-Instance/SSDValidator.hpp:
-
 /usr/include/cpprest/producerconsumerstream.h:
 
 /usr/include/cpprest/details/fileio.h:
@@ -5636,8 +5637,6 @@ CMakeFiles/KETI_Validator.dir/main.cpp.o: /root/workspace/keti/Validator-Instanc
 /usr/include/c++/11/numeric:
 
 /usr/include/c++/11/bits/random.h:
-
-/root/workspace/Simulator-Instance/stdafx.hpp:
 
 /usr/include/boost/property_tree/json_parser/detail/write.hpp:
 
@@ -6075,8 +6074,6 @@ CMakeFiles/KETI_Validator.dir/main.cpp.o: /root/workspace/keti/Validator-Instanc
 
 /root/workspace/keti/Validator-Instance/SSDValidator.cpp:
 
-/root/workspace/Simulator-Instance/TypeDef.hpp:
-
 /usr/include/boost/mpl/iterator_tags.hpp:
 
 /usr/include/boost/bind/placeholders.hpp:
@@ -6329,14 +6326,6 @@ CMakeFiles/KETI_Validator.dir/main.cpp.o: /root/workspace/keti/Validator-Instanc
 
 /usr/include/boost/optional/detail/optional_reference_spec.hpp:
 
-/usr/include/boost/asio/ssl/detail/openssl_types.hpp:
-
-/usr/include/cpprest/containerstream.h:
-
-/usr/include/boost/optional/detail/optional_config.hpp:
-
-/usr/include/boost/utility/compare_pointees.hpp:
-
 /usr/include/c++/11/bits/stl_map.h:
 
 /usr/include/rapidjson/internal/strfunc.h:
@@ -6352,10 +6341,6 @@ CMakeFiles/KETI_Validator.dir/main.cpp.o: /root/workspace/keti/Validator-Instanc
 /usr/include/x86_64-linux-gnu/bits/ioctl-types.h:
 
 /usr/include/c++/11/bits/regex_scanner.h:
-
-/root/workspace/keti/Validator-Instance/RestHandler.hpp:
-
-/usr/include/asm-generic/ioctl.h:
 
 /usr/include/boost/mpl/vector/aux_/size.hpp:
 
@@ -6535,6 +6520,10 @@ CMakeFiles/KETI_Validator.dir/main.cpp.o: /root/workspace/keti/Validator-Instanc
 
 /usr/include/boost/asio/detail/config.hpp:
 
+/usr/include/asm-generic/ioctl.h:
+
+/root/workspace/keti/Validator-Instance/RestHandler.hpp:
+
 /usr/include/boost/preprocessor/logical/bool.hpp:
 
 /root/workspace/keti/Validator-Instance/QueryParser.hpp:
@@ -6705,11 +6694,15 @@ CMakeFiles/KETI_Validator.dir/main.cpp.o: /root/workspace/keti/Validator-Instanc
 
 /usr/include/rapidjson/internal/itoa.h:
 
-/root/workspace/Simulator-Instance/CSDValidator.hpp:
-
 /usr/include/boost/algorithm/string.hpp:
 
 /usr/include/rapidjson/internal/dtoa.h:
+
+/usr/include/boost/concept/usage.hpp:
+
+/usr/include/net/if.h:
+
+/usr/include/c++/11/tuple:
 
 /usr/include/rapidjson/writer.h:
 
@@ -6787,9 +6780,9 @@ CMakeFiles/KETI_Validator.dir/main.cpp.o: /root/workspace/keti/Validator-Instanc
 
 /usr/include/boost/predef/os/bsd/open.h:
 
-/root/workspace/keti/Validator-Instance/stdafx.hpp:
-
 /usr/include/boost/config/no_tr1/functional.hpp:
+
+/root/workspace/keti/Validator-Instance/stdafx.hpp:
 
 /usr/include/c++/11/stdlib.h:
 
@@ -7013,8 +7006,6 @@ CMakeFiles/KETI_Validator.dir/main.cpp.o: /root/workspace/keti/Validator-Instanc
 
 /usr/include/boost/preprocessor/detail/auto_rec.hpp:
 
-/usr/include/c++/11/bits/ranges_base.h:
-
 /usr/include/boost/type_traits/is_final.hpp:
 
 /usr/include/boost/asio/basic_datagram_socket.hpp:
@@ -7123,6 +7114,14 @@ CMakeFiles/KETI_Validator.dir/main.cpp.o: /root/workspace/keti/Validator-Instanc
 
 /usr/include/x86_64-linux-gnu/bits/sched.h:
 
+/usr/include/boost/asio/ssl/stream_base.hpp:
+
+/usr/include/boost/serialization/type_info_implementation.hpp:
+
+/usr/include/boost/predef/architecture/x86/64.h:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/atomic_word.h:
+
 /usr/include/boost/mpl/set/aux_/insert_impl.hpp:
 
 /usr/include/cppconn/statement.h:
@@ -7138,12 +7137,6 @@ CMakeFiles/KETI_Validator.dir/main.cpp.o: /root/workspace/keti/Validator-Instanc
 /usr/include/boost/property_tree/string_path.hpp:
 
 /usr/include/c++/11/type_traits:
-
-/usr/include/c++/11/tuple:
-
-/usr/include/boost/concept/usage.hpp:
-
-/usr/include/net/if.h:
 
 /usr/include/boost/predef/library/c/vms.h:
 
@@ -7221,6 +7214,18 @@ CMakeFiles/KETI_Validator.dir/main.cpp.o: /root/workspace/keti/Validator-Instanc
 
 /usr/include/c++/11/bits/stringfwd.h:
 
+/usr/include/netinet/tcp.h:
+
+/usr/include/x86_64-linux-gnu/sys/select.h:
+
+/usr/include/boost/asio/datagram_socket_service.hpp:
+
+/usr/include/boost/predef/os/qnxnto.h:
+
+/usr/include/boost/multi_index_container_fwd.hpp:
+
+/usr/include/boost/asio/generic/datagram_protocol.hpp:
+
 /usr/include/openssl/dsa.h:
 
 /usr/include/c++/11/unordered_set:
@@ -7256,18 +7261,6 @@ CMakeFiles/KETI_Validator.dir/main.cpp.o: /root/workspace/keti/Validator-Instanc
 /usr/include/boost/mpl/aux_/advance_forward.hpp:
 
 /usr/include/x86_64-linux-gnu/sys/ttydefaults.h:
-
-/usr/include/netinet/tcp.h:
-
-/usr/include/x86_64-linux-gnu/sys/select.h:
-
-/usr/include/boost/asio/datagram_socket_service.hpp:
-
-/usr/include/boost/predef/os/qnxnto.h:
-
-/usr/include/boost/multi_index_container_fwd.hpp:
-
-/usr/include/boost/asio/generic/datagram_protocol.hpp:
 
 /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h:
 
@@ -7338,8 +7331,6 @@ CMakeFiles/KETI_Validator.dir/main.cpp.o: /root/workspace/keti/Validator-Instanc
 /usr/include/boost/asio/io_service.hpp:
 
 /usr/include/c++/11/cxxabi.h:
-
-/root/workspace/Simulator-Instance/DBManager.hpp:
 
 /usr/include/boost/mpl/integral_c.hpp:
 
@@ -7535,8 +7526,6 @@ CMakeFiles/KETI_Validator.dir/main.cpp.o: /root/workspace/keti/Validator-Instanc
 
 /usr/include/boost/asio/detail/reactive_serial_port_service.hpp:
 
-/root/workspace/Simulator-Instance/StorageValidator.hpp:
-
 /usr/include/boost/config/stdlib/libstdcpp3.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
@@ -7688,8 +7677,6 @@ CMakeFiles/KETI_Validator.dir/main.cpp.o: /root/workspace/keti/Validator-Instanc
 /usr/include/c++/11/bits/vector.tcc:
 
 /usr/include/c++/11/cstring:
-
-/root/workspace/Simulator-Instance/RestHandler.hpp:
 
 /usr/include/x86_64-linux-gnu/asm/sockios.h:
 
@@ -7858,8 +7845,6 @@ CMakeFiles/KETI_Validator.dir/main.cpp.o: /root/workspace/keti/Validator-Instanc
 /usr/include/boost/type_traits/is_enum.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h:
-
-/root/workspace/Simulator-Instance/QueryParser.hpp:
 
 /usr/include/boost/predef/library/std/roguewave.h:
 
@@ -8185,14 +8170,6 @@ CMakeFiles/KETI_Validator.dir/main.cpp.o: /root/workspace/keti/Validator-Instanc
 
 /usr/include/boost/predef/architecture/x86/32.h:
 
-/usr/include/boost/asio/ssl/stream_base.hpp:
-
-/usr/include/boost/serialization/type_info_implementation.hpp:
-
-/usr/include/x86_64-linux-gnu/c++/11/bits/atomic_word.h:
-
-/usr/include/boost/predef/architecture/x86/64.h:
-
 /usr/include/c++/11/bits/invoke.h:
 
 /usr/include/boost/predef/architecture/z.h:
@@ -8356,6 +8333,12 @@ CMakeFiles/KETI_Validator.dir/main.cpp.o: /root/workspace/keti/Validator-Instanc
 /usr/include/x86_64-linux-gnu/bits/iscanonical.h:
 
 /usr/include/boost/smart_ptr/detail/local_sp_deleter.hpp:
+
+/usr/include/boost/asio/ssl/detail/openssl_types.hpp:
+
+/usr/include/cpprest/containerstream.h:
+
+/usr/include/boost/optional/detail/optional_config.hpp:
 
 /usr/include/boost/date_time/posix_time/posix_time_system.hpp:
 
@@ -8700,8 +8683,6 @@ CMakeFiles/KETI_Validator.dir/main.cpp.o: /root/workspace/keti/Validator-Instanc
 /usr/include/boost/asio/detail/descriptor_read_op.hpp:
 
 /usr/include/boost/asio/windows/basic_stream_handle.hpp:
-
-/root/workspace/Simulator-Instance/RestHandler.cpp:
 
 /usr/include/boost/asio/detail/throw_error.hpp:
 
@@ -9060,3 +9041,5 @@ CMakeFiles/KETI_Validator.dir/main.cpp.o: /root/workspace/keti/Validator-Instanc
 /usr/include/boost/asio/ssl/detail/openssl_init.hpp:
 
 /usr/include/boost/none_t.hpp:
+
+/usr/include/boost/utility/compare_pointees.hpp:

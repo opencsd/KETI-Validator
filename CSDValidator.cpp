@@ -5,6 +5,20 @@
 #include <ctime>
 #include <thread>
 
+float adjust5percent(float value){
+    static bool seedInitialized = false;
+    if (!seedInitialized) {
+        srand(static_cast<unsigned int>(time(nullptr)));
+        seedInitialized = true;
+    }
+
+    // -5% ~ +5% 범위의 비율 생성
+    float adjustmentFactor = (static_cast<float>(rand() % 11) - 5) / 100.0f;
+
+    // 값 조정
+    return value * (1.0f + adjustmentFactor);
+}
+
 std::string CSDValidatorTemp(std::vector<querySnippetInfo> snippetInfo,std::string queryStatement, int queryNum,int optionID, optionInfo option, std::string userID, int simulationNnm, std::string returnJson){
     std::cout<<"---CSD VALIDATION START---\n";
     validationLog validateLog;
@@ -196,7 +210,7 @@ std::string CSDValidatorTemp(std::vector<querySnippetInfo> snippetInfo,std::stri
     std::cout<<"---CSD VALIDATION FINISHED---\n";
     returnJson = StorageValidatorMain(validateLog,snippetInfo, queryNum, option,optionID, userID, simulationNnm, returnJson);
 
-    for(int i=0;i<csdCount;i++){
+    for(int i=0;i<option.csdCount;i++){
         csdValidtion csdLog;
         csdLog.validationID = simulationNnm;
         csdLog.storageID = i;
@@ -218,8 +232,8 @@ std::string CSDValidatorTemp(std::vector<querySnippetInfo> snippetInfo,std::stri
             cpuUsage = applyWeight(csdTime* csd13CPUWeight);
         }
         powerUsage = applyWeight( csdTime* csdpowerweight);
-        csdLog.cpuUsage = cpuUsage;
-        csdLog.powerUsage = powerUsage;
+        csdLog.cpuUsage = adjust5percent(cpuUsage);
+        csdLog.powerUsage = adjust5percent(powerUsage);
 
         std::string newQueryState = queryState + std::to_string(csdLog.validationID) + ", " + std::to_string(csdLog.storageID) + ", " + std::to_string(csdLog.cpuUsage) + ", " + std::to_string(csdLog.powerUsage) + ")";
         //std::cout<<newQueryState<<std::endl;
@@ -233,6 +247,8 @@ std::string CSDValidatorTemp(std::vector<querySnippetInfo> snippetInfo,std::stri
     }
     return returnJson;
 }
+
+
 
 
 
