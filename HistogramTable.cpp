@@ -1,7 +1,7 @@
 #include "HistogramTable.hpp"
 #include <algorithm>
 #include <regex>
-#include <iostream>1
+#include <iostream>
 #include <string>
 #include <sstream>
 #include <cmath>
