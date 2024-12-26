@@ -1,7 +1,7 @@
 #include "SSDValidator.hpp"
 
 
-std::string SSDValidatorTemp(std::string queryStatement, std::vector<querySnippetInfo> snippetInfo, int queryNum, optionInfo option, int optionID, std::string userID, int simulationNnm, std::string returnJson){
+std::string SSDValidatorTemp(std::string queryStatement, std::vector<querySnippetInfo> snippetInfo, int queryNum, optionInfo option, int optionID, std::string userID, in2t simulationNnm, std::string returnJson){
     std::cout<<"---SSD VALIDATION START---\n";
     sleep(5);
     validationLog validateLog;
