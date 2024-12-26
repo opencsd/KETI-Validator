@@ -3,7 +3,7 @@
 std::string StorageValidatorMain(validationLog csdLog, std::vector<querySnippetInfo> snippetInfo, int queryNum, optionInfo option, int optionID, std::string userID, int simulationNnm, std::string returnJson){
     std::cout<<"---STORAGE VALIDATION START---"<<std::endl;
     StorageCalcInfo storageCalc;
-    // 스니펫 순서대로 각 스니펫 별 결과 Row수 예측
+    // 스니펫 순서대로 각 스니펫 별 결과 Row수 예측1
     for(int i=0 ;i<snippetInfo.size();i++){
         std::cout<<"\nSTORAGE SNIPPET NUMBER : "<<i<<" SNIPPET TYPE : "<<snippetInfo[i].snippetType<<std::endl;
         if(snippetInfo[i].snippetType == "Aggregation"){ // AGGREGATION SNIPPET
