@@ -15,7 +15,7 @@ float adjust5percent(float value){
     // -5% ~ +5% 범위의 비율 생성
     float adjustmentFactor = (static_cast<float>(rand() % 11) - 5) / 100.0f;
 
-    // 값 조정2
+    // 값 조정22
     return value * (1.0f + adjustmentFactor);
 }
 
