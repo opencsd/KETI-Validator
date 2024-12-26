@@ -12,7 +12,7 @@ float adjust5percent(float value){
         seedInitialized = true;
     }
 
-    // -5% ~ +5% 범위의 비율 생성11
+    // -5% ~ +5% 범위의 비율 생성1
     float adjustmentFactor = (static_cast<float>(rand() % 11) - 5) / 100.0f;
 
     // 값 조정
