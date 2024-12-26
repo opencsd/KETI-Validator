@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#include <cmath>1
+#include <cmath>
 histogram p_partkey;
 histogram p_name;
 histogram p_mfgr;
