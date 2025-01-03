@@ -1,5 +1,7 @@
 # KETI Validator
 
+![Project Logo](image.png)
+
 # Emulate CSD on Raspberry Pi 3b using QEMU in 64 bit 
 
 ## Install QEMU 6.2 from source:
