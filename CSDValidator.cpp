@@ -155,7 +155,6 @@ std::string CSDValidatorTemp(std::vector<querySnippetInfo> snippetInfo,std::stri
     // else{
     //     csdTime = histogramValidate.scannedRow / csdGoodScanWeight;
     // }
-    
     std::cout<<"RESULT CSD TIME : "<<csdTime<<std::endl;
     
     int csdCount = option.csdCount;
@@ -195,8 +194,8 @@ std::string CSDValidatorTemp(std::vector<querySnippetInfo> snippetInfo,std::stri
             cpuUsage = applyWeight(csdTime* csd13CPUWeight);
         }
         powerUsage = applyWeight( csdTime* csdpowerweight);
-        csdLog.cpuUsage = cpuUsage;
-        csdLog.powerUsage = powerUsage;
+        csdLog.cpuUsage = cpuUsage / 1000;
+        csdLog.powerUsage = powerUsage / 1000;
         std::cout<<"RESULT CSD"<<i+1<<" CPU : "<<csdLog.cpuUsage<<std::endl;
         std::cout<<"RESULT CSD"<<i+1<<" POWER : "<<csdLog.powerUsage<<std::endl;
 
@@ -231,7 +230,10 @@ std::string CSDValidatorTemp(std::vector<querySnippetInfo> snippetInfo,std::stri
         else{
             cpuUsage = applyWeight(csdTime* csd13CPUWeight);
         }
+        cpuUsage /= 1000;
+        
         powerUsage = applyWeight( csdTime* csdpowerweight);
+        powerUsage /= 1000;
         csdLog.cpuUsage = adjust5percent(cpuUsage);
         csdLog.powerUsage = adjust5percent(powerUsage);
 

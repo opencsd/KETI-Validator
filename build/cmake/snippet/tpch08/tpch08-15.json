@@ -28,8 +28,8 @@
       },
       {
         "selectType": 1,
-        "value": ["CASE", "WHEN", "nation", "india", "LIKE", "THEN", "volume", "ELSE", "0", "END"],
-        "valueType": [11, 11, 10, 9, 11, 11, 10, 11, 2, 11]
+        "value": ["CASE", "WHEN", "nation", "INDIA", "LIKE", "THEN", "volume", "ELSE", "0", "END"],
+        "valueType": [11, 11, 10, 9, 11, 11, 10, 11, 4, 11]
       },
       {
         "selectType": 1,

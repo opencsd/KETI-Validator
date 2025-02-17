@@ -36,7 +36,7 @@
             9
           ],
           "value": [
-            "%PENDING%DEPOSITS%"
+            "%pending%deposits%"
           ]
        }
       }

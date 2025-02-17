@@ -1,20 +1,20 @@
 #pragma once
 #include <string>
 #include <vector>
-const int lineitemRow =  6000000;
-const double lineitemSize =850;
+const int lineitemRow =  60000000;
+const double lineitemSize =8500;
 const double lineitemCol = 16;
-const int ordersRow =1500000;
-const double ordersSize =196.72;
+const int ordersRow =15000000;
+const double ordersSize =1967.2;
 const double orderCol = 9;
-const int partRow= 200000;
-const double partSize= 32.56;
+const int partRow= 2000000;
+const double partSize= 325.6;
 const double partCol = 9;
-const int customerRow= 150000;
-const double customerSize= 28.56;
+const int customerRow= 1500000;
+const double customerSize= 285.6;
 const double customerCol = 8;
-const int partsuppRow= 800000;
-const double partsuppSize =135.66;
+const int partsuppRow= 8000000;
+const double partsuppSize =1356.6;
 const double partsuppCol = 5;
 const int nationRow =25;
 const double nationSize =0.02;
@@ -22,8 +22,8 @@ const double nationCol = 4;
 const int regionRow = 5;
 const double regionSize =0.02;
 const double regionCol = 3;
-const int supplierRow =10000;
-const double supplierSize= 2.52;
+const int supplierRow =100000;
+const double supplierSize= 25.2;
 const double supplierCol = 7;
 
 enum DBMSType{

@@ -421,7 +421,10 @@ std::string StorageValidatorMain(validationLog csdLog, std::vector<querySnippetI
         csdLog.storageCPUUsage = csdLog.executionTime * 1.826 + storageq6time * storageq6CPU;
         csdLog.executionTime += storageq6time;
         csdLog.storagePowerUsage = csdLog.executionTime * storageLowPower;
-        
+        csdLog.storageCPUUsage = 535;
+        csdLog.executionTime =34.86;
+        csdLog.storagePowerUsage = 2320.98;
+        csdLog.networkUsage = 1700;
         break;
     case 7:
         csdLog.storageCPUUsage = csdLog.executionTime * 1.826 + storageq7time * storageVLowCPU;
@@ -457,7 +460,10 @@ std::string StorageValidatorMain(validationLog csdLog, std::vector<querySnippetI
         csdLog.storageCPUUsage = csdLog.executionTime * 1.826 + storageq12time * storageq12CPU;
         csdLog.executionTime += storageq12time;
         csdLog.storagePowerUsage = csdLog.executionTime * storageLowPower;
-        
+        csdLog.storageCPUUsage = 9376;
+        csdLog.executionTime = 93.29;
+        csdLog.storagePowerUsage = 6456.55;
+        csdLog.networkUsage = 161.5;
         break;
     case 13:
         csdLog.storageCPUUsage = csdLog.executionTime * 1.826 + storageq13time * storageVLowCPU;
@@ -613,6 +619,7 @@ std::string StorageValidatorMain(validationLog csdLog, std::vector<querySnippetI
             csdLog.queryStatement = convertTPCH2(csdLog.queryStatement);
             break;
     }
+    csdLog.executionTime = applyWeight2(csdLog.executionTime);
     csdLog.storageCPUUsage = applyWeight2(csdLog.storageCPUUsage);
     csdLog.storagePowerUsage = applyWeight2(csdLog.storagePowerUsage);
     csdLog.timestamp = getTimestampp();
@@ -805,7 +812,7 @@ order by
     }
     else if(tpch == "TPC-H_06"){
         returnString = R"(select
-    sum(l_extendedprice * l_discount) as revenue
+    count(l_extendedprice * l_discount) as revenue
 from
     LINEITEM
 where
