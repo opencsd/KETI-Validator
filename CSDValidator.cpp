@@ -109,7 +109,7 @@ std::string CSDValidatorTemp(std::vector<querySnippetInfo> snippetInfo,std::stri
                 snippetInfo[i].filterCount = filterRatio * supplierRow;
                 snippetInfo[i].topTableRow = supplierRow;
             }
-            std::cout<<"SNIPPET INFO \n"<<snippetInfo[i].filterCount<<" "<<snippetInfo[i].filterRatio<<" "<<snippetInfo[i].snippetType<<" "<<snippetInfo[i].tableAlias<<"\n";
+            std::cout<<" \n"<<snippetInfo[i].filterCount<<" "<<snippetInfo[i].filterRatio<<" "<<snippetInfo[i].snippetType<<" "<<snippetInfo[i].tableAlias<<"\n";
         }
     }
 

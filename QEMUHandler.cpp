@@ -65,7 +65,7 @@ void QEMUHandler::inputQEMUHandler(){
          BlockResult block = BlockResult(json.c_str());
          int newID = block.query_id * 100 + block.work_id;
          rowCountMap[newID]+= block.row_count;
-         std::cout<<newID<<" CURRENT BLOCK COUNT : "<<rowCountMap[newID]<<std::endl;
+         std::cout<<"Query,Work ID: "<<newID<<", CURRENT BLOCK COUNT : "<<rowCountMap[newID]<<std::endl;
          if(rowCountMap[newID] >= 100000 || rowCountMap[newID] == 5 || rowCountMap[newID] == 25 || rowCountMap[newID] == 1250){
             resultMap[newID] = block;
          }

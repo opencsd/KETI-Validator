@@ -28,14 +28,15 @@ std::string QueryParserMain(std::string queryStatement, int optionID, std::strin
     optionInfo option;
     std::vector<querySnippetInfo> snippetInfo;
     option = getOptionInfo(optionID, userID);
-    
+    sleep(1);
     std::cout<<"---QUERY PARSER---"<<std::endl;
     std::cout<<"VALIDATION ID : "<<simulationNum<<std::endl;
     snippetInfo = getSnippetInfo(queryStatement);
+    sleep(1);
     std::cout<<"SNIPPET COUNT : "<<snippetInfo.size()<<std::endl;
     returnJson = "{\n\"Validation_Option\":{\n\"Option_ID\" : " + std::to_string(option.optionID) + "\",\n\"Option_Name\" : \"" + option.optionName + "\",\n\"DBMS_Type\" : \"" + option.DBType + "\",\n\"Storage_Type\" : \"" + option.storageType + "\",\n\"CSD_Count\" : " + std::to_string(option.csdCount) + ",\n\"CSD_Type\" : \"" + option.csdType + "\",\n\"Block_Count\" : " + std::to_string(option.blockCount) + ",\n\"Scheduling_Algorithm\" : \"" + option.schedulingAlgorithm + "\",\n\"Using_Index\" : " + std::to_string(option.usingIndex) + "\n},\n";
     
-
+    sleep(1);
     returnJson = returnJson + " \"Validation_Snippet\" : {\n[\n";
     for(int i=0;i <snippetInfo.size();i++){
         std::string snippetJson = "";
@@ -43,6 +44,7 @@ std::string QueryParserMain(std::string queryStatement, int optionID, std::strin
         if(i < snippetInfo.size() - 1)
             snippetJson += ",";
         returnJson += snippetJson;
+        sleep(0.5);
     }
     returnJson += "]\n},\n";
     std::cout<<"COMPLETE SNIPPET INFO IN DB"<<std::endl;
