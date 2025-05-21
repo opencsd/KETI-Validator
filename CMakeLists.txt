@@ -4,7 +4,7 @@ include(./common.cmake)
 
 add_executable(KETI_Validator  "QueryParser.cpp" "RestHandler.cpp" "SSDValidator.cpp" "CSDValidator.cpp" "HistogramTable.cpp" "StorageValidator.cpp" "QEMUHandler.cpp" "main.cpp")
 
-set(Casablanca_LIBRARIES "-lboost_system -lcrypto -lssl -lcpprest")
+set(Casablanca_LIBRARIES "-lboost_system -lcrypto -lssl -lcpprest -pthread")
 set(LINKING_LIBRARIES ${Casablanca_LIBRARIES})
 set(CMAKE_C_COMPILER ${GCC})
 set(CMAKE_CXX_COMPILER ${GPP})
