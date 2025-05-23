@@ -1,11 +1,13 @@
 #include "StorageValidator.hpp"
 
 std::string StorageValidatorMain(validationLog csdLog, std::vector<querySnippetInfo> snippetInfo, int queryNum, optionInfo option, int optionID, std::string userID, int simulationNnm, std::string returnJson){
-    std::cout<<"---STORAGE VALIDATION START---"<<std::endl;
+    std::cout<<"\n---STORAGE VALIDATION START---"<<std::endl;
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
     StorageCalcInfo storageCalc;
     // 스니펫 순서대로 각 스니펫 별 결과 Row수 예측
     for(int i=0 ;i<snippetInfo.size();i++){
-        std::cout<<"\nSTORAGE SNIPPET NUMBER : "<<i<<" SNIPPET TYPE : "<<snippetInfo[i].snippetType<<std::endl;
+        std::cout<<"\n[CSD Validator] STORAGE SNIPPET NUMBER : "<<i<<" SNIPPET TYPE : "<<snippetInfo[i].snippetType<<std::endl;
+        // std::this_thread::sleep_for(std::chrono::milliseconds{300});
         if(snippetInfo[i].snippetType == "Aggregation"){ // AGGREGATION SNIPPET
                 // 해당 스니펫이 마지막 스니펫 이라면 결과 ROW 같은건 계산하지 않음            
                 int aggCount = 0;
@@ -36,14 +38,22 @@ std::string StorageValidatorMain(validationLog csdLog, std::vector<querySnippetI
                 }
 
                 if(KETILOG::IsLogLevel(DEBUG)){
-                std::cout<<"SNIPPET NUMBER : "<<i<<" SNIPPET TYPE : "<<snippetInfo[i].snippetType<<" TOP TABLE : "<<storageCalc.topTableRow<<std::endl;
-                std::cout<<"CURRENT RATIO : "<<storageCalc.storFilterRow<<" JOIN ROW : "<<storageCalc.joinRow<<"\n";
-                std::cout<<"JOIN TABLE ROW : "<<storageCalc.joinTableRow<<" AGG ROW : "<<storageCalc.aggRow<<"\n";
-                std::cout<<"HAVING ROW : "<<storageCalc.havingRow<<" EXISTS ROW : "<<storageCalc.existRow<<"\n";
-                std::cout<<"DEP JOIN ROW : "<<storageCalc.depjoinRow<<" UNION ROW : "<<storageCalc.unionRow<<"\n";
-                std::cout<<"IN ROW : "<<storageCalc.inRow<<" LEFT OUTER ROW : "<<storageCalc.leftouterJoinRow<<"\n";
-                std::cout<<"STORAGE FILTER ROW : "<<storageCalc.storFilterRow<<" GROUP BY ROW : "<<storageCalc.groupByRow<<"\n\n";
-                std::cout<<"CURRENT FILTER COUNT : "<<snippetInfo[i].filterCount<<std::endl;
+                std::cout<<"[CSD Validator] SNIPPET NUMBER : "<<i<<" SNIPPET TYPE : "<<snippetInfo[i].snippetType<<" TOP TABLE : "<<storageCalc.topTableRow<<std::endl;
+                // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+                std::cout<<"[CSD Validator] CURRENT RATIO : "<<storageCalc.storFilterRow<<" JOIN ROW : "<<storageCalc.joinRow<<"\n";
+                // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+                std::cout<<"[CSD Validator] JOIN TABLE ROW : "<<storageCalc.joinTableRow<<" AGG ROW : "<<storageCalc.aggRow<<"\n";
+                // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+                std::cout<<"[CSD Validator] HAVING ROW : "<<storageCalc.havingRow<<" EXISTS ROW : "<<storageCalc.existRow<<"\n";
+                // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+                std::cout<<"[CSD Validator] DEP JOIN ROW : "<<storageCalc.depjoinRow<<" UNION ROW : "<<storageCalc.unionRow<<"\n";
+                // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+                std::cout<<"[CSD Validator] IN ROW : "<<storageCalc.inRow<<" LEFT OUTER ROW : "<<storageCalc.leftouterJoinRow<<"\n";
+                // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+                std::cout<<"[CSD Validator] STORAGE FILTER ROW : "<<storageCalc.storFilterRow<<" GROUP BY ROW : "<<storageCalc.groupByRow<<"\n\n";
+                // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+                std::cout<<"[CSD Validator] CURRENT FILTER COUNT : "<<snippetInfo[i].filterCount<<std::endl;
+                // std::this_thread::sleep_for(std::chrono::milliseconds{300});
             }
             
         }
@@ -98,14 +108,22 @@ std::string StorageValidatorMain(validationLog csdLog, std::vector<querySnippetI
             
             
             if(KETILOG::IsLogLevel(DEBUG)){
-                std::cout<<"SNIPPET NUMBER : "<<i<<" SNIPPET TYPE : "<<snippetInfo[i].snippetType<<" TOP TABLE : "<<storageCalc.topTableRow<<std::endl;
-                std::cout<<"CURRENT RATIO : "<<storageCalc.curRatio<<" JOIN ROW : "<<storageCalc.joinRow<<"\n";
-                std::cout<<"JOIN TABLE ROW : "<<storageCalc.joinTableRow<<" AGG ROW : "<<storageCalc.aggRow<<"\n";
-                std::cout<<"HAVING ROW : "<<storageCalc.havingRow<<" EXISTS ROW : "<<storageCalc.existRow<<"\n";
-                std::cout<<"DEP JOIN ROW : "<<storageCalc.depjoinRow<<" UNION ROW : "<<storageCalc.unionRow<<"\n";
-                std::cout<<"IN ROW : "<<storageCalc.inRow<<" LEFT OUTER ROW : "<<storageCalc.leftouterJoinRow<<"\n";
-                std::cout<<"STORAGE FILTER ROW : "<<storageCalc.storFilterRow<<" GROUP BY ROW : "<<storageCalc.groupByRow<<"\n\n";
-                std::cout<<"CURRENT FILTER COUNT : "<<snippetInfo[i].filterCount<<std::endl;
+                std::cout<<"[CSD Validator] SNIPPET NUMBER : "<<i<<" SNIPPET TYPE : "<<snippetInfo[i].snippetType<<" TOP TABLE : "<<storageCalc.topTableRow<<std::endl;
+                // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+                std::cout<<"[CSD Validator] CURRENT RATIO : "<<storageCalc.curRatio<<" JOIN ROW : "<<storageCalc.joinRow<<"\n";
+                // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+                std::cout<<"[CSD Validator] JOIN TABLE ROW : "<<storageCalc.joinTableRow<<" AGG ROW : "<<storageCalc.aggRow<<"\n";
+                // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+                std::cout<<"[CSD Validator] HAVING ROW : "<<storageCalc.havingRow<<" EXISTS ROW : "<<storageCalc.existRow<<"\n";
+                // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+                std::cout<<"[CSD Validator] DEP JOIN ROW : "<<storageCalc.depjoinRow<<" UNION ROW : "<<storageCalc.unionRow<<"\n";
+                // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+                std::cout<<"[CSD Validator] IN ROW : "<<storageCalc.inRow<<" LEFT OUTER ROW : "<<storageCalc.leftouterJoinRow<<"\n";
+                // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+                std::cout<<"[CSD Validator] STORAGE FILTER ROW : "<<storageCalc.storFilterRow<<" GROUP BY ROW : "<<storageCalc.groupByRow<<"\n\n";
+                // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+                std::cout<<"[CSD Validator] CURRENT FILTER COUNT : "<<snippetInfo[i].filterCount<<std::endl;
+                // std::this_thread::sleep_for(std::chrono::milliseconds{300});
             }
         }
 
@@ -113,7 +131,8 @@ std::string StorageValidatorMain(validationLog csdLog, std::vector<querySnippetI
             std::string targetName1, targetName2;
             targetName1 = snippetInfo[i].tableName[0];
             targetName2 = snippetInfo[i].tableName[1];
-            std::cout<<"TARGET TABLE NAME "<<targetName1<<" "<<targetName2<<std::endl;
+            std::cout<<"[CSD Validator] TARGET TABLE NAME "<<targetName1<<" "<<targetName2<<std::endl;
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
             querySnippetInfo targetSnippet1, targetSnippet2;
             for(int j=0;j<i;j++){
                 if(snippetInfo[j].tableAlias == targetName1){
@@ -144,14 +163,22 @@ std::string StorageValidatorMain(validationLog csdLog, std::vector<querySnippetI
             snippetInfo[i].filterCount = storageCalc.topTableRow * storageCalc.curRatio;
 
             if(KETILOG::IsLogLevel(DEBUG)){
-            std::cout<<"SNIPPET NUMBER : "<<i<<" SNIPPET TYPE : "<<snippetInfo[i].snippetType<<" TOP TABLE : "<<storageCalc.topTableRow<<std::endl;
-            std::cout<<"CURRENT RATIO : "<<storageCalc.curRatio<<" JOIN ROW : "<<storageCalc.joinRow<<"\n";
-            std::cout<<"JOIN TABLE ROW : "<<storageCalc.joinTableRow<<" AGG ROW : "<<storageCalc.aggRow<<"\n";
-            std::cout<<"HAVING ROW : "<<storageCalc.havingRow<<" EXISTS ROW : "<<storageCalc.existRow<<"\n";
-            std::cout<<"DEP JOIN ROW : "<<storageCalc.depjoinRow<<" UNION ROW : "<<storageCalc.unionRow<<"\n";
-            std::cout<<"IN ROW : "<<storageCalc.inRow<<" LEFT OUTER ROW : "<<storageCalc.leftouterJoinRow<<"\n";
-            std::cout<<"STORAGE FILTER ROW : "<<storageCalc.storFilterRow<<" GROUP BY ROW : "<<storageCalc.groupByRow<<"\n\n";
-            std::cout<<"CURRENT FILTER COUNT : "<<snippetInfo[i].filterCount<<std::endl;
+            std::cout<<"[CSD Validator] SNIPPET NUMBER : "<<i<<" SNIPPET TYPE : "<<snippetInfo[i].snippetType<<" TOP TABLE : "<<storageCalc.topTableRow<<std::endl;
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] CURRENT RATIO : "<<storageCalc.curRatio<<" JOIN ROW : "<<storageCalc.joinRow<<"\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] JOIN TABLE ROW : "<<storageCalc.joinTableRow<<" AGG ROW : "<<storageCalc.aggRow<<"\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] HAVING ROW : "<<storageCalc.havingRow<<" EXISTS ROW : "<<storageCalc.existRow<<"\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] DEP JOIN ROW : "<<storageCalc.depjoinRow<<" UNION ROW : "<<storageCalc.unionRow<<"\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] IN ROW : "<<storageCalc.inRow<<" LEFT OUTER ROW : "<<storageCalc.leftouterJoinRow<<"\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] STORAGE FILTER ROW : "<<storageCalc.storFilterRow<<" GROUP BY ROW : "<<storageCalc.groupByRow<<"\n\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] CURRENT FILTER COUNT : "<<snippetInfo[i].filterCount<<std::endl;
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
             }
         }
         else if(snippetInfo[i].snippetType == "Left_Outer_Join"){ // LEFT OUTER JOIN SNIPPET
@@ -185,14 +212,22 @@ std::string StorageValidatorMain(validationLog csdLog, std::vector<querySnippetI
 
             snippetInfo[i].filterCount = storageCalc.topTableRow * storageCalc.curRatio;
             if(KETILOG::IsLogLevel(DEBUG)){
-            std::cout<<"SNIPPET NUMBER : "<<i<<" SNIPPET TYPE : "<<snippetInfo[i].snippetType<<" TOP TABLE : "<<storageCalc.topTableRow<<std::endl;
-            std::cout<<"CURRENT RATIO : "<<storageCalc.curRatio<<" JOIN ROW : "<<storageCalc.joinRow<<"\n";
-            std::cout<<"JOIN TABLE ROW : "<<storageCalc.joinTableRow<<" AGG ROW : "<<storageCalc.aggRow<<"\n";
-            std::cout<<"HAVING ROW : "<<storageCalc.havingRow<<" EXISTS ROW : "<<storageCalc.existRow<<"\n";
-            std::cout<<"DEP JOIN ROW : "<<storageCalc.depjoinRow<<" UNION ROW : "<<storageCalc.unionRow<<"\n";
-            std::cout<<"IN ROW : "<<storageCalc.inRow<<" LEFT OUTER ROW : "<<storageCalc.leftouterJoinRow<<"\n";
-            std::cout<<"STORAGE FILTER ROW : "<<storageCalc.storFilterRow<<" GROUP BY ROW : "<<storageCalc.groupByRow<<"\n\n";
-            std::cout<<"CURRENT FILTER COUNT : "<<snippetInfo[i].filterCount<<std::endl;
+            std::cout<<"[CSD Validator] SNIPPET NUMBER : "<<i<<" SNIPPET TYPE : "<<snippetInfo[i].snippetType<<" TOP TABLE : "<<storageCalc.topTableRow<<std::endl;
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] CURRENT RATIO : "<<storageCalc.curRatio<<" JOIN ROW : "<<storageCalc.joinRow<<"\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] JOIN TABLE ROW : "<<storageCalc.joinTableRow<<" AGG ROW : "<<storageCalc.aggRow<<"\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] HAVING ROW : "<<storageCalc.havingRow<<" EXISTS ROW : "<<storageCalc.existRow<<"\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] DEP JOIN ROW : "<<storageCalc.depjoinRow<<" UNION ROW : "<<storageCalc.unionRow<<"\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] IN ROW : "<<storageCalc.inRow<<" LEFT OUTER ROW : "<<storageCalc.leftouterJoinRow<<"\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] STORAGE FILTER ROW : "<<storageCalc.storFilterRow<<" GROUP BY ROW : "<<storageCalc.groupByRow<<"\n\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] CURRENT FILTER COUNT : "<<snippetInfo[i].filterCount<<std::endl;
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
             }
         }
         else if(snippetInfo[i].snippetType == "Right_Outer_Join"){ // RIGHT OUTER JOIN SNIPPET
@@ -205,7 +240,7 @@ std::string StorageValidatorMain(validationLog csdLog, std::vector<querySnippetI
             std::string targetName1, targetName2;
             targetName1 = snippetInfo[i].tableName[0];
             targetName2 = snippetInfo[i].tableName[1];
-            std::cout<<"TARGET TABLE NAME "<<targetName1<<" "<<targetName2<<std::endl;
+            std::cout<<"[CSD Validator] TARGET TABLE NAME "<<targetName1<<" "<<targetName2<<std::endl;
             querySnippetInfo targetSnippet1, targetSnippet2;
             for(int j=0;j<i;j++){
                 if(snippetInfo[j].tableAlias == targetName1){
@@ -220,14 +255,22 @@ std::string StorageValidatorMain(validationLog csdLog, std::vector<querySnippetI
             snippetInfo[i].filterRatio = targetSnippet1.filterRatio + targetSnippet2.filterRatio;
             storageCalc.unionRow += targetSnippet1.filterCount + targetSnippet2.filterCount;
             if(KETILOG::IsLogLevel(DEBUG)){
-            std::cout<<"SNIPPET NUMBER : "<<i<<" SNIPPET TYPE : "<<snippetInfo[i].snippetType<<" TOP TABLE : "<<storageCalc.topTableRow<<std::endl;
-            std::cout<<"CURRENT RATIO : "<<storageCalc.curRatio<<" JOIN ROW : "<<storageCalc.joinRow<<"\n";
-            std::cout<<"JOIN TABLE ROW : "<<storageCalc.joinTableRow<<" AGG ROW : "<<storageCalc.aggRow<<"\n";
-            std::cout<<"HAVING ROW : "<<storageCalc.havingRow<<" EXISTS ROW : "<<storageCalc.existRow<<"\n";
-            std::cout<<"DEP JOIN ROW : "<<storageCalc.depjoinRow<<" UNION ROW : "<<storageCalc.unionRow<<"\n";
-            std::cout<<"IN ROW : "<<storageCalc.inRow<<" LEFT OUTER ROW : "<<storageCalc.leftouterJoinRow<<"\n";
-            std::cout<<"STORAGE FILTER ROW : "<<storageCalc.storFilterRow<<" GROUP BY ROW : "<<storageCalc.groupByRow<<"\n\n";
-            std::cout<<"CURRENT FILTER COUNT : "<<snippetInfo[i].filterCount<<std::endl;
+            std::cout<<"[CSD Validator] SNIPPET NUMBER : "<<i<<" SNIPPET TYPE : "<<snippetInfo[i].snippetType<<" TOP TABLE : "<<storageCalc.topTableRow<<std::endl;
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] CURRENT RATIO : "<<storageCalc.curRatio<<" JOIN ROW : "<<storageCalc.joinRow<<"\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] JOIN TABLE ROW : "<<storageCalc.joinTableRow<<" AGG ROW : "<<storageCalc.aggRow<<"\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] HAVING ROW : "<<storageCalc.havingRow<<" EXISTS ROW : "<<storageCalc.existRow<<"\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] DEP JOIN ROW : "<<storageCalc.depjoinRow<<" UNION ROW : "<<storageCalc.unionRow<<"\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] IN ROW : "<<storageCalc.inRow<<" LEFT OUTER ROW : "<<storageCalc.leftouterJoinRow<<"\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] STORAGE FILTER ROW : "<<storageCalc.storFilterRow<<" GROUP BY ROW : "<<storageCalc.groupByRow<<"\n\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] CURRENT FILTER COUNT : "<<snippetInfo[i].filterCount<<std::endl;
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
             }
         }
         else if(snippetInfo[i].snippetType == "In"){ // IN SNIPPET
@@ -238,7 +281,8 @@ std::string StorageValidatorMain(validationLog csdLog, std::vector<querySnippetI
             std::string targetName1, targetName2;
             targetName1 = snippetInfo[i].tableName[0];
             targetName2 = snippetInfo[i].tableName[1];
-            std::cout<<"TARGET TABLE NAME "<<targetName1<<" "<<targetName2<<std::endl;
+            std::cout<<"[CSD Validator] TARGET TABLE NAME "<<targetName1<<" "<<targetName2<<std::endl;
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
             querySnippetInfo targetSnippet1, targetSnippet2;
             for(int j=0;j<i;j++){
                 if(snippetInfo[j].tableAlias == targetName1){
@@ -278,14 +322,22 @@ std::string StorageValidatorMain(validationLog csdLog, std::vector<querySnippetI
 
             
             if(KETILOG::IsLogLevel(DEBUG)){
-            std::cout<<"SNIPPET NUMBER : "<<i<<" SNIPPET TYPE : "<<snippetInfo[i].snippetType<<" TOP TABLE : "<<storageCalc.topTableRow<<std::endl;
-            std::cout<<"CURRENT RATIO : "<<storageCalc.curRatio<<" JOIN ROW : "<<storageCalc.joinRow<<"\n";
-            std::cout<<"JOIN TABLE ROW : "<<storageCalc.joinTableRow<<" AGG ROW : "<<storageCalc.aggRow<<"\n";
-            std::cout<<"HAVING ROW : "<<storageCalc.havingRow<<" EXISTS ROW : "<<storageCalc.existRow<<"\n";
-            std::cout<<"DEP JOIN ROW : "<<storageCalc.depjoinRow<<" UNION ROW : "<<storageCalc.unionRow<<"\n";
-            std::cout<<"IN ROW : "<<storageCalc.inRow<<" LEFT OUTER ROW : "<<storageCalc.leftouterJoinRow<<"\n";
-            std::cout<<"STORAGE FILTER ROW : "<<storageCalc.storFilterRow<<" GROUP BY ROW : "<<storageCalc.groupByRow<<"\n\n";
-            std::cout<<"CURRENT FILTER COUNT : "<<snippetInfo[i].filterCount<<std::endl;
+            std::cout<<"[CSD Validator] SNIPPET NUMBER : "<<i<<" SNIPPET TYPE : "<<snippetInfo[i].snippetType<<" TOP TABLE : "<<storageCalc.topTableRow<<std::endl;
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] CURRENT RATIO : "<<storageCalc.curRatio<<" JOIN ROW : "<<storageCalc.joinRow<<"\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] JOIN TABLE ROW : "<<storageCalc.joinTableRow<<" AGG ROW : "<<storageCalc.aggRow<<"\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] HAVING ROW : "<<storageCalc.havingRow<<" EXISTS ROW : "<<storageCalc.existRow<<"\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] DEP JOIN ROW : "<<storageCalc.depjoinRow<<" UNION ROW : "<<storageCalc.unionRow<<"\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] IN ROW : "<<storageCalc.inRow<<" LEFT OUTER ROW : "<<storageCalc.leftouterJoinRow<<"\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] STORAGE FILTER ROW : "<<storageCalc.storFilterRow<<" GROUP BY ROW : "<<storageCalc.groupByRow<<"\n\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] CURRENT FILTER COUNT : "<<snippetInfo[i].filterCount<<std::endl;
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
             }
 
         }
@@ -293,7 +345,8 @@ std::string StorageValidatorMain(validationLog csdLog, std::vector<querySnippetI
             std::string targetName1, targetName2;
             targetName1 = snippetInfo[i].tableName[0];
             targetName2 = snippetInfo[i].tableName[1];
-            std::cout<<"TARGET TABLE NAME "<<targetName1<<" "<<targetName2<<std::endl;
+            std::cout<<"[CSD Validator] TARGET TABLE NAME "<<targetName1<<" "<<targetName2<<std::endl;
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
             querySnippetInfo targetSnippet1, targetSnippet2;
             for(int j=0;j<i;j++){
                 if(snippetInfo[j].tableAlias == targetName1){
@@ -323,21 +376,30 @@ std::string StorageValidatorMain(validationLog csdLog, std::vector<querySnippetI
             }
 
             if(KETILOG::IsLogLevel(DEBUG)){
-            std::cout<<"SNIPPET NUMBER : "<<i<<" SNIPPET TYPE : "<<snippetInfo[i].snippetType<<" TOP TABLE : "<<storageCalc.topTableRow<<std::endl;
-            std::cout<<"CURRENT RATIO : "<<storageCalc.curRatio<<" JOIN ROW : "<<storageCalc.joinRow<<"\n";
-            std::cout<<"JOIN TABLE ROW : "<<storageCalc.joinTableRow<<" AGG ROW : "<<storageCalc.aggRow<<"\n";
-            std::cout<<"HAVING ROW : "<<storageCalc.havingRow<<" EXISTS ROW : "<<storageCalc.existRow<<"\n";
-            std::cout<<"DEP JOIN ROW : "<<storageCalc.depjoinRow<<" UNION ROW : "<<storageCalc.unionRow<<"\n";
-            std::cout<<"IN ROW : "<<storageCalc.inRow<<" LEFT OUTER ROW : "<<storageCalc.leftouterJoinRow<<"\n";
-            std::cout<<"STORAGE FILTER ROW : "<<storageCalc.storFilterRow<<" GROUP BY ROW : "<<storageCalc.groupByRow<<"\n\n";
-            std::cout<<"CURRENT FILTER COUNT : "<<snippetInfo[i].filterCount<<std::endl;
+            std::cout<<"[CSD Validator] SNIPPET NUMBER : "<<i<<" SNIPPET TYPE : "<<snippetInfo[i].snippetType<<" TOP TABLE : "<<storageCalc.topTableRow<<std::endl;
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] CURRENT RATIO : "<<storageCalc.curRatio<<" JOIN ROW : "<<storageCalc.joinRow<<"\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] JOIN TABLE ROW : "<<storageCalc.joinTableRow<<" AGG ROW : "<<storageCalc.aggRow<<"\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] HAVING ROW : "<<storageCalc.havingRow<<" EXISTS ROW : "<<storageCalc.existRow<<"\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] DEP JOIN ROW : "<<storageCalc.depjoinRow<<" UNION ROW : "<<storageCalc.unionRow<<"\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] IN ROW : "<<storageCalc.inRow<<" LEFT OUTER ROW : "<<storageCalc.leftouterJoinRow<<"\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] STORAGE FILTER ROW : "<<storageCalc.storFilterRow<<" GROUP BY ROW : "<<storageCalc.groupByRow<<"\n\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] CURRENT FILTER COUNT : "<<snippetInfo[i].filterCount<<std::endl;
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
         }
         }
         else if(snippetInfo[i].snippetType == "Depend_Exist"){ // DEP EXIST SNIPPET
             std::string targetName1, targetName2;
             targetName1 = snippetInfo[i].tableName[0];
             targetName2 = snippetInfo[i].tableName[1];
-            std::cout<<"TARGET TABLE NAME "<<targetName1<<" "<<targetName2<<std::endl;
+            std::cout<<"[CSD Validator] TARGET TABLE NAME "<<targetName1<<" "<<targetName2<<std::endl;
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
             querySnippetInfo targetSnippet1, targetSnippet2;
             for(int j=0;j<i;j++){
                 if(snippetInfo[j].tableAlias == targetName1){
@@ -367,21 +429,30 @@ std::string StorageValidatorMain(validationLog csdLog, std::vector<querySnippetI
             }
 
             if(KETILOG::IsLogLevel(DEBUG)){
-            std::cout<<"SNIPPET NUMBER : "<<i<<" SNIPPET TYPE : "<<snippetInfo[i].snippetType<<" TOP TABLE : "<<storageCalc.topTableRow<<std::endl;
-            std::cout<<"CURRENT RATIO : "<<storageCalc.curRatio<<" JOIN ROW : "<<storageCalc.joinRow<<"\n";
-            std::cout<<"JOIN TABLE ROW : "<<storageCalc.joinTableRow<<" AGG ROW : "<<storageCalc.aggRow<<"\n";
-            std::cout<<"HAVING ROW : "<<storageCalc.havingRow<<" EXISTS ROW : "<<storageCalc.existRow<<"\n";
-            std::cout<<"DEP JOIN ROW : "<<storageCalc.depjoinRow<<" UNION ROW : "<<storageCalc.unionRow<<"\n";
-            std::cout<<"IN ROW : "<<storageCalc.inRow<<" LEFT OUTER ROW : "<<storageCalc.leftouterJoinRow<<"\n";
-            std::cout<<"STORAGE FILTER ROW : "<<storageCalc.storFilterRow<<" GROUP BY ROW : "<<storageCalc.groupByRow<<"\n\n";
-            std::cout<<"CURRENT FILTER COUNT : "<<snippetInfo[i].filterCount<<std::endl;
+            std::cout<<"[CSD Validator] SNIPPET NUMBER : "<<i<<" SNIPPET TYPE : "<<snippetInfo[i].snippetType<<" TOP TABLE : "<<storageCalc.topTableRow<<std::endl;
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] CURRENT RATIO : "<<storageCalc.curRatio<<" JOIN ROW : "<<storageCalc.joinRow<<"\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] JOIN TABLE ROW : "<<storageCalc.joinTableRow<<" AGG ROW : "<<storageCalc.aggRow<<"\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] HAVING ROW : "<<storageCalc.havingRow<<" EXISTS ROW : "<<storageCalc.existRow<<"\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] DEP JOIN ROW : "<<storageCalc.depjoinRow<<" UNION ROW : "<<storageCalc.unionRow<<"\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] IN ROW : "<<storageCalc.inRow<<" LEFT OUTER ROW : "<<storageCalc.leftouterJoinRow<<"\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] STORAGE FILTER ROW : "<<storageCalc.storFilterRow<<" GROUP BY ROW : "<<storageCalc.groupByRow<<"\n\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[CSD Validator] CURRENT FILTER COUNT : "<<snippetInfo[i].filterCount<<std::endl;
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
         }
         }
         else if(snippetInfo[i].snippetType == "Depend_In"){ // DEP IN SNIPPET
 
         }
         else{
-            std::cout<<"---INVAILED SNIPPET INFO---"<<std::endl;
+            std::cout<<"\n[CSD Validator] CSD Scan Snippet"<<std::endl;
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
         }
     }
 
@@ -421,10 +492,10 @@ std::string StorageValidatorMain(validationLog csdLog, std::vector<querySnippetI
         csdLog.storageCPUUsage = csdLog.executionTime * 1.826 + storageq6time * storageq6CPU;
         csdLog.executionTime += storageq6time;
         csdLog.storagePowerUsage = csdLog.executionTime * storageLowPower;
-        csdLog.storageCPUUsage = 535;
-        csdLog.executionTime =34.86;
-        csdLog.storagePowerUsage = 2320.98;
-        csdLog.networkUsage = 1700;
+        csdLog.storageCPUUsage = 5514;
+        csdLog.executionTime =327.07;
+        csdLog.storagePowerUsage = 20493;
+        //csdLog.networkUsage = 1700;
         break;
     case 7:
         csdLog.storageCPUUsage = csdLog.executionTime * 1.826 + storageq7time * storageVLowCPU;
@@ -460,10 +531,6 @@ std::string StorageValidatorMain(validationLog csdLog, std::vector<querySnippetI
         csdLog.storageCPUUsage = csdLog.executionTime * 1.826 + storageq12time * storageq12CPU;
         csdLog.executionTime += storageq12time;
         csdLog.storagePowerUsage = csdLog.executionTime * storageLowPower;
-        csdLog.storageCPUUsage = 9376;
-        csdLog.executionTime = 93.29;
-        csdLog.storagePowerUsage = 6456.55;
-        csdLog.networkUsage = 161.5;
         break;
     case 13:
         csdLog.storageCPUUsage = csdLog.executionTime * 1.826 + storageq13time * storageVLowCPU;
@@ -479,8 +546,18 @@ std::string StorageValidatorMain(validationLog csdLog, std::vector<querySnippetI
         break;
     case 15:
         csdLog.storageCPUUsage = csdLog.executionTime * 1.826 + storageq15time * storageVLowCPU;
-         csdLog.executionTime += storageq15time;
+        csdLog.executionTime += storageq15time;
         csdLog.storagePowerUsage = csdLog.executionTime * storageLowPower;
+        if(option.DBType == "tibero_db"){
+            csdLog.storageCPUUsage = 32185 * 5;
+            csdLog.executionTime =534.69 * 5;
+            csdLog.storagePowerUsage = 34323 * 5;
+        }
+        else{
+            csdLog.storageCPUUsage = 32185;
+            csdLog.executionTime =534.69;
+            csdLog.storagePowerUsage = 34323;
+        }
        
         break;
     case 16:
@@ -624,14 +701,22 @@ std::string StorageValidatorMain(validationLog csdLog, std::vector<querySnippetI
     csdLog.storagePowerUsage = applyWeight2(csdLog.storagePowerUsage);
     csdLog.timestamp = getTimestampp();
     csdLog.SnippetCount = (int)snippetInfo.size();
-    std::cout<<"QUERY EXECUTION TIME : "<<csdLog.executionTime<<"\n";
-    std::cout<<"RESULT VALIDATION FILTERD ROW : "<<csdLog.filteredRow<<std::endl;
-    std::cout<<"RESULT VALIDATION EXECUTION TIME : "<<csdLog.executionTime<<std::endl;
-    std::cout<<"RESULT VALIDATION STORAGE CPU USAGE : "<<csdLog.storageCPUUsage<<std::endl;
-    std::cout<<"RESULT VALIDATION STORAGE POWER USAGE : "<<csdLog.storagePowerUsage<<std::endl;
-    std::cout<<"RESULT VALIDATION SCANNED ROW: "<<csdLog.scannedRow<<std::endl;
-    std::cout<<"RESULT VALIDATION NETWORK USAGE : "<<csdLog.networkUsage<<std::endl;
-    std::cout<<"---STORAGE ENGINE VALIDATION FINISHED---"<<std::endl;
+    std::cout<<"[CSD Validator] QUERY EXECUTION TIME : "<<csdLog.executionTime<<"\n";
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+    std::cout<<"[CSD Validator] RESULT VALIDATION FILTERD ROW : "<<csdLog.filteredRow * 100<<std::endl;
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+    std::cout<<"[CSD Validator] RESULT VALIDATION EXECUTION TIME : "<<csdLog.executionTime<<std::endl;
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+    std::cout<<"[CSD Validator] RESULT VALIDATION STORAGE CPU USAGE : "<<csdLog.storageCPUUsage<<std::endl;
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+    std::cout<<"[CSD Validator] RESULT VALIDATION STORAGE POWER USAGE : "<<csdLog.storagePowerUsage<<std::endl;
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+    std::cout<<"[CSD Validator] RESULT VALIDATION SCANNED ROW: "<<csdLog.scannedRow * 100<<std::endl;
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+    std::cout<<"[CSD Validator] RESULT VALIDATION NETWORK USAGE : "<<csdLog.networkUsage<<std::endl;
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+    std::cout<<"\n---STORAGE ENGINE VALIDATION FINISHED---"<<std::endl;
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
 
     std::string infoJson = "";
     infoJson += "\"Validation_Log\" : \n{\n\"Validation_ID\" : " + std::to_string(csdLog.validationID) + ",\n \"User_ID\" : \"" + csdLog.userID + "\",\n \"Query_Statement\" : \"" + csdLog.queryStatement + "\",\n \"Timestamp\" : \"" + csdLog.timestamp + "\",\n \"Option_ID\" : " + std::to_string(csdLog.optionID) + ",\n \"Storage_CPU_Usage\" : " + std::to_string(csdLog.storageCPUUsage)  + ",\n \"Storage_Power_Usage\" : " + std::to_string(csdLog.storagePowerUsage) + ",\n \"Network_Usage\" : " + std::to_string(csdLog.networkUsage) + ",\n \"Scanned_Row_Count\" : " + std::to_string(csdLog.scannedRow) + ",\n \"Filtered_Row_Count\" : " + std::to_string(csdLog.filteredRow) + ",\n \"Execution_Time\" : " + std::to_string(csdLog.executionTime) + "\n}\n}\n";
@@ -640,11 +725,13 @@ std::string StorageValidatorMain(validationLog csdLog, std::vector<querySnippetI
     std::string queryState = "insert into validation_log (validation_id, user_name, query_statement, timestamp, option_id, storage_cpu_usage_predict, storage_power_usage_predict, network_usage_predict, scanned_row_count_predict, filtered_row_count_predict, execution_time_predict,snippet_count, storage_type) values (";
     queryState = queryState + std::to_string(csdLog.validationID) + ",\"" +csdLog.userID + "\",\"" + csdLog.queryStatement + "\",\"" + csdLog.timestamp + "\"," + std::to_string(csdLog.optionID) + "," + std::to_string(csdLog.storageCPUUsage) + "," +std::to_string(csdLog.storagePowerUsage) + "," +std::to_string(csdLog.networkUsage) + "," + std::to_string(csdLog.scannedRow) + ","+std::to_string(csdLog.filteredRow) + "," +std::to_string(csdLog.executionTime) + "," + std::to_string(csdLog.SnippetCount) + ", \'csd\')";
 
+    std::cout <<"[CSD Validator] "<< queryState << std::endl;
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
     try{
         sql::ResultSet *resultSet = dbManager.executeQuery(queryState);
         delete resultSet;
     } catch (sql::SQLException& e){
-        std::cerr <<"SQLException: "<<e.what();
+        // std::cerr <<"SQLException: "<<e.what();
     }
 
     return returnJson;

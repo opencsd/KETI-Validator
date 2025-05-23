@@ -4522,7 +4522,8 @@ float getFilteredRow(querySnippetInfo snippet){
     for(int i=0;i<snippet.filterInfo.size();i++){
         if(snippet.filterInfo[i] == "12"){
             isContainNot = true;
-            std::cout<<"IS CONTAIN NOT"<<std::endl;
+            std::cout<<"[Histogram Table] IS CONTAIN NOT"<<std::endl;
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
             break;
         }
     }
@@ -4541,7 +4542,8 @@ float getFilteredRow(querySnippetInfo snippet){
             if(snippet.filterInfo[((itemp+1)/2)*6+notCount] == "12"){ // not 연산자 
                 currentNot = true;
                 notCount++;
-                std::cout<<"NOT CONTAIN COUNT"<<notCount<<std::endl;
+                std::cout<<"[Histogram Table] NOT CONTAIN COUNT"<<notCount<<std::endl;
+                // std::this_thread::sleep_for(std::chrono::milliseconds{300});
             }
             else if(currentSubstring){
                 histogram targetTable = Stringtohisto(subStringTable);
@@ -4567,22 +4569,27 @@ float getFilteredRow(querySnippetInfo snippet){
                 index = (itemp/2) * 6 + notCount;
                 histogram targetTable = Stringtohisto(snippet.filterInfo[index+1]); // 타겟 히스토그램 테이블
                 tableList.push_back(snippet.filterInfo[index+1]); // 타겟 테이블 리스트 정리 같은 컬럼 and, or 연산자 처리를 위함 
-            std::cout<<"SCAN TARGET TABLE : "<<snippet.filterInfo[index+1]<<std::endl;
-            std::cout<<"SCAN OPERATOR : "<<snippet.filterInfo[index+2]<<std::endl;
-            std::cout<<"SCAN DATA TYPE : "<<snippet.filterInfo[index+3]<<std::endl;
+            std::cout<<"[Histogram Table] SCAN TARGET TABLE : "<<snippet.filterInfo[index+1]<<std::endl;
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[Histogram Table] SCAN OPERATOR : "<<snippet.filterInfo[index+2]<<std::endl;
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[Histogram Table] SCAN DATA TYPE : "<<snippet.filterInfo[index+3]<<std::endl;
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
             for(int j=0;j<tableList.size();j++){
-                std::cout<<"INDEX : "<<j<<"PREV TABLE LIST : "<<tableList[j]<<std::endl;
+                std::cout<<"[Histogram Table] INDEX : "<<j<<"PREV TABLE LIST : "<<tableList[j]<<std::endl;
+                // std::this_thread::sleep_for(std::chrono::milliseconds{300});
             }
             if(snippet.filterInfo[index+2] == "1" | snippet.filterInfo[index+2] == "3"){ // >= or >
                     bool isduplicated = false;
                     int duplicateIndex = 0;
                     for(int k = 0;k<tableList.size()-1;k++){
-                        std::cout<<"TABLE LIST NAME : "<<tableList[k]<<std::endl;
-                        std::cout<<"1231232123"<<std::endl;
+                        std::cout<<"[Histogram Table] TABLE LIST NAME : "<<tableList[k]<<std::endl;
+                        // std::this_thread::sleep_for(std::chrono::milliseconds{300});
                         if(snippet.filterInfo[index+1] == tableList[k]){
                             isduplicated = true;
                             duplicateIndex = k;
-                            std::cout<<"DUPLICATE INDEX : "<<k<<" DUPLICATED TABLE : "<<snippet.filterInfo[index+1]<<std::endl;
+                            std::cout<<"[Histogram Table] DUPLICATE INDEX : "<<k<<" | DUPLICATED TABLE : "<<snippet.filterInfo[index+1]<<std::endl;
+                            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
                         }
                     }
 
@@ -4623,7 +4630,8 @@ float getFilteredRow(querySnippetInfo snippet){
                 }
                 else if(snippet.filterInfo[index+3] == "9") // string의 경우
                 {
-                    std::cout<<"WRONG DATATYPE AND OPERATOR TYPE >= , STRING"<<std::endl;
+                    std::cout<<"[Histogram Table] WRONG DATATYPE AND OPERATOR TYPE >= , STRING"<<std::endl;
+                    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
                 }
                 else if(snippet.filterInfo[index+3] == "10"){
                     histogram targetTable2 = Stringtohisto(snippet.filterInfo[index+4]);
@@ -4731,7 +4739,8 @@ float getFilteredRow(querySnippetInfo snippet){
                 }
                 else if(snippet.filterInfo[index+3] == "9") // string의 경우
                 {
-                    std::cout<<"WRONG DATATYPE AND OPERATOR TYPE >= , STRING"<<std::endl;
+                    std::cout<<"[Histogram Table] WRONG DATATYPE AND OPERATOR TYPE >= , STRING"<<std::endl;
+                    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
                 }
                 else if(snippet.filterInfo[index+3] == "10"){
                     histogram targetTable2 = Stringtohisto(snippet.filterInfo[index+4]);
@@ -4811,13 +4820,18 @@ float getFilteredRow(querySnippetInfo snippet){
                 newRatio = prevRatio + curRatio - 1;
                 filterRatio.pop_back();
                 filterRatio.push_back(newRatio);
-                 std::cout<<"RATIO LIST"<<std::endl;
+                 std::cout<<"[Histogram Table] RATIO LIST"<<std::endl;
+                 // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+                 std::cout<<"[Histogram Table] ";
                     for(int p = 0;p<filterRatio.size();p++){
                         std::cout<<filterRatio[p]<<" ";
                     }
                     std::cout<<"\n";
-                std::cout<<"PREV RATIO : "<<prevRatio << " CUR RATIO : "<<curRatio<<std::endl;
-                std::cout<<"NEW CALCULATED RATIO : "<<newRatio<<std::endl;
+                    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+                std::cout<<"[Histogram Table] PREV RATIO : "<<prevRatio << " CUR RATIO : "<<curRatio<<std::endl;
+                // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+                std::cout<<"[Histogram Table] NEW CALCULATED RATIO : "<<newRatio<<std::endl;
+                // std::this_thread::sleep_for(std::chrono::milliseconds{300});
                 isduplicated = false;
                 }
             }
@@ -4828,7 +4842,8 @@ float getFilteredRow(querySnippetInfo snippet){
                     if(snippet.filterInfo[index+1] == tableList[k]){
                         isduplicated = true;
                         duplicateIndex = k;
-                        std::cout<<"DUPLICATE INDEX : "<<k<<"DUPLICATED TABLE : "<<snippet.filterInfo[index+1]<<std::endl;
+                        std::cout<<"[Histogram Table] DUPLICATE INDEX : "<<k<<"DUPLICATED TABLE : "<<snippet.filterInfo[index+1]<<std::endl;
+                        // std::this_thread::sleep_for(std::chrono::milliseconds{300});
                     }
                 }
 
@@ -4870,7 +4885,8 @@ float getFilteredRow(querySnippetInfo snippet){
                 }
                 else if(snippet.filterInfo[index+3] == "9") // string의 경우
                 {
-                    std::cout<<"WRONG DATATYPE AND OPERATOR TYPE >= , STRING"<<std::endl;
+                    std::cout<<"[Histogram Table] WRONG DATATYPE AND OPERATOR TYPE >= , STRING"<<std::endl;
+                    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
                 }
                 else if(snippet.filterInfo[index+3] == "10"){
                     histogram targetTable2 = Stringtohisto(snippet.filterInfo[index+4]);
@@ -4976,7 +4992,8 @@ float getFilteredRow(querySnippetInfo snippet){
                 }
                 else if(snippet.filterInfo[index+3] == "9") // string의 경우
                 {
-                    std::cout<<"WRONG DATATYPE AND OPERATOR TYPE >= , STRING"<<std::endl;
+                    std::cout<<"[Histogram Table] WRONG DATATYPE AND OPERATOR TYPE >= , STRING"<<std::endl;
+                    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
                 }
                 else if(snippet.filterInfo[index+3] == "10"){
                     histogram targetTable2 = Stringtohisto(snippet.filterInfo[index+4]);
@@ -5055,13 +5072,18 @@ float getFilteredRow(querySnippetInfo snippet){
                 newRatio = prevRatio + curRatio - 1;
                 filterRatio.pop_back();
                 filterRatio.push_back(newRatio);
-                 std::cout<<"RATIO LIST"<<std::endl;
+                 std::cout<<"[Histogram Table] RATIO LIST"<<std::endl;
+                 // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+                 std::cout<<"[Histogram Table] ";
                     for(int p = 0;p<filterRatio.size();p++){
                         std::cout<<filterRatio[p]<<" ";
                     }
                     std::cout<<"\n";
-                std::cout<<"PREV RATIO : "<<prevRatio << " CUR RATIO : "<<curRatio<<std::endl;
-                std::cout<<"NEW CALCULATED RATIO : "<<newRatio<<std::endl;
+                    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+                std::cout<<"[Histogram Table] PREV RATIO : "<<prevRatio << " CUR RATIO : "<<curRatio<<std::endl;
+                // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+                std::cout<<"[Histogram Table] NEW CALCULATED RATIO : "<<newRatio<<std::endl;
+                // std::this_thread::sleep_for(std::chrono::milliseconds{300});
                 isduplicated = false;
                 }
             }
@@ -5277,7 +5299,8 @@ float getFilteredRow(querySnippetInfo snippet){
                 }
             }
             else if(snippet.filterInfo[index+2] == "16"){ //substring 연산자 계산 
-            std::cout<<"SUBSTRING CALCULATE ON"<<std::endl;
+            std::cout<<"[Histogram Table] SUBSTRING CALCULATE ON"<<std::endl;
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
                 currentSubstring = true;
                 subStringTable = snippet.filterInfo[index+1];
                 std::vector<std::string> valueVector;
@@ -5334,12 +5357,16 @@ float getFilteredRow(querySnippetInfo snippet){
             int index = (i/2)*6;
             histogram targetTable = Stringtohisto(snippet.filterInfo[index+1]); // 타겟 히스토그램 테이블
             tableList.push_back(snippet.filterInfo[index+1]); // 타겟 테이블 리스트 정리 같은 컬럼 and, or 연산자 처리를 위함
-            std::cout<<"SCAN TARGET TABLE : "<<snippet.filterInfo[index+1]<<std::endl;
-            std::cout<<"SCAN OPERATOR : "<<snippet.filterInfo[index+2]<<std::endl;
-            std::cout<<"SCAN DATA TYPE : "<<snippet.filterInfo[index+3]<<std::endl;
+            std::cout<<"[Histogram Table] SCAN TARGET TABLE : "<<snippet.filterInfo[index+1]<<std::endl;
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[Histogram Table] SCAN OPERATOR : "<<snippet.filterInfo[index+2]<<std::endl;
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+            std::cout<<"[Histogram Table] SCAN DATA TYPE : "<<snippet.filterInfo[index+3]<<std::endl;
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
 
             for(int j=0;j<tableList.size()-1;j++){
-                std::cout<<"INDEX : "<<j<<" PREV TABLE LIST : "<<tableList[j]<<std::endl;
+                std::cout<<"[Histogram Table] INDEX : "<<j<<" PREV TABLE LIST : "<<tableList[j]<<std::endl;
+                // std::this_thread::sleep_for(std::chrono::milliseconds{300});
             }
 
             if(snippet.filterInfo[index+2] == "1" | snippet.filterInfo[index+2] == "3"){ // >= or >
@@ -5347,12 +5374,13 @@ float getFilteredRow(querySnippetInfo snippet){
                     bool isduplicated = false;
                     int duplicateIndex = 0;
                     for(int k = 0;k<tableList.size()-1;k++){
-                        std::cout<<"TABLE LIST NAME : "<<tableList[k]<<std::endl;
-                        std::cout<<"1231232123"<<std::endl;
+                        std::cout<<"[Histogram Table] TABLE LIST NAME : "<<tableList[k]<<std::endl;
+                        // std::this_thread::sleep_for(std::chrono::milliseconds{300});
                         if(snippet.filterInfo[index+1] == tableList[k]){
                             isduplicated = true;
                             duplicateIndex = k;
-                            std::cout<<"DUPLICATE INDEX : "<<k<<"DUPLICATED TABLE : "<<snippet.filterInfo[index+1]<<std::endl;
+                            std::cout<<"[Histogram Table] DUPLICATE INDEX : "<<k<<"DUPLICATED TABLE : "<<snippet.filterInfo[index+1]<<std::endl;
+                            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
                         }
                     }
                 if(isduplicated){
@@ -5385,7 +5413,8 @@ float getFilteredRow(querySnippetInfo snippet){
                 }
                 else if(snippet.filterInfo[index+3] == "9") // string의 경우
                 {
-                    std::cout<<"WRONG DATATYPE AND OPERATOR TYPE >= , STRING"<<std::endl;
+                    std::cout<<"[Histogram Table] WRONG DATATYPE AND OPERATOR TYPE >= , STRING"<<std::endl;
+                    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
                 }
                 else if(snippet.filterInfo[index+3] == "10"){
                     histogram targetTable2 = Stringtohisto(snippet.filterInfo[index+4]);
@@ -5472,7 +5501,8 @@ float getFilteredRow(querySnippetInfo snippet){
                 }
                 else if(snippet.filterInfo[index+3] == "9") // string의 경우
                 {
-                    std::cout<<"WRONG DATATYPE AND OPERATOR TYPE >= , STRING"<<std::endl;
+                    std::cout<<"[Histogram Table] WRONG DATATYPE AND OPERATOR TYPE >= , STRING"<<std::endl;
+                    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
                 }
                 else if(snippet.filterInfo[index+3] == "10"){
                     histogram targetTable2 = Stringtohisto(snippet.filterInfo[index+4]);
@@ -5540,13 +5570,18 @@ float getFilteredRow(querySnippetInfo snippet){
                     newRatio = prevRatio + curRatio - 1;
                     filterRatio.pop_back();
                     filterRatio.push_back(newRatio);
-                     std::cout<<"RATIO LIST"<<std::endl;
+                     std::cout<<"[Histogram Table] RATIO LIST"<<std::endl;
+                     // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+                     std::cout<<"[Histogram Table] ";
                     for(int p = 0;p<filterRatio.size();p++){
                         std::cout<<filterRatio[p]<<" ";
                     }
                     std::cout<<"\n";
-                    std::cout<<"PREV RATIO : "<<prevRatio << " CUR RATIO : "<<curRatio<<std::endl;
-                    std::cout<<"NEW CALCULATED RATIO : "<<newRatio<<std::endl;
+                    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+                    std::cout<<"[Histogram Table] PREV RATIO : "<<prevRatio << " CUR RATIO : "<<curRatio<<std::endl;
+                    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+                    std::cout<<"[Histogram Table] NEW CALCULATED RATIO : "<<newRatio<<std::endl;
+                    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
                     isduplicated = false;   
                 }
             }
@@ -5558,7 +5593,8 @@ float getFilteredRow(querySnippetInfo snippet){
                     if(snippet.filterInfo[index+1] == tableList[k]){
                         isduplicated = true;
                         duplicateIndex = k;
-                        std::cout<<"DUPLICATE INDEX : "<<k<<"DUPLICATED TABLE : "<<snippet.filterInfo[index+1]<<std::endl;
+                        std::cout<<"[Histogram Table] DUPLICATE INDEX : "<<k<<"DUPLICATED TABLE : "<<snippet.filterInfo[index+1]<<std::endl;
+                        // std::this_thread::sleep_for(std::chrono::milliseconds{300});
                     }
                 }
 
@@ -5592,7 +5628,8 @@ float getFilteredRow(querySnippetInfo snippet){
                 }
                 else if(snippet.filterInfo[index+3] == "9") // string의 경우
                 {
-                    std::cout<<"WRONG DATATYPE AND OPERATOR TYPE >= , STRING"<<std::endl;
+                    std::cout<<"[Histogram Table] WRONG DATATYPE AND OPERATOR TYPE >= , STRING"<<std::endl;
+                    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
                 }
                 else if(snippet.filterInfo[index+3] == "10"){
                     histogram targetTable2 = Stringtohisto(snippet.filterInfo[index+4]);
@@ -5679,7 +5716,8 @@ float getFilteredRow(querySnippetInfo snippet){
                 }
                 else if(snippet.filterInfo[index+3] == "9") // string의 경우
                 {
-                    std::cout<<"WRONG DATATYPE AND OPERATOR TYPE >= , STRING"<<std::endl;
+                    std::cout<<"[Histogram Table] WRONG DATATYPE AND OPERATOR TYPE >= , STRING"<<std::endl;
+                    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
                 }
                 else if(snippet.filterInfo[index+3] == "10"){
                     histogram targetTable2 = Stringtohisto(snippet.filterInfo[index+4]);
@@ -5747,13 +5785,18 @@ float getFilteredRow(querySnippetInfo snippet){
                     newRatio = prevRatio + curRatio - 1;
                     filterRatio.pop_back();
                     filterRatio.push_back(newRatio);
-                    std::cout<<"RATIO LIST"<<std::endl;
+                    std::cout<<"[Histogram Table] RATIO LIST"<<std::endl;
+                    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+                    std::cout<<"[Histogram Table] ";
                     for(int p = 0;p<filterRatio.size();p++){
                         std::cout<<filterRatio[p]<<" ";
                     }
                     std::cout<<"\n";
-                    std::cout<<"PREV RATIO : "<<prevRatio << " CUR RATIO : "<<curRatio<<std::endl;
-                    std::cout<<"NEW CALCULATED RATIO : "<<newRatio<<std::endl;
+                    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+                    std::cout<<"[Histogram Table] PREV RATIO : "<<prevRatio << " CUR RATIO : "<<curRatio<<std::endl;
+                    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+                    std::cout<<"[Histogram Table] NEW CALCULATED RATIO : "<<newRatio<<std::endl;
+                    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
                     isduplicated = false;   
                 }
             }
@@ -5929,12 +5972,14 @@ float getFilteredRow(querySnippetInfo snippet){
                 }
             }
             else if(snippet.filterInfo[index+2] == "16"){
-                std::cout<<"SUBSTRING CALCULATE ON"<<std::endl;
+                std::cout<<"[Histogram Table] SUBSTRING CALCULATE ON"<<std::endl;
+                // std::this_thread::sleep_for(std::chrono::milliseconds{300});
                 currentSubstring = true;
                 subStringTable = snippet.filterInfo[index+1];
                 std::vector<std::string> valueVector;
                 subStringNum = std::stoi(snippet.filterInfo[index+4]);
-                std::cout<<"SUBSTRING CALCULATE FINISHED"<<std::endl;
+                std::cout<<"[Histogram Table] SUBSTRING CALCULATE FINISHED"<<std::endl;
+                // std::this_thread::sleep_for(std::chrono::milliseconds{300});
             }
         }
         else if(i%2 == 1){ // 중간 연산자 or, and
@@ -5973,9 +6018,11 @@ float getFilteredRow(querySnippetInfo snippet){
                 andon = true;
             }
         }
-        std::cout<<"FILTER RATIO : "<<filterRatio[j]<<std::endl;
+        std::cout<<"[Histogram Table] FILTER RATIO : "<<filterRatio[j]<<std::endl;
+        // std::this_thread::sleep_for(std::chrono::milliseconds{300});
     }
-    std::cout<<"RESULT RATIO : "<<resultRatio<<std::endl;
+    std::cout<<"[Histogram Table] RESULT RATIO : "<<resultRatio<<std::endl;
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
     return resultRatio;
 }
 

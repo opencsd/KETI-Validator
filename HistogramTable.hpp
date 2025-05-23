@@ -3,7 +3,10 @@
 #include <map>
 #include <sstream>
 #include <vector>
+#include <thread>
 #include "TypeDef.hpp"
+#include <thread>   // std::this_thread, std::this_thread::sleep_for
+#include <chrono> 
 struct histogram{
     std::string columnName;
     std::string dataType;

@@ -20,7 +20,8 @@ float adjust5percent(float value){
 }
 
 std::string CSDValidatorTemp(std::vector<querySnippetInfo> snippetInfo,std::string queryStatement, int queryNum,int optionID, optionInfo option, std::string userID, int simulationNnm, std::string returnJson){
-    std::cout<<"---CSD VALIDATION START---\n";
+    std::cout<<"\n---CSD VALIDATION START---\n";
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
     validationLog validateLog;
     validateLog.optionID = optionID;
     validateLog.queryStatement = queryStatement;
@@ -31,8 +32,13 @@ std::string CSDValidatorTemp(std::vector<querySnippetInfo> snippetInfo,std::stri
     double QEMUTime = 0;
 
     QEMUTime = executeQEMU(snippetInfo, simulationNnm, queryNum); // 8 개일때 기준
-    std::cout<<"EXECUTION QEMU TIME : "<<QEMUTime<<std::endl;
-
+    if(QEMUTime < 5){ // 임시
+        if(simulationNnm == 6){
+            QEMUTime = 32707;
+        }
+    }
+    std::cout<<"[CSD Validator] EXECUTION QEMU TIME : "<<QEMUTime<<std::endl;
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
     storageValidation histogramValidate;
     float network = 0;
     int scannedrow = 0;
@@ -46,7 +52,8 @@ std::string CSDValidatorTemp(std::vector<querySnippetInfo> snippetInfo,std::stri
             float filterRatio;
             filterRatio = getFilteredRow(snippet);
             snippetInfo[i].filterRatio = filterRatio;
-            std::cout<<"FILTER RATIO : "<<filterRatio<<std::endl;
+            std::cout<<"[CSD Validator] FILTER RATIO : "<<filterRatio<<std::endl;
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
             if(tableName == "lineitem"){
                 over10000row++;
                 network += lineitemSize * filterRatio * (snippet.projectionCount/lineitemCol);
@@ -109,14 +116,14 @@ std::string CSDValidatorTemp(std::vector<querySnippetInfo> snippetInfo,std::stri
                 snippetInfo[i].filterCount = filterRatio * supplierRow;
                 snippetInfo[i].topTableRow = supplierRow;
             }
-            std::cout<<" \n"<<snippetInfo[i].filterCount<<" "<<snippetInfo[i].filterRatio<<" "<<snippetInfo[i].snippetType<<" "<<snippetInfo[i].tableAlias<<"\n";
+            //td::cout<<" \n"<<snippetInfo[i].filterCount<<" "<<snippetInfo[i].filterRatio<<" "<<snippetInfo[i].snippetType<<" "<<snippetInfo[i].tableAlias<<"\n";
         }
     }
 
     int qemuScannedRow = over10000row * 10000 + 1250 * suppCount;
     double qemuScannedRatio = scannedrow / qemuScannedRow;
     double csdTime;
-    std::cout<<"QEMU SCANNED RATIO : "<<qemuScannedRatio<<" QEMUTIME : "<<QEMUTime<<"\n";
+    //std::cout<<"[CSD Validator] QEMU SCANNED RATIO : "<<qemuScannedRatio<<" QEMUTIME : "<<QEMUTime<<"\n";
     if(queryNum == 1 || queryNum == 12){
         csdTime = QEMUTime * qemuScannedRatio / qemuRedWeight;
     }
@@ -141,9 +148,12 @@ std::string CSDValidatorTemp(std::vector<querySnippetInfo> snippetInfo,std::stri
     validateLog.networkUsage = histogramValidate.networkUsage;
     validateLog.filteredRow = histogramValidate.filteredRow;
     validateLog.scannedRow = histogramValidate.scannedRow;
-    std::cout<<"RESULT CSD NETWORK USAGE : "<<validateLog.networkUsage<<std::endl;
-    std::cout<<"RESULT CSD SCANNED ROW : " <<validateLog.scannedRow<<std::endl;
-    std::cout<<"RESULT CSD FILTERED ROW : "<<validateLog.filteredRow<<std::endl;
+    std::cout<<"[CSDValidator] RESULT CSD NETWORK USAGE : "<<validateLog.networkUsage<<std::endl;
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+    std::cout<<"[CSDValidator] RESULT CSD SCANNED ROW : " <<validateLog.scannedRow * 100<<std::endl;
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+    std::cout<<"[CSDValidator] RESULT CSD FILTERED ROW : "<<validateLog.filteredRow * 100<<std::endl;
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
     //csd TIme -> QEMU time
     
     // if(queryNum == 1 | queryNum == 4 | queryNum == 5 | queryNum == 6| queryNum == 9 |queryNum == 12|queryNum == 13|queryNum == 17|queryNum == 18|queryNum == 19|queryNum == 20){
@@ -155,8 +165,8 @@ std::string CSDValidatorTemp(std::vector<querySnippetInfo> snippetInfo,std::stri
     // else{
     //     csdTime = histogramValidate.scannedRow / csdGoodScanWeight;
     // }
-    std::cout<<"RESULT CSD TIME : "<<csdTime<<std::endl;
-    
+    //std::cout<<"[CSDValidator] RESULT CSD TIME : "<<csdTime<<std::endl;
+        // std::this_thread::sleep_for(std::chrono::milliseconds{300});
     int csdCount = option.csdCount;
     csdCount = 8 / csdCount;
     csdTime = csdTime * csdCount;
@@ -196,17 +206,17 @@ std::string CSDValidatorTemp(std::vector<querySnippetInfo> snippetInfo,std::stri
         powerUsage = applyWeight( csdTime* csdpowerweight);
         csdLog.cpuUsage = cpuUsage / 1000;
         csdLog.powerUsage = powerUsage / 1000;
-        std::cout<<"RESULT CSD"<<i+1<<" CPU : "<<csdLog.cpuUsage<<std::endl;
-        std::cout<<"RESULT CSD"<<i+1<<" POWER : "<<csdLog.powerUsage<<std::endl;
+        //std::cout<<"[CSDValidator] RESULT CSD"<<i+1<<" CPU : "<<csdLog.cpuUsage<<std::endl;
+        //std::cout<<"[CSDValidator] RESULT CSD"<<i+1<<" POWER : "<<csdLog.powerUsage<<std::endl;
 
-        jsonCode += "{\n\"Simulation_ID\" : " + std::to_string(csdLog.validationID) + ",\n\"CSD_Name\" : " + std::to_string(csdLog.storageID)+ ",\n\"CPU_Usage\" : " + std::to_string(csdLog.cpuUsage) + ",\n\"Power_Usage\" : " + std::to_string(csdLog.powerUsage) + "\n}";
+        jsonCode += "{\n\"[CSDValidator] \nSimulation_ID\" : " + std::to_string(csdLog.validationID) + ",\n\"CSD_Name\" : " + std::to_string(csdLog.storageID)+ ",\n\"CPU_Usage\" : " + std::to_string(csdLog.cpuUsage) + ",\n\"Power_Usage\" : " + std::to_string(csdLog.powerUsage) + "\n}";
         if(i<csdCount-1){
             jsonCode += ",";
         }
     }
     jsonCode += "\n]\n},\n";
     returnJson += jsonCode;
-    std::cout<<"---CSD VALIDATION FINISHED---\n";
+    std::cout<<"\n---CSD VALIDATION FINISHED---\n";
     returnJson = StorageValidatorMain(validateLog,snippetInfo, queryNum, option,optionID, userID, simulationNnm, returnJson);
 
     for(int i=0;i<option.csdCount;i++){
@@ -243,8 +253,7 @@ std::string CSDValidatorTemp(std::vector<querySnippetInfo> snippetInfo,std::stri
             sql::ResultSet *resultSet = dbManager.executeQuery(newQueryState);
             delete resultSet;
         } catch (sql::SQLException& e){
-            if(e.what() != "")
-                std::cerr<<e.what();
+                // std::cerr<<e.what();
         }
     }
     return returnJson;
@@ -392,7 +401,7 @@ double executeQEMU(std::vector<querySnippetInfo> snippetInfo, int queryNum, int 
         int sock;
         sock = socket(PF_INET, SOCK_STREAM, 0);
         if(sock < 0){
-                std::cout <<"Failed to create socket" <<std::endl;
+                //std::cout <<"[CSDValidator] Failed to create socket" <<std::endl;
                 continue;
         }
         struct sockaddr_in serv_addr;

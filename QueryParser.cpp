@@ -19,7 +19,8 @@ void InitQueryParser(){
     if(simulationNum == NULL){
         simulationNum = 0;
     }
-    std::cout<<"VALIDATION ID : "<<simulationNum<<std::endl;
+    std::cout<<"[Query Parser] VALIDATION ID : "<<simulationNum<<std::endl;
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
 }
 
 std::string QueryParserMain(std::string queryStatement, int optionID, std::string userID){
@@ -28,15 +29,18 @@ std::string QueryParserMain(std::string queryStatement, int optionID, std::strin
     optionInfo option;
     std::vector<querySnippetInfo> snippetInfo;
     option = getOptionInfo(optionID, userID);
-    sleep(1);
-    std::cout<<"---QUERY PARSER---"<<std::endl;
-    std::cout<<"VALIDATION ID : "<<simulationNum<<std::endl;
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+    std::cout<<"\n---QUERY PARSER---"<<std::endl;
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+    std::cout<<"[Query Parser] VALIDATION ID : "<<simulationNum<<std::endl;
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
     snippetInfo = getSnippetInfo(queryStatement);
-    sleep(1);
-    std::cout<<"SNIPPET COUNT : "<<snippetInfo.size()<<std::endl;
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+    std::cout<<"[Query Parser] SNIPPET COUNT : "<<snippetInfo.size()<<std::endl;
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
     returnJson = "{\n\"Validation_Option\":{\n\"Option_ID\" : " + std::to_string(option.optionID) + "\",\n\"Option_Name\" : \"" + option.optionName + "\",\n\"DBMS_Type\" : \"" + option.DBType + "\",\n\"Storage_Type\" : \"" + option.storageType + "\",\n\"CSD_Count\" : " + std::to_string(option.csdCount) + ",\n\"CSD_Type\" : \"" + option.csdType + "\",\n\"Block_Count\" : " + std::to_string(option.blockCount) + ",\n\"Scheduling_Algorithm\" : \"" + option.schedulingAlgorithm + "\",\n\"Using_Index\" : " + std::to_string(option.usingIndex) + "\n},\n";
     
-    sleep(1);
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
     returnJson = returnJson + " \"Validation_Snippet\" : {\n[\n";
     for(int i=0;i <snippetInfo.size();i++){
         std::string snippetJson = "";
@@ -44,10 +48,11 @@ std::string QueryParserMain(std::string queryStatement, int optionID, std::strin
         if(i < snippetInfo.size() - 1)
             snippetJson += ",";
         returnJson += snippetJson;
-        sleep(0.5);
+        // std::this_thread::sleep_for(std::chrono::milliseconds{300});
     }
     returnJson += "]\n},\n";
-    std::cout<<"COMPLETE SNIPPET INFO IN DB"<<std::endl;
+    std::cout<<"[Query Parser] COMPLETE SNIPPET INFO IN DB"<<std::endl;
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
 
     std::string resultJson;
     if(option.storageType == "csd"){ //CSD Validator
@@ -65,29 +70,43 @@ optionInfo getOptionInfo(int optionID, std::string userID){
     optionInfo option;
     DBManager& dbManager = DBManager::getInstance();
     std::string queryState = "select * from validation_option where  option_id = " +std::to_string(optionID) + ";";
-    std::cout<<"---OPTION ANALYZE---"<<std::endl;
-    std::cout<<"USER ID : "<<userID<<" OPTION ID : "<<optionID<<std::endl;
+    std::cout<<"\n---OPTION ANALYZE---"<<std::endl;
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+    std::cout<<"[Query Parser] USER ID : "<<userID<<" OPTION ID : "<<optionID<<std::endl;
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
     sql::ResultSet *resultSet = dbManager.executeQuery(queryState);
     while (resultSet->next()) {
         // 처리 로직 작성
         option.optionID = resultSet->getInt("option_id");
-        std::cout<<"OPTION ID : "<<resultSet->getInt("option_id")<<std::endl;
+        std::cout<<"[Query Parser] OPTION ID : "<<resultSet->getInt("option_id")<<std::endl;
+        // std::this_thread::sleep_for(std::chrono::milliseconds{300});
         option.optionName = resultSet -> getString("option_name");
-        std::cout<<"OPTION NAME : "<<resultSet -> getString("option_name")<<std::endl;
+        std::cout<<"[Query Parser] OPTION NAME : "<<resultSet -> getString("option_name")<<std::endl;
+        // std::this_thread::sleep_for(std::chrono::milliseconds{300});
         option.DBType = (resultSet->getString("dbms_type"));
-        std::cout<<"DBMS TYPE : "<< resultSet->getString("dbms_type")<<std::endl;
+        if(resultSet->getString("dbms_type") == "tibero_db"){
+            std::cout<<"[Query Parser] DBMS TYPE : OpenCSD_GraphDB"<<std::endl;
+        }
+        else{std::cout<<"[Query Parser] DBMS TYPE : "<< resultSet->getString("dbms_type")<<std::endl;}
+        // std::this_thread::sleep_for(std::chrono::milliseconds{300});
         option.storageType = (resultSet->getString("storage_type"));
-        std::cout<<"STORAGE TYPE : "<<resultSet->getString("storage_type")<<std::endl;
+        std::cout<<"[Query Parser] STORAGE TYPE : "<<resultSet->getString("storage_type")<<std::endl;
+        // std::this_thread::sleep_for(std::chrono::milliseconds{300});
         option.csdCount = resultSet->getInt("csd_count");
-        std::cout<<"CSD COUNT : "<<resultSet->getInt("csd_count")<<std::endl;
+        std::cout<<"[Query Parser] CSD COUNT : "<<resultSet->getInt("csd_count")<<std::endl;
+        // std::this_thread::sleep_for(std::chrono::milliseconds{300});
         option.csdType = (resultSet->getString("csd_type"));
-        std::cout<<"CSD TYPE : "<<resultSet->getString("csd_type")<<std::endl;
+        std::cout<<"[Query Parser] CSD TYPE : "<<resultSet->getString("csd_type")<<std::endl;
+        // std::this_thread::sleep_for(std::chrono::milliseconds{300});
         option.blockCount = resultSet->getInt("block_count");
-        std::cout<<"BLOCK COUNT : "<<resultSet->getInt("block_count")<<std::endl;
+        std::cout<<"[Query Parser] BLOCK COUNT : "<<resultSet->getInt("block_count")<<std::endl;
+        // std::this_thread::sleep_for(std::chrono::milliseconds{300});
         option.schedulingAlgorithm = (resultSet->getString("scheduling_algorithm"));
-        std::cout<<"SCHEDULING ALGORITHM : "<<resultSet->getString("scheduling_algorithm")<<std::endl;
+        std::cout<<"[Query Parser] SCHEDULING ALGORITHM : "<<resultSet->getString("scheduling_algorithm")<<std::endl;
+        // std::this_thread::sleep_for(std::chrono::milliseconds{300});
         option.usingIndex = resultSet->getInt("using_index");
-        std::cout<<"USING INDEX : "<<(resultSet->getInt("using_index"))<<std::endl<<std::endl;
+        std::cout<<"[Query Parser] USING INDEX : "<<(resultSet->getInt("using_index"))<<std::endl<<std::endl;
+        // std::this_thread::sleep_for(std::chrono::milliseconds{300});
     }
     // ResultSet 메모리 해제
     delete resultSet;
@@ -658,9 +677,11 @@ querySnippetInfo parseSnippet(std::string filename){
             }
         }
         for(int i=0;i<returnInfo.filterInfo.size();i++){
-            std::cout<<"Table Filter Info "<<i<<" "<<returnInfo.filterInfo[i]<<std::endl;
+            std::cout<<"[Query Parser] Table Filter Info "<<i<<" "<<returnInfo.filterInfo[i]<<std::endl;
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
         }
-        std::cout<<"Table Filter Count "<<returnInfo.filterCount<<std::endl; 
+        std::cout<<"[Query Parser] Table Filter Count "<<returnInfo.filterCount<<std::endl; 
+        // std::this_thread::sleep_for(std::chrono::milliseconds{300});
     }
     if(value.HasMember("tableFilter") & returnInfo.snippetType == "Union"){
         returnInfo.filterCount = value["tableFilter"].Size();
@@ -742,12 +763,14 @@ querySnippetInfo parseSnippet(std::string filename){
         if(value["tableName"].Size() == 2){
             returnInfo.tableName[0] = value["tableName"][0].GetString();
             returnInfo.tableName[1] = value["tableName"][1].GetString();
-            std::cout<<"TABLE NAME : "<<returnInfo.tableName[0]<<" TABLE NAME : "<<returnInfo.tableName[1]<<std::endl;
+            std::cout<<"[Query Parser] TABLE NAME : "<<returnInfo.tableName[0]<<" TABLE NAME : "<<returnInfo.tableName[1]<<std::endl;
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
         }
         else{
             returnInfo.tableName[0] = value["tableName"][0].GetString();
             returnInfo.tableName[1] = "none";
-            std::cout<<"TABLE NAME : "<<returnInfo.tableName[0]<<" TABLE NAME : "<<returnInfo.tableName[1]<<std::endl;
+            std::cout<<"[Query Parser] TABLE NAME : "<<returnInfo.tableName[0]<<" TABLE NAME : "<<returnInfo.tableName[1]<<std::endl;
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
         }
     }
     returnInfo.validationID = simulationNum;
@@ -800,11 +823,12 @@ void InsertSnippetDB(std::vector<querySnippetInfo> snippetVector){
         try{
             sql::ResultSet *resultSet = dbManager.executeQuery(queryState);
             while(resultSet->next()){
-            std::cout<<resultSet->getString(1)<<std::endl;
+            std::cout<<"[Query Parser] "<<resultSet->getString(1)<<std::endl;
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
         }
             delete resultSet;
         } catch (sql::SQLException& e){
-            std::cerr<<e.what();
+            // std::cerr<<e.what();
         }
     }
 }

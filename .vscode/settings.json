@@ -82,6 +82,9 @@
         "videodev2.h": "c",
         "*.dat": "cpp",
         "span": "cpp",
-        "regex": "cpp"
+        "regex": "cpp",
+        "csetjmp": "cpp",
+        "forward_list": "cpp",
+        "netfwd": "cpp"
     }
 }

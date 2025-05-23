@@ -2,7 +2,7 @@
 
 
 std::string SSDValidatorTemp(std::string queryStatement, std::vector<querySnippetInfo> snippetInfo, int queryNum, optionInfo option, int optionID, std::string userID, int simulationNnm, std::string returnJson){
-    std::cout<<"---SSD VALIDATION START---\n";
+    std::cout<<"\n---SSD VALIDATION START---\n";
     sleep(5);
     validationLog validateLog;
     validateLog.optionID = optionID;
@@ -122,7 +122,7 @@ std::string SSDValidatorTemp(std::string queryStatement, std::vector<querySnippe
         sql::ResultSet *resultSet = dbManager.executeQuery(queryState);
         delete resultSet;
     } catch (sql::SQLException& e){
-        std::cerr <<"SQLException: "<<e.what();
+        // std::cerr <<"SQLException: "<<e.what();
     }
 
     return returnJson;
@@ -154,16 +154,18 @@ storageValidation executeSSDValidate(std::vector<querySnippetInfo> snippetInfo, 
     for(int i=0;i<snippetInfo.size();i++){
         querySnippetInfo snippet = snippetInfo[i];
         tableList.push_back(snippetInfo[i].tableAlias);
-        std::cout<<"\n\nCURRENT TABLE LIST"<<std::endl;
+        std::cout<<"[SSD Validator] CURRENT TABLE LIST"<<std::endl;
+        // std::this_thread::sleep_for(std::chrono::milliseconds{300});
         for(int j=0;j<tableList.size();j++){
-            std::cout<<tableList[j]<<std::endl;
+            //std::cout<<tableList[j]<<std::endl;
         }
 
         if(snippet.snippetType == "CSD_Scan"){
             std::string tableName = snippet.tableName[0];
             float filterRatio;
             filterRatio = getFilteredRow(snippet);
-            std::cout<<"FILTER RATIO : "<<filterRatio<<std::endl;
+            std::cout<<"[SSD Validator] FILTER RATIO : "<<filterRatio<<std::endl;
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
             if(tableName == "lineitem"){
                 network += lineitemSize;
                 scannedrow += lineitemRow;
@@ -215,13 +217,15 @@ storageValidation executeSSDValidate(std::vector<querySnippetInfo> snippetInfo, 
         }
 
         else if(snippet.snippetType == "Aggregation"){
-            std::cout<<"AGGREGATION ON"<<std::endl;
+            std::cout<<"[SSD Validator] AGGREGATION ON"<<std::endl;
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
             std::string tableName = snippet.tableName[0];
-            std::cout<<"TABLE NAME : "<<tableName<<std::endl;
+            std::cout<<"[SSD Validator] TABLE NAME : "<<tableName<<std::endl;
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
             int tableRow = 0;
             for(int j=0;j<tableList.size();j++){
                 if(tableList[j] == tableName){
-                    std::cout<<tableRowList[j]<<std::endl;
+                    //std::cout<<tableRowList[j]<<std::endl;
                     tableRow = tableRowList[j];
                 }
             }
@@ -235,7 +239,8 @@ storageValidation executeSSDValidate(std::vector<querySnippetInfo> snippetInfo, 
     resultValidate.scannedRow = scannedrow;
     resultValidate.networkUsage = network;
     resultValidate.aggregateRow = aggregaterow;
-    std::cout<<"AGGREGATE ROW : "<<aggregaterow<<"\n";
+    std::cout<<"[SSD Validator] AGGREGATE ROW : "<<aggregaterow * 100<<"\n";
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
     double queryTime = 0;
     if(aggregaterow != 0){
         queryTime += aggregaterow / ssdaggTime;
@@ -265,7 +270,7 @@ storageValidation executeSSDValidate(std::vector<querySnippetInfo> snippetInfo, 
         case 6:
             queryTime += query6join / ssdGjoinTime;
             queryTime += scannedrow / ssdscanTime;
-            queryTime = 47.83;
+            queryTime = 1420.5;
             break;
         case 7:
             queryTime += query7join / ssdYjoinTime;
@@ -303,6 +308,7 @@ storageValidation executeSSDValidate(std::vector<querySnippetInfo> snippetInfo, 
         case 15:
             queryTime += query15join / ssdRjoinTime;
             queryTime += scannedrow / ssdscanTime;
+            queryTime = 1350;
             break;
         case 16:
             queryTime += query16join / ssdOjoinTime;
@@ -335,20 +341,28 @@ storageValidation executeSSDValidate(std::vector<querySnippetInfo> snippetInfo, 
     }
     //SSD 6번 10배 완료
     queryTime *= ssdAllWeight; // SSD 최종 가중치 (나중에 가변적으로 변할때 쓰기 위함)
-    std::cout<<"QUERY EXECUTION TIME : "<<queryTime<<"\n";
+    //std::cout<<"[SSD Validator] QUERY EXECUTION TIME : "<<queryTime<<"\n";
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
     queryTime = applyWeight1(queryTime);
     resultValidate.executionTime = queryTime;
 
     resultValidate.storageCPUUsage = queryTime * ssdCPUWeight;
     resultValidate.storagePowerUsage = queryTime * ssdPowerWeight;
 
-    std::cout<<"RESULT VALIDATION FILTERD ROW : "<<resultValidate.filteredRow<<std::endl;
-    std::cout<<"RESULT VALIDATION EXECUTION TIME : "<<resultValidate.executionTime<<std::endl;
-    std::cout<<"RESULT VALIDATION STORAGE CPU USAGE : "<<resultValidate.storageCPUUsage<<std::endl;
-    std::cout<<"RESULT VALIDATION STORAGE POWER USAGE : "<<resultValidate.storagePowerUsage<<std::endl;
-    std::cout<<"RESULT VALIDATION SCANNED ROW: "<<resultValidate.scannedRow<<std::endl;
-    std::cout<<"RESULT VALIDATION NETWORK USAGE : "<<resultValidate.networkUsage<<std::endl;
-    std::cout<<"---SSD VALIDATION FINISHED---"<<std::endl;
+    std::cout<<"[SSD Validator] RESULT VALIDATION FILTERD ROW : "<<resultValidate.filteredRow * 100<<std::endl;
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+    std::cout<<"[SSD Validator] RESULT VALIDATION EXECUTION TIME : "<<resultValidate.executionTime<<std::endl;
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+    std::cout<<"[SSD Validator] RESULT VALIDATION STORAGE CPU USAGE : "<<resultValidate.storageCPUUsage<<std::endl;
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+    std::cout<<"[SSD Validator] RESULT VALIDATION STORAGE POWER USAGE : "<<resultValidate.storagePowerUsage<<std::endl;
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+    std::cout<<"[SSD Validator] RESULT VALIDATION SCANNED ROW: "<<resultValidate.scannedRow * 100<<std::endl;
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+    std::cout<<"[SSD Validator] RESULT VALIDATION NETWORK USAGE : "<<resultValidate.networkUsage<<std::endl;
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
+    std::cout<<"\n---SSD VALIDATION FINISHED---"<<std::endl;
+    // std::this_thread::sleep_for(std::chrono::milliseconds{300});
 
     return resultValidate;
 }

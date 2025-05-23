@@ -15,7 +15,7 @@ void QEMUHandler::inputQEMUHandler(){
     static char cMsg[] = "ok";
 
     if((server_fd = socket(AF_INET, SOCK_STREAM,0)) == -1){
-        std::cout<<"SOCKET CREATION FAILED "<<server_fd<<std::endl;
+        std::cout<<"[QEMU Handler] SOCKET CREATION FAILED "<<server_fd<<std::endl;
         //exit(EXIT_FAILURE);
     }
     if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt))){
@@ -36,7 +36,8 @@ void QEMUHandler::inputQEMUHandler(){
 		exit(EXIT_FAILURE);
 	}
     while(1){
-        std::cout<<"RUN QEMU HANDLER"<<std::endl;
+        std::cout<<"[QEMU Handler] RUN QEMU HANDLER"<<std::endl;
+        // std::this_thread::sleep_for(std::chrono::milliseconds{300});
 		if ((client_fd = accept(server_fd, (struct sockaddr*)&client_addr, (socklen_t*)&addrlen)) < 0){
 			perror("accept");
         	exit(EXIT_FAILURE);
@@ -61,11 +62,13 @@ void QEMUHandler::inputQEMUHandler(){
 				break;
 		}
         
-         std::cout<<"RECEV JSON : \n"<<json<<std::endl;
+         std::cout<<"[QEMU Handler] RECEV JSON : \n"<<json<<std::endl;
+         // std::this_thread::sleep_for(std::chrono::milliseconds{300});
          BlockResult block = BlockResult(json.c_str());
          int newID = block.query_id * 100 + block.work_id;
          rowCountMap[newID]+= block.row_count;
-         std::cout<<"Query,Work ID: "<<newID<<", CURRENT BLOCK COUNT : "<<rowCountMap[newID]<<std::endl;
+         std::cout<<"[QEMU Handler] Query,Work ID: "<<newID<<", CURRENT BLOCK COUNT : "<<rowCountMap[newID]<<std::endl;
+         // std::this_thread::sleep_for(std::chrono::milliseconds{300});
          if(rowCountMap[newID] >= 100000 || rowCountMap[newID] == 5 || rowCountMap[newID] == 25 || rowCountMap[newID] == 1250){
             resultMap[newID] = block;
          }
@@ -102,7 +105,7 @@ double QEMUHandler::calculateQEMU(int queryID, int workID){
     int returnCount = 0;
     while(1){
         int newID = 100 * queryID + workID;
-        std::cout<<"SEEKING ID "<<newID<<std::endl;
+        std::cout<<"[QEMU Handler] SEEKING ID "<<newID<<std::endl;
         if(resultMap.find(newID) != resultMap.end()){
             return resultMap[newID].executionTime;
             break;
@@ -110,10 +113,10 @@ double QEMUHandler::calculateQEMU(int queryID, int workID){
         
         else{
             returnCount++;
-            sleep(1);
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
         }
 
-        if(returnCount >= 10){
+        if(returnCount >= 3){
             return resultMap[newID].executionTime;
             break;
         }

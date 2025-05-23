@@ -44,9 +44,10 @@
             int optionID = document["Option_ID"].GetInt();
             std::string userID = document["User_ID"].GetString();
             std::cout<<"REST HANDLER\n USER_ID : "<<userID<<" OPTION_ID : "<<optionID<<" QUERY STATEMENT : "<<queryStatement<<"\n";
+            // std::this_thread::sleep_for(std::chrono::milliseconds{300});
             resultJson = QueryParserMain(queryStatement, optionID, userID);
             message.reply(web::http::status_codes::OK,resultJson);
-            std::cout<<"---VALIDATION FINISHED---"<<std::endl;
+            std::cout<<"\n---VALIDATION FINISHED---"<<std::endl;
             //std::cout.rdbuf(oldCoutStreamBuf);
             //std::string debugLog = buffer.str();
             //std::cout<<"DEBUG LOG \n"<<debugLog<<std::endl;

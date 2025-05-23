@@ -1,20 +1,20 @@
 #pragma once
 #include <string>
 #include <vector>
-const int lineitemRow =  60000000;
-const double lineitemSize =8500;
+const int lineitemRow =  6000000;
+const double lineitemSize =62700;
 const double lineitemCol = 16;
-const int ordersRow =15000000;
-const double ordersSize =1967.2;
+const int ordersRow =1500000;
+const double ordersSize = 20580;
 const double orderCol = 9;
-const int partRow= 2000000;
-const double partSize= 325.6;
+const int partRow= 200000;
+const double partSize= 3534;
 const double partCol = 9;
-const int customerRow= 1500000;
-const double customerSize= 285.6;
+const int customerRow= 15000;
+const double customerSize= 2789;
 const double customerCol = 8;
-const int partsuppRow= 8000000;
-const double partsuppSize =1356.6;
+const int partsuppRow= 800000;
+const double partsuppSize = 12105;
 const double partsuppCol = 5;
 const int nationRow =25;
 const double nationSize =0.02;
@@ -22,8 +22,8 @@ const double nationCol = 4;
 const int regionRow = 5;
 const double regionSize =0.02;
 const double regionCol = 3;
-const int supplierRow =100000;
-const double supplierSize= 25.2;
+const int supplierRow =10000;
+const double supplierSize= 187;
 const double supplierCol = 7;
 
 enum DBMSType{
@@ -150,8 +150,8 @@ const double ssdGjoinTime = 556.0;
 const double ssdYjoinTime = 703.0;
 const double ssdOjoinTime = 1098.0;
 
-const double ssdCPUWeight =99.99;
-const double ssdPowerWeight =56.1244;
+const double ssdCPUWeight =50;
+const double ssdPowerWeight =71.5;
 
 
 const long query1join =0;
